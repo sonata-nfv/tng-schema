@@ -1,6 +1,7 @@
 ---
   $schema: "http://json-schema.org/draft-04/schema#"
-  id: ""
+  id: "http://www.sonata-nfv.eu/schema/nsd-schema-01"
+  description: "The core schema for network service descriptors"
   type: "object"
   properties: 
     nsd: 
