@@ -1,0 +1,111 @@
+---
+$schema: "http://json-schema.org/draft-04/schema#"
+id: "http://www.sonata-nfv.eu/schema/pd-schema-01"
+title: "Package Descriptor Schema"
+version: 1.0
+description: >
+  "The package descriptor schema specifies the structure
+   of the package descriptor. It makes sure the relevant
+   information is provided to parse the package in a
+   meaningful way."
+
+##
+## The actual document description.
+##
+type: "object"
+properties:
+  ##
+  ## Some general information regarding the schema used to describe
+  ## the package descriptor.
+  ##
+  $schema:
+    description: "An optional reference to this package descriptor schema."
+    id: "http://www.sonata-nfv.eu/schema"
+    type: "string"
+  descriptor_version:
+    description: "The version of the descriptor schema used."
+    id: "http://www.sonata-nfv.eu/descriptor_version"
+    type: "number"
+  ##
+  ## Some general infromation that describes the package as such.
+  ##
+  package_group:
+    description: "The group id will identify the package uniquely across all package."
+    id: "http://www.sonata-nfv.eu/package_group"
+    type: "string"
+  package_name:
+    description: "The package name identifies the package without its version."
+    id: "http://www.sonata-nfv.eu/package_name"
+    type: "string"
+  package_version:
+    description: "The version allows to distinguish the same package at different times."
+    id: "http://www.sonata-nfv.eu/package_version"
+    type: "number"
+  package_maintainer:
+    description: "The person or organization that created the package."
+    id: "http://www.sonata-nfv.eu/package_maintainer"
+    type: "string"
+  package_description:
+    description: "An arbitrary description of the package."
+    id: "http://www.sonata-nfv.eu/package_description"
+    type: "string"
+  ##
+  ## Some information regarding the package's service descriptor (if any).
+  ##
+  entry_service_template:
+    description: "The service descriptor that defines THE service of the package."
+    id: "http://www.sonata-nfv.eu/entry_service_template"
+    type: "string"
+    pattern: "^[A-Za-z0-9\\-_\./]+$"
+  sealed:
+    id: "http://www.sonata-nfv.eu/sealed"
+    type: "boolean"
+    default: false
+  ##
+  ## The description of the package content and where it
+  ## is located in the package.
+  ##
+  package_content:
+    description: "An array of artifacts contained in the package."
+    id: "http://www.sonata-nfv.eu/package_content"
+    type: "array"
+    items:
+      id: "http://www.sonata-nfv.eu/package_content/0"
+      type: "object"
+      properties:
+        name:
+          description: "The name of the artifact similar to the absolute path of the artifact in the package."
+          id: "http://www.sonata-nfv.eu/package_content/0/name"
+          type: "string"
+          pattern: "^[A-Za-z0-9\\-_\./]+$"
+        content-type:
+          description: "The type of content of the artifact."
+          id: "http://www.sonata-nfv.eu/package_content/0/content-type"
+          type: "string"
+        md5:
+          description: "An MD5 hash of the artifact."
+          id: "http://www.sonata-nfv.eu/package_content/0/md5"
+          type: "string"
+          pattern: "^[a-f0-9]{32}$"
+        sealed:
+          id: "http://www.sonata-nfv.eu/package_content/0/sealed"
+          type: "boolean"
+      required:
+        - "name"
+        - "content-type"
+      additionalProperties: false
+
+    # Unique items makes sure that the items as a whole are
+    # unique. However, it does not make sure that the item
+    # names are unique, which is what we actually want.
+    # Unfortunately, it is not possible to express that
+    # using JSON schema.
+    uniqueItems: true
+required:
+  - "descriptor_version"
+  - "package_group"
+  - "package_name"
+  - "package_version"
+
+## Prohibit any other key in the file.
+additionalProperties: false 
