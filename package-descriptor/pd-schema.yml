@@ -25,7 +25,9 @@ properties:
   descriptor_version:
     description: "The version of the descriptor schema used."
     id: "http://www.sonata-nfv.eu/descriptor_version"
-    type: "number"
+    type: "string"
+    pattern: "^[A-Za-z0-9\\-./]+$"
+
   ##
   ## Some general infromation that describes the package as such.
   ##
@@ -40,7 +42,8 @@ properties:
   package_version:
     description: "The version allows to distinguish the same package at different times."
     id: "http://www.sonata-nfv.eu/package_version"
-    type: "number"
+    type: "string"
+    pattern: "^[0-9\\-./]+$"
   package_maintainer:
     description: "The person or organization that created the package."
     id: "http://www.sonata-nfv.eu/package_maintainer"
@@ -49,6 +52,7 @@ properties:
     description: "An arbitrary description of the package."
     id: "http://www.sonata-nfv.eu/package_description"
     type: "string"
+
   ##
   ## Some information regarding the package's service descriptor (if any).
   ##
@@ -61,9 +65,11 @@ properties:
     id: "http://www.sonata-nfv.eu/sealed"
     type: "boolean"
     default: false
+
   ##
-  ## The description of the package content and where it
-  ## is located in the package.
+  ##  The description of the package content, such as service descriptors,
+  ##  virtual machine images, scripts, and any addition data and
+  ##  artifacts that are shipped with this package.
   ##
   package_content:
     description: "An array of artifacts contained in the package."
@@ -101,6 +107,92 @@ properties:
     # Unfortunately, it is not possible to express that
     # using JSON schema.
     uniqueItems: true
+
+  ##
+  ##  Configuration of package resolvers, i.e. catalogs and
+  ##  repositories where package dependencies can be found
+  ##  and retrieved.
+  ##
+  package_resolvers:
+    description: "An array of artifacts contained in the package."
+    id: "http://www.sonata-nfv.eu/package_resolvers"
+    type: "array"
+    items:
+      id: "http://www.sonata-nfv.eu/package_resolvers/0"
+      type: "object"
+      properties:
+        name:
+          id: "http://www.sonata-nfv.eu/package_resolvers/0/name"
+          type: "string"
+        credentials:
+          id: "http://www.sonata-nfv.eu/package_resolvers/0/credentials"
+          type: "string"
+      required:
+        - name
+    uniqueItems: true
+
+  ##
+  ##  Other SONATA packages this package depends up on.
+  ##
+  package_dependencies:
+    id: "http://www.sonata-nfv.eu/package_dependencies"
+    type: "array"
+    items:
+      id: "http://www.sonata-nfv.eu/package_dependencies/0"
+      type: "object"
+      properties:
+        name:
+          id: "http://www.sonata-nfv.eu/package_dependencies/0/name"
+          type: "string"
+          pattern: "^[A-Za-z0-9\\-_./]+$"
+        group:
+          id: "http://www.sonata-nfv.eu/package_dependencies/0/group"
+          type: "string"
+          pattern: "^[A-Za-z0-9\\-_./]+$"
+        version:
+          id: "http://www.sonata-nfv.eu/package_dependencies/0/version"
+          type: "string"
+          pattern: "^[A-Za-z0-9\\-_./]+$"
+        credentials:
+          id: "http://www.sonata-nfv.eu/package_dependencies/0/credentials"
+          type: "string"
+      required:
+        - group
+        - name
+        - version
+    uniqueItems: true
+
+  ##
+  ##  Artifact dependencies such as virtual machine images that are
+  ##  not shipped with this package, but have to be downloaded on
+  ##  the fly.
+  ##
+  artifact_dependencies:
+    id: "http://www.sonata-nfv.eu/artifact_dependencies"
+    type: "array"
+    items:
+      id: "http://www.sonata-nfv.eu/artifact_dependencies/0"
+      type: "object"
+      properties:
+        name:
+          id: "http://www.sonata-nfv.eu/artifact_dependencies/0/package_content_name"
+          type: "string"
+          pattern: "^[A-Za-z0-9\\-_./]+$"
+        url:
+          id: "http://www.sonata-nfv.eu/artifact_dependencies/0/url"
+          type: "string"
+        md5:
+          description: "An MD5 hash of the artifact."
+          id: "http://www.sonata-nfv.eu/artifact_dependencies/0/md5"
+          type: "string"
+          pattern: "^[a-f0-9]{32}$"
+        credentials:
+          id: "http://www.sonata-nfv.eu/artifact_dependencies/0/credentials"
+          type: "string"
+      required:
+        - name
+        - url
+
 required:
   - "descriptor_version"
   - "package_group"
