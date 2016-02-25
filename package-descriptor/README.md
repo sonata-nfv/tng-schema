@@ -3,7 +3,7 @@ The package descriptor file specifies the content, artifacts, and dependencies o
 
 In a package, the package descriptor file MUST be placed in the ***META-INF*** directory in the root of the package. Moreover, it MUST be named ***MANIFEST.MF***. Please note that, dependent on the operating system, directory and file names are case sensitive.
 
-### Sections of the Package Descriptor
+## Sections of the Package Descriptor
 
 Below we discuss the various section of a package descriptor. The general descriptor section contains some of the manditory fields that have to be present in each and every package descriptor. All other sections are optional.
 
@@ -19,7 +19,7 @@ Moreover, the package signatur, i.e. the *package_group*, the *package_name*, an
 Best practicies for creating the signatur can be derived from the Java Maven naming conventions for groupId, artifactId, and version. To this end, the *package_group*, the *package_name*, and the *package_version* should be named as follows:
 
 - **package_group** will identify the package uniquely across all packages. It should at least be comprised of the reverse domain name that is under your controll. Moreover, it might have as many sub-groups as needed. For example: eu.sonata-nfv.nec.
- - **package_name** is the name of the package without its version. It can be created with any name written in lower letters and no strange symbols.
+- **package_name** is the name of the package without its version. It can be created with any name written in lower letters and no strange symbols.
 - **package_version** names the version of the package. Any typical version with numbers and dots, such as 1.0, 1.1, and 1.0.1 is allows here. The package version must be increased with any new (changed) instance of the service.
 - **package_maintainer** (optional) describes the maintainer of the package, like *John Doe, NEC*.
 - **package_description** (optional) provides an arbitrary description of the package.
@@ -74,7 +74,7 @@ While the parent section is optional, once it is specified it has to have at lea
 - **credentials** (optional) provides the credentials that might be needed to download the artifact.
 
 
-### Example
+## Example
 
 A simple example of a package descriptor.
 
