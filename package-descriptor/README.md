@@ -6,6 +6,7 @@ The schema file for the package descriptor used by SONATA. It specifies the stru
 
 ```
 ---
+---
 descriptor_version: "1.0"
 
 package_group: "eu.sonata.nfv"
@@ -21,7 +22,7 @@ sealed: true
 package_content:
  - name: "/path/to/descriptor"
    content-type: "application/sonata.service_descriptor"
-   md5: 00236a2ae558018ed13b5222ef1bd9f3
+   md5: "00236a2ae558018ed13b5222ef1bd9f3"
    sealed: false
  - name: "/path/to/descriptor"
    content-type: "application/sonata.service_descriptor"
@@ -30,14 +31,18 @@ package_content:
    content-type: "application/sonata.image"
 
 package_resolvers:
-  - name: "http://www.bredel-it.de"
+  - name: "http://www.bredel-it.de/path/to/catalog"
+    credentials: "my (optional) credentials"
 
 package_dependencies:
  - name: "my-dependent-package"
    group: "eu.sonata.nfv"
    version: "1.0"
+   credentials: "my (optional) credentials"
 
 artifact_dependencies:
   - name: "my-vm-image"
-    url: "http:www.bredel-it.de//path/to/vm-image"
+    url: "http://www.bredel-it.de/path/to/vm-image"
+    md5: "00236a2ae558018ed13b5222ef1bd9f3"
+    credentials: "my (optional) credentials"
 ```
