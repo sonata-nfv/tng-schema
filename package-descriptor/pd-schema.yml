@@ -26,24 +26,26 @@ properties:
     description: "The version of the descriptor schema used."
     id: "http://www.sonata-nfv.eu/descriptor_version"
     type: "string"
-    pattern: "^[A-Za-z0-9\\-./]+$"
+    pattern: "^[A-Za-z0-9\\-_.]+$"
 
   ##
-  ## Some general infromation that describes the package as such.
+  ## Some general information that describes the package as such.
   ##
   package_group:
     description: "The group id will identify the package uniquely across all package."
     id: "http://www.sonata-nfv.eu/package_group"
     type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
   package_name:
     description: "The package name identifies the package without its version."
     id: "http://www.sonata-nfv.eu/package_name"
     type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
   package_version:
     description: "The version allows to distinguish the same package at different times."
     id: "http://www.sonata-nfv.eu/package_version"
     type: "string"
-    pattern: "^[0-9\\-./]+$"
+    pattern: "^[0-9\\-_.]+$"
   package_maintainer:
     description: "The person or organization that created the package."
     id: "http://www.sonata-nfv.eu/package_maintainer"
@@ -51,6 +53,21 @@ properties:
   package_description:
     description: "An arbitrary description of the package."
     id: "http://www.sonata-nfv.eu/package_description"
+    type: "string"
+  package_md5:
+    description: >
+      "An MD5 hash over the package content, i.e. all files contained in the package 
+       EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF, as this file
+       contains this hash."
+    id: "http://www.sonata-nfv.eu/package_md5"
+    type: "string"
+    pattern: "^[A-Fa-f0-9]{32}$"
+  package_signature:
+    description: >
+      "A signature over the package content, i.e. all files contained in the package 
+       EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF, as this file
+       contains this hash."
+    id: "http://www.sonata-nfv.eu/package_signature"
     type: "string"
 
   ##
@@ -88,11 +105,12 @@ properties:
           description: "The type of content of the artifact."
           id: "http://www.sonata-nfv.eu/package_content/0/content-type"
           type: "string"
+          pattern: "^[A-Za-z0-9\\-_./]+$"
         md5:
           description: "An MD5 hash of the artifact."
           id: "http://www.sonata-nfv.eu/package_content/0/md5"
           type: "string"
-          pattern: "^[a-f0-9]{32}$"
+          pattern: "^[A-Fa-f0-9]{32}$"
         sealed:
           id: "http://www.sonata-nfv.eu/package_content/0/sealed"
           type: "boolean"
@@ -124,11 +142,13 @@ properties:
         name:
           id: "http://www.sonata-nfv.eu/package_resolvers/0/name"
           type: "string"
+          pattern: "^[A-Za-z0-9\\-_./:]+$"
         credentials:
           id: "http://www.sonata-nfv.eu/package_resolvers/0/credentials"
           type: "string"
       required:
         - name
+      additionalProperties: false
     uniqueItems: true
 
   ##
@@ -144,22 +164,27 @@ properties:
         name:
           id: "http://www.sonata-nfv.eu/package_dependencies/0/name"
           type: "string"
-          pattern: "^[A-Za-z0-9\\-_./]+$"
+          pattern: "^[a-z0-9\\-_.]+$"
         group:
           id: "http://www.sonata-nfv.eu/package_dependencies/0/group"
           type: "string"
-          pattern: "^[A-Za-z0-9\\-_./]+$"
+          pattern: "^[a-z0-9\\-_.]+$"
         version:
           id: "http://www.sonata-nfv.eu/package_dependencies/0/version"
           type: "string"
-          pattern: "^[A-Za-z0-9\\-_./]+$"
+          pattern: "^[0-9\\-_.]+$"
         credentials:
           id: "http://www.sonata-nfv.eu/package_dependencies/0/credentials"
+          type: "string"
+        verification_key:
+          description: "A public key used to verify the signature of the package."
+          id: "http://www.sonata-nfv.eu/package_dependencies/0/verification_key"
           type: "string"
       required:
         - group
         - name
         - version
+      additionalProperties: false
     uniqueItems: true
 
   ##
@@ -181,17 +206,20 @@ properties:
         url:
           id: "http://www.sonata-nfv.eu/artifact_dependencies/0/url"
           type: "string"
+          pattern: "^[A-Za-z0-9\\-_./:]+$"
         md5:
           description: "An MD5 hash of the artifact."
           id: "http://www.sonata-nfv.eu/artifact_dependencies/0/md5"
           type: "string"
-          pattern: "^[a-f0-9]{32}$"
+          pattern: "^[A-Fa-f0-9]{32}$"
         credentials:
           id: "http://www.sonata-nfv.eu/artifact_dependencies/0/credentials"
           type: "string"
       required:
         - name
         - url
+      additionalProperties: false
+    uniqueItems: true
 
 required:
   - "descriptor_version"

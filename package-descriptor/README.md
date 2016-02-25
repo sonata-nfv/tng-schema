@@ -23,6 +23,8 @@ Best practicies for creating the signatur can be derived from the Java Maven nam
 - **package_version** names the version of the package. Any typical version with numbers and dots, such as 1.0, 1.1, and 1.0.1 is allows here. The package version must be increased with any new (changed) instance of the service.
 - **package_maintainer** (optional) describes the maintainer of the package, like *John Doe, NEC*.
 - **package_description** (optional) provides an arbitrary description of the package.
+- **package_md5** provides an MD5 hash over the package content, i.e. all files contained in the package EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF, as this file contains this hash.
+- **package_signature** provides a cryptographic signature over the package content, i.e. all files contained in the package EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF.
 - **entry_service_template** (optional) specifies THE service template of this package. In General the package can contain more than one network service descriptor as dependencies. In order to identify the 
 - **sealed** (optional) is a boolean value that states wheter this package is self-contained, i.e. it already contains all its relevant artifacts (true), or it has external dependencies that may have to be provided from somewhere else. Default is *false*.
 
@@ -62,6 +64,7 @@ While the parent section is optional, once it is specified it has to have at lea
 - **group** specifies the name of the group, similar to the group name of this package.
 - **version** specifies the version or version ranges of the package that is needed. For example one can specify the exact version like, *1.0.1-beta*, but also ranges such as *>= 1.0*, *<= 1.0*, even in combination with boolean expression *>= 1.0 && < 2.0*, *1.1 || 1.2*, etc.
 - **credentials** (optional) provides the credentials that might be needed to *use* this package.
+- **verification_key** provides the public key of the package maintainer to verify the package.
 
 #### Artifact Dependencies Section
 
