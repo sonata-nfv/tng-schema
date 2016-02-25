@@ -6,7 +6,6 @@ The schema file for the package descriptor used by SONATA. It specifies the stru
 
 ```
 ---
----
 descriptor_version: "1.0"
 
 package_group: "eu.sonata.nfv"
