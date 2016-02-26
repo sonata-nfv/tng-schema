@@ -25,7 +25,7 @@ Best practicies for creating the signatur can be derived from the Java Maven nam
 - **package_description** (optional) provides an arbitrary description of the package.
 - **package_md5** provides an MD5 hash over the package content, i.e. all files contained in the package EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF, as this file contains this hash.
 - **package_signature** provides a cryptographic signature over the package content, i.e. all files contained in the package EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF.
-- **entry_service_template** (optional) specifies THE service template of this package. In General the package can contain more than one network service descriptor as dependencies. In order to identify the 
+- **entry_service_template** (optional) specifies THE service template of this package. In General the package can contain more than one network service descriptor as dependencies. In order to identify the descriptor that describes the service of this package, it has to be named here.
 - **sealed** (optional) is a boolean value that states wheter this package is self-contained, i.e. it already contains all its relevant artifacts (true), or it has external dependencies that may have to be provided from somewhere else. Default is *false*.
 
 #### Package Content Section
