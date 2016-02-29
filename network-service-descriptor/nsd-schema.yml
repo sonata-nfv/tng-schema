@@ -1,10 +1,10 @@
 ---
   $schema: "http://json-schema.org/draft-04/schema#"
-  id: "http://www.sonata-nfv.eu/schema/nsd-schema-01"
-  description: "The core schema for network service descriptors"
+  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive"
+  description: "The core scheme for RECUSRIVE service descriptors (many details left out)"
   type: "object"
-  properties: 
-    nsd: 
+  properties:
+    nsd:
       id: "/nsd"
       type: "object"
       properties: 
@@ -28,91 +28,102 @@
           type: "array"
           items: 
             type: "string"
-          minItems: 1
+          minItems: 0
           uniqueItems: true
-        vnffgd: 
-          id: "/nsd/vnffgd"
-          type: "object"
-          properties: 
-            id: 
-              id: "/nsd/vnffgd/id"
-              type: "string"
+        nsds:
+          id: "/nsd/nsds"
+          type: "array"
+          items: 
+            type: "string"
+          minItems: 0
+          uniqueItems: true
+          # how do I write down that there must be at least one of VNFDs or NSDs?
+        fgd:
+          # the forwarding graph is more generic, it can be services or functions
+          id: "/nsd/fgd/id"
+          type: "string"
             vendor: 
-              id: "/nsd/vnffgd/vendor"
+              id: "/nsd/fgd/vendor"
               type: "string"
             version: 
-              id: "/nsd/vnffgd/version"
+              id: "/nsd/fgd/version"
               type: "string"
             ns_version: 
-              id: "/nsd/vnffgd/ns_version"
+              id: "/nsd/fgd/ns_version"
               type: "string"
             manifest_file_md5: 
-              id: "/nsd/vnffgd/manifest_file_md5"
+              id: "/nsd/fgd/manifest_file_md5"
               type: "string"
             vnffgs: 
-              id: "/nsd/vnffgd/vnffgs"
+              id: "/nsd/fgd/vnffgs"
               type: "array"
               items: 
-                id: "/nsd/vnffgd/vnffgs/0"
+                id: "/nsd/fgd/vnffgs/0"
                 type: "object"
                 properties: 
-                  vnffg_id: 
-                    id: "/nsd/vnffgd/vnffgs/0/vnffg_id"
+                  fg_id: 
+                    id: "/nsd/fgd/fgs/0/fg_id"
                     type: "string"
                   number_of_endpoints: 
-                    id: "/nsd/vnffgd/vnffgs/0/number_of_endpoints"
+                    id: "/nsd/fgd/fgs/0/number_of_endpoints"
                     type: "integer"
                   number_of_virtual_links: 
-                    id: "/nsd/vnffgd/vnffgs/0/number_of_virtual_links"
+                    id: "/nsd/fgd/fgs/0/number_of_virtual_links"
                     type: "integer"
                   depedent_virtual_links: 
-                    id: "/nsd/vnffgd/vnffgs/0/depedent_virtual_links"
+                    id: "/nsd/fgd/fgs/0/depedent_virtual_links"
                     type: "array"
                     items: 
                       - 
-                        id: "/nsd/vnffgd/vnffgs/0/depedent_virtual_links/0"
+                        id: "/nsd/fgd/fgs/0/depedent_virtual_links/0"
                         type: "string"
                       - 
-                        id: "/nsd/vnffgd/vnffgs/0/depedent_virtual_links/1"
+                        id: "/nsd/fgd/fgs/0/depedent_virtual_links/1"
                         type: "string"
                       - 
-                        id: "/nsd/vnffgd/vnffgs/0/depedent_virtual_links/2"
+                        id: "/nsd/fgd/vnffgs/0/depedent_virtual_links/2"
                         type: "string"
                   network_forwarding_path: 
-                    id: "/nsd/vnffgd/vnffgs/0/network_forwarding_path"
+                    id: "/nsd/fgd/fgs/0/network_forwarding_path"
                     type: "array"
                     items: 
-                      id: "/nsd/vnffgd/vnffgs/0/network_forwarding_path/0"
+                      id: "/nsd/fgd/fgs/0/network_forwarding_path/0"
                       type: "object"
                       properties: 
                         nfp_id: 
-                          id: "/nsd/vnffgd/vnffgs/0/network_forwarding_path/0/nfp_id"
+                          id: "/nsd/fgd/fgs/0/network_forwarding_path/0/nfp_id"
                           type: "string"
                         graph: 
-                          id: "/nsd/vnffgd/vnffgs/0/network_forwarding_path/0/graph"
+                          id: "/nsd/fgd/fgs/0/network_forwarding_path/0/graph"
                           type: "array"
                           items: 
                             - 
-                              id: "/nsd/vnffgd/vnffgs/0/network_forwarding_path/0/graph/0"
+                              id: "/nsd/fgd/fgs/0/network_forwarding_path/0/graph/0"
                               type: "string"
                             - 
-                              id: "/nsd/vnffgd/vnffgs/0/network_forwarding_path/0/graph/1"
+                              id: "/nsd/fgd/fgs/0/network_forwarding_path/0/graph/1"
                               type: "string"
                         connection_points: 
-                          id: "/nsd/vnffgd/vnffgs/0/network_forwarding_path/0/connection_points"
+                          id: "/nsd/fgd/fgs/0/network_forwarding_path/0/connection_points"
                           type: "array"
                           items: 
                             - 
-                              id: "/nsd/vnffgd/vnffgs/0/network_forwarding_path/0/connection_points/0"
+                              id: "/nsd/fgd/fgs/0/network_forwarding_path/0/connection_points/0"
                               type: "string"
                             - 
-                              id: "/nsd/vnffgd/vnffgs/0/network_forwarding_path/0/connection_points/1"
+                              id: "/nsd/fgd/vnffgs/0/network_forwarding_path/0/connection_points/1"
                               type: "string"
                         constituent_vnfs: 
-                          id: "/nsd/vnffgd/vnffgs/0/network_forwarding_path/0/constituent_vnfs"
+                          id: "/nsd/fgd/fgs/0/network_forwarding_path/0/constituent_vnfs"
                           type: "array"
                           items: 
-                            id: "/nsd/vnffgd/vnffgs/0/network_forwarding_path/0/constituent_vnfs/0"
+                            id: "/nsd/fgd/fgs/0/network_forwarding_path/0/constituent_vnfs/0"
+                            type: "string"
+                        constituent_services: 
+                          id: "/nsd/fgd/fgs/0/network_forwarding_path/0/constituent_services"
+                          type: "array"
+                          items: 
+                            id: "/nsd/fgd/fgs/0/network_forwarding_path/0/constituent_services/0"
                             type: "string"
         lifecycle_events: 
           id: "/nsd/lifecycle_events"
@@ -162,7 +173,14 @@
           type: "array"
           items: 
             type: "string"
-          minItems: 1
+          minItems: 0
+          uniqueItems: true
+        services_depedency: 
+          id: "/nsd/services_depedency"
+          type: "array"
+          items: 
+            type: "string"
+          minItems: 0
           uniqueItems: true
         monitoring_parameters: 
           id: "/nsd/monitoring_parameters"
@@ -213,7 +231,7 @@
             number_of_endpoints: 
               id: "/nsd/vld/number_of_endpoints"
               type: "integer"
-            vitual_links: 
+            virtual_links: 
               id: "/nsd/vld/vitual_links"
               type: "array"
               items: 
@@ -356,6 +374,25 @@
                     vnf_reference: 
                       id: "/nsd/sla/0/constituent_vnf/0/vnf_reference"
                       type: "integer"
+              constituent_services: 
+                id: "/nsd/sla/0/constituent_service"
+                type: "array"
+                items: 
+                  id: "/nsd/sla/0/constituent_service/0"
+                  type: "object"
+                  properties: 
+                    number_of_instances: 
+                      id: "/nsd/sla/0/constituent_service/0/number_of_instances"
+                      type: "integer"
+                    redundancy_model: 
+                      id: "/nsd/sla/0/constituent_service/0/redundancy_model"
+                      type: "string"
+                    service_flavour_id_reference: 
+                      id: "/nsd/sla/0/constituent_service/0/service_flavour_id_reference"
+                      type: "string"
+                    service_reference: 
+                      id: "/nsd/sla/0/constituent_service/0/service_reference"
+                      type: "integer"
         auto_scale_policy: 
           id: "/nsd/auto_scale_policy"
           type: "object"
@@ -431,3 +468,4 @@
         - "connection_points"
   required: 
     - "nsd"
+          
