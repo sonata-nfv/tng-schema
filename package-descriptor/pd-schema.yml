@@ -15,6 +15,30 @@ description: >
 type: "object"
 properties:
   ##
+  ## Definitions that are re-used later on.
+  ##
+  ## It seems that some (many?) parsers have problems
+  ## parsing the reference to definitions correctly.
+  ## Thus, we ignore definitions for now and insert
+  ## the keys directly at the right places.
+  ##
+  definitions:
+    credentials:
+      username_and_password:
+        description: "Basic authentication credentials using username and password"
+        id: "http://www.sonata-nfv.eu/definitions/username_and_password"
+        type: "object"
+        properties:
+          username:
+            type: "string"
+          password:
+            type: "string"
+        required:
+          - username
+          - password
+        additionalProperties: false 
+
+  ##
   ## Some general information regarding the schema used to describe
   ## the package descriptor.
   ##
@@ -79,6 +103,7 @@ properties:
     type: "string"
     pattern: "^[A-Za-z0-9\\-_./]+$"
   sealed:
+    description: "Sets the default 'sealed' status that states whether the package is self-contained or not."
     id: "http://www.sonata-nfv.eu/sealed"
     type: "boolean"
     default: false
@@ -112,6 +137,7 @@ properties:
           type: "string"
           pattern: "^[A-Fa-f0-9]{32}$"
         sealed:
+          description: "Overrides the default 'sealed' status that states whether this artifact is contained or not."
           id: "http://www.sonata-nfv.eu/package_content/0/sealed"
           type: "boolean"
       required:
@@ -136,16 +162,36 @@ properties:
     id: "http://www.sonata-nfv.eu/package_resolvers"
     type: "array"
     items:
+      description: "The different package resolvers, i.e. catatalogs, where packages can be retrieved from."
       id: "http://www.sonata-nfv.eu/package_resolvers/0"
       type: "object"
       properties:
         name:
+          description: "The resolver name."
           id: "http://www.sonata-nfv.eu/package_resolvers/0/name"
           type: "string"
           pattern: "^[A-Za-z0-9\\-_./:]+$"
+        # TODO: Should the credentials be part of the package descriptor? Or part of an external configuration?
         credentials:
+          description: "The credentials needed to access the resolver."
           id: "http://www.sonata-nfv.eu/package_resolvers/0/credentials"
-          type: "string"
+          type: "object"
+          oneOf:
+            #- $ref: "#/definitions/username_and_password"
+            # TODO: The parser has issues with reference. Thus
+            # we insert the reference directly.
+            - description: "Basic authentication credentials using username and password"
+              id: "http://www.sonata-nfv.eu/package_resolvers/0/credentials/username_and_password"
+              type: "object"
+              properties:
+                username:
+                  type: "string"
+                password:
+                  type: "string"
+              required:
+                - username
+                - password
+              additionalProperties: false 
       required:
         - name
       additionalProperties: false
@@ -212,9 +258,26 @@ properties:
           id: "http://www.sonata-nfv.eu/artifact_dependencies/0/md5"
           type: "string"
           pattern: "^[A-Fa-f0-9]{32}$"
+        # TODO: Should the credentials be part of the package descriptor? Or part of an external configuration?
         credentials:
           id: "http://www.sonata-nfv.eu/artifact_dependencies/0/credentials"
-          type: "string"
+          type: "object"
+          oneOf:
+            #- $ref: "#/definitions/username_and_password"
+            # TODO: The parser has issues with reference. Thus
+            # we insert the reference directly.
+            - description: "Basic authentication credentials using username and password"
+              id: "http://www.sonata-nfv.eu/package_resolvers/0/credentials/username_and_password"
+              type: "object"
+              properties:
+                username:
+                  type: "string"
+                password:
+                  type: "string"
+              required:
+                - username
+                - password
+              additionalProperties: false 
       required:
         - name
         - url
