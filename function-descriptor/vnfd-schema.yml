@@ -8,43 +8,75 @@
       description: "The version of the description definition used to describe the function descriptor."
       id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/descriptor_version"
       type: "string"
-    id: 
-      description: "A unique id that identifies the descriptor. Usually a UUID."
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/id"
-      type: "integer"
-    version: 
+      pattern: "^[A-Za-z0-9\\-_.]+$"
+      tosca:
+        name: "tosca_definitions_version"
+        type: "string"
+      etsi:
+        name: "descriptor_version"
+        type: null
+      t-nova:
+        name: "descriptor_version"
+        type: "string"
+      hot:
+        name: "heat_template_version"
+        type: "string"
+    vnf_group:
+      description: "The group id identifies the VNF descriptor uniquely across all function descriptors."
+      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_group"
+      type: "string"
+      pattern: "^[a-z0-9\\-_.]+$"
+    vnf_name:
+      description: "The name of the function description."
+      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_name"
+      type: "string"
+      pattern: "^[a-z0-9\\-_.]+$"
+      tosca:
+        name: "template_name"
+        type: "string"
+      etsi:
+        name: "id"
+        type: null
+      t-nova:
+        name: "name"
+        type: "string"
+    vnf_version:
       description: "The version of the service description."
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/version"
+      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_version"
       type: "string"
-    name: 
-      description: "A human-readable name of the service desciption."
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/name"
+      pattern: "^[0-9\\-_.]+$"
+      tosca:
+        name: "template_version"
+        type: "string"
+      etsi:
+        name: "version"
+        type: null
+      t-nova:
+        name: "version"
+        type: "string"
+    vnf_author:
+      description: "The person or organization that created the VNF descriptor."
+      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_author"
       type: "string"
-    description: 
+      tosca:
+        name: "template_author"
+        type: "string"
+      etsi:
+        name: "vendor"
+        type: null
+    vnf_description:
       description: "A longer description of the network function."
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/description"
+      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_description"
       type: "string"
-    provider_id: 
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/provider_id"
-      type: "integer"
-    provider: 
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/provider"
-      type: "string"
-    created_at: 
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/created_at"
-      type: "string"
-    modified_at: 
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/modified_at"
-      type: "string"
-    trade: 
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/trade"
-      type: "boolean"
-    release: 
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/release"
-      type: "string"
-    type: 
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/type"
-      type: "string"
+      tosca:
+        name: "tosca_definitions_version"
+        type: "string"
+      t-nova:
+        name: "descriptor_version"
+        type: "string"
+      hot:
+        name: "description"
+        type: "string"
     vdu: 
       id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu"
       type: "array"
@@ -434,29 +466,9 @@
             id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_lifecycle_events/0/flavor_id_ref"
             type: "string"
         additionalProperties: false
-    billing_model: 
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/billing_model"
-      type: "object"
-      properties: 
-        model: 
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/billing_model/model"
-          type: "string"
-        price: 
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/billing_model/price"
-          type: "object"
-          properties: 
-            min_per_period: 
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/billing_model/price/min_per_period"
-              type: "integer"
-            max_per_period: 
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/billing_model/price/max_per_period"
-              type: "integer"
-            setup: 
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/billing_model/price/setup"
-              type: "integer"
-            unit: 
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/billing_model/price/unit"
-              type: "string"
-          additionalProperties: false
-      additionalProperties: false
+  required:
+    - descriptor_version
+    - vnf_group
+    - vnf_name
+    - vnf_version
   additionalProperties: false
