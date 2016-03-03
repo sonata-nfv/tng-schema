@@ -9,6 +9,9 @@
       id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/descriptor_version"
       type: "string"
       pattern: "^[A-Za-z0-9\\-_.]+$"
+      ##
+      ## Translations of the key to other descriptor format, such as TOSCA, ETSI NVF, and HOT
+      ##
       tosca:
         name: "tosca_definitions_version"
         type: "string"
@@ -31,6 +34,9 @@
       id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_name"
       type: "string"
       pattern: "^[a-z0-9\\-_.]+$"
+      ##
+      ## Translations of the key to other descriptor format, such as TOSCA, ETSI NVF, and HOT
+      ##
       tosca:
         name: "template_name"
         type: "string"
@@ -45,6 +51,9 @@
       id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_version"
       type: "string"
       pattern: "^[0-9\\-_.]+$"
+      ##
+      ## Translations of the key to other descriptor format, such as TOSCA, ETSI NVF, and HOT
+      ##
       tosca:
         name: "template_version"
         type: "string"
@@ -58,6 +67,9 @@
       description: "The person or organization that created the VNF descriptor."
       id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_author"
       type: "string"
+      ##
+      ## Translations of the key to other descriptor format, such as TOSCA, ETSI NVF, and HOT
+      ##
       tosca:
         name: "template_author"
         type: "string"
@@ -68,6 +80,9 @@
       description: "A longer description of the network function."
       id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_description"
       type: "string"
+      ##
+      ## Translations of the key to other descriptor format, such as TOSCA, ETSI NVF, and HOT
+      ##
       tosca:
         name: "tosca_definitions_version"
         type: "string"
@@ -84,13 +99,37 @@
         id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0"
         type: "object"
         properties: 
+          id: 
+            description: "A unique identifier of this VDU within the scope of this VNF descriptor."
+            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/id"
+            type: "string"
+          vm_image: 
+            description: "The reference to a virtual machine image."
+            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/vm_image"
+            type: "string"
+          vm_image_format: 
+            description: "The format of the virtual machine image."
+            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/vm_image_format"
+            enum:
+              - "raw"
+              - "vhd"
+              - "vmdk"
+              - "vdi"
+              - "iso"
+              - "qcow2"
+              - "docker"
+              - "ova"
+              - "ovf"
+              - "bare"
+          vm_image_md5: 
+            description: "An MD5 hash of the virtual machine image."
+            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/vm_image_md5"
+            type: "string"
+            pattern: "^[A-Fa-f0-9]{32}$"
           resource_requirements: 
             id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements"
             type: "object"
             properties: 
-              network_interface_bandwidth_unit: 
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/network_interface_bandwidth_unit"
-                type: "string"
               hypervisor_parameters: 
                 id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/hypervisor_parameters"
                 type: "object"
@@ -102,9 +141,6 @@
                     id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/hypervisor_parameters/type"
                     type: "string"
                 additionalProperties: false
-              memory_unit: 
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/memory_unit"
-                type: "string"
               network_interface_card_capabilities: 
                 id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/network_interface_card_capabilities"
                 type: "object"
@@ -116,23 +152,82 @@
                     id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/network_interface_card_capabilities/mirroring"
                     type: "boolean"
                 additionalProperties: false
+              network_interface_bandwidth: 
+                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/network_interface_bandwidth"
+                type: "number"
+                minimum: 0
+                exclusiveMinimum: true
+              network_interface_bandwidth_unit: 
+                description: "The unit of the network interface bandwidth. Default is bps (bit per second)."
+                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/network_interface_bandwidth_unit"
+                enum:
+                  - "bps"  # Bit per second
+                  - "kbps" # Kilobit per second
+                  - "Mbps" # Megabit per second
+                  - "Gbps" # Gigabit per second
+                  - "Tbps" # Terabit per second
+              memory: 
+                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/memory"
+                type: "object"
+                properties:
+                  size:
+                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/memory/size"
+                    type: "number"
+                    minimum: 0
+                    exclusiveMinimum: true
+                  size_unit: 
+                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/memory/size_unit"
+                    description: "The unit the host memory is measured in. Default is MB (Megabyte)"
+                    enum:
+                      - "B"   # Byte
+                      - "kB"  # Kilobyte
+                      - "KiB" # Kibityte
+                      - "MB"  # Megabyte
+                      - "MiB" # Mebibyte
+                      - "GB"  # Gigabyte
+                      - "GiB" # Gibibyte
+                      - "TB"  # Terabyte
+                      - "TiB" # Tebibyte
+                      - "PT"  # Petabyte
+                      - "PiT" # Pebibyte
+                  large_pages_required: 
+                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/memory/large_pages_required"
+                    type: "boolean"
+                  numa_allocation_policy: 
+                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/memory/numa_allocation_policy"
+                    type: "string"
+                required:
+                  - size
+                additionalProperties: false
               storage: 
                 id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/storage"
                 type: "object"
                 properties: 
+                  size: 
+                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/storage/size"
+                    type: "number"
+                    minimum: 0
+                    exclusiveMinimum: true
                   size_unit: 
                     id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/storage/size_unit"
-                    type: "string"
+                    enum:
+                      - "B"   # Byte
+                      - "kB"  # Kilobyte
+                      - "KiB" # Kibityte
+                      - "MB"  # Megabyte
+                      - "MiB" # Mebibyte
+                      - "GB"  # Gigabyte
+                      - "GiB" # Gibibyte
+                      - "TB"  # Terabyte
+                      - "TiB" # Tebibyte
+                      - "PT"  # Petabyte
+                      - "PiT" # Pebibyte
                   persistence: 
                     id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/storage/persistence"
                     type: "boolean"
-                  size: 
-                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/storage/size"
-                    type: "integer"
+                required:
+                  - size
                 additionalProperties: false
-              network_interface_bandwidth: 
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/network_interface_bandwidth"
-                type: "string"
               platform_pcie_parameters: 
                 id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/platform_pcie_parameters"
                 type: "object"
@@ -144,9 +239,14 @@
                     id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/platform_pcie_parameters/device_pass_through"
                     type: "boolean"
                 additionalProperties: false
+              cpu_support_accelerator: 
+                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/cpu_support_accelerator"
+                type: "string"
               vcpus: 
                 id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/vcpus"
                 type: "integer"
+                minimum: 0
+                exclusiveMinimum: true
               vswitch_capabilities: 
                 id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/vswitch_capabilities"
                 type: "object"
@@ -164,65 +264,33 @@
               data_processing_acceleration_library: 
                 id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/data_processing_acceleration_library"
                 type: "string"
-              memory: 
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/memory"
-                type: "integer"
-              memory_parameters: 
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/memory_parameters"
-                type: "object"
-                properties: 
-                  large_pages_required: 
-                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/memory_parameters/large_pages_required"
-                    type: "boolean"
-                  numa_allocation_policy: 
-                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/memory_parameters/numa_allocation_policy"
-                    type: "string"
-                additionalProperties: false
-              cpu_support_accelerator: 
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/resource_requirements/cpu_support_accelerator"
-                type: "string"
+            required:
+              - memory
+              - vcpus
             additionalProperties: false
-          alias: 
-            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/alias"
-            type: "string"
-          vm_image_format: 
-            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/vm_image_format"
-            type: "string"
           networking_resources: 
             id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/networking_resources"
             type: "string"
-          id: 
-            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/id"
-            type: "string"
-          vm_image: 
-            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/vm_image"
-            type: "string"
-          controller: 
-            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/controller"
-            type: "boolean"
           connection_points: 
             id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/connection_points"
             type: "array"
             items: 
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/connection_points/2"
+              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/connection_points/0"
               type: "object"
               properties: 
                 vlink_ref: 
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/connection_points/2/vlink_ref"
+                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/connection_points/0/vlink_ref"
                   type: "string"
                 id: 
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/connection_points/2/id"
+                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/connection_points/0/id"
                   type: "string"
               additionalProperties: false
           monitoring_parameters: 
             id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/monitoring_parameters"
             type: "array"
             items: 
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/monitoring_parameters/3"
+              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/monitoring_parameters/0"
               type: "string"
-          vm_image_md5: 
-            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/vm_image_md5"
-            type: "string"
           scale_in_out: 
             id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/scale_in_out"
             type: "object"
@@ -234,7 +302,12 @@
                 id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vdu/0/scale_in_out/maximum"
                 type: "integer"
             additionalProperties: false
+        required:
+          - id
+          - resource_requirements
         additionalProperties: false
+      minItems: 1
+      uniqueItems: true
     vlinks: 
       id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vlinks"
       type: "array"
@@ -471,4 +544,5 @@
     - vnf_group
     - vnf_name
     - vnf_version
+    - vdu
   additionalProperties: false
