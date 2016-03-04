@@ -37,7 +37,6 @@ This section has to have at least one item with the following information:
 
 - **id** represents a unique identifer within the scope of the VNF descriptor. 
 - **resource_requirements** details the resources required by the VDU even further.
-
 - **vm_image** (optional) specifies a reference to the virtual machine image (or container) that is used for the virtual network function. The image location can be a local file, a file within a package, a remove locatoin, that might be accessed via HTTP, or a reference within the SONATA service platform.
 - **vm_image_format** (optional) specifies the image format, such as raw, vmdk, iso, and docker.
 - **vm_image_md5** (optional) represent an MD5 hash of the virtual machine image. It is highly recommended to provide an MD5 hash, not only to verify the image, but to also make versioning of the whole virtual network function easier.
@@ -49,13 +48,17 @@ This section has to have at least one item with the following information:
 
 - **connection_points** (optional)
 
+While the parent section is optional, once it is specified it has to have at least one item with the following information:
+
 - **id**
 - **type**
 - **virtual_link_reference** (optional) (deprecated)
 
 #### Virtual Links Section
 
-- **virtual_links**
+- **virtual_links** (optional)
+
+While the parent section is optional, once it is specified it has to have at least one item with the following information:
 
 - **id**
 - **connectivity_type**
