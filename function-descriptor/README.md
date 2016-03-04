@@ -24,16 +24,47 @@ Moreover, the VNF signature, i.e the *vnf_group*, the *vnf_name*, and the *vnf_v
 
 The general descriptor section also contains some optional components as outlined below.
 
-- **vnf_author** (optional) describe the author of the network function descriptor.
+- **vnf_author** (optional) describes the author of the network function descriptor.
 - **vnf_description** (optional) provides an arbitrary description of the VNF.
 
 #### Virtual Deployment Units Section
 
 The virtual deployment unit section ...
 
-#### Connections Points Section
+- **virtual_deployment_units** contains all the virtual deployment units (VDUs) that are handled by the network function.
+
+- **id**
+- **resource_requirements**
+
+- **vm_image** (optional)
+- **vm_image_format** (optional)
+- **vm_image_md5** (optional)
+- **connection_points** (optional)
+- **monitoring_parameters** (optional)
+- **scale_in_out** (optional)
+
+#### Connection Points Section
+
+- **connection_points** (optional)
+
+- **id**
+- **type**
+- **virtual_link_reference** (optional) (deprecated)
 
 #### Virtual Links Section
+
+- **virtual_links**
+
+- **id**
+- **connectivity_type**
+- **connection_points_reference**
+- **access** (optional)
+- **external_access** (optional)
+- **root_requirement** (optional)
+- **leaf_requirement** (optional)
+- **dhcp** (optional)
+- **qos** (optional)
+
 
 #### VNF Lifecycle Events Section
 
