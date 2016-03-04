@@ -29,18 +29,20 @@ The general descriptor section also contains some optional components as outline
 
 #### Virtual Deployment Units Section
 
-The virtual deployment unit section ...
+The virtual deployment unit section contains all the information regarding the VDUs, such as virtual machines an containers, that constitute the virtual network functions. The section is mandatory and starts with:
 
 - **virtual_deployment_units** contains all the virtual deployment units (VDUs) that are handled by the network function.
 
-- **id**
-- **resource_requirements**
+This section has to have at least one item with the following information:
 
-- **vm_image** (optional)
-- **vm_image_format** (optional)
-- **vm_image_md5** (optional)
-- **connection_points** (optional)
-- **monitoring_parameters** (optional)
+- **id** represents a unique identifer within the scope of the VNF descriptor. 
+- **resource_requirements** details the resources required by the VDU even further.
+
+- **vm_image** (optional) specifies a reference to the virtual machine image (or container) that is used for the virtual network function. The image location can be a local file, a file within a package, a remove locatoin, that might be accessed via HTTP, or a reference within the SONATA service platform.
+- **vm_image_format** (optional) specifies the image format, such as raw, vmdk, iso, and docker.
+- **vm_image_md5** (optional) represent an MD5 hash of the virtual machine image. It is highly recommended to provide an MD5 hash, not only to verify the image, but to also make versioning of the whole virtual network function easier.
+- **connection_points** (optional) names the connection points offered by the VDU. The connection points can be used to interconnect various VDUs or to connect the VDU to an VNF connection point and to the outside world.
+- **monitoring_parameters** (optional) names the monitoring parameters that are collected for this specific VDU and used, e.g. to trigger scaling operations.
 - **scale_in_out** (optional)
 
 #### Connection Points Section
