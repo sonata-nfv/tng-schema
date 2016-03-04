@@ -24,16 +24,49 @@ Moreover, the VNF signature, i.e the *vnf_group*, the *vnf_name*, and the *vnf_v
 
 The general descriptor section also contains some optional components as outlined below.
 
-- **vnf_author** (optional) describe the author of the network function descriptor.
+- **vnf_author** (optional) describes the author of the network function descriptor.
 - **vnf_description** (optional) provides an arbitrary description of the VNF.
 
 #### Virtual Deployment Units Section
 
-The virtual deployment unit section ...
+The virtual deployment unit section contains all the information regarding the VDUs, such as virtual machines an containers, that constitute the virtual network functions. The section is mandatory and starts with:
 
-#### Connections Points Section
+- **virtual_deployment_units** contains all the virtual deployment units (VDUs) that are handled by the network function.
+
+This section has to have at least one item with the following information:
+
+- **id** represents a unique identifer within the scope of the VNF descriptor. 
+- **resource_requirements** details the resources required by the VDU even further.
+
+- **vm_image** (optional) specifies a reference to the virtual machine image (or container) that is used for the virtual network function. The image location can be a local file, a file within a package, a remove locatoin, that might be accessed via HTTP, or a reference within the SONATA service platform.
+- **vm_image_format** (optional) specifies the image format, such as raw, vmdk, iso, and docker.
+- **vm_image_md5** (optional) represent an MD5 hash of the virtual machine image. It is highly recommended to provide an MD5 hash, not only to verify the image, but to also make versioning of the whole virtual network function easier.
+- **connection_points** (optional) names the connection points offered by the VDU. The connection points can be used to interconnect various VDUs or to connect the VDU to an VNF connection point and to the outside world.
+- **monitoring_parameters** (optional) names the monitoring parameters that are collected for this specific VDU and used, e.g. to trigger scaling operations.
+- **scale_in_out** (optional)
+
+#### Connection Points Section
+
+- **connection_points** (optional)
+
+- **id**
+- **type**
+- **virtual_link_reference** (optional) (deprecated)
 
 #### Virtual Links Section
+
+- **virtual_links**
+
+- **id**
+- **connectivity_type**
+- **connection_points_reference**
+- **access** (optional)
+- **external_access** (optional)
+- **root_requirement** (optional)
+- **leaf_requirement** (optional)
+- **dhcp** (optional)
+- **qos** (optional)
+
 
 #### VNF Lifecycle Events Section
 
@@ -46,4 +79,4 @@ The virtual deployment unit section ...
 [2] [T-NOVA FP7 European Project](http://www.t-nova.eu/)
 [3] [TeNOR VNFD Schema](https://github.com/T-NOVA/TeNOR/blob/master/vnfd-validator/assets/schemas/vnfd_schema.json)
 [4] [JSON Schema](http://json-schema.org/)
-[5] [YAML-to-JSON Translatore](http://jsontoyaml.com/)
+[5] [YAML-to-JSON Translator](http://jsontoyaml.com/)

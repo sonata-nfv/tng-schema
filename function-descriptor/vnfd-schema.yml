@@ -132,19 +132,24 @@
             type: "string"
             pattern: "^[A-Fa-f0-9]{32}$"
           resource_requirements:
+            description: "The requirments of a (virtual) machine that hosts this VDU. The service platform has to provide machines that meet these requirements."
             id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements"
             type: "object"
             properties:
               hypervisor_parameters:
+                description: "The requirements and parameters of a (potential) hyperviser that operates the VDU VM."
                 id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/hypervisor_parameters"
                 type: "object"
                 properties:
-                  version:
-                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/hypervisor_parameters/version"
-                    type: "string"
                   type:
+                    description: "The type of hypervisor needed for this VDU."
                     id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/hypervisor_parameters/type"
                     type: "string"
+                  version:
+                    description: "The version of the hypervisor needed for this VDU."
+                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/hypervisor_parameters/version"
+                    type: "string"
+                    # TODO: Provide a pattern that allows boolean expression, like '>= 5.0' to specify version a version greater or equal 5.0
               vswitch_capabilities:
                 id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/vswitch_capabilities"
                 type: "object"
@@ -159,10 +164,12 @@
                     id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/vswitch_capabilities/overlay_tunnel"
                     type: "string"
               cpu:
+                description: "All the requirements and parameters related to the (virtual) CPU."
                 id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/cpu"
                 type: "object"
                 properties:
                   vcpus:
+                    description: "The number of (virtualized) CPU cores."
                     id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/cpu/vcpus"
                     type: "integer"
                     minimum: 0
@@ -292,19 +299,21 @@
                   description: "A VNF-unique id of the connection point. Can be used for references."
                   id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/connection_points/0/id"
                   type: "string"
+                type:
+                  description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
+                  # TODO: Change type to a particular type, and use oneOf.
+                  enum:
+                    - "interface" 
                 # TODO: Remove? Cyclic reference with virtual_links?
                 virtual_link_reference:
                   description: "A reference to a virtual link, i.e. the virtual_links:id."
                   id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/connection_points/0/vlink_ref"
                   type: "string"
-                type:
-                  description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-                  # TODO: Change type to a particular type, and use oneOf.
-                  type: "string"
               required:
                 - id
+                - type
               additionalProperties: false
-            minItems: 0
+            minItems: 1
             uniqueItems: true
           monitoring_parameters:
             id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/monitoring_parameters"
@@ -344,19 +353,21 @@
             description: "A VNF-unique id of the connection point. Can be used for references."
             id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/connection_points/0/id"
             type: "string"
+          type:
+            description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
+            # TODO: Change type to a particular type, and use oneOf.
+            enum:
+              - "interface" 
           # TODO: Remove? Cyclic reference with virtual_links?
           virtual_link_reference:
             description: "A reference to a virtual link, i.e. the virtual_links:id."
             id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/connection_points/0/virtual_link_reference"
             type: "string"
-          type:
-            description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-            # TODO: Change type to a particular type, and use oneOf.
-            type: "string"
         required:
           - id
+          - type
         additionalProperties: false
-      minItems: 0
+      minItems: 1
       uniqueItems: true
     virtual_links:
       description: "VNF internal virtual link. A link interconnects at least two connection points."
