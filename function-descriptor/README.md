@@ -77,4 +77,4 @@ The virtual deployment unit section ...
 [2] [T-NOVA FP7 European Project](http://www.t-nova.eu/)
 [3] [TeNOR VNFD Schema](https://github.com/T-NOVA/TeNOR/blob/master/vnfd-validator/assets/schemas/vnfd_schema.json)
 [4] [JSON Schema](http://json-schema.org/)
-[5] [YAML-to-JSON Translatore](http://jsontoyaml.com/)
+[5] [YAML-to-JSON Translator](http://jsontoyaml.com/)
