@@ -47,7 +47,7 @@
         name: "name"
         type: "string"
     vnf_version:
-      description: "The version of the service description."
+      description: "The version of the function descriptor."
       id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_version"
       type: "string"
       pattern: "^[0-9\\-_.]+$"
