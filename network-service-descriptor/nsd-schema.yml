@@ -32,35 +32,41 @@
       description: "A longer description of the network service."
       id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/ns_description"
       type: "string"
-    vnfds: 
-      description: "The VNFs (their descriptors), that are part of the network service."
-      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vnfds"
+    network_functions: 
+      description: "The VNFs (their descriptors), that are part of this network service."
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions"
       type: "array"
       items: 
-        id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vnfds/0"
+        id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions/0"
         type: "object"
         properties:
+          vnf_id:
+            description: "A unique identifier of this network function within the scope of this NS descriptor."
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions/0/vnf_id"
+            type: "string"
           vnf_group:
-            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vnfds/0/vnf_group"
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions/0/vnf_group"
             type: "string"
           vnf_name:
-            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vnfds/0/vnf_name"
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions/0/vnf_name"
             type: "string"
           vnf_version:
-            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vnfds/0/vnf_version"
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions/0/vnf_version"
             type: "string"
           description:
-            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vnfds/0/description"
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions/0/description"
             type: "string"
         required:
+          - vnf_id
           - vnf_group
           - vnf_name
           - vnf_version
         additionalProperties: false
       minItems: 1
       uniqueItems: true
-    nsds:
-      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/nsds"
+    network_services:
+      description: "The recursive NSs (their descriptors), that are part of this network service."
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_services"
       type: "array"
       items: 
         type: "string"
@@ -76,9 +82,9 @@
           id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graph/fgd_ref"
           type: "object"
           properties:
-            id:
+            fg_id:
               description: "A unique identifier of this forwarding graph within the scope of this NS descriptor."
-              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graph/fgd_ref/id"
+              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graph/fgd_ref/fg_id"
               type: "string"
             group: 
               id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graph/fgd_ref/group"
@@ -93,7 +99,7 @@
               id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graph/fgd_ref/version"
               type: "string"
           required:
-            - id
+            - fg_id
             - group
             - name
             - version
@@ -102,9 +108,9 @@
           id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graph/fgd"
           type: "object"
           properties:
-            id: 
+            fg_id:
               description: "A unique identifier of this forwarding graph within the scope of this NS descriptor."
-              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graph/fgd/id"
+              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graph/fgd/fg_id"
               type: "string"
             number_of_endpoints: 
               id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graph/fgd/number_of_endpoints"
