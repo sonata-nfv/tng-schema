@@ -251,8 +251,17 @@
                       id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/network_forwarding_path/0/connection_points"
                       type: "array"
                       items: 
-                        - id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/network_forwarding_path/0/connection_points/0"
-                          type: "string"
+                        id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/network_forwarding_path/0/connection_points/0"
+                        type: "object"
+                        properties:
+                          connection_point_ref:
+                            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/network_forwarding_path/0/connection_points/0/cp_ref"
+                            description: "A connection point reference, referenced by a connection point id."
+                            type: "string"
+                          position:
+                            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/network_forwarding_path/0/connection_points/0/possition"
+                            description: "The possition of the connection point with the forwarding graph"
+                            type: "integer"
             required:
               - fg_id
     lifecycle_events: 
