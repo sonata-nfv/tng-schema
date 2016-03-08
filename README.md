@@ -21,5 +21,11 @@ There are some useful tools that support working the JSON and YAML files.
 
 #### Useful Links
 
+## Lead Developers
+
+The following lead developers are responsible for this repository and have admin right. They can, for example, merge pull requests.
+
+ - Michael Bredel (mbredel)
+
 - http://json-schema.org/ The general JSON-Schema standard
 
