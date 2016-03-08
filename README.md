@@ -26,7 +26,7 @@ There are some useful tools that support working the JSON and YAML files.
 ---
 #### Lead Developers
 
-The following lead developers are responsible for this repository and have admin right. They can, for example, merge pull requests.
+The following lead developers are responsible for this repository and have admin rights. They can, for example, merge pull requests.
 
 - Michael Bredel (mbredel)
 
