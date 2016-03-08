@@ -275,61 +275,61 @@
             unit: 
               id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters/1/unit"
               type: "string"
-    vld: 
-      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld"
+    virtual_links: 
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links"
       type: "object"
       properties: 
         id: 
-          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/id"
+          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/id"
           type: "string"
         vendor: 
-          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/vendor"
+          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/vendor"
           type: "string"
         manifest_file_md5: 
-          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/manifest_file_md5"
+          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/manifest_file_md5"
           type: "string"
         number_of_endpoints: 
-          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/number_of_endpoints"
+          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/number_of_endpoints"
           type: "integer"
         virtual_links: 
-          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/vitual_links"
+          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/vitual_links"
           type: "array"
           items: 
             - 
-              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/vitual_links/0"
+              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/vitual_links/0"
               type: "object"
               properties: 
                 vld_id: 
-                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/vitual_links/0/vld_id"
+                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/vitual_links/0/vld_id"
                   type: "string"
                 root_requirements: 
-                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/vitual_links/0/root_requirements"
+                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/vitual_links/0/root_requirements"
                   type: "string"
                 leaf_requirements: 
-                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/vitual_links/0/leaf_requirements"
+                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/vitual_links/0/leaf_requirements"
                   type: "string"
                 qos: 
-                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/vitual_links/0/qos"
+                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/vitual_links/0/qos"
                   type: "object"
                   properties: 
                     none: 
-                      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/vitual_links/0/qos/none"
+                      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/vitual_links/0/qos/none"
                       type: "string"
                 test_access: 
-                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/vitual_links/0/test_access"
+                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/vitual_links/0/test_access"
                   type: "string"
                 connections: 
-                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/vitual_links/0/connections"
+                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/vitual_links/0/connections"
                   type: "array"
                   items: 
                     - 
-                      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/vitual_links/0/connections/0"
+                      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/vitual_links/0/connections/0"
                       type: "string"
                     - 
-                      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/vitual_links/0/connections/1"
+                      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/vitual_links/0/connections/1"
                       type: "string"
                 connectivity_type: 
-                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vld/vitual_links/0/connectivity_type"
+                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/vitual_links/0/connectivity_type"
                   type: "string"
     auto_scale_policy: 
       id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy"
