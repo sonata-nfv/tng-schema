@@ -1,4 +1,4 @@
-# son-schema
+# son-schema [![Build Status](http://jenkins.sonata-nfv.eu/buildStatus/icon?job=son-schema)](http://jenkins.sonata-nfv.eu/job/son-schema/)
 The schema files for the various descriptors used by SONATA as well as some examples and tests. The schema files in this repository serve as ground truth for the whole SONATA project. Thus, every tool and sub-project should be able to parse and handle the latest versions of these files (or - once available - tagged versions in corresponding branches).
 
 
