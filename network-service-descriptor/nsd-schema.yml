@@ -305,8 +305,7 @@
       id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters"
       type: "array"
       items: 
-        - 
-          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters/0"
+        - id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters/0"
           type: "object"
           properties: 
             desc: 
@@ -318,19 +317,6 @@
             unit: 
               id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters/0/unit"
               type: "string"
-        - 
-          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters/1"
-          type: "object"
-          properties: 
-            desc: 
-              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters/1/desc"
-              type: "string"
-            metric: 
-              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters/1/metric"
-              type: "string"
-            unit: 
-              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters/1/unit"
-              type: "string"
     auto_scale_policy: 
       id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy"
       type: "object"
@@ -339,19 +325,11 @@
           id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy/criteria"
           type: "array"
           items: 
-            - 
-              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy/criteria/0"
+            - id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy/criteria/0"
               type: "object"
               properties: 
                 end-to-end bandwidth: 
                   id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy/criteria/0/end-to-end_bandwidth"
-                  type: "string"
-            - 
-              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy/criteria/1"
-              type: "object"
-              properties: 
-                test: 
-                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy/criteria/1/test"
                   type: "string"
         action: 
           id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy/action"
