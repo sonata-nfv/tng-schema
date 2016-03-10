@@ -28,6 +28,6 @@ Each of the VNFs uses a Docker container to actual provide and run the network f
  - docker_files/firewall/Dockerfile
  - docker_files/tcpdump/Dockerfile
 
-Finally, the packages contains a package descriptor that provides additional information on the strucuture of the package and the contained data. By definition, the package descriptor is located at:
+Finally, the packages contains a package descriptor that provides additional information on the structure of the package and the contained data. By definition, the package descriptor is located at:
 
  - META-INF/MANIFEST.MF
