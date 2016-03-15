@@ -10,38 +10,53 @@ description: |
   meaningful way.
 
 ##
+## Definitions that are re-used later on.
+##
+## It seems that some (many?) parsers have problems
+## parsing the reference to definitions correctly.
+## Thus, we ignore definitions for now and insert
+## the keys directly at the right places.
+##
+definitions:
+  credentials:
+    username_and_password:
+      description: "Basic authentication credentials using username and password."
+      type: "object"
+      properties:
+        username:
+          description: "A username for authentication."
+          type: "string"
+        password:
+          description: "A password for authentication."
+          type: "string"
+      required:
+        - username
+        - password
+      additionalProperties: false
+    public_private_key:
+      description: "Authentication based on a public-private key approach."
+      type: "object"
+      properties:
+        private_key:
+          description: "A private key for authentication."
+          type: "string"
+        password:
+          description: "An optional password for the private key."
+          type: "string"
+      required:
+        - private_key
+      additionalProperties: false
+
+##
 ## The actual document description.
 ##
 type: "object"
 properties:
   ##
-  ## Definitions that are re-used later on.
-  ##
-  ## It seems that some (many?) parsers have problems
-  ## parsing the reference to definitions correctly.
-  ## Thus, we ignore definitions for now and insert
-  ## the keys directly at the right places.
-  ##
-  definitions:
-    credentials:
-      username_and_password:
-        description: "Basic authentication credentials using username and password"
-        type: "object"
-        properties:
-          username:
-            type: "string"
-          password:
-            type: "string"
-        required:
-          - username
-          - password
-        additionalProperties: false 
-
-  ##
   ## Some general information regarding the schema used to describe
   ## the package descriptor.
   ##
-  $schema:
+  schema:
     description: "An optional reference to this package descriptor schema."
     type: "string"
   descriptor_version:
@@ -155,20 +170,8 @@ properties:
           description: "The credentials needed to access the resolver."
           type: "object"
           oneOf:
-            #- $ref: "#/definitions/username_and_password"
-            # TODO: The parser has issues with reference. Thus
-            # we insert the reference directly.
-            - description: "Basic authentication credentials using username and password"
-              type: "object"
-              properties:
-                username:
-                  type: "string"
-                password:
-                  type: "string"
-              required:
-                - username
-                - password
-              additionalProperties: false 
+            - $ref: "#/definitions/credentials/username_and_password"
+            - $ref: "#/definitions/credentials/public_private_key"
       required:
         - name
       additionalProperties: false
@@ -227,20 +230,8 @@ properties:
         credentials:
           type: "object"
           oneOf:
-            #- $ref: "#/definitions/username_and_password"
-            # TODO: The parser has issues with reference. Thus
-            # we insert the reference directly.
-            - description: "Basic authentication credentials using username and password"
-              type: "object"
-              properties:
-                username:
-                  type: "string"
-                password:
-                  type: "string"
-              required:
-                - username
-                - password
-              additionalProperties: false 
+            - $ref: "#/definitions/credentials/username_and_password"
+            - $ref: "#/definitions/credentials/public_private_key"
       required:
         - name
         - url
