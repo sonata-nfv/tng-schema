@@ -1,13 +1,51 @@
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
-id: "http://www.sonata-nfv.eu/schema/pd-schema-01"
+#id: "http://www.sonata-nfv.eu/schema/pd-schema-01"
 title: "Package Descriptor Schema"
 version: 1.0
-description: >
-  "The package descriptor schema specifies the structure
-   of the package descriptor. It makes sure the relevant
-   information is provided to parse the package in a
-   meaningful way."
+description: |
+  The package descriptor schema specifies the structure
+  of the package descriptor. It makes sure the relevant
+  information is provided to parse the package in a
+  meaningful way.
+
+##
+## Definitions that are re-used later on.
+##
+## It seems that some (many?) parsers have problems
+## parsing the reference to definitions correctly.
+## Thus, we ignore definitions for now and insert
+## the keys directly at the right places.
+##
+definitions:
+  credentials:
+    username_and_password:
+      description: "Basic authentication credentials using username and password."
+      type: "object"
+      properties:
+        username:
+          description: "A username for authentication."
+          type: "string"
+        password:
+          description: "A password for authentication."
+          type: "string"
+      required:
+        - username
+        - password
+      additionalProperties: false
+    public_private_key:
+      description: "Authentication based on a public-private key approach."
+      type: "object"
+      properties:
+        private_key:
+          description: "A private key for authentication."
+          type: "string"
+        password:
+          description: "An optional password for the private key."
+          type: "string"
+      required:
+        - private_key
+      additionalProperties: false
 
 ##
 ## The actual document description.
@@ -15,40 +53,14 @@ description: >
 type: "object"
 properties:
   ##
-  ## Definitions that are re-used later on.
-  ##
-  ## It seems that some (many?) parsers have problems
-  ## parsing the reference to definitions correctly.
-  ## Thus, we ignore definitions for now and insert
-  ## the keys directly at the right places.
-  ##
-  definitions:
-    credentials:
-      username_and_password:
-        description: "Basic authentication credentials using username and password"
-        id: "http://www.sonata-nfv.eu/definitions/username_and_password"
-        type: "object"
-        properties:
-          username:
-            type: "string"
-          password:
-            type: "string"
-        required:
-          - username
-          - password
-        additionalProperties: false 
-
-  ##
   ## Some general information regarding the schema used to describe
   ## the package descriptor.
   ##
-  $schema:
+  schema:
     description: "An optional reference to this package descriptor schema."
-    id: "http://www.sonata-nfv.eu/schema"
     type: "string"
   descriptor_version:
     description: "The version of the descriptor schema used."
-    id: "http://www.sonata-nfv.eu/descriptor_version"
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.]+$"
 
@@ -57,41 +69,34 @@ properties:
   ##
   package_group:
     description: "The group id will identify the package uniquely across all package."
-    id: "http://www.sonata-nfv.eu/package_group"
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
   package_name:
     description: "The package name identifies the package without its version."
-    id: "http://www.sonata-nfv.eu/package_name"
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
   package_version:
     description: "The version allows to distinguish the same package at different times."
-    id: "http://www.sonata-nfv.eu/package_version"
     type: "string"
     pattern: "^[0-9\\-_.]+$"
   package_maintainer:
     description: "The person or organization that created the package."
-    id: "http://www.sonata-nfv.eu/package_maintainer"
     type: "string"
   package_description:
     description: "An arbitrary description of the package."
-    id: "http://www.sonata-nfv.eu/package_description"
     type: "string"
   package_md5:
-    description: >
-      "An MD5 hash over the package content, i.e. all files contained in the package 
-       EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF, as this file
-       contains this hash."
-    id: "http://www.sonata-nfv.eu/package_md5"
+    description: |
+      An MD5 hash over the package content, i.e. all files contained in the package 
+      EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF, as this file
+      contains this hash.
     type: "string"
     pattern: "^[A-Fa-f0-9]{32}$"
   package_signature:
-    description: >
-      "A signature over the package content, i.e. all files contained in the package 
-       EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF, as this file
-       contains this hash."
-    id: "http://www.sonata-nfv.eu/package_signature"
+    description: |
+      A signature over the package content, i.e. all files contained in the package 
+      EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF, as this file
+      contains this hash.
     type: "string"
 
   ##
@@ -99,12 +104,10 @@ properties:
   ##
   entry_service_template:
     description: "The service descriptor that defines THE service of the package."
-    id: "http://www.sonata-nfv.eu/entry_service_template"
     type: "string"
     pattern: "^[A-Za-z0-9\\-_./]+$"
   sealed:
     description: "Sets the default 'sealed' status that states whether the package is self-contained or not."
-    id: "http://www.sonata-nfv.eu/sealed"
     type: "boolean"
     default: false
 
@@ -115,30 +118,24 @@ properties:
   ##
   package_content:
     description: "An array of artifacts contained in the package."
-    id: "http://www.sonata-nfv.eu/package_content"
     type: "array"
     items:
-      id: "http://www.sonata-nfv.eu/package_content/0"
       type: "object"
       properties:
         name:
           description: "The name of the artifact similar to the absolute path of the artifact in the package."
-          id: "http://www.sonata-nfv.eu/package_content/0/name"
           type: "string"
           pattern: "^[A-Za-z0-9\\-_./]+$"
         content-type:
           description: "The type of content of the artifact."
-          id: "http://www.sonata-nfv.eu/package_content/0/content-type"
           type: "string"
           pattern: "^[A-Za-z0-9\\-_./]+$"
         md5:
           description: "An MD5 hash of the artifact."
-          id: "http://www.sonata-nfv.eu/package_content/0/md5"
           type: "string"
           pattern: "^[A-Fa-f0-9]{32}$"
         sealed:
           description: "Overrides the default 'sealed' status that states whether this artifact is contained or not."
-          id: "http://www.sonata-nfv.eu/package_content/0/sealed"
           type: "boolean"
       required:
         - "name"
@@ -159,39 +156,22 @@ properties:
   ##
   package_resolvers:
     description: "An array of artifacts contained in the package."
-    id: "http://www.sonata-nfv.eu/package_resolvers"
     type: "array"
     items:
       description: "The different package resolvers, i.e. catatalogs, where packages can be retrieved from."
-      id: "http://www.sonata-nfv.eu/package_resolvers/0"
       type: "object"
       properties:
         name:
           description: "The resolver name."
-          id: "http://www.sonata-nfv.eu/package_resolvers/0/name"
           type: "string"
           pattern: "^[A-Za-z0-9\\-_./:]+$"
         # TODO: Should the credentials be part of the package descriptor? Or part of an external configuration?
         credentials:
           description: "The credentials needed to access the resolver."
-          id: "http://www.sonata-nfv.eu/package_resolvers/0/credentials"
           type: "object"
           oneOf:
-            #- $ref: "#/definitions/username_and_password"
-            # TODO: The parser has issues with reference. Thus
-            # we insert the reference directly.
-            - description: "Basic authentication credentials using username and password"
-              id: "http://www.sonata-nfv.eu/package_resolvers/0/credentials/username_and_password"
-              type: "object"
-              properties:
-                username:
-                  type: "string"
-                password:
-                  type: "string"
-              required:
-                - username
-                - password
-              additionalProperties: false 
+            - $ref: "#/definitions/credentials/username_and_password"
+            - $ref: "#/definitions/credentials/public_private_key"
       required:
         - name
       additionalProperties: false
@@ -201,30 +181,23 @@ properties:
   ##  Other SONATA packages this package depends up on.
   ##
   package_dependencies:
-    id: "http://www.sonata-nfv.eu/package_dependencies"
     type: "array"
     items:
-      id: "http://www.sonata-nfv.eu/package_dependencies/0"
       type: "object"
       properties:
         name:
-          id: "http://www.sonata-nfv.eu/package_dependencies/0/name"
           type: "string"
           pattern: "^[a-z0-9\\-_.]+$"
         group:
-          id: "http://www.sonata-nfv.eu/package_dependencies/0/group"
           type: "string"
           pattern: "^[a-z0-9\\-_.]+$"
         version:
-          id: "http://www.sonata-nfv.eu/package_dependencies/0/version"
           type: "string"
           pattern: "^[0-9\\-_.]+$"
         credentials:
-          id: "http://www.sonata-nfv.eu/package_dependencies/0/credentials"
           type: "string"
         verification_key:
           description: "A public key used to verify the signature of the package."
-          id: "http://www.sonata-nfv.eu/package_dependencies/0/verification_key"
           type: "string"
       required:
         - group
@@ -239,45 +212,26 @@ properties:
   ##  the fly.
   ##
   artifact_dependencies:
-    id: "http://www.sonata-nfv.eu/artifact_dependencies"
     type: "array"
     items:
-      id: "http://www.sonata-nfv.eu/artifact_dependencies/0"
       type: "object"
       properties:
         name:
-          id: "http://www.sonata-nfv.eu/artifact_dependencies/0/package_content_name"
           type: "string"
           pattern: "^[A-Za-z0-9\\-_./]+$"
         url:
-          id: "http://www.sonata-nfv.eu/artifact_dependencies/0/url"
           type: "string"
           pattern: "^[A-Za-z0-9\\-_./:]+$"
         md5:
           description: "An MD5 hash of the artifact."
-          id: "http://www.sonata-nfv.eu/artifact_dependencies/0/md5"
           type: "string"
           pattern: "^[A-Fa-f0-9]{32}$"
         # TODO: Should the credentials be part of the package descriptor? Or part of an external configuration?
         credentials:
-          id: "http://www.sonata-nfv.eu/artifact_dependencies/0/credentials"
           type: "object"
           oneOf:
-            #- $ref: "#/definitions/username_and_password"
-            # TODO: The parser has issues with reference. Thus
-            # we insert the reference directly.
-            - description: "Basic authentication credentials using username and password"
-              id: "http://www.sonata-nfv.eu/package_resolvers/0/credentials/username_and_password"
-              type: "object"
-              properties:
-                username:
-                  type: "string"
-                password:
-                  type: "string"
-              required:
-                - username
-                - password
-              additionalProperties: false 
+            - $ref: "#/definitions/credentials/username_and_password"
+            - $ref: "#/definitions/credentials/public_private_key"
       required:
         - name
         - url
