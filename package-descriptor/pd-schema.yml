@@ -12,11 +12,6 @@ description: |
 ##
 ## Definitions that are re-used later on.
 ##
-## It seems that some (many?) parsers have problems
-## parsing the reference to definitions correctly.
-## Thus, we ignore definitions for now and insert
-## the keys directly at the right places.
-##
 definitions:
   credentials:
     username_and_password:
@@ -178,26 +173,31 @@ properties:
     uniqueItems: true
 
   ##
-  ##  Other SONATA packages this package depends up on.
+  ##  Other SONATA packages this package depends on.
   ##
   package_dependencies:
+    description: "Other SONATA packages this package depends on."
     type: "array"
     items:
       type: "object"
       properties:
-        name:
+        group:
+          description: "The group id that identifies the opther package uniquely across all package."
           type: "string"
           pattern: "^[a-z0-9\\-_.]+$"
-        group:
+        name:
+          description: "The package name that identifies the other package without its version."
           type: "string"
           pattern: "^[a-z0-9\\-_.]+$"
         version:
+          description: "The version that allows to distinguish the other package at different times."
           type: "string"
           pattern: "^[0-9\\-_.]+$"
         credentials:
+          description: "Credentials needed to run the other package."
           type: "string"
         verification_key:
-          description: "A public key used to verify the signature of the package."
+          description: "A public key used to verify the signature of the other package."
           type: "string"
       required:
         - group
@@ -212,14 +212,17 @@ properties:
   ##  the fly.
   ##
   artifact_dependencies:
+    description: "Artifacts, such as VM images, that are not part of this package, but have to be downloaded."
     type: "array"
     items:
       type: "object"
       properties:
         name:
+          description: "The name of the artifact."
           type: "string"
           pattern: "^[A-Za-z0-9\\-_./]+$"
         url:
+          description: "The URL where the artifact can be downloaded from."
           type: "string"
           pattern: "^[A-Za-z0-9\\-_./:]+$"
         md5:
@@ -228,6 +231,7 @@ properties:
           pattern: "^[A-Fa-f0-9]{32}$"
         # TODO: Should the credentials be part of the package descriptor? Or part of an external configuration?
         credentials:
+          description: "Credentials needed to download the artifact."
           type: "object"
           oneOf:
             - $ref: "#/definitions/credentials/username_and_password"
