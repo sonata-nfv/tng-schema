@@ -50,7 +50,6 @@ type: "object"
 properties:
   descriptor_version:
     description: "The version of the description definition used to describe the function descriptor."
-    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/descriptor_version"
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.]+$"
     ##
@@ -70,12 +69,10 @@ properties:
       type: "string"
   vnf_group:
     description: "The group id identifies the VNF descriptor uniquely across all function descriptors."
-    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_group"
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
   vnf_name:
     description: "The name of the function description."
-    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_name"
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
     ##
@@ -92,7 +89,6 @@ properties:
       type: "string"
   vnf_version:
     description: "The version of the function descriptor."
-    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_version"
     type: "string"
     pattern: "^[0-9\\-_.]+$"
     ##
@@ -109,7 +105,6 @@ properties:
       type: "string"
   vnf_author:
     description: "The person or organization that created the VNF descriptor."
-    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_author"
     type: "string"
     ##
     ## Translations of the key to other descriptor format, such as TOSCA, ETSI NVF, and HOT
@@ -122,7 +117,6 @@ properties:
       type: null
   vnf_description:
     description: "A longer description of the network function."
-    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/vnf_description"
     type: "string"
     ##
     ## Translations of the key to other descriptor format, such as TOSCA, ETSI NVF, and HOT
@@ -138,125 +132,98 @@ properties:
       type: "string"
   virtual_deployment_units: 
     description: "The virtual deployment units (VDUs) of the virtual network function."
-    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units"
     type: "array"
     items:
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0"
       type: "object"
       properties:
         description:
           description: "An arbitrary description of the VDU:"
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/description"
           type: "string"
         id:
           description: "A unique identifier of this VDU within the scope of this VNF descriptor."
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/id"
           type: "string"
         vm_image:
           description: "The reference to a virtual machine image."
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/vm_image"
           type: "string"
         vm_image_format:
           description: "The format of the virtual machine image."
           $ref: "#/definitions/images_formats"
         vm_image_md5:
           description: "An MD5 hash of the virtual machine image."
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/vm_image_md5"
           type: "string"
           pattern: "^[A-Fa-f0-9]{32}$"
         resource_requirements:
           description: "The requirments of a (virtual) machine that hosts this VDU. The service platform has to provide machines that meet these requirements."
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements"
           type: "object"
           properties:
             hypervisor_parameters:
               description: "The requirements and parameters of a (potential) hyperviser that operates the VDU VM."
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/hypervisor_parameters"
               type: "object"
               properties:
                 type:
                   description: "The type of hypervisor needed for this VDU."
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/hypervisor_parameters/type"
                   type: "string"
                 version:
                   description: "The version of the hypervisor needed for this VDU."
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/hypervisor_parameters/version"
                   type: "string"
                   # TODO: Provide a pattern that allows boolean expression, like '>= 5.0' to specify version a version greater or equal 5.0
             vswitch_capabilities:
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/vswitch_capabilities"
               type: "object"
               properties:
                 version:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/vswitch_capabilities/version"
                   type: "string"
                 type:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/vswitch_capabilities/type"
                   type: "string"
                 overlay_tunnel:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/vswitch_capabilities/overlay_tunnel"
                   type: "string"
             cpu:
               description: "All the requirements and parameters related to the (virtual) CPU."
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/cpu"
               type: "object"
               properties:
                 vcpus:
                   description: "The number of (virtualized) CPU cores."
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/cpu/vcpus"
                   type: "integer"
                   minimum: 0
                   exclusiveMinimum: true
                 cpu_support_accelerator:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/cpu/cpu_support_accelerator"
                   type: "string"
               required:
                 - vcpus
             memory:
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/memory"
               type: "object"
               properties:
                 size:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/memory/size"
                   type: "number"
                   minimum: 0
                   exclusiveMinimum: true
                 size_unit:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/memory/size_unit"
                   description: "The unit the host memory is measured in. Default is MB (Megabyte)"
                   $ref: "#/definitions/memory_units"
                 large_pages_required:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/memory/large_pages_required"
                   type: "boolean"
                 numa_allocation_policy:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/memory/numa_allocation_policy"
                   type: "string"
               required:
                 - size
               additionalProperties: false
             storage:
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/storage"
               type: "object"
               properties:
                 size:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/storage/size"
                   type: "number"
                   minimum: 0
                   exclusiveMinimum: true
                 size_unit:
                   $ref: "#/definitions/memory_units"
                 persistence:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/storage/persistence"
                   type: "boolean"
               required:
                 - size
               additionalProperties: false
             network:
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/network"
               type: "object"
               properties:
                 network_interface_bandwidth:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/network/network_interface_bandwidth"
                   type: "number"
                   minimum: 0
                   exclusiveMinimum: true
@@ -264,28 +231,21 @@ properties:
                   description: "The unit of the network interface bandwidth. Default is bps (bit per second)."
                   $ref: "#/definitions/bandwidth_units"
                 network_interface_card_capabilities: 
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/network/network_interface_card_capabilities"
                   type: "object"
                   properties:
                     SR-IOV:
-                      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/network/network_interface_card_capabilities/SR-IOV"
                       type: "boolean"
                     mirroring:
-                      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/network/network_interface_card_capabilities/mirroring"
                       type: "boolean"
                 data_processing_acceleration_library:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/network/data_processing_acceleration_library"
                   type: "string"
             pcie:
               description: "The PCIe parameters of the platform."
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/pcie"
               type: "object"
               properties:
                 SR-IOV:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/pcie/SR-IOV"
                   type: "boolean"
                 device_pass_through:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/resource_requirements/pcie/device_pass_through"
                   type: "boolean"
           required:
             - cpu
@@ -293,15 +253,12 @@ properties:
           additionalProperties: false
         connection_points:
           description: "The connection points of this VDU. Connects the VDU ot other VDUs or the external world."
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/connection_points"
           type: "array"
           items:
-            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/connection_points/0"
             type: "object"
             properties:
               id:
                 description: "A VNF-unique id of the connection point. Can be used for references."
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/connection_points/0/id"
                 type: "string"
               type:
                 description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
@@ -310,7 +267,6 @@ properties:
               # TODO: Remove? Cyclic reference with virtual_links?
               virtual_link_reference:
                 description: "A reference to a virtual link, i.e. the virtual_links:id."
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/connection_points/0/vlink_ref"
                 type: "string"
             required:
               - id
@@ -319,21 +275,16 @@ properties:
           minItems: 1
           uniqueItems: true
         monitoring_parameters:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/monitoring_parameters"
           type: "array"
           items:
-            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/monitoring_parameters/0"
             type: "string"
         scale_in_out:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/scale_in_out"
           type: "object"
           properties:
             minimum:
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/scale_in_out/minimum"
               type: "integer"
               minimum: 0
             maximum:
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_deployment_units/0/scale_in_out/maximum"
               type: "integer"
               minimum: 0
               exclusiveMinimum: true
@@ -346,15 +297,12 @@ properties:
     uniqueItems: true
   connection_points:
     description: "The connection points of the overall VNF, that connects the VNF to the external world."
-    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/connection_points"
     type: "array"
     items:
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/connection_points/0"
       type: "object"
       properties:
         id:
           description: "A VNF-unique id of the connection point. Can be used for references."
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/connection_points/0/id"
           type: "string"
         type:
           description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
@@ -363,7 +311,6 @@ properties:
         # TODO: Remove? Cyclic reference with virtual_links?
         virtual_link_reference:
           description: "A reference to a virtual link, i.e. the virtual_links:id."
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/connection_points/0/virtual_link_reference"
           type: "string"
       required:
         - id
@@ -373,46 +320,34 @@ properties:
     uniqueItems: true
   virtual_links:
     description: "VNF internal virtual link. A link interconnects at least two connection points."
-    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links"
     type: "array"
     items:
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0"
       type: "object"
       properties:
         id:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/id"
           type: "string"
         connectivity_type: 
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/connectivity_type"
           enum:
             - "E-Line"
             - "E-Tree"
             - "E-LAN"
         connection_points_reference:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/connection_points_reference"
           type: "array"
           items:
-            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/connection_points_reference/0"
             type: "string"
             minItems: 2
             uniqueItems: true
         access:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/access"
           type: "boolean"
         external_access:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/external_access"
           type: "boolean"
         root_requirement:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/root_requirement"
           type: "string"
         leaf_requirement:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/leaf_requirement"
           type: "string"
         dhcp:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/dhcp"
           type: "boolean"
         qos:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/qos"
           type: "string"
       required:
         - id
@@ -420,187 +355,133 @@ properties:
         - connection_points_reference
       additionalProperties: false
   deployment_flavours:
-    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours"
     type: "array"
     items:
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0"
       type: "object"
       properties:
         vdu_reference:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/vdu_reference"
           type: "array"
           items:
-            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/vdu_reference/0"
             type: "string"
         constraint:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/constraint"
           type: "string"
         flavour_key:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/flavour_key"
           type: "string"
         vlink_reference:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/vlink_reference"
           type: "array"
           items:
-            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/vlink_reference/0"
             type: "string"
         id:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/id"
           type: "string"
         assurance_parameters:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters"
           type: "array"
           items:
-            id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0"
             type: "object"
             properties:
               violation:
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/violation"
                 type: "array"
                 items:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/violation/0"
                   type: "object"
                   properties:
                     interval:
-                      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/violation/0/interval"
                       type: "integer"
                     breaches_count:
-                      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/violation/0/breaches_count"
                       type: "integer"
                   additionalProperties: false
               value:
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/value"
                 type: "integer"
               penalty:
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/penalty"
                 type: "object"
                 properties:
                   type:
-                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/penalty/type"
                     type: "string"
                   expression:
-                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/penalty/expression"
                     type: "integer"
                   validity:
-                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/penalty/validity"
                     type: "string"
                   unit:
-                    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/penalty/unit"
                     type: "string"
                 additionalProperties: false
               formula:
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/formula"
                 type: "string"
               rel_id:
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/rel_id"
                 type: "string"
               id:
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/id"
                 type: "string"
               unit:
-                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/deployment_flavours/0/assurance_parameters/0/unit"
                 type: "string"
             additionalProperties: false
       additionalProperties: false
   lifecycle_events:
-    id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events"
     type: "array"
     items:
-      id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0"
       type: "object"
       properties:
         authentication_username:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/authentication_username"
           type: "string"
         driver:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/driver"
           type: "string"
         authentication_type:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/authentication_type"
           type: "string"
         authentication:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/authentication"
           type: "string"
         vnf_container:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/vnf_container"
           type: "string"
         events:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events"
           type: "object"
           properties:
             start:
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/start"
               type: "object"
               properties:
                 command:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/start/command"
                   type: "string"
                 template_file_format:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/start/template_file_format"
                   type: "string"
                 template_file:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/start/template_file"
                   type: "string"
               additionalProperties: false
             stop:
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop"
               type: "object"
               properties:
                 command:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop/command"
                   type: "string"
                 template_file:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop/template_file"
                   type: "string"
                 template_file_format:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop/template_file_format"
                   type: "string"
               additionalProperties: false
             restart:
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop"
               type: "object"
               properties:
                 command:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop/command"
                   type: "string"
                 template_file:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop/template_file"
                   type: "string"
                 template_file_format:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop/template_file_format"
                   type: "string"
               additionalProperties: false
             scale-in:
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop"
               type: "object"
               properties:
                 command:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop/command"
                   type: "string"
                 template_file:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop/template_file"
                   type: "string"
                 template_file_format:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop/template_file_format"
                   type: "string"
               additionalProperties: false
             scale-out:
-              id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop"
               type: "object"
               properties:
                 command:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop/command"
                   type: "string"
                 template_file:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop/template_file"
                   type: "string"
                 template_file_format:
-                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/events/stop/template_file_format"
                   type: "string"
               additionalProperties: false
           additionalProperties: false
         flavor_id_ref:
-          id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/lifecycle_events/0/flavor_id_ref"
           type: "string"
       additionalProperties: false
 required:
