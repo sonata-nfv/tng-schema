@@ -1,0 +1,13 @@
+##
+## This example is the most simple network service descriptor
+## one can create. It only contains the mandatory
+## fields.
+##
+## @author Michael Bredel
+##
+---
+descriptor_version: "1.0"
+
+ns_group: "eu.sonata-nfv.service-descriptor"
+ns_name: "simplest-example"
+ns_version: "0.1"

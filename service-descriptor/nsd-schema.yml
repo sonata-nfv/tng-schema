@@ -1,0 +1,363 @@
+---
+  $schema: "http://json-schema.org/draft-04/schema#"
+  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive"
+  description: "The core scheme for RECUSRIVE service descriptors (many details left out)"
+  type: "object"
+  properties:
+    descriptor_version:
+      description: "The version of the description definition used to describe the network descriptor."
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/descriptor_version"
+      type: "string"
+      pattern: "^[A-Za-z0-9\\-_.]+$"
+    ns_group:
+      description: "The group id identifies the NS descriptor uniquely across all network descriptors."
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/ns_group"
+      type: "string"
+      pattern: "^[a-z0-9\\-_.]+$"
+    ns_name: 
+      description: "The name of the network service description."
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/ns_name"
+      type: "string"
+      pattern: "^[a-z0-9\\-_.]+$"
+    ns_version: 
+      description: "The version of the service descriptor."
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/ns_version"
+      type: "string"
+      pattern: "^[0-9\\-_.]+$"
+    ns_author:
+      description: "The person or organization that created the NS descriptor."
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/ns_author"
+      type: "string"
+    ns_description:
+      description: "A longer description of the network service."
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/ns_description"
+      type: "string"
+    network_functions: 
+      description: "The VNFs (their descriptors), that are part of this network service."
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions"
+      type: "array"
+      items: 
+        id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions/0"
+        type: "object"
+        properties:
+          vnf_id:
+            description: "A unique identifier of this network function within the scope of this NS descriptor."
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions/0/vnf_id"
+            type: "string"
+          vnf_group:
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions/0/vnf_group"
+            type: "string"
+          vnf_name:
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions/0/vnf_name"
+            type: "string"
+          vnf_version:
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions/0/vnf_version"
+            type: "string"
+          description:
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_functions/0/description"
+            type: "string"
+        required:
+          - vnf_id
+          - vnf_group
+          - vnf_name
+          - vnf_version
+        additionalProperties: false
+      minItems: 1
+      uniqueItems: true
+    network_services:
+      description: "The recursive NSs (their descriptors), that are part of this network service."
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/network_services"
+      type: "array"
+      items: 
+        type: "string"
+      minItems: 0
+      uniqueItems: true
+      # how do I write down that there must be at least one of VNFDs or NSDs?
+    connection_points:
+      description: "The connection points of the overall NS, that connects the NS to the external world."
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/connection_points"
+      type: "array"
+      items:
+        id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/connection_points/0"
+        type: "object"
+        properties:
+          id:
+            description: "A VNF-unique id of the connection point. Can be used for references."
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/connection_points/0/id"
+            type: "string"
+          type:
+            description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
+            # TODO: Change type to a particular type, and use oneOf.
+            enum:
+              - "interface"
+          # TODO: Remove? Cyclic reference with virtual_links?
+          virtual_link_reference:
+            description: "A reference to a virtual link, i.e. the virtual_links:id."
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/connection_points/0/virtual_link_reference"
+            type: "string"
+        required:
+          - id
+          - type
+        additionalProperties: false
+      minItems: 1
+      uniqueItems: true
+    virtual_links: 
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links"
+      type: "array"
+      items:
+        id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/0"
+        type: "object"
+        oneOf:
+          - description: "A reference to an external virtual link descriptor (VLD)."
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/0/vld_ref"
+            type: "object"
+            properties:
+              vl_group:
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/vld_ref/vl_group"
+                type: "string"
+              vl_name:
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/vld_ref/vl_name"
+                type: "string"
+              vl_version:
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/vld_ref/vl_version"
+                type: "string"
+              vl_description:
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/vld_ref/vl_version"
+                type: "string"
+            required:
+              - vl_group
+              - vl_name
+              - vl_version
+            additionalProperties: false
+          - description: "A full-featured virtual link description."
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/virtual_links/0/vld"
+            type: "object"
+            properties:
+              id:
+                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/vld/id"
+                type: "string"
+              connectivity_type: 
+                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/vld/connectivity_type"
+                enum:
+                  - "E-Line"
+                  - "E-Tree"
+                  - "E-LAN"
+              connection_points_reference:
+                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/vld/connection_points_reference"
+                type: "array"
+                items:
+                  id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/vld/connection_points_reference/0"
+                  type: "string"
+                  minItems: 2
+                  uniqueItems: true
+              access:
+                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/vld/access"
+                type: "boolean"
+              external_access:
+                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/vld/external_access"
+                type: "boolean"
+              root_requirement:
+                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/vld/root_requirement"
+                type: "string"
+              leaf_requirement:
+                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/vld/leaf_requirement"
+                type: "string"
+              dhcp:
+                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/vld/dhcp"
+                type: "boolean"
+              qos:
+                id: "http://www.sonata-nfv.eu/schema/vnfd-schema-01/virtual_links/0/vld/qos"
+                type: "string"
+            required:
+              - id
+              - connectivity_type
+              - connection_points_reference
+            additionalProperties: false
+    forwarding_graphs:
+      description: "The forwarding graph."
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs"
+      type: "array"
+      items:
+        id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0"
+        type: "object"
+        oneOf:
+          - description: "A reference to an external forwarding graph descriptor (VNFFGD)."
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd_ref"
+            type: "object"
+            properties:
+              fg_group: 
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd_ref/fg_group"
+                type: "string"
+              fg_name:
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd_ref/fg_name"
+                type: "string"
+              fg_version:
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd_ref/fg_version"
+                type: "string"
+              fg_description:
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd_ref/fg_version"
+                type: "string"
+            required:
+              - fg_group
+              - fg_name
+              - fg_version
+            additionalProperties: false
+          - description: "A full-featured forwarding graph description."
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd"
+            type: "object"
+            properties:
+              fg_id:
+                description: "A unique identifier of this forwarding graph within the scope of this NS descriptor."
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/fg_id"
+                type: "string"
+              number_of_endpoints: 
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/number_of_endpoints"
+                type: "integer"
+              number_of_virtual_links: 
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/number_of_virtual_links"
+                type: "integer"
+              depedent_virtual_links: 
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/depedent_virtual_links"
+                type: "array"
+                items: 
+                  - id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/depedent_virtual_links/0"
+                    type: "string"
+              constituent_vnfs: 
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/constituent_vnfs"
+                type: "array"
+                items: 
+                  - id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/constituent_vnfs/0"
+                    type: "string"
+              constituent_services: 
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/constituent_services"
+                type: "array"
+                items: 
+                  - id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/constituent_services/0"
+                    type: "string"
+              network_forwarding_paths: 
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/network_forwarding_paths"
+                type: "array"
+                items: 
+                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/network_forwarding_paths/0"
+                  type: "object"
+                  properties: 
+                    fp_id: 
+                      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/network_forwarding_paths/0/fp_id"
+                      type: "string"
+                    policy:
+                      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/network_forwarding_paths/0/policy"
+                      type: "string"
+                    connection_points: 
+                      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/network_forwarding_paths/0/connection_points"
+                      type: "array"
+                      items: 
+                        id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/network_forwarding_paths/0/connection_points/0"
+                        type: "object"
+                        properties:
+                          connection_point_ref:
+                            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/network_forwarding_paths/0/connection_points/0/cp_ref"
+                            description: "A connection point reference, referenced by a connection point id."
+                            type: "string"
+                          position:
+                            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/forwarding_graphs/0/fgd/network_forwarding_paths/0/connection_points/0/possition"
+                            description: "The possition of the connection point with the forwarding graph"
+                            type: "integer"
+            required:
+              - fg_id
+    lifecycle_events: 
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/lifecycle_events"
+      type: "object"
+      properties: 
+        start: 
+          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/lifecycle_events/start"
+          type: "array"
+          items: 
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/lifecycle_events/start/0"
+            type: "object"
+            properties: 
+              vnf_id: 
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/lifecycle_events/start/0/vnf_id"
+                type: "string"
+              vnf_event: 
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/lifecycle_events/start/0/vnf_event"
+                type: "string"
+        stop: 
+          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/lifecycle_events/stop"
+          type: "array"
+          items: 
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/lifecycle_events/stop/0"
+            type: "object"
+            properties: 
+              vnf_id: 
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/lifecycle_events/stop/0/vnf_id"
+                type: "string"
+              vnf_event: 
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/lifecycle_events/stop/0/vnf_event"
+                type: "string"
+        scale_out: 
+          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/lifecycle_events/scale_out"
+          type: "array"
+          items: 
+            id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/lifecycle_events/scale_out/0"
+            type: "object"
+            properties: 
+              vnf_id: 
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/lifecycle_events/scale_out/0/vnf_id"
+                type: "string"
+              vnf_event: 
+                id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/lifecycle_events/scale_out/0/vnf_event"
+                type: "string"
+    vnf_depedency: 
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/vnf_depedency"
+      type: "array"
+      items: 
+        type: "string"
+      minItems: 0
+      uniqueItems: true
+    services_depedency: 
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/services_depedency"
+      type: "array"
+      items: 
+        type: "string"
+      minItems: 0
+      uniqueItems: true
+    monitoring_parameters: 
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters"
+      type: "array"
+      items: 
+        - id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters/0"
+          type: "object"
+          properties: 
+            desc: 
+              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters/0/desc"
+              type: "string"
+            metric: 
+              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters/0/metric"
+              type: "string"
+            unit: 
+              id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/monitoring_parameters/0/unit"
+              type: "string"
+    auto_scale_policy: 
+      id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy"
+      type: "object"
+      properties: 
+        criteria: 
+          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy/criteria"
+          type: "array"
+          items: 
+            - id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy/criteria/0"
+              type: "object"
+              properties: 
+                end-to-end bandwidth: 
+                  id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy/criteria/0/end-to-end_bandwidth"
+                  type: "string"
+        action: 
+          id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive/auto_scale_policy/action"
+          type: "string"
+  required: 
+    - descriptor_version
+    - ns_group
+    - ns_name
+    - ns_version
+  additionalProperties: false
+
