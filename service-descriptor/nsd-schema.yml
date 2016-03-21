@@ -2,6 +2,18 @@
 $schema: "http://json-schema.org/draft-04/schema#"
 #id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive"
 description: "The core scheme for RECUSRIVE service descriptors (many details left out)"
+
+##
+## Some definitions used later on.
+##
+definitions:
+  interfaces:
+    enum:
+      - "interface"
+
+##
+## The actual document description.
+##
 type: "object"
 properties:
   descriptor_version:
@@ -65,7 +77,7 @@ properties:
       type: "string"
     minItems: 0
     uniqueItems: true
-    # how do I write down that there must be at least one of VNFDs or NSDs?
+    # How do I write down that there must be at least one of VNFDs or NSDs?
   connection_points:
     description: "The connection points of the overall NS, that connects the NS to the external world."
     type: "array"
@@ -77,9 +89,7 @@ properties:
           type: "string"
         type:
           description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-          # TODO: Change type to a particular type, and use oneOf.
-          enum:
-            - "interface"
+          $ref: "#/definitions/interfaces"
         # TODO: Remove? Cyclic reference with virtual_links?
         virtual_link_reference:
           description: "A reference to a virtual link, i.e. the virtual_links:id."
@@ -118,9 +128,9 @@ properties:
               type: "string"
             connectivity_type: 
               enum:
-                - "E-Line"
-                - "E-Tree"
-                - "E-LAN"
+                - "E-Line" # Point-to-point
+                - "E-Tree" # Point-to-multipoint
+                - "E-LAN"  # Multipoint-to-multipoint
             connection_points_reference:
               type: "array"
               items:
@@ -179,18 +189,15 @@ properties:
             depedent_virtual_links: 
               type: "array"
               items: 
-                -
-                  type: "string"
+                - type: "string"
             constituent_vnfs: 
               type: "array"
               items: 
-                -
-                  type: "string"
+                - type: "string"
             constituent_services: 
               type: "array"
               items: 
-                -
-                  type: "string"
+                - type: "string"
             network_forwarding_paths: 
               type: "array"
               items: 
@@ -258,8 +265,7 @@ properties:
   monitoring_parameters: 
     type: "array"
     items: 
-      -
-        type: "object"
+      - type: "object"
         properties: 
           desc: 
             type: "string"
@@ -273,8 +279,7 @@ properties:
       criteria: 
         type: "array"
         items: 
-          -
-            type: "object"
+          - type: "object"
             properties: 
               end-to-end bandwidth: 
                 type: "string"
