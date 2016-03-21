@@ -106,7 +106,7 @@ properties:
                 version:
                   description: "The version of the hypervisor needed for this VDU."
                   type: "string"
-                  # TODO: Provide a pattern that allows boolean expression, like '>= 5.0' to specify version a version greater or equal 5.0
+                  pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
             vswitch_capabilities:
               type: "object"
               properties:
