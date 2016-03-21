@@ -52,21 +52,6 @@ properties:
     description: "The version of the description definition used to describe the function descriptor."
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.]+$"
-    ##
-    ## Translations of the key to other descriptor format, such as TOSCA, ETSI NVF, and HOT
-    ##
-    tosca:
-      name: "tosca_definitions_version"
-      type: "string"
-    etsi:
-      name: "descriptor_version"
-      type: null
-    t-nova:
-      name: "descriptor_version"
-      type: "string"
-    hot:
-      name: "heat_template_version"
-      type: "string"
   vnf_group:
     description: "The group id identifies the VNF descriptor uniquely across all function descriptors."
     type: "string"
@@ -75,61 +60,16 @@ properties:
     description: "The name of the function description."
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
-    ##
-    ## Translations of the key to other descriptor format, such as TOSCA, ETSI NVF, and HOT
-    ##
-    tosca:
-      name: "template_name"
-      type: "string"
-    etsi:
-      name: "id"
-      type: null
-    t-nova:
-      name: "name"
-      type: "string"
   vnf_version:
     description: "The version of the function descriptor."
     type: "string"
     pattern: "^[0-9\\-_.]+$"
-    ##
-    ## Translations of the key to other descriptor format, such as TOSCA, ETSI NVF, and HOT
-    ##
-    tosca:
-      name: "template_version"
-      type: "string"
-    etsi:
-      name: "version"
-      type: null
-    t-nova:
-      name: "version"
-      type: "string"
   vnf_author:
     description: "The person or organization that created the VNF descriptor."
     type: "string"
-    ##
-    ## Translations of the key to other descriptor format, such as TOSCA, ETSI NVF, and HOT
-    ##
-    tosca:
-      name: "template_author"
-      type: "string"
-    etsi:
-      name: "vendor"
-      type: null
   vnf_description:
     description: "A longer description of the network function."
     type: "string"
-    ##
-    ## Translations of the key to other descriptor format, such as TOSCA, ETSI NVF, and HOT
-    ##
-    tosca:
-      name: "tosca_definitions_version"
-      type: "string"
-    t-nova:
-      name: "descriptor_version"
-      type: "string"
-    hot:
-      name: "description"
-      type: "string"
   virtual_deployment_units: 
     description: "The virtual deployment units (VDUs) of the virtual network function."
     type: "array"
