@@ -111,8 +111,11 @@ properties:
               type: "object"
               properties:
                 version:
+                  description: "The version of vswitch to use."
                   type: "string"
+                  pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
                 type:
+                  description: "The type of vswitch to use."
                   type: "string"
                 overlay_tunnel:
                   type: "string"
@@ -133,37 +136,48 @@ properties:
               type: "object"
               properties:
                 size:
+                  description: "The size of the memory for this VDU."
                   type: "number"
                   minimum: 0
                   exclusiveMinimum: true
                 size_unit:
-                  description: "The unit the host memory is measured in. Default is MB (Megabyte)"
+                  description: "The unit the host memory is measured in. Default is MB (Megabyte)."
                   $ref: "#/definitions/memory_units"
+                  default: "MB"
                 large_pages_required:
+                  description: "States whether large memory pages are required or not."
                   type: "boolean"
                 numa_allocation_policy:
+                  description: "Names the NUMA allocaton policy."
                   type: "string"
               required:
                 - size
               additionalProperties: false
             storage:
+              # TODO: This has to be an array! There can be more than one storage entity.
               type: "object"
               properties:
                 size:
+                  description: "The size of the storage for this VDU."
                   type: "number"
                   minimum: 0
                   exclusiveMinimum: true
                 size_unit:
+                  description: "The unit the host storage is measured in. Default is MB (Megabyte)."
                   $ref: "#/definitions/memory_units"
+                  default: "MB"
                 persistence:
+                  description: "States whether this is persistent storage or not."
                   type: "boolean"
               required:
                 - size
               additionalProperties: false
             network:
+              # TODO: This has to be an array! There can be more than one network interface.
               type: "object"
               properties:
                 network_interface_bandwidth:
+                  description: "The size of the bandwidth for this VDU."
                   type: "number"
                   minimum: 0
                   exclusiveMinimum: true
@@ -171,21 +185,28 @@ properties:
                   description: "The unit of the network interface bandwidth. Default is bps (bit per second)."
                   $ref: "#/definitions/bandwidth_units"
                 network_interface_card_capabilities: 
+                  description: "Additional NIC capabilities:"
                   type: "object"
                   properties:
                     SR-IOV:
+                      description: "States whether this VDU requires Single Root I/O Virtualization on this NIC."
                       type: "boolean"
                     mirroring:
+                      description: "States whether the traffic is mirrored or not."
                       type: "boolean"
                 data_processing_acceleration_library:
+                  description: "The name of the data processing acceleration library."
                   type: "string"
             pcie:
+              # TODO: This has to be an array! There can be more than one PCI entity.
               description: "The PCIe parameters of the platform."
               type: "object"
               properties:
                 SR-IOV:
+                  description: "States whether this VDU requires Single Root I/O Virtualization on this PCI entity."
                   type: "boolean"
                 device_pass_through:
+                  description: "States whether this PCI entity MUST support PCI pass through."
                   type: "boolean"
           required:
             - cpu
@@ -202,7 +223,6 @@ properties:
                 type: "string"
               type:
                 description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-                # TODO: Change type to a particular type, and use oneOf.
                 $ref: "#/definitions/interfaces"
               # TODO: Remove? Cyclic reference with virtual_links?
               virtual_link_reference:
@@ -215,19 +235,25 @@ properties:
           minItems: 1
           uniqueItems: true
         monitoring_parameters:
+          description: "The various metrics and parameters to monitor."
           type: "array"
           items:
+            description: "A specific monitoring metric or parameter."
             type: "string"
         scale_in_out:
+          description: "The scale-in/scale-out parameters."
           type: "object"
           properties:
             minimum:
+              description: "The minimum number of VDUs instantiated at any time."
               type: "integer"
               minimum: 0
+              default: 1
             maximum:
+              description: "The maximum number of VDUs instantiated at any time."
               type: "integer"
-              minimum: 0
-              exclusiveMinimum: true
+              minimum: 1
+              default: 1
           additionalProperties: false
       required:
         - id
@@ -246,7 +272,6 @@ properties:
           type: "string"
         type:
           description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-          # TODO: Change type to a particular type, and use oneOf.
           $ref: "#/definitions/interfaces"
         # TODO: Remove? Cyclic reference with virtual_links?
         virtual_link_reference:
@@ -265,13 +290,16 @@ properties:
       type: "object"
       properties:
         id:
+          description: "A VNF-unique id of the virtual link. Can be used for references."
           type: "string"
         connectivity_type: 
+          description: "The connectivity type, such as point-to-point, point-to-multipoint, and multipoint-to-multipoint."
           enum:
-            - "E-Line"
-            - "E-Tree"
-            - "E-LAN"
+            - "E-Line" # Point-to-point
+            - "E-Tree" # Point-to-multipoint
+            - "E-LAN"  # Multipoint-to-multipoint
         connection_points_reference:
+          description: "The references to the connection points connected to this virtual link."
           type: "array"
           items:
             type: "string"
@@ -295,6 +323,7 @@ properties:
         - connection_points_reference
       additionalProperties: false
   deployment_flavours:
+    description: "The flavours of the VNF that can be deployed."
     type: "array"
     items:
       type: "object"
