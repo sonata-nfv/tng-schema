@@ -29,6 +29,12 @@ properties:
     description: "The version id that identifies the version of the related VNFD."
     type: "string"
     pattern: "^[0-9\\-_.]+$"
+  creation_time:
+    description: "The (Unix) timestamp this VNFD metadata is created, i.e. the upload time of the VNFD"
+    type: "number"
+  creation_user:
+    description: "The user that uploaded the VNFD"
+    type: "string"
   virtual_deployment_units:
     description: "Meta-data related to the various VDUs specified in the VNFD." 
     type: "array"
