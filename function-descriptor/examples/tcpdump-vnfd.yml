@@ -19,8 +19,8 @@ vnf_description: >
 ## The virtual deployment unit.
 ##
 virtual_deployment_units:
-  - id: "1"
-    vm_image: "tcpdump_docker"
+  - id: "vdu01"
+    vm_image: "file:///docker_files/tcpdump/Dockerfile"
     vm_image_format: "docker"
     resource_requirements:
       cpu:

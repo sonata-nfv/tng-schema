@@ -19,8 +19,8 @@ vnf_description: >
 ## The virtual deployment unit.
 ##
 virtual_deployment_units:
-  - id: "1"
-    vm_image: "iperf_docker"
+  - id: "vdu01"
+    vm_image: "file:///docker_files/iperf/Dockerfile"
     vm_image_format: "docker"
     resource_requirements:
       cpu:

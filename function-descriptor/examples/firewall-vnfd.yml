@@ -18,8 +18,8 @@ vnf_description: >
 ## The virtual deployment unit.
 ##
 virtual_deployment_units:
-  - id: "1"
-    vm_image: "fw_docker"
+  - id: "vdu01"
+    vm_image: "file:///docker_files/firewall/Dockerfile"
     vm_image_format: "docker"
     resource_requirements:
       cpu:
