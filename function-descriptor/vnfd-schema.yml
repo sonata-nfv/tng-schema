@@ -52,6 +52,33 @@ definitions:
   interfaces:
     enum:
       - "interface"
+  monitoring:
+    type: "object"
+    properties:
+      name:
+       description: "The name of the parameter to monitor. The name has to be supported by the service platform or the FSM."
+       type: "string"
+       pattern: "^[A-Za-z-_]+$"
+      unit:
+       description: "The unit used to monitor (or represent) the parameter."
+       oneOf:
+         - $ref: "#/definitions/general_units"
+         - $ref: "#/definitions/memory_units"
+         - $ref: "#/definitions/bandwidth_units"
+         - $ref: "#/definitions/frequency_units"
+      frequency:
+        description: "The sample rate of the monitoring parameter."
+        type: "number"
+        minimum: 0
+        exclusiveMinimum: true
+      frequency_unit:
+        description: "The unit of the sample frequency."
+        $ref: "#/definitions/frequency_units"
+        default: "Hz"
+    required:
+      - name
+      - unit
+    additionalProperties: false
 
 ##
 ## The actual document description.
