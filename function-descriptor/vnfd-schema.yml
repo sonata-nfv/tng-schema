@@ -52,22 +52,22 @@ properties:
     description: "The version of the description definition used to describe the function descriptor."
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.]+$"
-  vnf_group:
+  group:
     description: "The group id identifies the VNF descriptor uniquely across all function descriptors."
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
-  vnf_name:
+  name:
     description: "The name of the function description."
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
-  vnf_version:
+  version:
     description: "The version of the function descriptor."
     type: "string"
     pattern: "^[0-9\\-_.]+$"
-  vnf_author:
+  author:
     description: "The person or organization that created the VNF descriptor."
     type: "string"
-  vnf_description:
+  description:
     description: "A longer description of the network function."
     type: "string"
   virtual_deployment_units: 
@@ -455,8 +455,8 @@ properties:
       additionalProperties: false
 required:
   - descriptor_version
-  - vnf_group
-  - vnf_name
-  - vnf_version
+  - group
+  - name
+  - version
   - virtual_deployment_units 
 additionalProperties: false
