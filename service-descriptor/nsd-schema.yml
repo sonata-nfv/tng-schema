@@ -20,22 +20,22 @@ properties:
     description: "The version of the description definition used to describe the network descriptor."
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.]+$"
-  ns_group:
+  group:
     description: "The group id identifies the NS descriptor uniquely across all network descriptors."
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
-  ns_name: 
+  name: 
     description: "The name of the network service description."
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
-  ns_version: 
+  version: 
     description: "The version of the service descriptor."
     type: "string"
     pattern: "^[0-9\\-_.]+$"
-  ns_author:
+  author:
     description: "The person or organization that created the NS descriptor."
     type: "string"
-  ns_description:
+  description:
     description: "A longer description of the network service."
     type: "string"
   network_functions: 
@@ -287,7 +287,7 @@ properties:
         type: "string"
 required: 
   - descriptor_version
-  - ns_group
-  - ns_name
-  - ns_version
+  - group
+  - name
+  - version
 additionalProperties: false
