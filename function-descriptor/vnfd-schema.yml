@@ -276,9 +276,7 @@ properties:
           type: "array"
           items:
             description: "A specific monitoring metric or parameter."
-            type: "array"
-            items:
-              $ref: "#/definitions/monitoring"
+            $ref: "#/definitions/monitoring"
         scale_in_out:
           description: "The scale-in/scale-out parameters."
           type: "object"
