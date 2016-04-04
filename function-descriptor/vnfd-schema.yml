@@ -250,9 +250,9 @@ properties:
               minimum: 0
               default: 1
             maximum:
-              description: "The maximum number of VDUs instantiated at any time."
+              description: "The maximum number of VDUs instantiated at any time. 0 means unlimited."
               type: "integer"
-              minimum: 1
+              minimum: 0
               default: 1
           additionalProperties: false
       required:
