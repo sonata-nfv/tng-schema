@@ -7,6 +7,9 @@ description: "The core schema for SONATA network function descriptors."
 ## Some definitions used later on.
 ##
 definitions:
+  general_units:
+    enum:
+      - "Percentage"
   memory_units:
     enum:
       - "B"   # Byte
@@ -27,6 +30,13 @@ definitions:
       - "Mbps" # Megabit per second
       - "Gbps" # Gigabit per second
       - "Tbps" # Terabit per second
+  frequency_units:
+    enum:
+      - "Hz"   # Hertz, 1/sec
+      - "kHz"  # Kilohertz
+      - "MHz"  # Megahertz
+      - "GHz"  # Gigahertz
+      - "THz"  # Terahertz
   images_formats:
     enum:
       - "raw"
