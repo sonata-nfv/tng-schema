@@ -52,8 +52,8 @@ properties:
     description: "The version of the description definition used to describe the function descriptor."
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.]+$"
-  group:
-    description: "The group id identifies the VNF descriptor uniquely across all function descriptors."
+  vendor:
+    description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
   name:
@@ -455,7 +455,7 @@ properties:
       additionalProperties: false
 required:
   - descriptor_version
-  - group
+  - vendor 
   - name
   - version
   - virtual_deployment_units 

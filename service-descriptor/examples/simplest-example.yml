@@ -8,6 +8,6 @@
 ---
 descriptor_version: "1.0"
 
-ns_group: "eu.sonata-nfv.service-descriptor"
-ns_name: "simplest-example"
-ns_version: "0.1"
+vendor: "eu.sonata-nfv.service-descriptor"
+name: "simplest-example"
+version: "0.2"
