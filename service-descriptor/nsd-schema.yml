@@ -20,8 +20,8 @@ properties:
     description: "The version of the description definition used to describe the network descriptor."
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.]+$"
-  group:
-    description: "The group id identifies the NS descriptor uniquely across all network descriptors."
+  vendor:
+    description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
   name: 
@@ -47,8 +47,8 @@ properties:
         vnf_id:
           description: "A unique identifier of this network function within the scope of this NS descriptor."
           type: "string"
-        vnf_group:
-          description: "The group id identifies the VNF descriptor uniquely across all function descriptors."
+        vnf_vendor:
+          description: "The vendor id identifies the VNF descriptor uniquely across all function descriptors."
           type: "string"
           pattern: "^[a-z0-9\\-_.]+$"
         vnf_name:
@@ -64,7 +64,7 @@ properties:
           type: "string"
       required:
         - vnf_id
-        - vnf_group
+        - vnf_vendor
         - vnf_name
         - vnf_version
       additionalProperties: false
@@ -287,7 +287,7 @@ properties:
         type: "string"
 required: 
   - descriptor_version
-  - group
+  - vendor 
   - name
   - version
 additionalProperties: false
