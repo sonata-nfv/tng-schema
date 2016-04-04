@@ -17,15 +17,15 @@ properties:
     description: "The primary key of the meta-data information:"
     type: "string"
     pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-  vnf_group_ref:
+  group_ref:
     description: "The group id that identifies the group of the related VNFD."
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
-  vnf_name_ref:
+  name_ref:
     description: "The name id that identifies the name of the related VNFD."
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
-  vnf_version_ref:
+  version_ref:
     description: "The version id that identifies the version of the related VNFD."
     type: "string"
     pattern: "^[0-9\\-_.]+$"
@@ -53,7 +53,7 @@ properties:
       additionalProperties: false
 required:
   - uuid
-  - vnf_group_ref
-  - vnf_name_ref
-  - vnf_version_ref
+  - group_ref
+  - name_ref
+  - version_ref
 additionalProperties: false
