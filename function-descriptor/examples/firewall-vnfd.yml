@@ -31,6 +31,13 @@ virtual_deployment_units:
       storage:
         size: 10
         size_unit: "GB"
+    monitoring_parameters:
+      - name: "cpu_load"
+        unit: "Percentage"
+        frequency: 1
+        frequency_unit: "kHz"
+      - name: "memory_consumption"
+        unit: "MB"
     connection_points:
       - id: "vdu01:cp01"
         type: "interface"
