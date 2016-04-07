@@ -1,7 +1,7 @@
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
-#id: "http://www.sonata-nfv.eu/schema/vnfd-schema-02"
-description: "The core schema for SONATA network function descriptors."
+#id: "http://www.sonata-nfv.eu/schema/vnfr-schema-01"
+description: "The core schema for SONATA network function records."
 
 ##
 ## Some definitions used later on.
@@ -86,49 +86,93 @@ definitions:
 type: "object"
 properties:
   descriptor_version:
-    description: "The version of the description definition used to describe the function descriptor."
+    description: "The version of the description definition used to describe the function record."
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.]+$"
-  vendor:
-    description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
+  id:
+    description: "The UUID of the function record."
     type: "string"
-    pattern: "^[a-z0-9\\-_.]+$"
-  name:
-    description: "The name of the function description."
-    type: "string"
-    pattern: "^[a-z0-9\\-_.]+$"
+    pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
   version:
-    description: "The version of the function descriptor."
+    description: "The version of the function record. Can be used to track changes."
     type: "string"
-    pattern: "^[0-9\\-_.]+$"
-  author:
-    description: "The person or organization that created the VNF descriptor."
+    pattern: "^[0-9]+$"
+  status:
+    description: "The current status of the VNF"
+    enum:
+      - "failed"
+      - "normal operation"
+      - "degraded operation"
+      - "offline"
+  descriptor_reference:
+    description: "Reference to the VNFD used to instanciate this VNF."
     type: "string"
-  description:
-    description: "A longer description of the network function."
+    pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+  deployment_favour:
+    description: "Reference to the selected deployment flavour (vnfd:deployment_flavour:id)."
     type: "string"
+    pattern: "^[A-Za-z0-9\\-_.:]+$"
+  parent_ns:
+    # TODO: ETSI forsees a list of records. Check why?
+    description: "Reference to records of network service (nsr:id) that this VNF instance is part of."
+    type: "string"
+    pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
   virtual_deployment_units: 
-    description: "The virtual deployment units (VDUs) of the virtual network function."
+    description: "The virtual deployment units (VDUs) of the virtual network record."
     type: "array"
     items:
       type: "object"
       properties:
-        description:
-          description: "An arbitrary description of the VDU:"
-          type: "string"
         id:
           description: "A unique identifier of this VDU within the scope of this VNF descriptor."
           type: "string"
         vm_image:
-          description: "The reference to a virtual machine image."
+          description: "The reference to a virtual machine image used for this instance."
           type: "string"
-        vm_image_format:
-          description: "The format of the virtual machine image."
-          $ref: "#/definitions/images_formats"
-        vm_image_md5:
-          description: "An MD5 hash of the virtual machine image."
+        vdu_reference:
+          description: "The reference to the VDU (vnfd:vdu:id) used to instantiate this element:"
           type: "string"
-          pattern: "^[A-Fa-f0-9]{32}$"
+        number_of_instances:
+          description: "The number of instances of this VDU element."
+          type: "integer"
+          minimum: 0
+        vnfc_instance:
+          description: "Additional information distinct for each VNFC instance created based on this VDU."
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              id:
+                description: "Unique name within the namespace of this VNF instance."
+                type: "string"
+              vim_id:
+                description: "Identifier of the VIM this VNFC is running at."
+                type: "string"
+              vc_id:
+                description: "Identifier of the virtualization container or VM running on the VIM."
+                type: "string"
+              connection_points:
+                description: "The connection points of this VNFC. Connects the VDU to other VDUs or the external world."
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    id:
+                      description: "A VNF-unique id of the connection point. Can be used for references."
+                      type: "string"
+                    type:
+                      description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
+                      $ref: "#/definitions/interfaces"
+                    # TODO: Remove? Cyclic reference with virtual_links?
+                    virtual_link_reference:
+                      description: "A reference to a virtual link, i.e. the virtual_links:id."
+                      type: "string"
+                  required:
+                    - id
+                    - type
+                  additionalProperties: false
+                minItems: 1
+                uniqueItems: true
         resource_requirements:
           description: "The requirments of a (virtual) machine that hosts this VDU. The service platform has to provide machines that meet these requirements."
           type: "object"
@@ -143,14 +187,14 @@ properties:
                 version:
                   description: "The version of the hypervisor needed for this VDU."
                   type: "string"
-                  pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
+                  pattern: "^[0-9\\-_.]+$"
             vswitch_capabilities:
               type: "object"
               properties:
                 version:
                   description: "The version of vswitch to use."
                   type: "string"
-                  pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
+                  pattern: "^[0-9\\-_.]+$"
                 type:
                   description: "The type of vswitch to use."
                   type: "string"
@@ -166,6 +210,10 @@ properties:
                   minimum: 0
                   exclusiveMinimum: true
                 cpu_support_accelerator:
+                  type: "string"
+                cpu_model:
+                  type: "string"
+                cpu_clock_speed:
                   type: "string"
               required:
                 - vcpus
@@ -249,49 +297,12 @@ properties:
             - cpu
             - memory
           additionalProperties: false
-        connection_points:
-          description: "The connection points of this VDU. Connects the VDU to other VDUs or the external world."
-          type: "array"
-          items:
-            type: "object"
-            properties:
-              id:
-                description: "A VNF-unique id of the connection point. Can be used for references."
-                type: "string"
-              type:
-                description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-                $ref: "#/definitions/interfaces"
-              # TODO: Remove? Cyclic reference with virtual_links?
-              virtual_link_reference:
-                description: "A reference to a virtual link, i.e. the virtual_links:id."
-                type: "string"
-            required:
-              - id
-              - type
-            additionalProperties: false
-          minItems: 1
-          uniqueItems: true
         monitoring_parameters:
           description: "The various metrics and parameters to monitor."
           type: "array"
           items:
             description: "A specific monitoring metric or parameter."
             $ref: "#/definitions/monitoring"
-        scale_in_out:
-          description: "The scale-in/scale-out parameters."
-          type: "object"
-          properties:
-            minimum:
-              description: "The minimum number of VDUs instantiated at any time."
-              type: "integer"
-              minimum: 0
-              default: 1
-            maximum:
-              description: "The maximum number of VDUs instantiated at any time. 0 means unlimited."
-              type: "integer"
-              minimum: 0
-              default: 1
-          additionalProperties: false
       required:
         - id
         - resource_requirements
@@ -359,65 +370,17 @@ properties:
         - connectivity_type
         - connection_points_reference
       additionalProperties: false
-  deployment_flavours:
-    description: "The flavours of the VNF that can be deployed."
+  vnf_address:
     type: "array"
     items:
       type: "object"
       properties:
-        vdu_reference:
-          type: "array"
-          items:
-            type: "string"
-        constraint:
+        address:
           type: "string"
-        flavour_key:
-          type: "string"
-        vlink_reference:
-          type: "array"
-          items:
-            type: "string"
-        id:
-          type: "string"
-        assurance_parameters:
-          type: "array"
-          items:
-            type: "object"
-            properties:
-              violation:
-                type: "array"
-                items:
-                  type: "object"
-                  properties:
-                    interval:
-                      type: "integer"
-                    breaches_count:
-                      type: "integer"
-                  additionalProperties: false
-              value:
-                type: "integer"
-              penalty:
-                type: "object"
-                properties:
-                  type:
-                    type: "string"
-                  expression:
-                    type: "integer"
-                  validity:
-                    type: "string"
-                  unit:
-                    type: "string"
-                additionalProperties: false
-              formula:
-                type: "string"
-              rel_id:
-                type: "string"
-              id:
-                type: "string"
-              unit:
-                type: "string"
-            additionalProperties: false
+      required:
+        - address
       additionalProperties: false
+    uniqueItems: true
   lifecycle_events:
     type: "array"
     items:
@@ -492,8 +455,7 @@ properties:
       additionalProperties: false
 required:
   - descriptor_version
-  - vendor 
-  - name
-  - version
+  - id
+  - status
   - virtual_deployment_units 
 additionalProperties: false
