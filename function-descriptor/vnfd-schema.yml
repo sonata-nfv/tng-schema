@@ -250,7 +250,7 @@ properties:
             - memory
           additionalProperties: false
         connection_points:
-          description: "The connection points of this VDU. Connects the VDU ot other VDUs or the external world."
+          description: "The connection points of this VDU. Connects the VDU to other VDUs or the external world."
           type: "array"
           items:
             type: "object"
