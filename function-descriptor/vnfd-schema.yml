@@ -10,6 +10,14 @@ definitions:
   general_units:
     enum:
       - "Percentage"
+  time_units:
+    enum:
+      - "ns"  # nano seconds
+      - "ms"  # milli seconds
+      - "s"   # seconds
+      - "m"   # minutes
+      - "h"   # hours
+      - "d"   # days
   memory_units:
     enum:
       - "B"   # Byte
@@ -490,6 +498,46 @@ properties:
         flavor_id_ref:
           type: "string"
       additionalProperties: false
+  monitoring_rules:
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        name:
+          description: "The name of the monitoring rule."
+          type: "string"
+        description:
+          description: "An arbitrary descritpion of this monitoring rule."
+          type: "string"
+        duration:
+          description: "The duration the condtion has to be met before an event is fired."
+          type: "number"
+        duration_unit:
+          description: "The unit of the durration."
+          ref: "#/definitions/time_units"
+        condition:
+          description: "The condition, a boolean expression, that must be met to fire the event."
+          type: "string"
+        notification:
+          description: "A list of notifications that are fired when the condition is met."
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              name:
+                description: "The name of the notification"
+                type: "string"
+              type:
+                description: "The type of message that is send to the message bus."
+                type: "string"
+            required:
+              - name
+              - type
+      required:
+        - name
+        - duration
+        - condition
+        - notification
 required:
   - descriptor_version
   - vendor 
