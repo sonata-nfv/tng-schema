@@ -134,6 +134,7 @@ properties:
             connection_points_reference:
               type: "array"
               items:
+                description: "The connection point reference has to uniquely reference the connection point of the VNF. To this end, it should name the vnf_id of the network_function section and the name of the connection point of this VNF as specified in the VNFD."
                 type: "string"
                 minItems: 2
                 uniqueItems: true
