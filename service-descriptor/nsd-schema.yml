@@ -187,7 +187,7 @@ properties:
               type: "integer"
             number_of_virtual_links: 
               type: "integer"
-            depedent_virtual_links: 
+            constituent_virtual_links: 
               type: "array"
               items: 
                 - type: "string"
