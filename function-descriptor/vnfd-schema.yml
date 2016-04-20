@@ -83,6 +83,9 @@ definitions:
         description: "The unit of the sample frequency."
         $ref: "#/definitions/frequency_units"
         default: "Hz"
+      command:
+        description: "A command that is executed in order to perform custom monitoring."
+        type: "string"
     required:
       - name
       - unit
