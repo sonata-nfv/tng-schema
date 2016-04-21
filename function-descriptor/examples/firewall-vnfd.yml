@@ -21,7 +21,7 @@ description: >
 virtual_deployment_units:
   - id: "vdu01"
     vm_image: "http://registry.sonata-nfv.eu/html/files/VM_images/sonata-VM-2ports.qcow"
-    vm_image_format: "qcow"
+    vm_image_format: "qcow2"
     resource_requirements:
       cpu:
         vcpus: 1
@@ -58,16 +58,19 @@ virtual_links:
     connection_points_reference:
       - "vdu01:eth0"
       - "mgmt"
+	dhcp: True
   - id: "input"
     connectivity_type: "E-Line"
     connection_points_reference:
       - "vdu01:eth1"
       - "input"
+	dhcp: True
   - id: "output"
     connectivity_type: "E-Line"
     connection_points_reference:
       - "vdu01:eth2"
       - "output"
+	dhcp: True
 
 ##
 ## The VNF connection points to the 
