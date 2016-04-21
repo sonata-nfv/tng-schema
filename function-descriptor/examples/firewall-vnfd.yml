@@ -41,11 +41,11 @@ virtual_deployment_units:
       - name: "vm_net_tx_MB"
         unit: "Mbps"
     connection_points:
-      - id: "vdu01:cp01"
+      - id: "vdu01:eth0"
         type: "interface"
-      - id: "vdu01:cp02"
+      - id: "vdu01:eth1"
         type: "interface"
-      - id: "vdu01:cp03"
+      - id: "vdu01:eth2"
         type: "interface"
 
 ##
