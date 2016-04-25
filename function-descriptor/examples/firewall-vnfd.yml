@@ -20,8 +20,8 @@ description: >
 ##
 virtual_deployment_units:
   - id: "vdu01"
-    vm_image: "file:///docker_files/firewall/Dockerfile"
-    vm_image_format: "docker"
+    vm_image: "http://registry.sonata-nfv.eu/html/files/VM_images/sonata-VM-2ports.qcow"
+    vm_image_format: "qcow2"
     resource_requirements:
       cpu:
         vcpus: 1
@@ -41,11 +41,11 @@ virtual_deployment_units:
       - name: "vm_net_tx_MB"
         unit: "Mbps"
     connection_points:
-      - id: "vdu01:cp01"
+      - id: "vdu01:eth0"
         type: "interface"
-      - id: "vdu01:cp02"
+      - id: "vdu01:eth1"
         type: "interface"
-      - id: "vdu01:cp03"
+      - id: "vdu01:eth2"
         type: "interface"
 
 ##
@@ -56,18 +56,21 @@ virtual_links:
   - id: "mgmt"
     connectivity_type: "E-LAN"
     connection_points_reference:
-      - "vdu01:cp01"
+      - "vdu01:eth0"
       - "mgmt"
+    dhcp: True
   - id: "input"
     connectivity_type: "E-Line"
     connection_points_reference:
-      - "vdu01:cp02"
+      - "vdu01:eth1"
       - "input"
+    dhcp: True
   - id: "output"
     connectivity_type: "E-Line"
     connection_points_reference:
-      - "vdu01:cp03"
+      - "vdu01:eth2"
       - "output"
+    dhcp: True
 
 ##
 ## The VNF connection points to the 
