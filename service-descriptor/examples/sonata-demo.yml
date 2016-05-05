@@ -68,11 +68,11 @@ virtual_links:
     connectivity_type: "E-Line"
     connection_points_reference:
       - "vnf_iperf:output"
-      - "vns_firewall:input"
+      - "vnf_firewall:input"
   - id: "firewall-2-tcpdump"
     connectivity_type: "E-Line"
     connection_points_reference:
-      - "vns_firewall:output"
+      - "vnf_firewall:output"
       - "vnf_tcpdump:input"
   - id: "tcpdump-2-output"
     connectivity_type: "E-Line"
