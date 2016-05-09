@@ -63,21 +63,15 @@ While the parent section is optional, once it is specified it has to have at lea
 - **id** A VNF-unique id of the virtual link which can be used for references.
 - **connectivity_type** The connectivity type, such as point-to-point, point-to-multipoint, and multipoint-to-multipoint.
 - **connection_points_reference** The references to the connection points connected to this virtual link.
-- **access** (optional)
-- **external_access** (optional)
-- **root_requirement** (optional)
-- **leaf_requirement** (optional)
-- **dhcp** (optional)
-- **qos** (optional)
 
 #### VNF Lifecycle Events Section
 
-- **lifecycle_events** (optional)
+- **lifecycle_events** (optional) An array that contains VNF workflows for specific lifecycle events such as *start*, *stop*, *Scale_out*, *update*, etc.
 
 While the parent section is optional, once it is specified it has to have at least some of the following information:
 
-- **vnf_container**
-- **events**
+- **vnf_container** The VNF container that is associated with the lifecycle event.
+- **events** The actual event such as start, stop, scale_out, update, etc.
 
 #### Deployment Flavours Section
 
@@ -85,21 +79,21 @@ While the parent section is optional, once it is specified it has to have at lea
 
 While the parent section is optional, once it is specified it has to have at least some of the following information:
 
-- **vdu_reference**
-- **constraint**
+- **flavour_key** A VNF-unique id of the deployment flavour which can be used for references.
+- **vdu_reference** A reference to the VDU.
 
-#### MOnitoring Rules
+#### Monitoring Rules
 
-- **monitoring_rules** (optional)
+- **monitoring_rules** (optional) The rules used for monitoring.
 
 While the parent section is optional, once it is specified it has to have at least some of the following information:
 
-- **name**
-- **description** (optional)
-- **duration**
-- **duration_unit** (optional)
-- **condition**
-- **notification**
+- **name** The name of the monitoring rule.
+- **description** (optional) An arbitrary description of this monitoring rule.
+- **duration** The duration the condtion has to be met before an event is fired.
+- **duration_unit** (optional) The unit of the durration, such as seconds, minutes, and hours.
+- **condition** The condition, a boolean expression, that must be met to fire the event.
+- **notification** A list of notifications that are fired when the condition is met.
 
 
 ---
