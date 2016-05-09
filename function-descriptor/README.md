@@ -18,14 +18,14 @@ At the root level, we first have the mandatory fields, that describe and identif
 
 Moreover, the VNF signature, i.e the *vnf_group*, the *vnf_name*, and the *vnf_version*, is of great importance as it idtenfies the VNF uniquely.
 
-- **vnf_group** will identify the VNF uniquely across all VNFs. It should at least be comprised of the reverse domain name that is under your controll. Moreover, it might have as many sub-groups as needed. For example: eu.sonata-nfv.nec.
-- **vnf_name** is the name of the VNF without its version. It can be created with any name written in lower letters and no strange symbols.
-- **vnf_version** names the version of the VNF descritor. Any typical version with numbers and dots, such as 1.0, 1.1, and 1.0.1 is allows here. The VNF version must be increased with any new (changed) instance of the network function descriptor. Please note: The whole network function is composed of the descriptor and other artifacts, like virtual machine images. Thus, the network function may change, even if the description remains constant, just because another artifact changes. This might or might not be reflected in the version of the package descriptor.
+- **vendor** will identify the VNF uniquely across all VNF vendors. It should at least be comprised of the reverse domain name that is under your controll. Moreover, it might have as many sub-groups as needed. For example: eu.sonata-nfv.nec.
+- **name** is the name of the VNF without its version. It can be created with any name written in lower letters and no strange symbols.
+- **version** names the version of the VNF descritor. Any typical version with numbers and dots, such as 1.0, 1.1, and 1.0.1 is allows here. The VNF version must be increased with any new (changed) instance of the network function descriptor. Please note: The whole network function is composed of the descriptor and other artifacts, like virtual machine images. Thus, the network function may change, even if the description remains constant, just because another artifact changes. This might or might not be reflected in the version of the package descriptor.
 
 The general descriptor section also contains some optional components as outlined below.
 
-- **vnf_author** (optional) describes the author of the network function descriptor.
-- **vnf_description** (optional) provides an arbitrary description of the VNF.
+- **author** (optional) describes the author of the network function descriptor.
+- **description** (optional) provides an arbitrary description of the VNF.
 
 #### Virtual Deployment Units Section
 
