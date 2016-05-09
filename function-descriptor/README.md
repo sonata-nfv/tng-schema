@@ -76,17 +76,30 @@ While the parent section is optional, once it is specified it has to have at lea
 
 While the parent section is optional, once it is specified it has to have at least some of the following information:
 
+- **vnf_container**
+- **events**
+
 #### Deployment Flavours Section
 
 - **deployment_flavour** (optional) The flavours of the VNF that can be deployed.
 
 While the parent section is optional, once it is specified it has to have at least some of the following information:
 
+- **vdu_reference**
+- **constraint**
+
 #### MOnitoring Rules
 
 - **monitoring_rules** (optional)
 
 While the parent section is optional, once it is specified it has to have at least some of the following information:
+
+- **name**
+- **description** (optional)
+- **duration**
+- **duration_unit** (optional)
+- **condition**
+- **notification**
 
 
 ---
