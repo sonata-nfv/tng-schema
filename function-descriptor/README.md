@@ -36,13 +36,13 @@ The virtual deployment unit section contains all the information regarding the V
 This section has to have at least one item with the following information:
 
 - **id** represents a unique identifer within the scope of the VNF descriptor. 
-- **resource_requirements** details the resources required by the VDU even further.
 - **vm_image** (optional) specifies a reference to the virtual machine image (or container) that is used for the virtual network function. The image location can be a local file, a file within a package, a remove locatoin, that might be accessed via HTTP, or a reference within the SONATA service platform.
 - **vm_image_format** (optional) specifies the image format, such as raw, vmdk, iso, and docker.
 - **vm_image_md5** (optional) represent an MD5 hash of the virtual machine image. It is highly recommended to provide an MD5 hash, not only to verify the image, but to also make versioning of the whole virtual network function easier.
+- **resource_requirements** details the resources required by the VDU even further.
 - **connection_points** (optional) names the connection points offered by the VDU. The connection points can be used to interconnect various VDUs or to connect the VDU to an VNF connection point and to the outside world.
 - **monitoring_parameters** (optional) names the monitoring parameters that are collected for this specific VDU and used, e.g. to trigger scaling operations.
-- **scale_in_out** (optional)
+- **scale_in_out** (optional) specifies the minimum and maximum number if VDU instances.
 
 #### Connection Points Section
 
@@ -50,19 +50,19 @@ This section has to have at least one item with the following information:
 
 While the parent section is optional, once it is specified it has to have at least one item with the following information:
 
-- **id**
-- **type**
-- **virtual_link_reference** (optional) (deprecated)
+- **id** A VNF-unique id of a connection point which can be used for references.
+- **type** The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel.
+- **virtual_link_reference** (optional) (deprecated) A reference to a virtual link, i.e. the virtual_links:id.
 
 #### Virtual Links Section
 
-- **virtual_links** (optional)
+- **virtual_links** (optional) A VNF internal virtual link interconnects at least two connection points.
 
-While the parent section is optional, once it is specified it has to have at least one item with the following information:
+While the parent section is optional, once it is specified it has to have at least some of the following information:
 
-- **id**
-- **connectivity_type**
-- **connection_points_reference**
+- **id** A VNF-unique id of the virtual link which can be used for references.
+- **connectivity_type** The connectivity type, such as point-to-point, point-to-multipoint, and multipoint-to-multipoint.
+- **connection_points_reference** The references to the connection points connected to this virtual link.
 - **access** (optional)
 - **external_access** (optional)
 - **root_requirement** (optional)
@@ -70,10 +70,23 @@ While the parent section is optional, once it is specified it has to have at lea
 - **dhcp** (optional)
 - **qos** (optional)
 
-
 #### VNF Lifecycle Events Section
 
+- **lifecycle_events** (optional)
+
+While the parent section is optional, once it is specified it has to have at least some of the following information:
+
 #### Deployment Flavours Section
+
+- **deployment_flavour** (optional) The flavours of the VNF that can be deployed.
+
+While the parent section is optional, once it is specified it has to have at least some of the following information:
+
+#### MOnitoring Rules
+
+- **monitoring_rules** (optional)
+
+While the parent section is optional, once it is specified it has to have at least some of the following information:
 
 
 ---
