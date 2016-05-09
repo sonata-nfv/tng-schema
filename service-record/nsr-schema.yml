@@ -271,7 +271,6 @@ properties:
         type: "string"
 required: 
   - descriptor_version
-  - vendor 
-  - name
-  - version
+  - id 
+  - status 
 additionalProperties: false
