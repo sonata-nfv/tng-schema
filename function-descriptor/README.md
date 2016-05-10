@@ -16,7 +16,7 @@ At the root level, we first have the mandatory fields, that describe and identif
 - **descriptor_version** identifies the version of the function descriptor schema that is used to describe the network function.
 - **$schema** (optional) provides a link to the schema that is used to describe the network function and can be used to validate the VNF descriptor file. This is related to the original JSON schema specification.
 
-Moreover, the VNF signature, i.e the *vnf_group*, the *vnf_name*, and the *vnf_version*, is of great importance as it idtenfies the VNF uniquely.
+Moreover, the VNF signature, i.e the *vendor*, the *name*, and the *version*, is of great importance as it identifies the VNF uniquely.
 
 - **vendor** will identify the VNF uniquely across all VNF vendors. It should at least be comprised of the reverse domain name that is under your controll. Moreover, it might have as many sub-groups as needed. For example: eu.sonata-nfv.nec.
 - **name** is the name of the VNF without its version. It can be created with any name written in lower letters and no strange symbols.
