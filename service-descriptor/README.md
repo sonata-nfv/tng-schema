@@ -36,10 +36,10 @@ The network functions section contains all the information regarding the VNFs th
 This section has to have at least one item with the following information:
 
 - **vnf_id** represents a unique identifer within the scope of the NSD. 
-- **vnf_vendor**
-- **vnf_name**
-- **vnf_version**
-- **description** (optional)
+- **vnf_vendor** as part of the primary key, the vendor parameter identifies the VNFD.
+- **vnf_name** as part of the primary key, the name parameter identifies the VNFD.
+- **vnf_version** as part of the primary key, the version parameter identifies the VNFD.
+- **description** (optional) a human-readable description of the VNF.
 
 
 #### Connection Points Section
@@ -66,14 +66,14 @@ While the parent section is optional, once it is specified it has to have at lea
 
 #### Forwarding Graph Section
 
-- **forwarding_graph**
+- **forwarding_graph** The forwarding graph describes the traffic steering through the network service. A network service might have more than one forwarding graph.
 
-- **id**
-- **number_of_endpoints**
-- **number_of_virtual_links**
-- **constituent_virtual_links**
-- **constituent_vnfs**
-- **network_forwaring_paths**
+- **id** The NS-unique id of the forwarding graph.
+- **number_of_endpoints** The number of endpoints of a graph.
+- **number_of_virtual_links** The number of virtual links in a graph.
+- **constituent_virtual_links** References to the virtual links that constitute the forwarding graph.
+- **constituent_vnfs** References to the VNFs taht constitute the forwarding graph.
+- **network_forwaring_paths** The path, i.e. a concatonation of virtual links and VNFs, of the forwaring graph.
 
 
 #### VNF Lifecycle Events Section
@@ -82,19 +82,20 @@ While the parent section is optional, once it is specified it has to have at lea
 
 While the parent section is optional, once it is specified it has to have at least some of the following information:
 
-- **start**
-- **stop**
-- **scale_out**
+- **start** The start event, executed whenever the network service starts.
+- **stop** The stop event, executed when the network service stops.
+- **scale_out** The scale-out event, when the network service is scaled out.
+- **scale_in** The scale-in event, wehn the network service is scaled in.
 
 
 #### Auto-Scale Policy Section
 
-- **auto_scale_policy** (optional)
+- **auto_scale_policy** (optional) The auto-scale policy connects monitoring event with actions that are executed when some given criterias are met.
 
 While the parent section is optional, once it is specified it has to have at least some of the following information:
 
-- **criteria**
-- **action**
+- **criteria** The criteria that have to be met to execute the given action.
+- **action** A list of actions that are execute when the criteria is met.
 
 
 #### Monitoring Parameters Section
@@ -103,9 +104,9 @@ While the parent section is optional, once it is specified it has to have at lea
 
 While the parent section is optional, once it is specified it has to have at least some of the following information:
 
-- **description**
-- **metric**
-- **unit**
+- **description** A human-readable description of the monitoring parameter.
+- **metric** The metric to measure. The metric has to be supported by the service platform.
+- **unit** The unit in which the metric is measured.
 
 
 ---
