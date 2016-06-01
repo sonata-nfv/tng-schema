@@ -8,11 +8,11 @@
 ---
 descriptor_version: "1.0"
 
-package_group: "eu.sonata-nfv.package"
-package_name: "sonata-demo"
-package_version: "0.1.1"
-package_maintainer: "Michael Bredel, NEC Labs Europe"
-package_description: > 
+vendor: "eu.sonata-nfv.package"
+name: "sonata-demo"
+version: "0.1.1"
+maintainer: "Michael Bredel, NEC Labs Europe"
+description: > 
   "The package descriptor for the SONATA demo package that
    comprises the descritors of the demo network service,
    the related VNFs, as well as the virtual machine
