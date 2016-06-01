@@ -25,15 +25,15 @@ network_functions:
   - vnf_id: "vnf_firewall"
     vnf_vendor: "eu.sonata-nfv"
     vnf_name: "firewall-vnf"
-    vnf_version: "0.1"
+    vnf_version: "0.2"
   - vnf_id: "vnf_iperf"
     vnf_vendor: "eu.sonata-nfv"
     vnf_name: "iperf-vnf"
-    vnf_version: "0.1"
+    vnf_version: "0.2"
   - vnf_id: "vnf_tcpdump"
     vnf_vendor: "eu.sonata-nfv"
     vnf_name: "tcpdump-vnf"
-    vnf_version: "0.1"
+    vnf_version: "0.2"
 
 ##
 ## The NS connection points to the 
