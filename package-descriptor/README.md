@@ -18,17 +18,17 @@ Moreover, the package signatur, i.e. the *package_group*, the *package_name*, an
 
 Best practicies for creating the signatur can be derived from the Java Maven naming conventions for groupId, artifactId, and version. To this end, the *package_group*, the *package_name*, and the *package_version* should be named as follows:
 
-- **package_group** will identify the package uniquely across all packages. It should at least be comprised of the reverse domain name that is under your controll. Moreover, it might have as many sub-groups as needed. For example: eu.sonata-nfv.nec.
-- **package_name** is the name of the package without its version. It can be created with any name written in lower letters and no strange symbols.
-- **package_version** names the version of the package. Any typical version with numbers and dots, such as 1.0, 1.1, and 1.0.1 is allows here. The package version must be increased with any new (changed) instance of the service.
+- **vendor** will identify the package uniquely across all packages. It should at least be comprised of the reverse domain name that is under your controll. Moreover, it might have as many sub-groups as needed. For example: eu.sonata-nfv.nec.
+- **name** is the name of the package without its version. It can be created with any name written in lower letters and no strange symbols.
+- **version** names the version of the package. Any typical version with numbers and dots, such as 1.0, 1.1, and 1.0.1 is allows here. The package version must be increased with any new (changed) instance of the service.
 
 The general descriptor section also contains some optional components as outlined below.
 
 
-- **package_maintainer** (optional) describes the maintainer of the package, like *John Doe, NEC*.
-- **package_description** (optional) provides an arbitrary description of the package.
-- **package_md5** (optiona) provides an MD5 hash over the package content, i.e. all files contained in the package EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF, as this file contains this hash.
-- **package_signature** (optional) provides a cryptographic signature over the package content, i.e. all files contained in the package EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF. Thus, a package customer can verify the integrity and the origin of the package.
+- **maintainer** (optional) describes the maintainer of the package, like *John Doe, NEC*.
+- **description** (optional) provides an arbitrary description of the package.
+- **md5** (optiona) provides an MD5 hash over the package content, i.e. all files contained in the package EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF, as this file contains this hash.
+- **signature** (optional) provides a cryptographic signature over the package content, i.e. all files contained in the package EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF. Thus, a package customer can verify the integrity and the origin of the package.
 - **entry_service_template** (optional) specifies THE service template of this package. In General the package can contain more than one network service descriptor as dependencies. In order to identify the descriptor that describes the service of this package, it has to be named here.
 - **sealed** (optional) is a boolean value that states wheter this package is self-contained, i.e. it already contains all its relevant artifacts (true), or it has external dependencies that may have to be provided from somewhere else. Default is *false*.
 
