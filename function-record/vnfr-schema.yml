@@ -50,8 +50,18 @@ definitions:
       - "ovf"
       - "bare"
   interfaces:
-    enum:
-      - "interface"
+    ipv4:
+      description: "An IPv4 capabable interface."
+      type: "object"
+      properties:
+        address:
+          description: "The IPv4 address of the interface."
+          type: "string"
+#          pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+        netmask:
+          description: "The netmask of the interface."
+          type: "string"
+#          pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
   monitoring:
     type: "object"
     properties:
@@ -162,7 +172,8 @@ properties:
                       type: "string"
                     type:
                       description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-                      $ref: "#/definitions/interfaces"
+                      oneOf:
+                        - $ref: "#/definitions/interfaces/ipv4"
                     # TODO: Remove? Cyclic reference with virtual_links?
                     virtual_link_reference:
                       description: "A reference to a virtual link, i.e. the virtual_links:id."
@@ -320,7 +331,8 @@ properties:
           type: "string"
         type:
           description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-          $ref: "#/definitions/interfaces"
+          oneOf:
+            - $ref: "#/definitions/interfaces/ipv4"
         # TODO: Remove? Cyclic reference with virtual_links?
         virtual_link_reference:
           description: "A reference to a virtual link, i.e. the virtual_links:id."
