@@ -38,6 +38,31 @@ properties:
   description:
     description: "A longer description of the network service."
     type: "string"
+  service_specific_manager:
+    description: "The FSM of this VNF. FSMs are always Docker containers."
+    type: "object"
+    properties:
+      description:
+        description: "An arbitrary description of the FSM."
+        type: "string"
+      id:
+        description: "A unique identifier of this FSM within the scope of this VNF descriptor."
+        type: "string"
+      image:
+        description: "The reference to a Docker image."
+        type: "string"
+      image_md5:
+        description: "An MD5 hash of the Docker image."
+        type: "string"
+        pattern: "^[A-Fa-f0-9]{32}$"
+      resource_requirements:
+        description: "The requirments for the Docker environment that runs the FSM."
+        type: "object"
+        properties:
+          version:
+            description: "The version of Docker needed for this FSM."
+            type: "string"
+            pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
   network_functions: 
     description: "The VNFs (their descriptors), that are part of this network service."
     type: "array"
