@@ -136,13 +136,30 @@ properties:
         type: "string"
         pattern: "^[A-Fa-f0-9]{32}$"
       resource_requirements:
-        description: "The requirments for the Docker environment that runs the FSM."
+        description: "The requirements for the Docker environment that runs the FSM."
         type: "object"
         properties:
           version:
             description: "The version of Docker needed for this FSM."
             type: "string"
             pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
+      options:
+        description: "The opions as key-value parameters that are passed to the Docker container. Can be used to configure the Docker."
+        type: "array"
+        items:
+          description: "A key-value parameter object."
+          type: "object"
+          properties:
+            key:
+              type: "string"
+            value:
+              type: "string"
+          required:
+            - key
+            - value
+          additionalProperties: false
+        uniqueItems: true
+    additionalProperties: false
   virtual_deployment_units: 
     description: "The virtual deployment units (VDUs) of the virtual network function."
     type: "array"
