@@ -10,10 +10,30 @@ descriptor_version: "vnfd-schema-01"
 
 vendor: "eu.sonata-nfv"
 name: "firewall-vnf"
-version: "0.2"
+version: "0.3"
 author: "Steven van Rossem, iMinds"
 description: >
   "A first firewall VNF descriptor"
+
+##
+## Some function specific managers.
+##
+function_specific_managers:
+  - id: "fms01"
+    description: "A FSM based on Ubuntu 16.04 LTS."
+    image: "ubuntu:16.04"
+    options:
+      - key: "myKey"
+        value: "myValue"
+  - id: "fms02"
+    image: "ubuntu:14.04"
+    resource_requirements:
+      docker_version: "1.12"
+    options:
+      - key: "myKey"
+        value: "myValue"
+      - key: "myOhterKey"
+        value: "myOtherValue"
 
 ##
 ## The virtual deployment unit.
