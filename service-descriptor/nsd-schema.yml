@@ -38,48 +38,56 @@ properties:
   description:
     description: "A longer description of the network service."
     type: "string"
-  service_specific_manager:
-    description: "The FSM of this VNF. FSMs are always Docker containers."
-    type: "object"
-    properties:
-      description:
-        description: "An arbitrary description of the FSM."
-        type: "string"
-      id:
-        description: "A unique identifier of this FSM within the scope of this VNF descriptor."
-        type: "string"
-      image:
-        description: "The reference to a Docker image."
-        type: "string"
-      image_md5:
-        description: "An MD5 hash of the Docker image."
-        type: "string"
-        pattern: "^[A-Fa-f0-9]{32}$"
-      resource_requirements:
-        description: "The requirements for the Docker environment that runs the FSM."
-        type: "object"
-        properties:
-          version:
-            description: "The version of Docker needed for this FSM."
-            type: "string"
-            pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
-      options:
-        description: "The opions as key-value parameters that are passed to the Docker container. Can be used to configure the Docker."
-        type: "array"
-        items:
-          description: "A key-value parameter object."
+  service_specific_managers:
+    description: "A list of SSMs used to manage this network service."
+    type: "array"
+    items: 
+      description: "An SSM object of this VNF. FSMs are always Docker containers."
+      type: "object"
+      properties:
+        description:
+          description: "An arbitrary description of the FSM."
+          type: "string"
+        id:
+          description: "A unique identifier of this FSM within the scope of this VNF descriptor."
+          type: "string"
+        image:
+          description: "The reference to a Docker image."
+          type: "string"
+        image_md5:
+          description: "An MD5 hash of the Docker image."
+          type: "string"
+          pattern: "^[A-Fa-f0-9]{32}$"
+        resource_requirements:
+          description: "The requirements for the Docker environment that runs the FSM."
           type: "object"
           properties:
-            key:
+            docker_version:
+              description: "The version of Docker needed for this FSM."
               type: "string"
-            value:
-              type: "string"
-          required:
-            - key
-            - value
-          additionalProperties: false
-        uniqueItems: true
-    additionalProperties: false
+              pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
+        options:
+          description: "The options as key-value parameters that are passed to the Docker container. Can be used to configure the Docker."
+          type: "array"
+          items:
+            description: "A key-value parameter object."
+            type: "object"
+            properties:
+              key:
+                type: "string"
+              value:
+                type: "string"
+            required:
+              - key
+              - value
+            additionalProperties: false
+          uniqueItems: true
+      required:
+        - id
+        - image
+      additionalProperties: false
+    uniqueItems: true
+    minItems: 0
   network_functions: 
     description: "The VNFs (their descriptors), that are part of this network service."
     type: "array"
