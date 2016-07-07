@@ -40,13 +40,13 @@ properties:
     type: "string"
     pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
   network_functions: 
-    description: "The VNFs (their descriptors), that are part of this network service."
+    description: "The VNF instances (actually their records), that are part of this network service instance."
     type: "array"
     items: 
       type: "object"
       properties:
         vnfr_id:
-          description: "A unique identifier of this network function within the scope of this NS descriptor."
+          description: "A unique identifier of the network function record within the scope of this NS instance."
           type: "string"
           pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
       required:
