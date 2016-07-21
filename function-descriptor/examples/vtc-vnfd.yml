@@ -98,10 +98,10 @@ virtual_deployment_units:
         type: "interface" #this is the only interface that should get floating IP address. traffic for the other interfaces will be forwarded via the SDN controller" 
         access: "public" #signal the allocation of public IP from the allocated segment for this tenant. 
       #Data-in interface
-      - id: "vdu01:eth1"
+      - id: "vdu02:eth1"
         type: "interface"
       #Data-out interfaces
-      - id: "vdu01:eth2"
+      - id: "vdu02:eth2"
         type: "interface"
 ##
 ## The virtual links that interconnect
@@ -112,18 +112,18 @@ virtual_links:
     connectivity_type: "E-LAN"
     connection_points_reference:
       - "vdu01:eth0"
-      - "mgmt"
+      - "vdu02:eth0"
     dhcp: True
   - id: "input"
     connectivity_type: "E-Line"
     connection_points_reference:
-      - "vdu01:eth1"
+      - "vdu02:eth1"
       - "input"
     dhcp: True
   - id: "output"
     connectivity_type: "E-Line"
     connection_points_reference:
-      - "vdu01:eth2"
+      - "vdu02:eth2"
       - "output"
     dhcp: True
 
