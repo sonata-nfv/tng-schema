@@ -9,23 +9,26 @@
 descriptor_version: "vnfd-schema-01"
 
 vendor: "eu.sonata-nfv"
-name: "firewall-vnf"
-version: "0.3"
-author: "Steven van Rossem, iMinds"
+name: "vtc-vnf"
+version: "0.1"
+author: "George Xilouris, NCSRD"
 description: >
-  "A first firewall VNF descriptor"
+  "Virtual traffic classifier (vTC) descriptor file. vTC uses ndpi library for the implementation of the vTC"
 
 ##
 ## Some function specific managers.
 ##
+
+## NOTE : this sub-section of the VNFD is not complete 
 function_specific_managers:
-  - id: "fms01"
-    description: "A FSM based on Ubuntu 16.04 LTS."
-    image: "ubuntu:16.04"
+  - id: "fsm00"
+    description: "FSM for controlling the classification capabilities of the vTC"
+    image: "ubuntu:14.04"
     options:
       - key: "myKey"
         value: "myValue"
-  - id: "fms02"
+  - id: "fsm01"
+    description: "FSM for management of the start/stop lifecycle of the vTC"
     image: "ubuntu:14.04"
     resource_requirements:
       docker_version: "1.12"
@@ -40,7 +43,8 @@ function_specific_managers:
 ##
 virtual_deployment_units:
   - id: "vdu01"
-    vm_image: "http://registry.sonata-nfv.eu/html/files/VM_images/sonata-VM-2ports.qcow"
+    description: "VNFC for the dashboard and the time-series database"
+    vm_image: "TBD"
     vm_image_format: "qcow2"
     resource_requirements:
       cpu:
@@ -49,7 +53,7 @@ virtual_deployment_units:
         size: 2
         size_unit: "GB"
       storage:
-        size: 10
+        size: 20
         size_unit: "GB"
     monitoring_parameters:
       - name: "vm_cpu_perc"
@@ -61,13 +65,44 @@ virtual_deployment_units:
       - name: "vm_net_tx_MB"
         unit: "Mbps"
     connection_points:
+      #Management interface
       - id: "vdu01:eth0"
         type: "interface"
+
+
+  - id: "vdu02"
+    vm_image: "TBD"
+    description: "VNFC for the DPI functionality"
+    vm_image_format: "qcow2"
+    resource_requirements:
+      cpu:
+        vcpus: 1
+      memory:
+        size: 2
+        size_unit: "GB"
+      storage:
+        size: 5
+        size_unit: "GB"
+    monitoring_parameters:
+      - name: "vm_cpu_perc"
+        unit: "Percentage"
+      - name: "vm_mem_pers"
+        unit: "Percentage"
+      - name: "vm_net_rx_MB"
+        unit: "MB"
+      - name: "vm_net_tx_MB"
+        unit: "Mbps"
+    connection_points:
+      #Management interface
+      - id: "vdu02:eth0"
+        type: "interface" #this is the only interface that should get floating IP address. traffic for the other interfaces will be forwarded via the SDN controller" 
+        access: "public" #signal the allocation of public IP from the allocated segment for this tenant. 
+      #Data-in interface
       - id: "vdu01:eth1"
         type: "interface"
+      #Data-out interfaces
       - id: "vdu01:eth2"
         type: "interface"
-
 ##
 ## The virtual links that interconnect
 ## the different connections points.
@@ -91,18 +126,6 @@ virtual_links:
       - "vdu01:eth2"
       - "output"
     dhcp: True
-
-##
-## The VNF connection points to the 
-## outside world.
-##
-connection_points:
-  - id: "mgmt"
-    type: "interface"
-  - id: "input"
-    type: "interface"
-  - id: "output"
-    type: "interface"
 
 ##
 ## The monitoring rules that react
