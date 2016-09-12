@@ -29,12 +29,13 @@ properties:
     type: "string"
     pattern: "^[0-9]+$"
   status:
-    description: "The current status of the VNF"
+    description: "The current status of the Service"
     enum:
       - "failed"
       - "normal operation"
       - "degraded operation"
       - "offline"
+      - "updating"
   descriptor_reference:
     description: "Reference to the NSD used to instanciate this NS."
     type: "string"
