@@ -62,11 +62,14 @@ virtual_deployment_units:
         unit: "Mbps"
     connection_points:
       - id: "vdu01:eth0"
-        type: "interface"
+        interface: "ipv4"
+        type: "internal"
       - id: "vdu01:eth1"
-        type: "interface"
+        interface: "ipv4"
+        type: "internal"
       - id: "vdu01:eth2"
-        type: "interface"
+        interface: "ipv4"
+        type: "internal"
 
 ##
 ## The virtual links that interconnect
@@ -98,11 +101,14 @@ virtual_links:
 ##
 connection_points:
   - id: "mgmt"
-    type: "interface"
+    interface: "ipv4"
+    type: "management"
   - id: "input"
-    type: "interface"
+    interface: "ipv4"
+    type: "external"
   - id: "output"
-    type: "interface"
+    interface: "ipv4"
+    type: "external"
 
 ##
 ## The monitoring rules that react
