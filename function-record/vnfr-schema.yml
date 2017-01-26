@@ -49,9 +49,24 @@ definitions:
       - "ova"
       - "ovf"
       - "bare"
+  connection_point_types:
+    enum:
+      - "internal"
+      - "external"
+      - "management"
   interfaces:
+    ethernet:
+      description: "An Ethernet capable interface"
+      type: "object"
+      properties:
+        address:
+          description: "The Ethernet address of the interface."
+          type: "string"
+          pattern: "^([0-9A-Fa-f]{2}[:]){5}([0-9A-Fa-f]{2})$"
+      required:
+        - address
     ipv4:
-      description: "An IPv4 capabable interface."
+      description: "An IPv4 capable interface."
       type: "object"
       properties:
         address:
@@ -62,6 +77,23 @@ definitions:
           description: "The netmask of the interface."
           type: "string"
 #          pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+        hardware_address:
+          description: "The hardware address of the interface."
+          type: "string"
+      required:
+        - address
+    ipv6:
+      description: "An IPv6 capable interface."
+      type: "object"
+      properties:
+        address:
+          description: "The IPv6 address of the interface."
+          type: "string"
+        hardware_address:
+          description: "The hardware address of the interface."
+          type: "string"
+      required:
+        - address
   monitoring:
     type: "object"
     properties:
@@ -170,16 +202,22 @@ properties:
                     id:
                       description: "A VNF-unique id of the connection point. Can be used for references."
                       type: "string"
-                    type:
+                    interface:
                       description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
                       oneOf:
+                        - $ref: "#/definitions/interfaces/ethernet"
                         - $ref: "#/definitions/interfaces/ipv4"
+                        - $ref: "#/definitions/interfaces/ipv6"
+                    type:
+                      description: "The type of the connection point with respect to its visibility in the service platform"
+                      $ref: "#/definitions/connection_point_types"
                     # TODO: Remove? Cyclic reference with virtual_links?
                     virtual_link_reference:
                       description: "A reference to a virtual link, i.e. the virtual_links:id."
                       type: "string"
                   required:
                     - id
+                    - interface
                     - type
                   additionalProperties: false
                 minItems: 1
@@ -329,16 +367,22 @@ properties:
         id:
           description: "A VNF-unique id of the connection point. Can be used for references."
           type: "string"
-        type:
+        interface:
           description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
           oneOf:
+            - $ref: "#/definitions/interfaces/ethernet"
             - $ref: "#/definitions/interfaces/ipv4"
+            - $ref: "#/definitions/interfaces/ipv6"
+        type:
+          description: "The type of the connection point with respect to its visibility in the service platform"
+          $ref: "#/definitions/connection_point_types"
         # TODO: Remove? Cyclic reference with virtual_links?
         virtual_link_reference:
           description: "A reference to a virtual link, i.e. the virtual_links:id."
           type: "string"
       required:
         - id
+        - interface
         - type
       additionalProperties: false
     minItems: 1
