@@ -57,9 +57,16 @@ definitions:
       - "ova"
       - "ovf"
       - "bare"
+  connection_point_types:
+    enum:
+      - "internal"
+      - "external"
+      - "management"
   interfaces:
     enum:
-      - "interface"
+      - "ethernet"
+      - "ipv4"
+      - "ipv6"
   monitoring:
     type: "object"
     properties:
@@ -319,15 +326,19 @@ properties:
               id:
                 description: "A VNF-unique id of the connection point. Can be used for references."
                 type: "string"
-              type:
+              interface:
                 description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
                 $ref: "#/definitions/interfaces"
+              type:
+                description: "The type of the connection point with respect to its visibility in the service platform"
+                $ref: "#/definitions/connection_point_types"
               # TODO: Remove? Cyclic reference with virtual_links?
               virtual_link_reference:
                 description: "A reference to a virtual link, i.e. the virtual_links:id."
                 type: "string"
             required:
               - id
+              - interface
               - type
             additionalProperties: false
           minItems: 1
@@ -368,15 +379,20 @@ properties:
         id:
           description: "A VNF-unique id of the connection point. Can be used for references."
           type: "string"
-        type:
+        interface:
           description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
           $ref: "#/definitions/interfaces"
         # TODO: Remove? Cyclic reference with virtual_links?
         virtual_link_reference:
           description: "A reference to a virtual link, i.e. the virtual_links:id."
           type: "string"
+        type:
+          description: "The type of the connection point with respect to its visibility in the service platform"
+          oneOf:
+            - $ref: "#/definitions/connection_point_types"
       required:
         - id
+        - interface
         - type
       additionalProperties: false
     minItems: 1
