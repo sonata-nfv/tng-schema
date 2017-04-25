@@ -70,7 +70,9 @@ package_content:
 artifact_dependencies:
   # This could be the vm image that runs the docker environment.
   # It is a dummy right now.
-  - name: "my-vm-image"
+  - name: "vm-image"
+    vendor: "my"
+    version: "1.0"
     url: "http://www.bredel-it.de/path/to/vm-image"
     md5: "00236a2ae558018ed13b5222ef1bd9f3"
     credentials:

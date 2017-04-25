@@ -212,15 +212,23 @@ properties:
   ##  the fly.
   ##
   artifact_dependencies:
-    description: "Artifacts, such as VM images, that are not part of this package, but have to be downloaded."
+    description: "Artifacts, such as VM images, that are not part of this package, but have to be downloaded. The artifacts are then identified by the vendor-name-version tuple."
     type: "array"
     items:
       type: "object"
       properties:
+        vendor:
+          description: "The vendor of the artifact."
+          type: "string"
+          pattern: "^[A-Za-z0-9\\-_./]+$"
         name:
           description: "The name of the artifact."
           type: "string"
           pattern: "^[A-Za-z0-9\\-_./]+$"
+        version:
+          description: "The version of the artifact."
+          type: "string"
+          pattern: "^[0-9.]+$"
         url:
           description: "The URL where the artifact can be downloaded from."
           type: "string"
@@ -237,7 +245,9 @@ properties:
             - $ref: "#/definitions/credentials/username_and_password"
             - $ref: "#/definitions/credentials/public_private_key"
       required:
+        - vendor
         - name
+        - version
         - url
       additionalProperties: false
     uniqueItems: true
