@@ -117,9 +117,7 @@ properties:
         interface:
           description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
           oneOf:
-            - $ref: "#/definitions/interfaces/ethernet"
-            - $ref: "#/definitions/interfaces/ipv4"
-            - $ref: "#/definitions/interfaces/ipv6"
+            - $ref: "#/definitions/interfaces"
         type:
           description: "The type of the connection point with respect to its visibility in the service platform"
           $ref: "#/definitions/connection_point_types"
