@@ -146,6 +146,7 @@ properties:
       - "normal operation"
       - "degraded operation"
       - "offline"
+      - "terminated"
   descriptor_reference:
     description: "Reference to the VNFD used to instanciate this VNF."
     type: "string"

@@ -78,6 +78,7 @@ properties:
       - "degraded operation"
       - "offline"
       - "updating"
+      - "terminated"
   descriptor_reference:
     description: "Reference to the NSD used to instanciate this NS."
     type: "string"
