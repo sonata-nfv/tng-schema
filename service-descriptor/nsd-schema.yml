@@ -45,15 +45,15 @@ properties:
   description:
     description: "A longer description of the network service."
     type: "string"
-  licenses:
-    description: "Information on the license of this NSD."
+  licences:
+    description: "Information on the licence of this NSD."
     type: "array"
     items:
       anyOf:
         - type: "object"
           properties:
             type:
-              description: "The type of license, 'public' in this case."
+              description: "The type of licence, 'public' in this case."
               type: "string"
               enum:
               - "public"
@@ -63,12 +63,12 @@ properties:
         - type: "object"
           properties:
             type:
-              description: "The type of license, 'private' in this case."
+              description: "The type of licence, 'private' in this case."
               type: "string"
               enum:
               - "private"
             url:
-              description: "The URL to the license file."
+              description: "The URL to the licence file."
               type: "string"
           required:
             - "type"
