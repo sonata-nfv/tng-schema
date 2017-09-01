@@ -66,9 +66,9 @@ virtual_deployment_units:
         unit: "Mbps"
     connection_points:
       #Management interface
-      - id: "vdu01:eth0"
-        type: "interface"
-
+      - id: "eth0"
+        interface: "ipv4"
+        type: "internal"
 
   - id: "vdu02"
     vm_image: "TBD"
@@ -94,15 +94,34 @@ virtual_deployment_units:
         unit: "Mbps"
     connection_points:
       #Management interface
-      - id: "vdu02:eth0"
-        type: "interface" #this is the only interface that should get floating IP address. traffic for the other interfaces will be forwarded via the SDN controller" 
-        access: "public" #signal the allocation of public IP from the allocated segment for this tenant. 
+      - id: "eth0"
+        interface: "ipv4" #this is the only interface that should get floating IP address. traffic for the other interfaces will be forwarded via the SDN controller" 
+        type: "internal"
+        #access: "public" #signal the allocation of public IP from the allocated segment for this tenant. 
       #Data-in interface
-      - id: "vdu02:eth1"
-        type: "interface"
+      - id: "eth1"
+        interface: "ipv4"
+        type: "internal"
       #Data-out interfaces
-      - id: "vdu02:eth2"
-        type: "interface"
+      - id: "eth2"
+        interface: "ipv4"
+        type: "internal"
+  
+##
+## The VNF connection points to the 
+## outside world.
+##
+connection_points:
+  - id: "mgmt"
+    interface: "ipv4"
+    type: "management"
+  - id: "input"
+    interface: "ipv4"
+    type: "external"
+  - id: "output"
+    interface: "ipv4"
+    type: "external"
+
 ##
 ## The virtual links that interconnect
 ## the different connections points.
@@ -111,6 +130,7 @@ virtual_links:
   - id: "mgmt"
     connectivity_type: "E-LAN"
     connection_points_reference:
+      - "mgmt"
       - "vdu01:eth0"
       - "vdu02:eth0"
     dhcp: True
