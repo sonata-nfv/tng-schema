@@ -1,16 +1,18 @@
-# son-schema [![Build Status](http://jenkins.sonata-nfv.eu/buildStatus/icon?job=son-schema)](http://jenkins.sonata-nfv.eu/job/son-schema/)
-The schema files for the various descriptors used by SONATA as well as some examples and tests. The schema files in this repository serve as ground truth for the whole SONATA project. Thus, every tool and sub-project should be able to parse and handle the latest versions of these files (or - once available - tagged versions in corresponding branches).
+# tango-schema
 
+The schema files for the various descriptors used by 5GTANGO as well as some examples and tests. The schema files in this repository serve as ground truth for the whole 5GTANGO project. Thus, every tool and sub-project should be able to parse and handle the latest versions of these files (or - once available - tagged versions in corresponding branches).
+
+The 5GTANGO schemas are a fork of the SONATA NFV schemas which have been developed in the 5GPPP project SONATA ([http://sonata-nfv.eu](http://sonata-nfv.eu)).
 
 The schema files are written in JSON-Schema Draft-04.
 
 ## Development
 
-To contribute to the development of the SONATA schema files, you may use the very same development workflow as for any other SONATA Github project. That is, you have to fork the repository and create pull requests. Moreover, all discussions regarding the SONATA schemas take place on Github, and NOT on the wiki.
+To contribute to the development of the 5GTANGO schema files, you may use the very same development workflow as for any other 5GTANGO Github project. That is, you have to fork the repository and create pull requests. Moreover, all discussions regarding the 5GTANGO schemas take place on GitHub, and NOT on the wiki.
 
 ### Contributing
 
-You may contribute to the schema files similar to other SONATA (sub-) projects, i.e. by creating pull requests. However, since changes in the schema file may affect several other tools and projects, the pull requests might be discussed on the mailing list before it is merged to the master branch.
+You may contribute to the schema files similar to other 5GTANGO (sub-) projects, i.e. by creating pull requests. However, since changes in the schema file may affect several other tools and projects, the pull requests might be discussed on the mailing list before it is merged to the master branch.
 
 ### Integration with Jenkins
 
@@ -28,7 +30,7 @@ There are some useful tools that support working the JSON and YAML files.
 
 ## License
 
-The SONATA schemata for the VNF descriptor as well as the NS descriptor is published under Apache 2.0 license. Please see the LICENSE file for more details.
+The 5GTANGO schemata for the VNF descriptor as well as the NS descriptor is published under Apache 2.0 license. Please see the LICENSE file for more details.
 
 ## Useful Links
 
@@ -39,7 +41,8 @@ The SONATA schemata for the VNF descriptor as well as the NS descriptor is publi
 
 The following lead developers are responsible for this repository and have admin rights. They can, for example, merge pull requests.
 
-- Michael Bredel (mbredel)
+- Manuel Peuster (@mpeuster)
+- Stefan Schneider (@StefanUPB)
 
 #### Feedback-Chanel
 
