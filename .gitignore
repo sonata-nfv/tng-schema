@@ -2,3 +2,4 @@
 venv
 *.tmp
 *.swp
+*.egg-info
