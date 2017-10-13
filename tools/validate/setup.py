@@ -35,6 +35,10 @@ setup(name='yamlvalidate',
       author_email='manuel@peuster.de',
       package_dir={'': '.'},
       packages=find_packages('.'),
+      include_package_data=True,
+      package_data={
+              'yamlvalidate.schemas': ['*.json'],
+      },
       install_requires=[
           'pyaml',
           'jsonschema',

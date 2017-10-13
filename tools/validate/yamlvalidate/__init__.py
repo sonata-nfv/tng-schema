@@ -28,6 +28,8 @@ partner consortium (www.5gtango.eu).
 import argparse
 import yaml
 import sys
+import json
+import pkg_resources
 from jsonschema import validate
 
 
@@ -37,8 +39,9 @@ def parse_args():
     parser.add_argument(
         "-s",
         "--schema",
-        help="Schema file (JSON schema)",
-        required=True,
+        help="Schema file in YAML format (default: Draft04)",
+        required=False,
+        default=None,
         dest="schema_path")
     parser.add_argument(
         "-y",
@@ -49,22 +52,35 @@ def parse_args():
     return parser.parse_args()
 
 
-def read_yaml(path):
+def read_file(path, use_json=False):
+    if path is None:
+        return None
     try:
         with open(path, "r") as f:
-            yaml_data = yaml.load(f)
+            if use_json:
+                data = json.load(f)
+            else:
+                data = yaml.load(f)
     except:
         print("Couldn't open '{}'. Abort.".format(path))
         sys.exit(1)
     print("Loaded: {}".format(path))
-    return yaml_data
+    return data
 
 
 def main():
     args = parse_args()
     # read schema and data
-    schema = read_yaml(args.schema_path)
-    data = read_yaml(args.yaml_path)
+    if args.schema_path is None:
+        # use default jsonschema draft04
+        schema = json.loads(
+            pkg_resources.resource_string(__name__,
+                                          "schemas/draft4.json")
+            .decode('utf-8'))
+        print("Using JSON schema-draft04 as default schema")
+    else:
+        schema = read_file(args.schema_path)
+    data = read_file(args.yaml_path)
     # validate (will throw ValidationError)
     validate(data, schema)
     print("Vaild!")
