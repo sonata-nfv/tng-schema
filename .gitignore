@@ -1,1 +1,4 @@
+*.pyc
+venv
+*.tmp
 *.swp
