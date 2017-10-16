@@ -10,7 +10,7 @@
 ## descriptor schema, we need this test.
 ##
 
-CMD=/home/jenkins/bin/son-validate
+CMD=yamlvalidate
 BASE_DIR=`dirname $0`
 SCHEMA=${BASE_DIR}/../vnfd-schema.yml
 FILE=${BASE_DIR}/../examples/iperf-vnfd.yml
@@ -27,4 +27,4 @@ fi
 #
 # Execute the test.
 #
-${CMD} -s ${SCHEMA} ${FILE}
+${CMD} -s ${SCHEMA} -y ${FILE}

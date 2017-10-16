@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CMD=/home/jenkins/bin/son-validate
+CMD=yamlvalidate
 BASE_DIR=`dirname $0`
 SCHEMA=${BASE_DIR}/test-schema-with-id.yml
 FILE=${BASE_DIR}/test_success.yml
@@ -17,4 +17,4 @@ fi
 #
 # Execute the test.
 #
-${CMD} -s ${SCHEMA} ${FILE}
+${CMD} -s ${SCHEMA} -y ${FILE}
