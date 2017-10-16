@@ -3,3 +3,5 @@ venv
 *.tmp
 *.swp
 *.egg-info
+tools/validate/build
+tools/validate/dist
