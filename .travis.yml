@@ -1,0 +1,24 @@
+language: python
+python:
+  - 3.5
+
+install:
+  - cd tools/validate/; python setup.py install; cd ../../
+
+script:
+  - ls
+  - sh ./test.sh
+
+notifications:
+  email:
+    recipients:
+      - manuel.peuster@upb.de
+      - stefan.schneider@upb.de
+    on_success: change # default: change
+    on_failure: always # default: always
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/beba1b69115848c1c6e7
+    on_success: always  # options: [always|never|change] default: always
+    on_failure: always  # options: [always|never|change] default: always
+    on_start: always     # options: [always|never|change] default: always

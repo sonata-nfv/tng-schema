@@ -14,9 +14,24 @@ To contribute to the development of the 5GTANGO schema files, you may use the ve
 
 You may contribute to the schema files similar to other 5GTANGO (sub-) projects, i.e. by creating pull requests. However, since changes in the schema file may affect several other tools and projects, the pull requests might be discussed on the mailing list before it is merged to the master branch.
 
-### Integration with Jenkins
+### CI Integration
 
-The repository is integrated with Jenkins. Thus, every pull request is checked automatically. The Jenkins job validates all the JSON and YAML files in the repository to be a valid JSON/YAML format. Moreover, Jenkins executes all files named 'test_*.sh' that reside in */test/ directories automatically. Thus, it is quite easy to add new tests. Just write a corresponding bash script. Tests are considered successful when they return with exit code 0, and to be a failure otherwise.
+The repository is integrated with Travis CI. Thus, every pull request is checked automatically. The Travis job validates all the JSON and YAML files in the repository to be a valid JSON/YAML format. Moreover, Travis executes all files named 'test_*.sh' that reside in */test/ directories automatically. Thus, it is quite easy to add new tests. Just write a corresponding bash script. Tests are considered successful when they return with exit code 0, and to be a failure otherwise.
+
+### Run tests manually
+
+You can also run the test manually on your local machine. To do so, you need to install the validation tool located in the `tools` folder of this repository:
+
+```bash
+cd tools/validate/
+sudo python setup.py install
+```
+
+Once you did this you can trigger the tests like this (in the root of this repository):
+
+```bash
+test.sh
+```
 
 ### Useful Tools
 
