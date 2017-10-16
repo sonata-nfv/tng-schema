@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/5gtango/tango-schema.svg?branch=master)](https://travis-ci.org/5gtango/tango-schema) [![Join the chat at https://gitter.im/5gtango/tango-schema](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/5gtango/tango-schema)
+
 # tango-schema
 
 The schema files for the various descriptors used by 5GTANGO as well as some examples and tests. The schema files in this repository serve as ground truth for the whole 5GTANGO project. Thus, every tool and sub-project should be able to parse and handle the latest versions of these files (or - once available - tagged versions in corresponding branches).
