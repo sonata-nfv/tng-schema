@@ -52,6 +52,7 @@ The 5GTANGO schemata for the VNF descriptor as well as the NS descriptor is publ
 ## Useful Links
 
 - http://json-schema.org/ The general JSON-Schema standard
+- https://spacetelescope.github.io/understanding-json-schema/index.html Easy introduction into JSON-Schemas
 
 ---
 #### Lead Developers
