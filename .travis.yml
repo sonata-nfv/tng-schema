@@ -1,10 +1,13 @@
 language: python
+python:
+  - 3.5
 
 install:
   - cd tools/validate/; python setup.py install; cd ../../
 
 script:
-  - test.sh
+  - ls
+  - sh ./test.sh
 
 notifications:
   email:
