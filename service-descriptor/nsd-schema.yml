@@ -166,6 +166,7 @@ properties:
       additionalProperties: false
     minItems: 1
     uniqueItems: true
+    # why unique? What if I want to add the same VNF twice? Eg, to measure traffic before and after traversal of other VNFs.
   network_services:
     description: "The recursive NSs (their descriptors), that are part of this network service."
     type: "array"
@@ -258,7 +259,7 @@ properties:
             connection_points_reference:
               type: "array"
               items:
-                description: "The connection point reference has to uniquely reference the connection point of the VNF. To this end, it should name the vnf_id of the network_function section and the name of the connection point of this VNF as specified in the VNFD."
+                description: "The connection point reference has to uniquely reference the connection point of the VNF/NS. To this end, it should name the vnf_id of the network_function/ns_id of the network_services section and the name of the connection point of this VNF/NS as specified in the VNFD/NSD."
                 type: "string"
                 minItems: 2
                 uniqueItems: true
