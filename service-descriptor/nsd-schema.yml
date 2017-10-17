@@ -22,6 +22,14 @@ definitions:
 ## The actual document description.
 ##
 type: "object"
+# Ensure that the NS includes VNFs or NSs (recursive) or both, ie, a network_functions or network_services section
+# If a network_functions or network_services section is included, it needs to contain 1+ VNF or NS, respectively
+# Is this check wanted? simplest-example.yml doesn't include any VNF or NS...
+# anyOf:
+  # - required:
+    # - network_functions
+  # - required:
+    # - network_services
 properties:
   descriptor_version:
     description: "The version of the description definition used to describe the network descriptor."
@@ -158,14 +166,39 @@ properties:
       additionalProperties: false
     minItems: 1
     uniqueItems: true
+    # why unique? What if I want to add the same VNF twice? Eg, to measure traffic before and after traversal of other VNFs.
   network_services:
     description: "The recursive NSs (their descriptors), that are part of this network service."
     type: "array"
     items: 
-      type: "string"
-    minItems: 0
+      type: "object"
+      properties:
+        ns_id:
+          description: "A unique identifier of the referenced network service within the scope of this NS descriptor."
+          type: "string"
+        ns_vendor:
+          description: "The vendor id identifies the NS descriptor uniquely across all function descriptors."
+          type: "string"
+          pattern: "^[a-z0-9\\-_.]+$"
+        ns_name:
+          description: "The name of the referenced NS description."
+          type: "string"
+          pattern: "^[a-z0-9\\-_.]+$"
+        ns_version:
+          description: "The version of the referenced NS description."
+          type: "string"
+          pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
+        description:
+          description: "A longer description of the network service."
+          type: "string"
+      required:
+        - ns_id
+        - ns_vendor
+        - ns_name
+        - ns_version
+      additionalProperties: false
+    minItems: 1
     uniqueItems: true
-    # How do I write down that there must be at least one of VNFDs or NSDs?
   connection_points:
     description: "The connection points of the overall NS, that connects the NS to the external world."
     type: "array"
@@ -173,7 +206,7 @@ properties:
       type: "object"
       properties:
         id:
-          description: "A VNF-unique id of the connection point. Can be used for references."
+          description: "A NS-unique id of the connection point. Can be used for references."
           type: "string"
         interface:
           description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
@@ -226,7 +259,7 @@ properties:
             connection_points_reference:
               type: "array"
               items:
-                description: "The connection point reference has to uniquely reference the connection point of the VNF. To this end, it should name the vnf_id of the network_function section and the name of the connection point of this VNF as specified in the VNFD."
+                description: "The connection point reference has to uniquely reference the connection point of the VNF/NS. To this end, it should name the vnf_id of the network_function/ns_id of the network_services section and the name of the connection point of this VNF/NS as specified in the VNFD/NSD."
                 type: "string"
                 minItems: 2
                 uniqueItems: true
