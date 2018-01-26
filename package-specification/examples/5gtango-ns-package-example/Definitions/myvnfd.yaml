@@ -1,5 +1,5 @@
 ---
-descriptor_version: "0.9"
+descriptor_version: "1.0"
 
 vendor: "eu.5gtango"
 name: "myvnf"
