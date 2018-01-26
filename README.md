@@ -8,6 +8,10 @@ The 5GTANGO schemas are a fork of the SONATA NFV schemas which have been develop
 
 The schema files are written in JSON-Schema Draft-04.
 
+## Documentation
+
+* [5GTANGO Package Specification (latest)](https://github.com/sonata-nfv/tng-schema/wiki/PkgSpec_LATEST)
+
 ## Development
 
 To contribute to the development of the 5GTANGO schema files, you may use the very same development workflow as for any other 5GTANGO Github project. That is, you have to fork the repository and create pull requests. Moreover, all discussions regarding the 5GTANGO schemas take place on GitHub, and NOT on the wiki.
