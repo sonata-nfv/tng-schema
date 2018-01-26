@@ -1,13 +1,10 @@
-TOSCA-Meta-File-Version: 1.0
-CSAR-Version: 1.1
-Created-by: 5GTANGO SDK
-Entry-Definitions: Definitions/example-ns.yaml
+TOSCA-Meta-Version: 1.0
+CSAR-Version: 1.0
+Created-By: Manuel Peuster (Paderborn University)
+Entry-Definitions: Definitions/mynsd.yaml
+Entry-Manifest: mynsd.mf
+Entry-Change-Log: ChangeLog.txt
+Entry-Licenses: Licenses
 
-# Move this to the mf file?
-Entry-Definitions-TANGO: Definitions/example-ns.yaml
-Pkg-Verndor: de.upb
-Pkg-Name: standard-example-package
-Pkg-Version: 0.1
-Pkg-Maintainer: Manuel Peuster
-Pkg-Type: NSP
-
+Name: TOSCA-Metadata/NAPD.yaml
+Content-Type: application/vnd.5gtango.napd
