@@ -1,0 +1,65 @@
+---
+$schema: "http://json-schema.org/draft-04/schema#"
+#id: "http://www.sonata-nfv.eu/schema/napd-schema-01"
+title: "Reference Descriptor Schema"
+version: 0.9
+description: |
+  Reference descriptors define references
+  to external files from within a package.
+  They are placeholders, like symbolic links
+  in file systems. 
+
+##
+## The actual document description.
+##
+type: "object"
+properties:
+  schema:
+    description: "An optional reference to this package descriptor schema."
+    type: "string"
+  descriptor_version:
+    description: "The version of the descriptor schema used."
+    type: "string"
+    pattern: "^[A-Za-z0-9\\-_.]+$"
+  vendor:
+    description: "The vendor id will identify the package uniquely across all package."
+    type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
+  name:
+    description: "The package name identifies the package without its version."
+    type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
+  version:
+    description: "The version allows to distinguish the same package at different times."
+    type: "string"
+    pattern: "^[0-9\\-_.]+$"
+
+  proto:
+    description: "Protocol used to access the referenced artifact."
+    type: "string"
+    pattern: "^[A-Za-z0-9\\-_.]+$"
+  source:
+    description: "URI defining where to find the referenced artifact."
+    type: "string"
+    pattern: "^[A-Za-z0-9\\-_./:]+$"
+  algorithm:
+    description: "Algorithm used to compute the checksum."
+    type: "string"
+    pattern: "^[A-Z0-9\\-]+$"
+  hash:
+    description: "Algorithm used to compute the checksum."
+    type: "string"
+    pattern: "^[A-Za-z0-9]+$"
+
+required:
+  - "descriptor_version"
+  - "vendor"
+  - "name"
+  - "version"
+  - "proto"
+  - "source"
+  - "algorithm"
+  - "hash"
+
+## Prohibit any other key in the file.
+additionalProperties: true 

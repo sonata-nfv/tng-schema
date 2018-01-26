@@ -1,8 +1,8 @@
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
-#id: "http://www.sonata-nfv.eu/schema/pd-schema-01"
+#id: "http://www.sonata-nfv.eu/schema/napd-schema-01"
 title: "Package Descriptor Schema"
-version: 1.0
+version: 0.9
 description: |
   The package descriptor schema specifies the structure
   of the package descriptor. It makes sure the relevant

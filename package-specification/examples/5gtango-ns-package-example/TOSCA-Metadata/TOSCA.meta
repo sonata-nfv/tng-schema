@@ -1,0 +1,10 @@
+TOSCA-Meta-Version: 1.0
+CSAR-Version: 1.0
+Created-By: Manuel Peuster (Paderborn University)
+Entry-Definitions: Definitions/mynsd.yaml
+Entry-Manifest: mynsd.mf
+Entry-Change-Log: ChangeLog.txt
+Entry-Licenses: Licenses
+
+Name: TOSCA-Metadata/NAPD.yaml
+Content-Type: application/vnd.5gtango.napd
