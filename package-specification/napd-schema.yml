@@ -1,46 +1,13 @@
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
 #id: "http://www.sonata-nfv.eu/schema/napd-schema-01"
-title: "Package Descriptor Schema"
+title: "NFV Advanced Package Descriptor Schema"
 version: 0.9
 description: |
-  The package descriptor schema specifies the structure
-  of the package descriptor. It makes sure the relevant
-  information is provided to parse the package in a
-  meaningful way.
-
-##
-## Definitions that are re-used later on.
-##
-definitions:
-  credentials:
-    username_and_password:
-      description: "Basic authentication credentials using username and password."
-      type: "object"
-      properties:
-        username:
-          description: "A username for authentication."
-          type: "string"
-        password:
-          description: "A password for authentication."
-          type: "string"
-      required:
-        - username
-        - password
-      additionalProperties: false
-    public_private_key:
-      description: "Authentication based on a public-private key approach."
-      type: "object"
-      properties:
-        private_key:
-          description: "A private key for authentication."
-          type: "string"
-        password:
-          description: "An optional password for the private key."
-          type: "string"
-      required:
-        - private_key
-      additionalProperties: false
+  The NFV advanced package descriptor schema specifies
+  the structure  of the package descriptor. It makes sure
+  the relevantinformation is provided to parse the package
+  in a meaningful way.
 
 ##
 ## The actual document description.
@@ -74,38 +41,25 @@ properties:
     description: "The version allows to distinguish the same package at different times."
     type: "string"
     pattern: "^[0-9\\-_.]+$"
+  package_type:
+    description: "The MIME type of the package."
+    type: "string"
+    pattern: "^[A-Za-z0-9\\-_./]+$"
+  release_date_time:
+    description: "Package creation time."
+    type: "string"
+    pattern: "^[A-Z0-9\\.:+]+$"
   maintainer:
     description: "The person or organization that created the package."
     type: "string"
   description:
     description: "An arbitrary description of the package."
     type: "string"
-  md5:
-    description: |
-      An MD5 hash over the package content, i.e. all files contained in the package 
-      EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF, as this file
-      contains this hash.
-    type: "string"
-    pattern: "^[A-Fa-f0-9]{32}$"
-  signature:
-    description: |
-      A signature over the package content, i.e. all files contained in the package 
-      EXCEPT the package descriptor, i.e. /META-INF/MANIFEST.MF, as this file
-      contains this hash.
-    type: "string"
-
-  ##
-  ## Some information regarding the package's service descriptor (if any).
-  ##
-  entry_service_template:
-    description: "The service descriptor that defines THE service of the package."
+  logo:
+    description: "Path to package logo."
     type: "string"
     pattern: "^[A-Za-z0-9\\-_./]+$"
-  sealed:
-    description: "Sets the default 'sealed' status that states whether the package is self-contained or not."
-    type: "boolean"
-    default: false
-
+  
   ##
   ##  The description of the package content, such as service descriptors,
   ##  virtual machine images, scripts, and any addition data and
@@ -117,23 +71,32 @@ properties:
     items:
       type: "object"
       properties:
-        name:
+        source:
           description: "The name of the artifact similar to the absolute path of the artifact in the package."
           type: "string"
           pattern: "^[A-Za-z0-9\\-_./]+$"
+        algorithm:
+          description: "Algorithm used to compute the checksum."
+          type: "string"
+          pattern: "^[A-Z0-9\\-]+$"
+        hash:
+          description: "The checksum of the artifact."
+          type: "string"
+          pattern: "^[A-Za-z0-9]+$"
         content-type:
           description: "The type of content of the artifact."
           type: "string"
           pattern: "^[A-Za-z0-9\\-_./]+$"
-        md5:
-          description: "An MD5 hash of the artifact."
-          type: "string"
-          pattern: "^[A-Fa-f0-9]{32}$"
-        sealed:
-          description: "Overrides the default 'sealed' status that states whether this artifact is contained or not."
-          type: "boolean"
+        tags:
+          description: "List of tags assigned to this artifact."
+          type: "array"
+          items:
+            type: "string"
+            pattern: "^[A-Za-z0-9\\-_.]+$"
       required:
-        - "name"
+        - "source"
+        - "algorithm"
+        - "hash"
         - "content-type"
       additionalProperties: false
 
@@ -142,114 +105,6 @@ properties:
     # names are unique, which is what we actually want.
     # Unfortunately, it is not possible to express that
     # using JSON schema.
-    uniqueItems: true
-
-  ##
-  ##  Configuration of package resolvers, i.e. catalogs and
-  ##  repositories where package dependencies can be found
-  ##  and retrieved.
-  ##
-  package_resolvers:
-    description: "An array of artifacts contained in the package."
-    type: "array"
-    items:
-      description: "The different package resolvers, i.e. catatalogs, where packages can be retrieved from."
-      type: "object"
-      properties:
-        name:
-          description: "The resolver name."
-          type: "string"
-          pattern: "^[A-Za-z0-9\\-_./:]+$"
-        # TODO: Should the credentials be part of the package descriptor? Or part of an external configuration?
-        credentials:
-          description: "The credentials needed to access the resolver."
-          type: "object"
-          oneOf:
-            - $ref: "#/definitions/credentials/username_and_password"
-            - $ref: "#/definitions/credentials/public_private_key"
-      required:
-        - name
-      additionalProperties: false
-    uniqueItems: true
-
-  ##
-  ##  Other SONATA packages this package depends on.
-  ##
-  package_dependencies:
-    description: "Other SONATA packages this package depends on."
-    type: "array"
-    items:
-      type: "object"
-      properties:
-        group:
-          description: "The group id that identifies the opther package uniquely across all package."
-          type: "string"
-          pattern: "^[a-z0-9\\-_.]+$"
-        name:
-          description: "The package name that identifies the other package without its version."
-          type: "string"
-          pattern: "^[a-z0-9\\-_.]+$"
-        version:
-          description: "The version that allows to distinguish the other package at different times."
-          type: "string"
-          pattern: "^[0-9\\-_.]+$"
-        credentials:
-          description: "Credentials needed to run the other package."
-          type: "string"
-        verification_key:
-          description: "A public key used to verify the signature of the other package."
-          type: "string"
-      required:
-        - group
-        - name
-        - version
-      additionalProperties: false
-    uniqueItems: true
-
-  ##
-  ##  Artifact dependencies such as virtual machine images that are
-  ##  not shipped with this package, but have to be downloaded on
-  ##  the fly.
-  ##
-  artifact_dependencies:
-    description: "Artifacts, such as VM images, that are not part of this package, but have to be downloaded. The artifacts are then identified by the vendor-name-version tuple."
-    type: "array"
-    items:
-      type: "object"
-      properties:
-        vendor:
-          description: "The vendor of the artifact."
-          type: "string"
-          pattern: "^[A-Za-z0-9\\-_./]+$"
-        name:
-          description: "The name of the artifact."
-          type: "string"
-          pattern: "^[A-Za-z0-9\\-_./]+$"
-        version:
-          description: "The version of the artifact."
-          type: "string"
-          pattern: "^[0-9.]+$"
-        url:
-          description: "The URL where the artifact can be downloaded from."
-          type: "string"
-          pattern: "^[A-Za-z0-9\\-_./:]+$"
-        md5:
-          description: "An MD5 hash of the artifact."
-          type: "string"
-          pattern: "^[A-Fa-f0-9]{32}$"
-        # TODO: Should the credentials be part of the package descriptor? Or part of an external configuration?
-        credentials:
-          description: "Credentials needed to download the artifact."
-          type: "object"
-          oneOf:
-            - $ref: "#/definitions/credentials/username_and_password"
-            - $ref: "#/definitions/credentials/public_private_key"
-      required:
-        - vendor
-        - name
-        - version
-        - url
-      additionalProperties: false
     uniqueItems: true
 
 required:

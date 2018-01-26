@@ -6,7 +6,7 @@ name: "ns-package-example"
 version: "0.1"
 package_type: "application/vnd.5gtango.package.nsp"  # MIME type of package, e.g., nsp, vnfp, tdp, trp
 maintainer: "Manuel Peuster, Paderborn University"
-release_data_time: "2018.01.01T10:00+03:00"          # IETF RFC3339
+release_date_time: "2018.01.01T10:00+03:00"          # IETF RFC3339
 description: "This is an example 5GTANGO network service package."
 logo: "Icons/upb_logo.png"                           # (optional) path to logo file (PNG or JPEG)
 
@@ -30,6 +30,7 @@ package_content:
   - source: "Images/mycloudimage.ref"
     algorithm: "SHA-256"
     hash: "54cb482d72b9f454aec9197c91310273f1406ed7b62c938ebe1cf1c271b7f522"
+    content-type: "application/vnd.5gtango.ref"
   - source: "Licenses/LICENSE"
     algorithm: "SHA-256"
     hash: "179f180ea1630016d585ff32321037b18972d389be0518c0192021286c4898ca"

@@ -7,7 +7,40 @@ description: |
   Reference descriptors define references
   to external files from within a package.
   They are placeholders, like symbolic links
-  in file systems. 
+  in file systems.
+
+##
+## Definitions that are re-used later on.
+##
+definitions:
+  credentials:
+    username_and_password:
+      description: "Basic authentication credentials using username and password."
+      type: "object"
+      properties:
+        username:
+          description: "A username for authentication."
+          type: "string"
+        password:
+          description: "A password for authentication."
+          type: "string"
+      required:
+        - username
+        - password
+      additionalProperties: false
+    public_private_key:
+      description: "Authentication based on a public-private key approach."
+      type: "object"
+      properties:
+        private_key:
+          description: "A private key for authentication."
+          type: "string"
+        password:
+          description: "An optional password for the private key."
+          type: "string"
+      required:
+        - private_key
+      additionalProperties: false
 
 ##
 ## The actual document description.
@@ -47,9 +80,13 @@ properties:
     type: "string"
     pattern: "^[A-Z0-9\\-]+$"
   hash:
-    description: "Algorithm used to compute the checksum."
+    description: "AThe checksum of the artifact."
     type: "string"
     pattern: "^[A-Za-z0-9]+$"
+
+#
+# TODO Added credentials property.
+#
 
 required:
   - "descriptor_version"
@@ -62,4 +99,4 @@ required:
   - "hash"
 
 ## Prohibit any other key in the file.
-additionalProperties: true 
+additionalProperties: false 
