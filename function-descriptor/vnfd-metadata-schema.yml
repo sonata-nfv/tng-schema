@@ -1,6 +1,7 @@
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
 #id: "http://www.sonata-nfv.eu/schema/vnfd-metadata-schema-01"
+version: 0.9
 description: >
   The schema for SONATA network function descriptor metatada.
   The metadata is stored inside the SONATA service platform

@@ -1,6 +1,7 @@
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
 #id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive"
+version: 0.9
 description: "The core scheme for RECUSRIVE service record (many details left out)"
 
 ##
