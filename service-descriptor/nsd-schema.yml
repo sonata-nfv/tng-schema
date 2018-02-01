@@ -412,6 +412,13 @@ properties:
                 type: "string"
       action: 
         type: "string"
+  # tags to select network service for correct tests later (eg, latency tests)
+  testing_tags:
+    type: "array"
+    items:
+      type: "string"
+    uniqueItems: true
+  
 required: 
   - descriptor_version
   - vendor 
