@@ -1,6 +1,8 @@
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
 #id: "http://www.sonata-nfv.eu/schema/nst-schema"
+title: "Network Slice Template Schema"
+version: 1.0
 description: "The core scheme for network slice template"
 
 ##
