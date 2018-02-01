@@ -23,6 +23,10 @@ definitions:
 ##
 type: "object" 
 properties:
+  id:
+    description: "The UUID of the service record."
+    type: "string"
+    pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
   s_nssai:
     description: "s-nssai identifies a network slice"
     type: "object"
@@ -150,94 +154,12 @@ properties:
       additionalProperties: false
     minItems: 1
     uniqueItems: true
-  virtual_links: 
-    type: "array"
-    items:
-      type: "object"
-      properties:
-        id:
-          type: "string"
-        connectivity_type: 
-          enum:
-            - "E-Line" # Point-to-point
-            - "E-Tree" # Point-to-multipoint
-            - "E-LAN"  # Multipoint-to-multipoint
-        connection_points_reference:
-          type: "array"
-          items:
-            description: "The connection point reference has to uniquely reference the connection point of the VNF/NS. To this end, it should name the vnf_id of the network_function/ns_id of the network_services section and the name of the connection point of this VNF/NS as specified in the VNFD/NSD."
-            type: "string"
-            minItems: 2
-            uniqueItems: true
-        access:
-          type: "boolean"
-        external_access:
-          type: "boolean"
-        root_requirement:
-          type: "string"
-        leaf_requirement:
-          type: "string"
-        dhcp:
-          type: "boolean"
-        qos:
-          type: "string"
-      required:
-        - id
-        - connectivity_type
-        - connection_points_reference
-      additionalProperties: false
-  forwarding_graphs:
-    description: "The forwarding graph."
-    type: "array"
-    items:
-      type: "object"
-      properties:
-        fg_id:
-          description: "A unique identifier of this forwarding graph within the scope of this NS descriptor."
-          type: "string"
-        number_of_endpoints: 
-          type: "integer"
-        number_of_virtual_links: 
-          type: "integer"
-        constituent_virtual_links: 
-          type: "array"
-          items: 
-            - type: "string"
-        constituent_vnfs: 
-          type: "array"
-          items: 
-            - type: "string"
-        constituent_services: 
-          type: "array"
-          items: 
-            - type: "string"
-        network_forwarding_paths: 
-          type: "array"
-          items: 
-            type: "object"
-            properties: 
-              fp_id: 
-                type: "string"
-              policy:
-                type: "string"
-              connection_points: 
-                type: "array"
-                items: 
-                  type: "object"
-                  properties:
-                    connection_point_ref:
-                      description: "A connection point reference, referenced by a connection point id."
-                      type: "string"
-                    position:
-                      description: "The possition of the connection point with the forwarding graph"
-                      type: "integer"
-      required:
-        - fg_id
-  5qi:
+
+  qos:
     description: "slice qos"
     type: "object"
     properties:
-      value:
+      5qi_value:
         description: "5qi value identifies slice quality of service from B to G and 1 to 79"
         type: "string"
       resource_type:
@@ -258,13 +180,11 @@ properties:
       default_max_data_burst:
         description: "in bytes B"
         type: "integer"
-    required:
-      - value
         
 required: 
   - descriptor_version
   - vendor 
   - name
   - version
-  - s_nssai
+  - id
 additionalProperties: false

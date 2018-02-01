@@ -5,6 +5,8 @@
 ##
 ---
 
+id: "00000000-0000-0000-0000-000000000000"
+
 s_nssai:
   sst: 1 # eMBB
   sd: 1
@@ -24,11 +26,11 @@ network_services:
     ns_vendor: "eu.5gtango.slice-descriptor"
     ns_name: "5gtango-demo"
     ns_version: "0.1"
-    nsr_id: "0000-0000-000000000000"
+    nsr_id: "00000000-0000-0000-0000-000000000000"
 
 ##
 ## The Slice 5QI
 ##
-5qi:
-  value: "6"
+qos:
+  5qi_value: "6"
   

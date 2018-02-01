@@ -27,10 +27,10 @@ network_services:
     
 
 ##
-## The Slice connection points to the 
+## The Slice service interface points to the 
 ## outside world.
 ##
-connection_points:
+service_interface_points:
   - id: "mgmt"
     interface: "ipv4"
     type: "management"
@@ -45,6 +45,6 @@ connection_points:
 ## The Slice 5QI
 ##
 
-5qi:
-  value: "6"
+qos:
+  5qi_value: "6"
   
