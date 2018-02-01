@@ -1,7 +1,8 @@
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
-#id: "http://www.sonata-nfv.eu/schema/nsd-schema-02-recursive"
-description: "The core scheme for RECUSRIVE service descriptors (many details left out)"
+title: "Network Service Descriptor Schema"
+version: 1.0
+description: "The core schema for network service descriptors (supports recursive network services)"
 
 ##
 ## Some definitions used later on.

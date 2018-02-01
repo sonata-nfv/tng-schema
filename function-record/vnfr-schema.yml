@@ -1,6 +1,7 @@
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
 #id: "http://www.sonata-nfv.eu/schema/vnfr-schema-01"
+version: 0.9
 description: "The core schema for SONATA network function records."
 
 ##
