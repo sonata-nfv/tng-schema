@@ -1,0 +1,50 @@
+##
+## This slice network template 
+##
+## @author Ricard Vilalta
+##
+---
+
+s_nssai:
+  sst: 1 # eMBB
+  sd: 1
+      
+descriptor_version: "1.0"
+
+vendor: "eu.5gtango.slice-descriptor"
+name: "slice"
+version: "0.1"
+author: "Ricard Vilalta, CTTC"
+description: >
+  "Example Slice."
+
+# The network services reused by this service (recursively)
+network_services:
+  - ns_id: "ns_sonata"
+    ns_vendor: "eu.5gtango.slice-descriptor"
+    ns_name: "5gtango-demo"
+    ns_version: "0.1"
+    
+
+##
+## The Slice connection points to the 
+## outside world.
+##
+connection_points:
+  - id: "mgmt"
+    interface: "ipv4"
+    type: "management"
+  - id: "input"
+    interface: "ipv4"
+    type: "external"
+  - id: "output"
+    interface: "ipv4"
+    type: "external"
+
+##
+## The Slice 5QI
+##
+
+5qi:
+  value: "6"
+  
