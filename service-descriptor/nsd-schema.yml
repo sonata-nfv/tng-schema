@@ -54,6 +54,10 @@ properties:
   description:
     description: "A longer description of the network service."
     type: "string"
+  logo:
+    description: "Path to service logo."
+    type: "string"
+    pattern: "^[A-Za-z0-9\\-_./]+$"
   licences:
     description: "Information on the licence of this NSD."
     type: "array"
@@ -412,6 +416,13 @@ properties:
                 type: "string"
       action: 
         type: "string"
+  # tags to select network service for correct tests later (eg, latency tests)
+  testing_tags:
+    type: "array"
+    items:
+      type: "string"
+    uniqueItems: true
+  
 required: 
   - descriptor_version
   - vendor 

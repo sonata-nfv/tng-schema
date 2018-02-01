@@ -1,6 +1,7 @@
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
 #id: "http://www.sonata-nfv.eu/schema/nst-schema"
+version: 1.0
 description: "The core scheme for network slice template"
 
 ##
@@ -61,6 +62,10 @@ properties:
   description:
     description: "A longer description of the network service."
     type: "string"
+  logo:
+    description: "Path to slice logo."
+    type: "string"
+    pattern: "^[A-Za-z0-9\\-_./]+$"
   licences:
     description: "Information on the licence of this NST."
     type: "array"
