@@ -140,6 +140,10 @@ properties:
     description: "The version of the function record. Can be used to track changes."
     type: "string"
     pattern: "^[0-9]+$"
+  logo:
+    description: "Path to VNF logo."
+    type: "string"
+    pattern: "^[A-Za-z0-9\\-_./]+$"
   status:
     description: "The current status of the VNF"
     enum:

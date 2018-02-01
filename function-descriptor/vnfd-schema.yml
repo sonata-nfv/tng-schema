@@ -127,6 +127,10 @@ properties:
   description:
     description: "A longer description of the network function."
     type: "string"
+  logo:
+    description: "Path to VNF logo."
+    type: "string"
+    pattern: "^[A-Za-z0-9\\-_./]+$"
   licenses:
     description: "Information on the license of this VNFD."
     type: "array"

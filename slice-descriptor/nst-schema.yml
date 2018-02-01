@@ -57,6 +57,10 @@ properties:
   description:
     description: "A longer description of the network service."
     type: "string"
+  logo:
+    description: "Path to slice logo."
+    type: "string"
+    pattern: "^[A-Za-z0-9\\-_./]+$"
   licences:
     description: "Information on the licence of this NST."
     type: "array"
