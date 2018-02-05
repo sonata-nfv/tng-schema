@@ -54,6 +54,9 @@ properties:
     description: "The version of the descriptor schema used."
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.]+$"
+  descriptor_type:
+    description: "The type of descriptor based on the organization, eg, eu.5gtango.nsd for a 5GTANGO NSD."
+    type: "string"
   vendor:
     description: "The vendor id will identify the package uniquely across all package."
     type: "string"
@@ -90,6 +93,7 @@ properties:
 
 required:
   - "descriptor_version"
+  - "descriptor_type"
   - "vendor"
   - "name"
   - "version"

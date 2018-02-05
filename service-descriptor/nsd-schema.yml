@@ -1,12 +1,11 @@
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
 title: "Network Service Descriptor Schema"
-version: 1.0
+version: 0.9
 description: "The core schema for network service descriptors (supports recursive network services)"
 
-##
-## Some definitions used later on.
-##
+
+# definitions used later
 definitions:
   connection_point_types:
     enum:
@@ -18,24 +17,19 @@ definitions:
       - "ethernet"
       - "ipv4"
       - "ipv6"
+  
 
-##
-## The actual document description.
-##
+# actual schema of NSDs
 type: "object"
-# Ensure that the NS includes VNFs or NSs (recursive) or both, ie, a network_functions or network_services section
-# If a network_functions or network_services section is included, it needs to contain 1+ VNF or NS, respectively
-# Is this check wanted? simplest-example.yml doesn't include any VNF or NS...
-# anyOf:
-  # - required:
-    # - network_functions
-  # - required:
-    # - network_services
 properties:
   descriptor_version:
     description: "The version of the description definition used to describe the network descriptor."
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.]+$"
+  descriptor_type:
+    description: "The type of descriptor based on the organization, eg, eu.5gtango.nsd for a 5GTANGO NSD."
+    type: "string"
+    # TODO: restrict to possible types (all permutations of organizations and types)
   vendor:
     description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
     type: "string"
@@ -416,15 +410,27 @@ properties:
                 type: "string"
       action: 
         type: "string"
+        
   # tags to select network service for correct tests later (eg, latency tests)
   testing_tags:
     type: "array"
     items:
       type: "string"
     uniqueItems: true
+    
+  # soft constraints by developer, eg, proximity constraints
+  # TODO: more restrictive pattern?
+  soft_constraints:
+    type: "array"
+    items:
+      type: "string"
+      pattern: "[A-Za-z0-9\\-_.:]+"
+    uniqueItems: true
+  
   
 required: 
   - descriptor_version
+  - descriptor_type
   - vendor 
   - name
   - version

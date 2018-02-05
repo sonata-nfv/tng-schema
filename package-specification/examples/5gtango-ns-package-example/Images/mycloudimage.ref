@@ -1,5 +1,7 @@
 ---
 descriptor_version: "0.9"
+descriptor_type: "eu.5gtango.ref"
+
 name: "mycloudimage"
 vendor: "eu.5gtango"
 version: "16.04"

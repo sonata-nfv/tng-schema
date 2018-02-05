@@ -7,7 +7,8 @@
 ## @author Manuel Peuster
 ##
 ---
-descriptor_version: "1.0"
+descriptor_version: "0.9"
+descriptor_type: "eu.5gtango.nsd"
 
 vendor: "eu.sonata-nfv.service-descriptor"
 name: "sonata-demo"

@@ -1,5 +1,6 @@
 ---
 descriptor_version: "0.9"                            # will be 1.0 on first release
+descriptor_type: "eu.5gtango.napd"
 
 vendor: "eu.5gtango"
 name: "vnf-package-example"
