@@ -415,12 +415,12 @@ properties:
     uniqueItems: true
     
   # soft constraints by developer, eg, proximity constraints
-  # TODO: pattern may be restricted to "name:info1-info2-..."?
+  # TODO: more restrictive pattern?
   soft_constraints:
     type: "array"
     items:
       type: "string"
-      pattern: "^[a-z0-9\\-_.]+$"
+      pattern: "[A-Za-z0-9\\-_.:]+"
     uniqueItems: true
   
   
