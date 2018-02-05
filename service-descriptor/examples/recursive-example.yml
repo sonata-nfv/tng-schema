@@ -5,19 +5,15 @@
 ## @author Stefan Schneider
 ##
 ---
-descriptor_version: "1.0"
+descriptor_version: "0.9"
 
 vendor: "eu.tango-nfv.service-descriptor"
 name: "recursive-sonata"
 version: "0.1"
 author: "Stefan Schneider, Paderborn University"
-description: >
-  "Example recursive network service reusing the sonata-demo NS and adding a vTC at the beginning."
+description: "Example recursive network service reusing the sonata-demo NS and adding a vTC at the beginning."
 
-##
-## The various network functions this service
-## is composed of.
-##
+# This service uses an extra vTC VNF in addition to the Sonata NS (see below)
 network_functions:
   - vnf_id: "vnf_vtc"
     vnf_vendor: "eu.sonata-nfv"
@@ -111,3 +107,7 @@ forwarding_graphs:
 testing_tags:
   - "latency"
   - "throughput"
+  
+# Soft constraints asking for proximity of the VNF and the reused NS (just as an example)
+soft_constraints:
+  - "proximity:vnf_vtc-ns_sonata"

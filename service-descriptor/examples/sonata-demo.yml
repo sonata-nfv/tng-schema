@@ -7,7 +7,7 @@
 ## @author Michael Bredel
 ##
 ---
-descriptor_version: "1.0"
+descriptor_version: "0.9"
 
 vendor: "eu.sonata-nfv.service-descriptor"
 name: "sonata-demo"
