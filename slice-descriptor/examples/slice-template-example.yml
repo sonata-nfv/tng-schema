@@ -10,6 +10,7 @@ s_nssai:
   sd: 1
       
 descriptor_version: "0.9"
+descriptor_type: "eu.5gtango.nst"
 
 vendor: "eu.5gtango.slice-descriptor"
 name: "slice"

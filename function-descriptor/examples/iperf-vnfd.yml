@@ -7,6 +7,7 @@
 ## VNF descriptor.
 ##
 descriptor_version: "0.9"
+descriptor_type: "eu.5gtango.vnfd"
 
 vendor: "eu.sonata-nfv"
 name: "iperf-vnf"

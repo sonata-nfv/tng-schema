@@ -41,6 +41,9 @@ properties:
     description: "The version of the description definition used to describe the network descriptor."
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.]+$"
+  descriptor_type:
+    description: "The type of descriptor based on the organization, eg, eu.5gtango.nsd for a 5GTANGO NSD."
+    type: "string"
   vendor:
     description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
     type: "string"
@@ -180,6 +183,7 @@ properties:
         
 required: 
   - descriptor_version
+  - descriptor_type
   - vendor 
   - name
   - version
