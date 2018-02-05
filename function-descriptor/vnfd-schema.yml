@@ -2,7 +2,7 @@
 $schema: "http://json-schema.org/draft-04/schema#"
 #id: "http://www.sonata-nfv.eu/schema/vnfd-schema-02"
 title: "Virtual Network Function Descriptor Schema"
-version: 1.0
+version: 0.9
 description: "The core schema for SONATA network function descriptors."
 
 ##

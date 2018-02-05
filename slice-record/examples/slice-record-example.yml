@@ -11,7 +11,7 @@ s_nssai:
   sst: 1 # eMBB
   sd: 1
       
-descriptor_version: "1.0"
+descriptor_version: "0.9"
 
 vendor: "eu.5gtango.slice-descriptor"
 name: "slice"

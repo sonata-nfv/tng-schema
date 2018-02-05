@@ -6,7 +6,7 @@
 ## Some general information regarding this
 ## VNF descriptor.
 ##
-descriptor_version: "1.0"
+descriptor_version: "0.9"
 
 vendor: "eu.sonata-nfv"
 name: "vtc-vnf"
