@@ -1,6 +1,5 @@
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
-#id: "http://www.sonata-nfv.eu/schema/vnfd-schema-02"
 title: "Virtual Network Function Descriptor Schema"
 version: 0.9
 description: "The core schema for SONATA network function descriptors."
@@ -105,12 +104,8 @@ definitions:
 ##
 type: "object"
 properties:
-  descriptor_version:
-    description: "The version of the description definition used to describe the function descriptor."
-    type: "string"
-    pattern: "^[A-Za-z0-9\\-_.]+$"
-  descriptor_type:
-    description: "The type of descriptor based on the organization, eg, eu.5gtango.nsd for a 5GTANGO NSD."
+  descriptor_schema:
+    description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
     type: "string"
   vendor:
     description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
@@ -648,8 +643,7 @@ properties:
         - condition
         - notification
 required:
-  - descriptor_version
-  - descriptor_type
+  - descriptor_schema
   - vendor 
   - name
   - version

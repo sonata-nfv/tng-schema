@@ -13,8 +13,7 @@ Below we discuss the various section of a network function descriptor. The gener
 
 At the root level, we first have the mandatory fields, that describe and identify the virtual network function in a unique way.
 
-- **descriptor_version** identifies the version of the function descriptor schema that is used to describe the network function.
-- **descriptor_type** identifies the type of descriptor based on the organization (e.g., `eu.5gtango.nsd`)
+- **descriptor_schema** referenced to the corresponding schema of a descriptor (e.g., URL or local path)
 - **$schema** (optional) provides a link to the schema that is used to describe the network function and can be used to validate the VNF descriptor file. This is related to the original JSON schema specification.
 
 Moreover, the VNF signature, i.e the *vendor*, the *name*, and the *version*, is of great importance as it identifies the VNF uniquely.

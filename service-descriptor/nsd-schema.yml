@@ -22,14 +22,9 @@ definitions:
 # actual schema of NSDs
 type: "object"
 properties:
-  descriptor_version:
-    description: "The version of the description definition used to describe the network descriptor."
+  descriptor_schema:
+    description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
     type: "string"
-    pattern: "^[A-Za-z0-9\\-_.]+$"
-  descriptor_type:
-    description: "The type of descriptor based on the organization, eg, eu.5gtango.nsd for a 5GTANGO NSD."
-    type: "string"
-    # TODO: restrict to possible types (all permutations of organizations and types)
   vendor:
     description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
     type: "string"
@@ -419,7 +414,6 @@ properties:
     uniqueItems: true
     
   # soft constraints by developer, eg, proximity constraints
-  # TODO: more restrictive pattern?
   soft_constraints:
     type: "array"
     items:
@@ -429,8 +423,7 @@ properties:
   
   
 required: 
-  - descriptor_version
-  - descriptor_type
+  - descriptor_schema
   - vendor 
   - name
   - version

@@ -1,6 +1,5 @@
 ---
-descriptor_version: "0.9"                            # will be 1.0 on first release
-descriptor_type: "eu.5gtango.napd"
+descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/package-specification/napd-schema.yml"
 
 vendor: "eu.5gtango"
 name: "test-package-example"
