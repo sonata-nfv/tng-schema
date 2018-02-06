@@ -18,15 +18,8 @@ properties:
   ## Some general information regarding the schema used to describe
   ## the package descriptor.
   ##
-  schema:
-    description: "An optional reference to this package descriptor schema."
-    type: "string"
-  descriptor_version:
-    description: "The version of the descriptor schema used."
-    type: "string"
-    pattern: "^[A-Za-z0-9\\-_.]+$"
-  descriptor_type:
-    description: "The type of descriptor based on the organization, eg, eu.5gtango.nsd for a 5GTANGO NSD."
+  descriptor_schema:
+    description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
     type: "string"
 
   ##
@@ -111,8 +104,7 @@ properties:
     uniqueItems: true
 
 required:
-  - "descriptor_version"
-  - "descriptor_type"
+  - "descriptor_schema"
   - "vendor"
   - "name"
   - "version"

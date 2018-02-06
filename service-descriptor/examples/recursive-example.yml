@@ -5,8 +5,8 @@
 ## @author Stefan Schneider
 ##
 ---
-descriptor_version: "0.9"
-descriptor_type: "eu.5gtango.nsd"
+# this descriptor always points to the newest schema on GitHub
+descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/service-descriptor/nsd-schema.yml"
 
 vendor: "eu.tango-nfv.service-descriptor"
 name: "recursive-sonata"

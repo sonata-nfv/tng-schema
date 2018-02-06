@@ -9,8 +9,7 @@ s_nssai:
   sst: 1 # eMBB
   sd: 1
       
-descriptor_version: "0.9"
-descriptor_type: "eu.5gtango.nst"
+descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/slice-descriptor/nst-schema.yml"
 
 vendor: "eu.5gtango.slice-descriptor"
 name: "slice"

@@ -13,8 +13,7 @@ Below we discuss the various section of a network service descriptor. The genera
 
 At the root level, we first have the mandatory fields, that describe and identify the virtual network service in a unique way.
 
-- **descriptor_version** identifies the version of the service descriptor schema that is used to describe the network service.
-- **descriptor_type** identifies the type of descriptor based on the organization (e.g., `eu.5gtango.nsd`)
+- **descriptor_schema** referenced to the corresponding schema of a descriptor (e.g., URL or local path)
 - **$schema** (optional) provides a link to the schema that is used to describe the network service and can be used to validate the VNF descriptor file. This is related to the original JSON schema specification.
 
 Moreover, the service signature, i.e the *vendor*, the *name*, and the *version*, is of great importance as it identifies the network service uniquely.
