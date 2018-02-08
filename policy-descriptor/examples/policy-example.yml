@@ -1,0 +1,23 @@
+# do NOT delete: this is used by tng-sdk-descriptorgen
+# default YAML description of an ubuntu vm
+
+
+---
+descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/policy-descriptor/policy-schema.yml"
+
+name: "samplePolicy"
+
+
+rules:
+  - name: "FirstRule"
+    duration: "to be defined"
+    condition: "to be defined"
+    action: "to be defined"
+  - name: "SecondRule"
+    duration: "to be defined"
+    condition: "to be defined"
+    action: "to be defined"
+
+
+
+  
