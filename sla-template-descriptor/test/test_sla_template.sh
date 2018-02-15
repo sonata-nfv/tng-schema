@@ -12,7 +12,7 @@
 
 CMD=yamlvalidate
 BASE_DIR=`dirname $0`
-SCHEMA=${BASE_DIR}/../sla-template-schemaa.yml
+SCHEMA=${BASE_DIR}/../sla-template-schema.yml
 FILE=${BASE_DIR}/../examples/sla-template-example.yml
 
 #
