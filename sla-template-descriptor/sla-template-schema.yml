@@ -44,8 +44,7 @@ properties:
     description: "A longer description of the template"
     type: "string"
     examples:
-    - A default SLA Template with initial SLOs that are expressed through metrics,parameters
-      and an expression
+    - A default SLA Template with initial SLOs that are expressed through metrics,parameters and an expression
   sla_template:
     type: object
     properties:
@@ -101,9 +100,7 @@ properties:
                   type: string
                   description: An explanation-deffinition about the SLO
                   examples:
-                  - Availability is the percentage of time, in a specific time interval,
-                    during which a NS can be used for the purpose that it was originally
-                    designed and built for.
+                  - Availability is the percentage of time, in a specific time interval, during which a NS can be used for the purpose that it was originally designed and built for.
                 slo_unit:
                   type: string
                   description: The unit of the current slo
@@ -178,8 +175,7 @@ properties:
                                   type: string
                                   description: Explanation of how to use the metric
                                   examples:
-                                  - NS Uptime refers to the amount of time that the network
-                                    service has been powered on and working properly.
+                                  - NS Uptime refers to the amount of time that the network service has been powered on and working properly.
                                 parameter_unit:
                                   type: string
                                   description: The unit of the current parameter
@@ -192,7 +188,7 @@ properties:
                                   examples:
                                   - '8000'
                             minItems: 1
-                              required:
+                            required:
                                 - parameter_id
                                 - parameter_name
                                 - parameter_unit
@@ -202,13 +198,13 @@ properties:
                           - expression_unit
                           - parameters
                   minItems: 1
-                    required:
+                required:
                       - metric_id
                       - parameters
                       - rate
                       - expression
             minItems: 1
-              required:
+            required:
                 - slo_id
                 - slo_name
                 - slo_unit
