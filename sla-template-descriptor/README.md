@@ -1,2 +1,2 @@
-# tng-schema:: SLA Template schema and descriptor example
+# tng-schema::sla Template schema and descriptor example 
 
