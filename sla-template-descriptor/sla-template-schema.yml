@@ -1,0 +1,228 @@
+---
+$schema: "http://json-schema.org/draft-04/schema#"
+title: "SLA Template Descriptor Schema"
+version: 0.6
+description: "The core schema for sla templates descriptors"
+definitions: {}
+
+##
+## SLA Template SCHEMA
+##
+type: "object"
+properties:
+  descriptor_schema:
+    description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
+    type: "string"
+    examples:
+    - https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/service-descriptor/nsd-schema.yml
+  vendor:
+    description: The vendor id allows to identify a sla template descriptor uniquely across all function descriptor vendors.
+    type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
+    examples:
+    - tango-sla-template
+  name:
+    description: "The name of the sla template"
+    type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
+    examples:
+    - example-sla-template
+  version:
+    description: "The version of the sla template"
+    type: "string"
+    pattern: "^[0-9\\-_.]+$"
+    examples:
+    - '0.5'
+  author:
+    type: string
+    title: The Author Schema
+    description: An explanation about the purpose of this instance.
+    default: 'The person or organization that created the sla template descriptor.'
+    examples:
+    - Evgenia Kapassa, Marios Touloupou
+  description:
+    description: "A longer description of the template"
+    type: "string"
+    examples:
+    - A default SLA Template with initial SLOs that are expressed through metrics,parameters
+      and an expression
+  sla_template:
+    type: object
+    properties:
+      offered_date:
+        type: string
+        description: The offered date of the sla template
+        examples:
+        - '2018-01-24 10:00:00'
+      valid_until:
+        type: string
+        description: The date till it is valid the sla template
+        examples:
+        - '2019-01-24 10:00:00'
+      sla_template_version:
+        type: string
+        description: The Sla_template_version Schema
+        examples:
+        - '0.1'
+      service_provider_id:
+        type: string
+        description: The service provider id tha is responsible for this template
+        examples:
+        - sp001
+      ns:
+        type: object
+        properties:
+          ns_id:
+            type: string
+            description: the NS identifier
+            examples:
+            - ns001
+          description:
+            type: string
+            description: A description regarding the NS 
+            examples:
+            - a network service description
+          objectives:
+            type: array
+            items:
+              type: object
+              properties:
+                slo_id:
+                  type: string
+                  description: SLO identifier
+                  examples:
+                  - req001
+                slo_name:
+                  type: string
+                  description: The SLO name
+                  examples:
+                  - NetworkServiceAvailability
+                slo_definition:
+                  type: string
+                  description: An explanation-deffinition about the SLO
+                  examples:
+                  - Availability is the percentage of time, in a specific time interval,
+                    during which a NS can be used for the purpose that it was originally
+                    designed and built for.
+                slo_unit:
+                  type: string
+                  description: The unit of the current slo
+                  examples:
+                  - "%"
+                slo_value:
+                  type: string
+                  description: The desired value of the SLO
+                  examples:
+                  - '99.95'
+                metric:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      metric_id:
+                        type: string
+                        description: Metriv identifier
+                        examples:
+                        - mtr001
+                      metric_definition:
+                        type: string
+                        description: Define how to measure the current SLO
+                        examples:
+                        - Total time the NS is alive 
+                      rate:
+                        type: object
+                        properties:
+                          parameterWindow:
+                            type: string
+                            examples:
+                            - 1 year
+                          sampleInterval:
+                            type: string
+                            examples:
+                            - sample rate every 1 hour                     
+                      expression:
+                        type: object
+                        properties:
+                          expression_statement:
+                            type: string
+                            description: A function under which the specific metric of the SLA should obey.
+                            examples:
+                            - prmtr001/prmtr002
+                          expression_language:
+                            type: string
+                            description: The language in which the expression function is expressed
+                            default: 'ISO80000'
+                            examples:
+                            - ISO80000
+                          expression_unit:
+                            type: string
+                            description: The unit of the expression
+                            examples:
+                            - hour
+                          parameters:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                parameter_id:
+                                  type: string
+                                  description: Parameter identifier
+                                  examples:
+                                  - prmtr001
+                                parameter_name:
+                                  type: string
+                                  description: The name of the metric
+                                  examples:
+                                  - NetworkServiceUptime
+                                parameter_definition:
+                                  type: string
+                                  description: Explanation of how to use the metric
+                                  examples:
+                                  - NS Uptime refers to the amount of time that the network
+                                    service has been powered on and working properly.
+                                parameter_unit:
+                                  type: string
+                                  description: The unit of the current parameter
+                                  examples:
+                                  - hour
+                                parameter_value:
+                                  type: string
+                                  description: Desired value of the parameter
+                                  default: ''
+                                  examples:
+                                  - '8000'
+                            minItems: 1
+                              required:
+                                - parameter_id
+                                - parameter_name
+                                - parameter_unit
+                                - parameter_value
+                        required:
+                          - expression_statement
+                          - expression_unit
+                          - parameters
+                  minItems: 1
+                    required:
+                      - metric_id
+                      - parameters
+                      - rate
+                      - expression
+            minItems: 1
+              required:
+                - slo_id
+                - slo_name
+                - slo_unit
+                - slo_value
+                - metric
+        required:
+          - ns_id
+          - objectives                    
+      required:
+        - service_provider_id
+        - ns
+required: 
+  - descriptor_schema
+  - vendor 
+  - name
+  - version
+  - sla_template
