@@ -1,5 +1,5 @@
 ---
-descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/service-descriptor/nsd-schema.yml"
+descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/sla-template-descriptor/sla-template-schema.yml"
 
 vendor: "tango-sla-template"
 name: "example-sla-template"
