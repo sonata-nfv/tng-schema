@@ -1,0 +1,83 @@
+---
+descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/sla-template-descriptor/sla-template-schema.yml"
+
+vendor: "tango-sla-template"
+name: "example-sla-template"
+version: "0.5"
+author: "Evgenia Kapassa, Marios Touloupou"
+description: "A default SLA Template with initial SLOs that are expressed through metrics,parameters and an expression"
+
+sla_template:
+
+  # general details regarding the SLA Template
+  offered_date: '2018-01-24 10:00:00'
+  valid_until: '2019-01-24 10:00:00'
+  sla_template_version: '0.1'
+  service_provider_id: sp001
+  
+  # involved network service
+  ns:
+    ns_id: ns001
+    description: a network service description
+    
+    # high level SLOs
+    objectives:
+    - slo_id: req001
+      slo_name: NetworkServiceAvailability
+      slo_definition: Availability is the percentage of time, in a specific time interval,
+        during which a NS can be used for the purpose that it was originally designed
+        and built for.
+      slo_unit: "%"
+      slo_value: '99.95'
+      
+     # corresponds to how to measure the objective
+      metric:
+      - metric_id: mtr001
+        metric_definition: Total time the NS is alive
+
+        rate:
+          parameterWindow: 1 year
+          sampleInterval: sample rate every 1 hour
+
+        #  a function under which the specific metric of the SLA should obey
+        expression:
+          expression_statement: prmtr001/prmtr002
+          expression_language: ISO80000
+          expression_unit: hour
+
+          # expressing in detail each parameter inside the expression 
+          parameters:
+          - parameter_id: prmtr001
+            parameter_name: NetworkServiceUptime
+            parameter_definition: NS Uptime refers to the amount of time that the network service has been powered on and working properly.
+            parameter_unit: hour
+            parameter_value: '8000'
+          - parameter_id: prmtr002
+            parameter_name: Total_Time
+            metric_definition: Total Time refers to one year of the NS deployment
+            parameter_unit: hour
+            parameter_value: '8760'     
+        
+        
+    - slo_id: req002
+      slo_name: NetworkServiceDownTime
+      slo_definition: Time when a NS is not working or active.
+      slo_unit: hour
+      slo_value: '4'
+      metric:
+      - metric_id: mtr002
+        metric_definition: Total time the NS is inactive
+        rate:
+          parameterWindow: 1 year
+          sampleInterval: sample rate every 1 hour
+        expression:
+          expression_statement: sum(prmtr003)
+          expression_language: ISO80000
+          expression_unit: hour
+          parameters:
+          - parameter_id: prmtr003
+            parameter_name: NetworkServiceNoResponseTime
+            metric_definition: NS No Response Time refers to the total amount of time that the network service provides no response.
+            parameter_unit: hour
+            parameter_value: '4'
+        

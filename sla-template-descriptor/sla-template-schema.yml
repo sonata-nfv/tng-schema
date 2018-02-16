@@ -1,0 +1,292 @@
+---
+"$id": http://example.com/example.json
+type: object
+definitions: {}
+"$schema": http://json-schema.org/draft-04/schema#
+properties:
+  descriptor_schema:
+    "$id": "/properties/descriptor_schema"
+    type: string
+    title: The Descriptor_schema Schema
+    description: An explanation about the purpose of this instance.
+    default: ''
+    examples:
+    - https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/service-descriptor/nsd-schema.yml
+  vendor:
+    "$id": "/properties/vendor"
+    type: string
+    title: The Vendor Schema
+    description: An explanation about the purpose of this instance.
+    default: ''
+    examples:
+    - tango-sla-template
+  name:
+    "$id": "/properties/name"
+    type: string
+    title: The Name Schema
+    description: An explanation about the purpose of this instance.
+    default: ''
+    examples:
+    - example-sla-template
+  version:
+    "$id": "/properties/version"
+    type: string
+    title: The Version Schema
+    description: An explanation about the purpose of this instance.
+    default: ''
+    examples:
+    - '0.5'
+  author:
+    "$id": "/properties/author"
+    type: string
+    title: The Author Schema
+    description: An explanation about the purpose of this instance.
+    default: ''
+    examples:
+    - Evgenia Kapassa, Marios Touloupou
+  description:
+    "$id": "/properties/description"
+    type: string
+    title: The Description Schema
+    description: An explanation about the purpose of this instance.
+    default: ''
+    examples:
+    - A default SLA Template with initial SLOs that are expressed through metrics,parameters
+      and an expression
+  sla_template:
+    "$id": "/properties/sla_template"
+    type: object
+    properties:
+      offered_date:
+        "$id": "/properties/sla_template/properties/offered_date"
+        type: string
+        title: The Offered_date Schema
+        description: An explanation about the purpose of this instance.
+        default: ''
+        examples:
+        - '2018-01-24 10:00:00'
+      valid_until:
+        "$id": "/properties/sla_template/properties/valid_until"
+        type: string
+        title: The Valid_until Schema
+        description: An explanation about the purpose of this instance.
+        default: ''
+        examples:
+        - '2019-01-24 10:00:00'
+      sla_template_version:
+        "$id": "/properties/sla_template/properties/sla_template_version"
+        type: string
+        title: The Sla_template_version Schema
+        description: An explanation about the purpose of this instance.
+        default: ''
+        examples:
+        - '0.1'
+      service_provider_id:
+        "$id": "/properties/sla_template/properties/service_provider_id"
+        type: string
+        title: The Service_provider_id Schema
+        description: An explanation about the purpose of this instance.
+        default: ''
+        examples:
+        - sp001
+      ns:
+        "$id": "/properties/sla_template/properties/ns"
+        type: object
+        properties:
+          ns_id:
+            "$id": "/properties/sla_template/properties/ns/properties/ns_id"
+            type: string
+            title: The Ns_id Schema
+            description: An explanation about the purpose of this instance.
+            default: ''
+            examples:
+            - ns001
+          description:
+            "$id": "/properties/sla_template/properties/ns/properties/description"
+            type: string
+            title: The Description Schema
+            description: An explanation about the purpose of this instance.
+            default: ''
+            examples:
+            - a network service description
+          objectives:
+            "$id": "/properties/sla_template/properties/ns/properties/objectives"
+            type: array
+            items:
+              "$id": "/properties/sla_template/properties/ns/properties/objectives/items"
+              type: object
+              properties:
+                slo_id:
+                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_id"
+                  type: string
+                  title: The Slo_id Schema
+                  description: An explanation about the purpose of this instance.
+                  default: ''
+                  examples:
+                  - req001
+                slo_name:
+                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_name"
+                  type: string
+                  title: The Slo_name Schema
+                  description: An explanation about the purpose of this instance.
+                  default: ''
+                  examples:
+                  - NetworkServiceAvailability
+                slo_definition:
+                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_definition"
+                  type: string
+                  title: The Slo_definition Schema
+                  description: An explanation about the purpose of this instance.
+                  default: ''
+                  examples:
+                  - Availability is the percentage of time, in a specific time interval,
+                    during which a NS can be used for the purpose that it was originally
+                    designed and built for.
+                slo_unit:
+                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_unit"
+                  type: string
+                  title: The Slo_unit Schema
+                  description: An explanation about the purpose of this instance.
+                  default: ''
+                  examples:
+                  - "%"
+                slo_value:
+                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_value"
+                  type: string
+                  title: The Slo_value Schema
+                  description: An explanation about the purpose of this instance.
+                  default: ''
+                  examples:
+                  - '99.95'
+                metric:
+                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric"
+                  type: array
+                  items:
+                    "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items"
+                    type: object
+                    properties:
+                      metric_id:
+                        "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/metric_id"
+                        type: string
+                        title: The Metric_id Schema
+                        description: An explanation about the purpose of this instance.
+                        default: ''
+                        examples:
+                        - mtr001
+                      metric_definition:
+                        "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/metric_definition"
+                        type: string
+                        title: The Metric_definition Schema
+                        description: An explanation about the purpose of this instance.
+                        default: ''
+                        examples:
+                        - Total time the NS is alive
+                      rate:
+                        "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/rate"
+                        type: object
+                        properties:
+                          parameterWindow:
+                            "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/rate/properties/parameterWindow"
+                            type: string
+                            title: The Parameterwindow Schema
+                            description: An explanation about the purpose of this
+                              instance.
+                            default: ''
+                            examples:
+                            - 1 year
+                          sampleInterval:
+                            "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/rate/properties/sampleInterval"
+                            type: string
+                            title: The Sampleinterval Schema
+                            description: An explanation about the purpose of this
+                              instance.
+                            default: ''
+                            examples:
+                            - sample rate every 1 hour
+                      expression:
+                        "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression"
+                        type: object
+                        properties:
+                          expression_statement:
+                            "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/expression_statement"
+                            type: string
+                            title: The Expression_statement Schema
+                            description: An explanation about the purpose of this
+                              instance.
+                            default: ''
+                            examples:
+                            - prmtr001/prmtr002
+                          expression_language:
+                            "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/expression_language"
+                            type: string
+                            title: The Expression_language Schema
+                            description: An explanation about the purpose of this
+                              instance.
+                            default: ''
+                            examples:
+                            - ISO80000
+                          expression_unit:
+                            "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/expression_unit"
+                            type: string
+                            title: The Expression_unit Schema
+                            description: An explanation about the purpose of this
+                              instance.
+                            default: ''
+                            examples:
+                            - hour
+                          parameters:
+                            "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters"
+                            type: array
+                            items:
+                              "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items"
+                              type: object
+                              properties:
+                                parameter_id:
+                                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_id"
+                                  type: string
+                                  title: The Parameter_id Schema
+                                  description: An explanation about the purpose of
+                                    this instance.
+                                  default: ''
+                                  examples:
+                                  - prmtr001
+                                parameter_name:
+                                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_name"
+                                  type: string
+                                  title: The Parameter_name Schema
+                                  description: An explanation about the purpose of
+                                    this instance.
+                                  default: ''
+                                  examples:
+                                  - NetworkServiceUptime
+                                parameter_definition:
+                                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_definition"
+                                  type: string
+                                  title: The Parameter_definition Schema
+                                  description: An explanation about the purpose of
+                                    this instance.
+                                  default: ''
+                                  examples:
+                                  - NS Uptime refers to the amount of time that the
+                                    network service has been powered on and working
+                                    properly.
+                                parameter_unit:
+                                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_unit"
+                                  type: string
+                                  title: The Parameter_unit Schema
+                                  description: An explanation about the purpose of
+                                    this instance.
+                                  default: ''
+                                  examples:
+                                  - hour
+                                parameter_value:
+                                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_value"
+                                  type: string
+                                  title: The Parameter_value Schema
+                                  description: An explanation about the purpose of
+                                    this instance.
+                                  default: ''
+                                  examples:
+                                  - '8000'
+
+
