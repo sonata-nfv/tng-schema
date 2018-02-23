@@ -14,43 +14,81 @@ definitions:
       - "m"   # minutes
       - "h"   # hours
       - "d"   # days
-  aggregatin_function:
+  aggregation_function:
     enum:
       - "avg"   # average
       - "min"   # min
       - "max"   # max
-  monitoring:
+  operator:
+    enum:
+      - "less"   # less
+      - "equal"   # equal
+      - "greater"   # greater
+  input:
+    enum:
+      - "number"   # number
+      - "select"   # select
+  logicalOperator:
+    enum:
+      - "AND"   # AND
+      - "OR"   # OR
+  expression:
     type: "object"
     properties:
-      name:
-       description: "The name of the parameter to monitor. The name has to be supported by the service platform or the FSM."
+      id:
+       description: "The name of the expression parameter. The name has to be supported by the service platform or the FSM."
        type: "string"
-       pattern: "^[A-Za-z-_]+$"
-      unit:
-       description: "The unit used to monitor (or represent) the parameter."
-       oneOf:
-         - $ref: "#/definitions/general_units"
-         - $ref: "#/definitions/memory_units"
-         - $ref: "#/definitions/bandwidth_units"
-         - $ref: "#/definitions/frequency_units"
-      frequency:
-        description: "The sample rate of the monitoring parameter."
-        type: "number"
-        minimum: 0
-        exclusiveMinimum: true
-      frequency_unit:
-        description: "The unit of the sample frequency."
-        $ref: "#/definitions/frequency_units"
-        default: "Hz"
-      command:
-        description: "A command that is executed in order to perform custom monitoring."
-        type: "string"
+      field:
+       description: "The field name of the expression parameter. The name has to be supported by the service platform or the FSM."
+       type: "string"
+      type:
+       description: "The type of the parameter."
+       type: "string"
+      input:
+       description: "The input type of the parameter."
+       $ref: "#/definitions/input"
+      operator:
+       description: "The operator of the expression."
+       $ref: "#/definitions/operator"
+      value:
+       description: "The threshold value of the parameter."
+       type: "string"
     required:
-      - name
-      - unit
-    additionalProperties: false
-    
-    
+      - id
+      - field
+      - type
+      - input
+      - operator
+      - value
+  fullExpression:
+    description: "A set of expressions bind between them with logical operators."
+    type: "object"
+    properties:
+      condition:
+       description: "The operator AND / OR."
+       $ref: "#/definitions/logicalOperator"
+      rules:
+       description: "The set of expressions."
+       type: "array"
+       items:
+          description: "An FSM object of this VNF. FSMs are always Docker containers."
+          $ref: "#/definitions/expression"
+    required:
+      - condition
+      - rules
+  setOfExpressions:
+    description: "An expression with the optional condition."
+    type: "object"
+    properties:
+      rules:
+       description: "The set of expressions."
+       type: "array"
+       items:
+          description: "An FSM object of this VNF. FSMs are always Docker containers."
+          $ref: "#/definitions/fullExpression"
+    required:
+      - rules
+      
 ##
 ## The actual document description.
 ##
@@ -66,7 +104,7 @@ properties:
   description:
     description: "A longer description of the policy."
     type: "string"
-  rules:
+  policyRules:
     description: "A list of Policy rules  used to compose this Policy."
     type: "array"
     items:
@@ -82,10 +120,13 @@ properties:
         duration_unit:
           description: "The unit of the durration."
           ref: "#/definitions/time_units"
-        condition:
-          description: "The condition, a boolean expression, that must be met to fire the event."
-          type: "string"
-        action:
+        aggregation:
+          description: "The unit of the duration."
+          ref: "#/definitions/aggregation_function"
+        conditions:
+          description: "The set of conditions, that must be met to fire the event."
+          ref: "#/definitions/setOfExpressions"
+        actions:
           description: "A list of notifications that are fired when the condition is met."
           type: "array"
           items:
@@ -98,12 +139,14 @@ properties:
                 description: "The type of the action that is send to the message bus."
                 type: "string"
             required:
-              - type
+              - name
       required:
         - name
         - duration
-        - condition
-        - action
+        - duration_unit
+        - aggregation
+        - conditions
+        - actions
     uniqueItems: true
     minItems: 1
 required:
