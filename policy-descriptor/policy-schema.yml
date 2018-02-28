@@ -50,7 +50,7 @@ definitions:
   action_description:
     enum:
       - "ApplyFlavour"   # Infrastracture
-      - "Migragte"   # Infrastracture
+      - "Migrate"   # Infrastracture
       - "LoadBalancer.setBalancingAlgorithm"   # Orchestration
       - "LoadBalancer.Spawn"   # Orchestration
       - "LoadBalancer.Deprovision"   # Orchestration
@@ -143,12 +143,35 @@ properties:
         name:
           description: "The name of the policy rule."
           type: "string"
-        duration:
-          description: "The duration the condtion has to be met before an event is fired."
+        salience:
+          description: "The salience of the policy rule."
           type: "number"
-        duration_unit:
-          description: "The unit of the durration."
-          ref: "#/definitions/time_units"
+        inertia:
+          description: "The inertia period of the policy rule."
+          type: "object"
+          properties:
+            value: 
+              description: "The duration value of the inertia period."
+              type: "number"
+            duration_unit:
+              description: "The unit of the duration."
+              ref: "#/definitions/time_units"
+          required:
+            - value
+            - duration_unit
+        duration:
+          description: "The duration the condition has to be met before an event is fired."
+          type: "object"
+          properties:
+            value: 
+              description: "The duration value."
+              type: "number"
+            duration_unit:
+              description: "The unit of the duration."
+              ref: "#/definitions/time_units"
+          required:
+            - value
+            - duration_unit
         aggregation:
           description: "The unit of the duration."
           ref: "#/definitions/aggregation_function"
@@ -176,13 +199,25 @@ properties:
               target:
                 description: "The component to apply the action"
                 type: "string"
+              stability_period:
+                description: "The inertia period of the policy rule."
+                type: "object"
+                properties:
+                  value: 
+                    description: "The duration value of the inertia period."
+                    type: "number"
+                  duration_unit:
+                    description: "The unit of the duration."
+                    ref: "#/definitions/time_units"
+                required:
+                  - value
+                  - duration_unit
             required:
               - name
               - target
       required:
         - name
         - duration
-        - duration_unit
         - aggregation
         - conditions
         - actions

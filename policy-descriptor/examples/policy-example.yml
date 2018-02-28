@@ -9,8 +9,13 @@ name: "samplepolicyv1"
 
 policyRules:
   - name: "FirstRule"
-    duration: 10
-    duration_unit: "m"
+    salience: 1
+    inertia: 
+      value: 30
+      duration_unit: "m"
+    duration: 
+      value: 10
+      duration_unit: "m"
     aggregation : "avg"
     conditions: 
       condition: AND
@@ -33,8 +38,9 @@ policyRules:
        value: "3"
        target: "vnf1"
   - name: "secondRule"
-    duration: 10
-    duration_unit: "m"
+    duration: 
+      value: 10
+      duration_unit: "m"
     aggregation : "avg"
     conditions: 
       condition: AND
@@ -67,6 +73,9 @@ policyRules:
      - action_type: "LifecycleManagement"
        name: "restart"
        target: "vnf1"
+       stability_period: 
+         value: 30
+         duration_unit: "m"
      - action_type: "Profile"
        name: "setProfile"
        profile_tag: "Green"
