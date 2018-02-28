@@ -32,6 +32,35 @@ definitions:
     enum:
       - "AND"   # AND
       - "OR"   # OR
+  profile_tag:
+    enum:
+      - "under_attack"   # under_attack
+      - "mis_performed"   # mis_performed
+      - "low_energy"   # mis_performed
+      - "Green"   # mis_performed
+  action_type:
+    enum:
+      - "Infrastracture"   # InfraAction can be applied to a VNF/VDU. Is infrastracture related and can be either a new flavoId or a migration
+      - "Orchestration"   # OrchestrationAction. Is a loadBalancerAction such as setBalancingAlgorith or  Spawn, Deprovision
+      - "LifecycleManagement"   # LifecycleManagementAction
+      - "NetworkMechanism"   # ActivateNetworkMechanism
+      - "AlterConfiguration"   # AlterConfigurationAction
+      - "Profile"   # Add/remove a new profile
+      - "Log"   # Log
+  action_description:
+    enum:
+      - "ApplyFlavour"   # Infrastracture
+      - "Migragte"   # Infrastracture
+      - "LoadBalancer.setBalancingAlgorithm"   # Orchestration
+      - "LoadBalancer.Spawn"   # Orchestration
+      - "LoadBalancer.Deprovision"   # Orchestration
+      - "start"   # LifecycleManagementAction
+      - "stop"   # LifecycleManagementAction
+      - "restart"   # LifecycleManagementAction
+      - "MonitorEndToEndDelay"   # NetworkMechanism
+      - "ProvideDedicatedBandwidth"   # NetworkMechanism
+      - "setProfile"   # Profile
+      - "other"   # AlterConfiguration && Log
   expression:
     type: "object"
     properties:
@@ -132,14 +161,24 @@ properties:
           items:
             type: "object"
             properties:
+              action_type:
+                description: "The type of the action that is send to the message bus."
+                ref: "#/definitions/action_type"
               name:
                 description: "The description of the action"
+                ref: "#/definitions/action_description"
+              value:
+                description: "The value of the action"
                 type: "string"
-              type:
-                description: "The type of the action that is send to the message bus."
+              profile_tag:
+                description: "A profile tag"
+                ref: "#/definitions/profile_tag"
+              target:
+                description: "The component to apply the action"
                 type: "string"
             required:
               - name
+              - target
       required:
         - name
         - duration
@@ -152,5 +191,5 @@ properties:
 required:
   - descriptor_schema
   - name
-  - rules
+  - policyRules
 additionalProperties: false
