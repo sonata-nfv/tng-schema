@@ -1,0 +1,230 @@
+---
+$schema: "http://json-schema.org/draft-04/schema#"
+title: "Policy Descriptor Schema"
+version: 0.1
+description: "The core schema for SONATA policy descriptors."
+
+##
+## Some definitions used later on.
+##
+definitions:
+  time_units:
+    enum:
+      - "s"   # seconds
+      - "m"   # minutes
+      - "h"   # hours
+      - "d"   # days
+  aggregation_function:
+    enum:
+      - "avg"   # average
+      - "min"   # min
+      - "max"   # max
+  operator:
+    enum:
+      - "less"   # less
+      - "equal"   # equal
+      - "greater"   # greater
+  input:
+    enum:
+      - "number"   # number
+      - "select"   # select
+  logicalOperator:
+    enum:
+      - "AND"   # AND
+      - "OR"   # OR
+  profile_tag:
+    enum:
+      - "under_attack"   # under_attack
+      - "mis_performed"   # mis_performed
+      - "low_energy"   # mis_performed
+      - "Green"   # mis_performed
+  action_type:
+    enum:
+      - "Infrastracture"   # InfraAction can be applied to a VNF/VDU. Is infrastracture related and can be either a new flavoId or a migration
+      - "Orchestration"   # OrchestrationAction. Is a loadBalancerAction such as setBalancingAlgorith or  Spawn, Deprovision
+      - "LifecycleManagement"   # LifecycleManagementAction
+      - "NetworkMechanism"   # ActivateNetworkMechanism
+      - "AlterConfiguration"   # AlterConfigurationAction
+      - "Profile"   # Add/remove a new profile
+      - "Log"   # Log
+  action_description:
+    enum:
+      - "ApplyFlavour"   # Infrastracture
+      - "Migrate"   # Infrastracture
+      - "LoadBalancer.setBalancingAlgorithm"   # Orchestration
+      - "LoadBalancer.Spawn"   # Orchestration
+      - "LoadBalancer.Deprovision"   # Orchestration
+      - "start"   # LifecycleManagementAction
+      - "stop"   # LifecycleManagementAction
+      - "restart"   # LifecycleManagementAction
+      - "MonitorEndToEndDelay"   # NetworkMechanism
+      - "ProvideDedicatedBandwidth"   # NetworkMechanism
+      - "setProfile"   # Profile
+      - "other"   # AlterConfiguration && Log
+  expression:
+    type: "object"
+    properties:
+      id:
+       description: "The name of the expression parameter. The name has to be supported by the service platform or the FSM."
+       type: "string"
+      field:
+       description: "The field name of the expression parameter. The name has to be supported by the service platform or the FSM."
+       type: "string"
+      type:
+       description: "The type of the parameter."
+       type: "string"
+      input:
+       description: "The input type of the parameter."
+       $ref: "#/definitions/input"
+      operator:
+       description: "The operator of the expression."
+       $ref: "#/definitions/operator"
+      value:
+       description: "The threshold value of the parameter."
+       type: "string"
+    required:
+      - id
+      - field
+      - type
+      - input
+      - operator
+      - value
+  fullExpression:
+    description: "A set of expressions bind between them with logical operators."
+    type: "object"
+    properties:
+      condition:
+       description: "The operator AND / OR."
+       $ref: "#/definitions/logicalOperator"
+      rules:
+       description: "The set of expressions."
+       type: "array"
+       items:
+          description: "An FSM object of this VNF. FSMs are always Docker containers."
+          $ref: "#/definitions/expression"
+    required:
+      - condition
+      - rules
+  setOfExpressions:
+    description: "An expression with the optional condition."
+    type: "object"
+    properties:
+      rules:
+       description: "The set of expressions."
+       type: "array"
+       items:
+          description: "An FSM object of this VNF. FSMs are always Docker containers."
+          $ref: "#/definitions/fullExpression"
+    required:
+      - rules
+      
+##
+## The actual document description.
+##
+type: "object"
+properties:
+  descriptor_schema:
+    description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
+    type: "string"
+  name:
+    description: "The name of the policy description."
+    type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
+  description:
+    description: "A longer description of the policy."
+    type: "string"
+  policyRules:
+    description: "A list of Policy rules  used to compose this Policy."
+    type: "array"
+    items:
+      description: "A rule of the current policy"
+      type: "object"
+      properties:
+        name:
+          description: "The name of the policy rule."
+          type: "string"
+        salience:
+          description: "The salience of the policy rule."
+          type: "number"
+        inertia:
+          description: "The inertia period of the policy rule."
+          type: "object"
+          properties:
+            value: 
+              description: "The duration value of the inertia period."
+              type: "number"
+            duration_unit:
+              description: "The unit of the duration."
+              ref: "#/definitions/time_units"
+          required:
+            - value
+            - duration_unit
+        duration:
+          description: "The duration the condition has to be met before an event is fired."
+          type: "object"
+          properties:
+            value: 
+              description: "The duration value."
+              type: "number"
+            duration_unit:
+              description: "The unit of the duration."
+              ref: "#/definitions/time_units"
+          required:
+            - value
+            - duration_unit
+        aggregation:
+          description: "The unit of the duration."
+          ref: "#/definitions/aggregation_function"
+        conditions:
+          description: "The set of conditions, that must be met to fire the event."
+          ref: "#/definitions/setOfExpressions"
+        actions:
+          description: "A list of notifications that are fired when the condition is met."
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              action_type:
+                description: "The type of the action that is send to the message bus."
+                ref: "#/definitions/action_type"
+              name:
+                description: "The description of the action"
+                ref: "#/definitions/action_description"
+              value:
+                description: "The value of the action"
+                type: "string"
+              profile_tag:
+                description: "A profile tag"
+                ref: "#/definitions/profile_tag"
+              target:
+                description: "The component to apply the action"
+                type: "string"
+              stability_period:
+                description: "The inertia period of the policy rule."
+                type: "object"
+                properties:
+                  value: 
+                    description: "The duration value of the inertia period."
+                    type: "number"
+                  duration_unit:
+                    description: "The unit of the duration."
+                    ref: "#/definitions/time_units"
+                required:
+                  - value
+                  - duration_unit
+            required:
+              - name
+              - target
+      required:
+        - name
+        - duration
+        - aggregation
+        - conditions
+        - actions
+    uniqueItems: true
+    minItems: 1
+required:
+  - descriptor_schema
+  - name
+  - policyRules
+additionalProperties: false
