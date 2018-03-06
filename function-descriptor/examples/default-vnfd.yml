@@ -5,10 +5,10 @@
 ---
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/function-descriptor/vnfd-schema.yml"
 
-vendor: "tango"
+vendor: "eu.5gtango"
 name: "ubuntu-vnf"
 version: "0.9"
-author: "tango"
+author: "eu.5gtango"
 description: "A default ubuntu VNF descriptor"
 
 
@@ -48,7 +48,7 @@ virtual_deployment_units:
         type: "internal"
         
         
-# vnf connection points to the outside world
+# VNF connection points to the outside world
 connection_points:
   - id: "mgmt"
     interface: "ipv4"
