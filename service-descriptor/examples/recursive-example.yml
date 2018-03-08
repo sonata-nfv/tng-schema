@@ -111,4 +111,7 @@ testing_tags:
   
 # Soft constraints asking for proximity of the VNF and the reused NS (just as an example)
 soft_constraints:
-  - "proximity:vnf_vtc-ns_sonata"
+  - objective: "proximity"
+    involved_actors:
+      - "source"
+      - "vnf_vtc"
