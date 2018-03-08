@@ -414,13 +414,22 @@ properties:
     uniqueItems: true
     
   # soft constraints by developer, eg, proximity constraints
+  # so far only proximity or affinity constraints with exactly 2 involved actors
   soft_constraints:
     type: "array"
-    items:
-      type: "string"
-      pattern: "[A-Za-z0-9\\-_.:]+"
     uniqueItems: true
-  
+    items:
+      type: "object"
+      properties:
+        objective:
+          type: "string"
+          pattern: "(proximity)|(affinity)"
+        involved_actors:
+          type: "array"
+          minItems: 2
+          maxItems: 2
+          items:
+            type: "string"
   
 required: 
   - descriptor_schema
