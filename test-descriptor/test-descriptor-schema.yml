@@ -51,27 +51,29 @@ properties:
     type: array
     items: 
     type: object
-    parameter_name:
+    properties:
+     parameter_name:
       type: string
       description: "parameter string"
       pattern: "^[a-z0-9\\-_.]+$"
-    parameter_definition:
+     parameter_definition:
       type: string
       description: "parameter string"
       pattern: "^[a-z0-9\\-_.]+$"
-    parameter_value:
+     parameter_value:
       type: string
       description: "parameter value string"
       pattern: "^[a-z0-9\\-_.]+$"
-    content_type:
+     content_type:
       type: string
       description: "content type string"
       pattern: "^[a-z0-9\\-_.]+$"
-  test_category:
+   test_category:
     type: array
     items:  
     type: object
-    category_type:
+    properties:
+     category_type:
        type: string
        description: "category type"
        pattern: "^[a-z0-9\\-_.]+$" 
@@ -79,13 +81,12 @@ test_execution:
    type: array
    items:
    type: object
-   test_tag:
+   properties:
+    test_tag:
      type: string
      description: "test tag"
      pattern: "^[a-z0-9\\-_.]+$" 
-   test_id:
+    test_id:
      type: string
      description: "test id"
-     pattern: "^[a-z0-9\\-_.]+$" 
-      
-      
+     pattern: "^[a-z0-9\\-_.]+$"  
