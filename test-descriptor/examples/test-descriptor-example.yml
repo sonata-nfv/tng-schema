@@ -10,16 +10,16 @@ description: >
 test_type: TTCN3
 test_execution_files: "path/to/binaries"
 test_configuration_parameters: 
-      - parameter_name: TTCN3_config_file
+      - parameter_name: "TTCN3_config_file"
         parameter_definition: "location of the TTCN3 configuration file"
         parameter_value: "simple_VNF_test.ttcn3"
-        content_type: text/plain
-      - parameter_name: TTCN3_docker_instance
+        content_type: "text/plain"
+      - parameter_name: "TTCN3 docker_instance"
         parameter_definition: "Docker instance for TTCN3 runtime engine"
         parameter_value: "TTCN3.docker"
-        content_type: application/octet-stream
+        content_type: "application/octet-stream"
 test_category:
-    - category_type:performance   
+    - category_type: performance   
 
 #test tags are 
 test_execution:

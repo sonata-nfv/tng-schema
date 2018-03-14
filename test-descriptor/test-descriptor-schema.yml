@@ -50,43 +50,43 @@ properties:
   test_configuration_parameters:
     type: array
     items: 
-    type: object
-    properties:
-     parameter_name:
-      type: string
-      description: "parameter string"
-      pattern: "^[a-z0-9\\-_.]+$"
-     parameter_definition:
-      type: string
-      description: "parameter string"
-      pattern: "^[a-z0-9\\-_.]+$"
-     parameter_value:
-      type: string
-      description: "parameter value string"
-      pattern: "^[a-z0-9\\-_.]+$"
-     content_type:
-      type: string
-      description: "content type string"
-      pattern: "^[a-z0-9\\-_.]+$"
-   test_category:
+     type: object
+     properties:
+      parameter_name:
+       type: string
+       description: "parameter string"
+#       pattern: "^[a-z0-9\\-_.]+$"
+      parameter_definition:
+       type: string
+       description: "parameter string"
+#       pattern: "^[a-z0-9\\-_.]+$"
+      parameter_value:
+       type: string
+       description: "parameter value string"
+#       pattern: "^[a-z0-9\\-_.]+$"
+      content_type:
+       type: string
+       description: "content type string"
+#       pattern: "^[a-z0-9\\-_.]+$"
+  test_category:
     type: array
     items:  
-    type: object
-    properties:
-     category_type:
-       type: string
-       description: "category type"
-       pattern: "^[a-z0-9\\-_.]+$" 
+     type: object
+     properties:
+      category_type:
+        type: string
+        description: "category type"
+        pattern: "^[a-z0-9\\-_.]+$" 
 test_execution:
    type: array
    items:
-   type: object
-   properties:
-    test_tag:
-     type: string
-     description: "test tag"
-     pattern: "^[a-z0-9\\-_.]+$" 
-    test_id:
-     type: string
-     description: "test id"
-     pattern: "^[a-z0-9\\-_.]+$"  
+    type: object
+    properties:
+     test_tag:
+      type: string
+      description: "test tag"
+      pattern: "^[a-z0-9\\-_.]+$" 
+     test_id:
+      type: string
+      description: "test id"
+      pattern: "^[a-z0-9\\-_.]+$"  
