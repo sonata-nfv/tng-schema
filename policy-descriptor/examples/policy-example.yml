@@ -1,7 +1,3 @@
-# do NOT delete: this is used by tng-sdk-descriptorgen
-# default YAML description of an policy example
-
-
 ---
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/policy-descriptor/policy-schema.yml"
 
