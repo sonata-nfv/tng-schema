@@ -77,8 +77,12 @@ Each action also contains some optional components as outlined below.
 
 #### References
 [1] [ Generic Policy Information Model for Simplified Use of Policy Abstractions (SUPA) draft-ietf-supa-generic-policy-info-model-03](https://tools.ietf.org/html/draft-ietf-supa-generic-policy-info-model-03)
+
 [2][Policy-Based Context Integration & Ontologies in Autonomic Applications to Facilitate the Information Interoperability in NGN] (https://pdfs.semanticscholar.org/4cd5/fe204d1467800e84cf6fa5665546d1bb3e6d.pdf)
+
 [3] [eXtensible Access Control Markup Language (XACML) ](http://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html) 
 [4] [The Policy Continuum – A Formal Model](http://www.tssg.org/files/archives/2007_MACE_SDavy_Jennings_final.pdf )
+
 [5] [JSON Schema](http://json-schema.org/)
+
 [6] [YAML-to-JSON Translatore](http://jsontoyaml.com/)
