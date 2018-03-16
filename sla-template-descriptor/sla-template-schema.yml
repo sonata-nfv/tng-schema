@@ -93,7 +93,7 @@ properties:
         "$id": "/properties/sla_template/properties/ns"
         type: object
         properties:
-          ns_id:
+          uuid:
             "$id": "/properties/sla_template/properties/ns/properties/ns_id"
             type: string
             title: The Ns_id Schema
@@ -194,15 +194,6 @@ properties:
                             default: ''
                             examples:
                             - 1 year
-                          sampleInterval:
-                            "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/rate/properties/sampleInterval"
-                            type: string
-                            title: The Sampleinterval Schema
-                            description: An explanation about the purpose of this
-                              instance.
-                            default: ''
-                            examples:
-                            - sample rate every 1 hour
                       expression:
                         "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression"
                         type: object

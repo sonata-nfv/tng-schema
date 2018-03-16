@@ -17,7 +17,7 @@ sla_template:
   
   # involved network service
   ns:
-    ns_id: ns001
+    uuid: ns001
     description: a network service description
     
     # high level SLOs
@@ -69,7 +69,6 @@ sla_template:
         metric_definition: Total time the NS is inactive
         rate:
           parameterWindow: 1 year
-          sampleInterval: sample rate every 1 hour
         expression:
           expression_statement: sum(prmtr003)
           expression_language: ISO80000
