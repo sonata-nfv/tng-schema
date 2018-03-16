@@ -1,0 +1,92 @@
+---
+$schema: "http://json-schema.org/draft-04/schema#"
+title: "Test Descriptor Schema"
+version: 0.9
+description: "The schema for 5GTANGO Test Descriptor"
+
+##
+## Some definitions used later on.
+##
+definitions:
+  testtype:
+     enum:
+       - "TTCN3"
+       - "Python"
+       - "moongen"
+
+##
+## The actual document description.
+##
+type: "object"
+properties:
+  descriptor_schema:
+    description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
+    type: "string"
+  vendor:
+    description: "The vendor id allows identification of a test descriptor uniquely."
+    type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
+  name:
+    description: "The name of the test description."
+    type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
+  version:
+    description: "The version of the test descriptor."
+    type: "string"
+    pattern: "^[0-9\\-_.]+$"
+  author:
+    description: "The person or organization that created the test descriptor."
+    type: "string"
+  description:
+    description: "A longer description of the test descriptor."
+    type: "string"
+  test_type:
+    description: "test type"
+    $ref: "#/definitions/testtype"
+  test_execution_file:
+    description: "test execution binary files"
+    type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
+  test_configuration_parameters:
+    type: array
+    items: 
+     type: object
+     properties:
+      parameter_name:
+       type: string
+       description: "parameter string"
+#       pattern: "^[a-z0-9\\-_.]+$"
+      parameter_definition:
+       type: string
+       description: "parameter string"
+#       pattern: "^[a-z0-9\\-_.]+$"
+      parameter_value:
+       type: string
+       description: "parameter value string"
+#       pattern: "^[a-z0-9\\-_.]+$"
+      content_type:
+       type: string
+       description: "content type string"
+#       pattern: "^[a-z0-9\\-_.]+$"
+  test_category:
+    type: array
+    items:  
+     type: object
+     properties:
+      category_type:
+        type: string
+        description: "category type"
+        pattern: "^[a-z0-9\\-_.]+$" 
+test_execution:
+   type: array
+   items:
+    type: object
+    properties:
+     test_tag:
+      type: string
+      description: "test tag"
+      pattern: "^[a-z0-9\\-_.]+$" 
+     test_id:
+      type: string
+      description: "test id"
+      pattern: "^[a-z0-9\\-_.]+$"  
