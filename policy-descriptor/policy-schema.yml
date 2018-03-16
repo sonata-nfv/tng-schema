@@ -38,11 +38,15 @@ definitions:
       - "mis_performed"   # mis_performed
       - "low_energy"   # mis_performed
       - "Green"   # mis_performed
+  action_object:
+    enum:
+      - "ComponentResourceAllocationAction"   # ComponentResourceAllocationAction
+      - "NetworkManagementAction"   # NetworkManagementAction
   action_type:
     enum:
       - "Infrastracture"   # InfraAction can be applied to a VNF/VDU. Is infrastracture related and can be either a new flavoId or a migration
       - "Orchestration"   # OrchestrationAction. Is a loadBalancerAction such as setBalancingAlgorith or  Spawn, Deprovision
-      - "LifecycleManagement"   # LifecycleManagementAction
+      - "LifecycleManagement"   # LifecycleManagement
       - "NetworkMechanism"   # ActivateNetworkMechanism
       - "AlterConfiguration"   # AlterConfigurationAction
       - "Profile"   # Add/remove a new profile
@@ -54,9 +58,9 @@ definitions:
       - "LoadBalancer.setBalancingAlgorithm"   # Orchestration
       - "LoadBalancer.Spawn"   # Orchestration
       - "LoadBalancer.Deprovision"   # Orchestration
-      - "start"   # LifecycleManagementAction
-      - "stop"   # LifecycleManagementAction
-      - "restart"   # LifecycleManagementAction
+      - "start"   # LifecycleManagement
+      - "stop"   # LifecycleManagement
+      - "restart"   # LifecycleManagement
       - "MonitorEndToEndDelay"   # NetworkMechanism
       - "ProvideDedicatedBandwidth"   # NetworkMechanism
       - "setProfile"   # Profile
@@ -86,7 +90,6 @@ definitions:
       - id
       - field
       - type
-      - input
       - operator
       - value
   fullExpression:
@@ -132,6 +135,9 @@ properties:
     pattern: "^[a-z0-9\\-_.]+$"
   description:
     description: "A longer description of the policy."
+    type: "string"
+  author:
+    description: "The person or organization that created the policy descriptor."
     type: "string"
   policyRules:
     description: "A list of Policy rules  used to compose this Policy."
@@ -213,12 +219,11 @@ properties:
                   - value
                   - duration_unit
             required:
+              - action_type
               - name
               - target
       required:
         - name
-        - duration
-        - aggregation
         - conditions
         - actions
     uniqueItems: true
