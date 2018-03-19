@@ -53,7 +53,8 @@ policyRules:
          operator: less
          value: '8'
     actions:
-     - action_type: "Infrastracture"
+     - action_object: "ComponentResourceAllocationAction"
+       action_type: "InfrastructureType"
        name: "ApplyFlavour"
        value: "3"
        target: "vnf1"
