@@ -72,15 +72,7 @@ properties:
         description: An explanation about the purpose of this instance.
         default: ''
         examples:
-        - '2019-01-24 10:00:00'
-      sla_template_version:
-        "$id": "/properties/sla_template/properties/sla_template_version"
-        type: string
-        title: The Sla_template_version Schema
-        description: An explanation about the purpose of this instance.
-        default: ''
-        examples:
-        - '0.1'
+        - '2019-01-24 10:00:00'     
       service_provider_id:
         "$id": "/properties/sla_template/properties/service_provider_id"
         type: string
@@ -279,5 +271,3 @@ properties:
                                   default: ''
                                   examples:
                                   - '8000'
-
-
