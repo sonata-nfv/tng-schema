@@ -6,7 +6,10 @@
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/policy-descriptor/policy-schema.yml"
 
 name: "samplepolicydemo"
-
+network_service:
+  vendor: "tango"
+  name: "default-nsd"
+  version: "0.9"
 policyRules:
   - name: "actionUponAlert"
     salience: 1

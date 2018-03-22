@@ -139,6 +139,26 @@ properties:
   author:
     description: "The person or organization that created the policy descriptor."
     type: "string"
+  network_service:
+    description: "The network service this policy is applied to."
+    type: "object"
+    properties:
+      vendor:
+        description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
+        type: "string"
+        pattern: "^[a-z0-9\\-_.]+$"
+      name: 
+        description: "The name of the network service description."
+        type: "string"
+        pattern: "^[a-z0-9\\-_.]+$"
+      version: 
+        description: "The version of the service descriptor."
+        type: "string"
+        pattern: "^[0-9\\-_.]+$"
+    required:
+      - vendor
+      - name
+      - version
   policyRules:
     description: "A list of Policy rules  used to compose this Policy."
     type: "array"
@@ -231,5 +251,6 @@ properties:
 required:
   - descriptor_schema
   - name
+  - network_service
   - policyRules
 additionalProperties: false
