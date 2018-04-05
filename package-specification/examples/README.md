@@ -5,3 +5,10 @@
 * [5GTANGO Package Specification (latest)](https://github.com/sonata-nfv/tng-schema/wiki/PkgSpec_LATEST)
 
 These folder contains some example packages. Each sub-folder represents one (unzipped) example package. To generate packages from them, just zip them and append the file ending: `*.tgo`.
+
+Create ZIPs (OS X)
+
+```
+cd package-specification/examples/5gtango-ns-package-example/
+zip -r 5gtango-ns-package-example.tgo ./
+```
