@@ -44,7 +44,7 @@ properties:
   release_date_time:
     description: "Package creation time."
     type: "string"
-    pattern: "^[A-Z0-9\\.:+]+$"
+    pattern: "^[A-Z0-9\\.:+-]+$"
   maintainer:
     description: "The person or organization that created the package."
     type: "string"
