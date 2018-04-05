@@ -1,7 +1,7 @@
 vnf_product_name: vnf-package-example
 vnf_provider_id: eu.5gtango
 vnf_package_version: 0.1
-vnf_release_date_time: 2018.01.01T10:00+03:00
+vnf_release_date_time: 2009-01-01T10:01:02Z
 
 Source: Definitions/myvnfd.yaml
 Algorithm: SHA-256

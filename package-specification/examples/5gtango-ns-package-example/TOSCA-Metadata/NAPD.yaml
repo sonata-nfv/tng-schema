@@ -6,7 +6,7 @@ name: "ns-package-example"
 version: "0.1"
 package_type: "application/vnd.5gtango.package.nsp"  # MIME type of package, e.g., nsp, vnfp, tdp, trp
 maintainer: "Manuel Peuster, Paderborn University"
-release_date_time: "2018.01.01T10:00+03:00"          # IETF RFC3339
+release_date_time: "2009-01-01T10:01:02Z"          # IETF RFC3339
 description: "This is an example 5GTANGO network service package."
 logo: "Icons/upb_logo.png"                           # (optional) path to logo file (PNG or JPEG)
 
