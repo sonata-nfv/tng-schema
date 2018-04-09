@@ -13,13 +13,13 @@ logo: "Icons/upb_logo.png"                           # (optional) path to logo f
 package_content:
   - source: "Definitions/mynsd.yaml"
     algorithm: "SHA-256"
-    hash: "feb97301a80166c076cf0d639a4c0f13a93f87585496a054bf3dd61f6a9a6f02"
+    hash: "a3734cb3eeaa18dee2daf7f2538c4c3be185bead6fc5a28729f44bf78f2b8af8"
     content-type: "application/vnd.5gtango.nsd"
     tags:  # (optional)
       - "eu.5gtango"
   - source: "Definitions/myvnfd.yaml"
     algorithm: "SHA-256"
-    hash: "a8ecb3b378c5d4c40f8a8d8afb1870e6119231f10fab3e7c6e1dd96c38b87d93"
+    hash: "44fc832e0be9c78d8a59d8b57abd8d8f47e6b2e5e7ed264f111e51d3413f911b"
     content-type: "application/vnd.5gtango.vnfd"
     tags:  # (optional)
       - "eu.5gtango"
@@ -29,7 +29,7 @@ package_content:
     content-type: "image/png"
   - source: "Images/mycloudimage.ref"
     algorithm: "SHA-256"
-    hash: "54cb482d72b9f454aec9197c91310273f1406ed7b62c938ebe1cf1c271b7f522"
+    hash: "e26ff11f2cd2efc1eed3a47a94fccbf6fc8d0c844ff15b65aeb02576c1d02640"
     content-type: "application/vnd.5gtango.ref"
   - source: "Licenses/LICENSE"
     algorithm: "SHA-256"
