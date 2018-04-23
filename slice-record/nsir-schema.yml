@@ -2,163 +2,69 @@
 $schema: "http://json-schema.org/draft-04/schema#"
 #id: "http://www.sonata-nfv.eu/schema/nst-schema"
 version: 0.9
-description: "The core scheme for network slice template"
+description: "The core scheme for network slice instance (NSI)"
 
 ##
-## Some definitions used later on.
+## Network Slice Instance JSON SCHEMA
 ##
-definitions:
-  connection_point_types:
-    enum:
-      - "internal"
-      - "external"
-      - "management"
-  interfaces:
-    enum:
-      - "ethernet"
-      - "ipv4"
-      - "ipv6"
 
-##
-## Network Slice Template JSON SCHEMA
-##
-type: "object" 
+type: "object"
 properties:
-  id:
-    description: "The UUID of the service record."
+  descriptor_schema:
+    description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
     type: "string"
-    pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-  s_nssai:
-    description: "s-nssai identifies a network slice"
-    type: "object"
-    properties:
-      sst:
-        description: "slice/service type"
-        type: "integer"
-      sd:
-        description: "slice differentiator"
-        type: "integer"
-    required:
-      - sst      
-  descriptor_version:
-    description: "The version of the description definition used to describe the network descriptor."
+  nsiId:
+    description: "Identifies the Network Slice Instance (NSI)"
     type: "string"
-    pattern: "^[A-Za-z0-9\\-_.]+$"
-  vendor:
-    description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
+    pattern: "^[a-zA-Z0-9\\-_.]+$"
+  nsiName:
+    description: "The name of the NSI"
     type: "string"
-    pattern: "^[a-z0-9\\-_.]+$"
-  name: 
-    description: "The name of the network service description."
+  nsiDescription:
+    description: "Description of the NSI functionality"
     type: "string"
-    pattern: "^[a-z0-9\\-_.]+$"
-  version: 
-    description: "The version of the service descriptor."
+  nstId:
+    description: "The uuid of the NST used to instantiate the NSI."
     type: "string"
-    pattern: "^[0-9\\-_.]+$"
-  author:
-    description: "The person or organization that created the NS descriptor."
+    pattern: "^[a-zA-Z0-9\\-_.]+$"
+#  nstInfoId:
+#    description: "??????"
+#    type: "string"
+#  flavorId:
+#    description: "The flavor identifier of the NSI."
+#    type: "string"     
+#  sapInfo:
+#    description: "SAP of the NSI."
+#    type: "string"
+  nsiState:
+    description: "State of the NSI (possible values INSTANTIATED, NOT_INSTANTIATED)."
+    type: string
+    enum:
+    - INSTANTIATED
+    - NOT_INSTANTIATED
+  instantiateTime:
+    description: "Timestamp indicating when the instantiation will be trigerred (0 means immediatly)."
     type: "string"
-  description:
-    description: "A longer description of the network service."
+  terminateTime:
+    description: "Timestamp indicating when the termination will be tigerred (0 means immediatly)."
     type: "string"
-  logo:
-    description: "Path to slice logo."
-    type: "string"
-    pattern: "^[A-Za-z0-9\\-_./]+$"
-  licences:
-    description: "Information on the licence of this NST."
-    type: "array"
-    items:
-      anyOf:
-        - type: "object"
-          properties:
-            type:
-              description: "The type of licence, 'public' in this case."
-              type: "string"
-              enum:
-              - "public"
-          required:
-            - "type"
-          additionalProperties: false
-        - type: "object"
-          properties:
-            type:
-              description: "The type of licence, 'private' in this case."
-              type: "string"
-              enum:
-              - "private"
-            url:
-              description: "The URL to the licence file."
-              type: "string"
-          required:
-            - "type"
-            - "url"
-          additionalProperties: false
-    additionalItems: false
-    uniqueItems: true
-  network_services:
-    description: "The recursive NSs (their descriptors), that are part of this network service."
-    type: "array"
-    items: 
-      type: "object"
-      properties:
-        ns_id:
-          description: "A unique identifier of the referenced network service within the scope of this NS descriptor."
-          type: "string"
-        ns_vendor:
-          description: "The vendor id identifies the NS descriptor uniquely across all function descriptors."
-          type: "string"
-          pattern: "^[a-z0-9\\-_.]+$"
-        ns_name:
-          description: "The name of the referenced NS description."
-          type: "string"
-          pattern: "^[a-z0-9\\-_.]+$"
-        ns_version:
-          description: "The version of the referenced NS description."
-          type: "string"
-          pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
-        description:
-          description: "A longer description of the network service."
-          type: "string"
-        nsr_id:
-          description: "Deployed NS instance record ID"
-          type: "string"
-      required:
-        - ns_id
-        - ns_vendor
-        - ns_name
-        - ns_version
-        - nsr_id
-      additionalProperties: false
-    minItems: 1
-    uniqueItems: true
-  connection_points:
-    description: "The connection points of the overall NS, that connects the NS to the external world."
+#  scaleTime:
+#    description: "Timestamp indicating when the scale will be tigerred (0 means immediatly)."
+#    type: "string"
+#  updateTime:
+#    description: "Timestamp indicating when the update will be tigerred (0 means immediatly)."
+#    type: "string"
+  ServiceInstancesUuid:
+    description: "The list uuids of the Network Services instances generated when the NSI is requested."
     type: "array"
     items:
       type: "object"
       properties:
-        id:
-          description: "A NS-unique id of the connection point. Can be used for references."
+        NSInstancesId:
+          description: "The ID of a Network Service Instance"
           type: "string"
-        interface:
-          description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-          $ref: "#/definitions/interfaces"
-        type:
-          description: "The type of the connection point with respect to its visibility in the service platform"
-          $ref: "#/definitions/connection_point_types"
-        # TODO: Remove? Cyclic reference with virtual_links?
-        virtual_link_reference:
-          description: "A reference to a virtual link, i.e. the virtual_links:id."
-          type: "string"
-      required:
-        - id
-        - interface
-        - type
-      additionalProperties: false
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
     minItems: 1
-    uniqueItems: true
 
   qos:
     description: "slice qos"
@@ -170,7 +76,7 @@ properties:
       resource_type:
         description: "delay critical guaranted bit rate, GBR, non-GBR"
         enum:
-            - "delay_critical_GBR" # delay critical guaranted bit rate
+            - "delay_critical_GBR" #delay critical guaranted bit rate
             - "GBR" # GBR
             - "non_GBR"  # non GBR
       priority_level:
@@ -185,11 +91,11 @@ properties:
       default_max_data_burst:
         description: "in bytes B"
         type: "integer"
-        
+     
+
 required: 
-  - descriptor_version
-  - vendor 
-  - name
-  - version
-  - id
-additionalProperties: false
+  - nsiName 
+  - nsiId
+  - nstId
+  - ServiceInstancesUuid
+additionalProperties: true
