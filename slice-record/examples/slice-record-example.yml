@@ -1,32 +1,28 @@
 ##
-## This slice network instance record 
+## This is a slice network instance record 
 ##
-## @author Ricard Vilalta
+## @author Pol Alemany
 ##
 ---
 
-id: "00000000-0000-0000-0000-000000000000"
+nsiId: "36d7904d-bd6a-4150-936c-9b81bf5bc0c5"
+nsiName: "NSI Example"
+nsiDescription: "This is the description of the NSI Example"
+nstId: "e326f487-2620-433e-a90c-d4f5a99293ff"
+nsiState: "INSTANTIATED"
+instantiateTime: "2018-04-23T10:55:30.560"
+terminateTime: "0"
+ServiceInstancesUuid:
+  - NSInstancesId: "f2742207-c962-4e1e-b668-c781643c8b0d"
+  - NSInstancesId: "0684188f-8a42-4621-80be-5fc1fba03e04"
+  - NSInstancesId: "6460af18-788d-43a7-b1ca-1277de3a6ca5"
 
-s_nssai:
-  sst: 1 # eMBB
-  sd: 1
-      
-descriptor_version: "0.9"
-
-vendor: "eu.5gtango.slice-descriptor"
-name: "slice"
-version: "0.1"
-author: "Ricard Vilalta, CTTC"
-description: >
-  "Example Slice."
-
-# The network services reused by this service (recursively)
-network_services:
-  - ns_id: "ns_sonata"
-    ns_vendor: "eu.5gtango.slice-descriptor"
-    ns_name: "5gtango-demo"
-    ns_version: "0.1"
-    nsr_id: "00000000-0000-0000-0000-000000000000"
+#These parameters are not used yet.
+# nstInfoId
+# flavorId:
+# sapInfo
+# scaleTime:
+# updateTime:
 
 ##
 ## The Slice 5QI
