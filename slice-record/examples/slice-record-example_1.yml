@@ -9,24 +9,20 @@ nsiId: "36d7904d-bd6a-4150-936c-9b81bf5bc0c5"
 nsiName: "NSI Example"
 nsiDescription: "This is the description of the NSI Example"
 nstId: "e326f487-2620-433e-a90c-d4f5a99293ff"
+nstInfoId: "More info about the nst."
+flavorId: "Flavour information."
+sapInfo: "SAP information."
 nsiState: "INSTANTIATED"
 instantiateTime: "2018-04-23T10:55:30.560"
-terminateTime: "0"
+terminateTime: "2018-04-25T10:11:32.626533"
+scaleTime: "2018-04-24T10:11:33.626533"
+updateTime: "2018-04-24T10:11:32.626533"
 ServiceInstancesUuid:
-  - NSInstancesId: "f2742207-c962-4e1e-b668-c781643c8b0d"
-  - NSInstancesId: "0684188f-8a42-4621-80be-5fc1fba03e04"
-  - NSInstancesId: "6460af18-788d-43a7-b1ca-1277de3a6ca5"
+  - NSInstancesId: "a4186073-e989-48ee-92ba-9a52e885d84c"
 
-#These parameters are not used yet.
-# nstInfoId
-# flavorId:
-# sapInfo
-# scaleTime:
-# updateTime:
 
 ##
 ## The Slice 5QI
 ##
 qos:
   5qi_value: "6"
-  

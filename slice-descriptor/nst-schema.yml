@@ -58,9 +58,6 @@ properties:
   nstDesigner:
     description: "Name of the NST designer/developer."
     type: string
-
-##############################################################################  
-#TODO: the following parameters will be future implemented.
   nstInvariantId:
     description: "Common/Static ID for all versions belonging to the same NST."
     type: string
@@ -100,8 +97,7 @@ properties:
         type: "integer"
       default_max_data_burst:
         description: "in bytes B"
-        type: "integer"
-##############################################################################       
+        type: "integer"       
 
 required: 
   - descriptor_schema

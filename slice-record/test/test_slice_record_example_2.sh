@@ -13,7 +13,7 @@
 CMD=yamlvalidate
 BASE_DIR=`dirname $0`
 SCHEMA=${BASE_DIR}/../nsir-schema.yml
-FILE=${BASE_DIR}/../examples/slice-record-example.yml
+FILE=${BASE_DIR}/../examples/slice-record-example_2.yml
 
 #
 # We can provide an argument that overrides

@@ -5,25 +5,21 @@
 ##
 ---
 
-
 #The Network Slice Template with composed by two NetServices.
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/slice-descriptor/nst-schema.yml"
-nstId: "9b04fb8f-fb21-4858-8b3b-ff8d9521af14"
-nstName: "NST_slice"
+nstId: "49272f88-25aa-4762-a998-df65a048e680"
+nstName: "NST_Rubik_FW"
 nstNsdIds:
-  - NSdId: "957df66c-0d8c-46c0-8df8-4739f9fecf82"
-  - NSDId: "cd2000d3-a99a-4d3d-bb26-741ab64afbe0"
+   - NSdId: "40920a3c-9cc3-43f3-9f78-3fae65e29bad"
+   - NSdId: "467c75ff-2a1f-4c01-b2b3-531783d50b07"
 nstOnboardingState: "ENABLE"
 nstOperationalState: "ENABLE"
 nstUsageState: "NOT_IN_USE"
-nstVersion: "0.1"
+nstVersion: "1"
 nstDesigner: "Pol Alemany, CTTC"
-description: "NST Example."
-
-#These three parameters are not used yet.
-#nstInvariantId:
-#notificationTypes:
-#userDefinedData:
+nstInvariantId: "41cec8dc-d767-4d31-a285-bf870a63d03e"
+notificationTypes: "NstOnboardingNotification"
+userDefinedData: "user defined data example"
 
 #The Slice Quality of Service parameter
 qos:

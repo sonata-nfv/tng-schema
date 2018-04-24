@@ -10,9 +10,6 @@ description: "The core scheme for network slice instance (NSI)"
 
 type: "object"
 properties:
-  descriptor_schema:
-    description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
-    type: "string"
   nsiId:
     description: "Identifies the Network Slice Instance (NSI)"
     type: "string"
@@ -27,15 +24,15 @@ properties:
     description: "The uuid of the NST used to instantiate the NSI."
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
-#  nstInfoId:
-#    description: "??????"
-#    type: "string"
-#  flavorId:
-#    description: "The flavor identifier of the NSI."
-#    type: "string"     
-#  sapInfo:
-#    description: "SAP of the NSI."
-#    type: "string"
+  nstInfoId:
+    description: "More imformationa bout the NST"
+    type: "string"
+  flavorId:
+    description: "The flavor identifier of the NSI."
+    type: "string" 
+  sapInfo:
+    description: "SAP of the NSI."
+    type: "string"
   nsiState:
     description: "State of the NSI (possible values INSTANTIATED, NOT_INSTANTIATED)."
     type: string
@@ -48,13 +45,13 @@ properties:
   terminateTime:
     description: "Timestamp indicating when the termination will be tigerred (0 means immediatly)."
     type: "string"
-#  scaleTime:
-#    description: "Timestamp indicating when the scale will be tigerred (0 means immediatly)."
-#    type: "string"
-#  updateTime:
-#    description: "Timestamp indicating when the update will be tigerred (0 means immediatly)."
-#    type: "string"
-  ServiceInstancesUuid:
+  scaleTime:
+    description: "Timestamp indicating when the scale will be tigerred (0 means immediatly)."
+    type: "string"
+  updateTime:
+    description: "Timestamp indicating when the update will be tigerred (0 means immediatly)."
+    type: "string"
+  netServInstance_Uuid:
     description: "The list uuids of the Network Services instances generated when the NSI is requested."
     type: "array"
     items:
@@ -96,6 +93,7 @@ properties:
 required: 
   - nsiName 
   - nsiId
+  - nsiDescription
   - nstId
   - ServiceInstancesUuid
 additionalProperties: true
