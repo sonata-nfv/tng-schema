@@ -1,50 +1,26 @@
 ##
 ## This slice network template 
 ##
-## @author Ricard Vilalta
+## @author Pol Alemany
 ##
 ---
 
-s_nssai:
-  sst: 1 # eMBB
-  sd: 1
-      
+#The Network Slice Template with composed by two NetServices.
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/slice-descriptor/nst-schema.yml"
+nstId: "49272f88-25aa-4762-a998-df65a048e680"
+nstName: "NST_Rubik_FW"
+nstNsdIds:
+   - NSdId: "40920a3c-9cc3-43f3-9f78-3fae65e29bad"
+   - NSdId: "467c75ff-2a1f-4c01-b2b3-531783d50b07"
+nstOnboardingState: "ENABLE"
+nstOperationalState: "ENABLE"
+nstUsageState: "NOT_IN_USE"
+nstVersion: "1"
+nstDesigner: "Pol Alemany, CTTC"
+nstInvariantId: "41cec8dc-d767-4d31-a285-bf870a63d03e"
+notificationTypes: "NstOnboardingNotification"
+userDefinedData: "user defined data example"
 
-vendor: "eu.5gtango.slice-descriptor"
-name: "slice"
-version: "0.1"
-author: "Ricard Vilalta, CTTC"
-description: >
-  "Example Slice."
-
-# The network services reused by this service (recursively)
-network_services:
-  - ns_id: "ns_sonata"
-    ns_vendor: "eu.5gtango.slice-descriptor"
-    ns_name: "5gtango-demo"
-    ns_version: "0.1"
-    
-
-##
-## The Slice service interface points to the 
-## outside world.
-##
-service_interface_points:
-  - id: "mgmt"
-    interface: "ipv4"
-    type: "management"
-  - id: "input"
-    interface: "ipv4"
-    type: "external"
-  - id: "output"
-    interface: "ipv4"
-    type: "external"
-
-##
-## The Slice 5QI
-##
-
+#The Slice Quality of Service parameter
 qos:
-  5qi_value: "6"
-  
+  5qi_value: "6"      

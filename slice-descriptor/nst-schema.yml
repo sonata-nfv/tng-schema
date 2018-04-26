@@ -3,154 +3,76 @@ $schema: "http://json-schema.org/draft-04/schema#"
 #id: "http://www.sonata-nfv.eu/schema/nst-schema"
 title: "Network Slice Template Schema"
 version: 0.9
-description: "The core scheme for network slice template"
-
-##
-## Some definitions used later on.
-##
-definitions:
-  connection_point_types:
-    enum:
-      - "internal"
-      - "external"
-      - "management"
-  interfaces:
-    enum:
-      - "ethernet"
-      - "ipv4"
-      - "ipv6"
+#description: "The core scheme for network slice template (NST)"
 
 ##
 ## Network Slice Template JSON SCHEMA
 ##
-type: "object" 
+
+type: "object"
 properties:
-  s_nssai:
-    description: "s-nssai identifies a network slice"
-    type: "object"
-    properties:
-      sst:
-        description: "slice/service type"
-        type: "integer"
-      sd:
-        description: "slice differentiator"
-        type: "integer"
-    required:
-      - sst      
   descriptor_schema:
     description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
     type: "string"
-  vendor:
-    description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
+  nstId:
+    description: "Identifies the Network Slice Template (NST)"
     type: "string"
-    pattern: "^[a-z0-9\\-_.]+$"
-  name: 
-    description: "The name of the network service description."
+    pattern: "^[a-zA-Z0-9\\-_.]+$"
+  nstName:
+    description: "The name of the NST"
     type: "string"
-    pattern: "^[a-z0-9\\-_.]+$"
-  version: 
+    pattern: "^[a-zA-Z0-9\\-_.]+$"
+  nstNsdIds:
+    description: "The list of Network Services uuids composing the NST"
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        NSdId:
+          description: "The ID of a Network Service available in Sonata SP/BSS"
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+    minItems: 1
+  nstOnboardingState:
+    description: "Defines the onboarding state (ENABLE, DISABLED)."
+    type: string
+    enum:
+    - ENABLE
+    - DISABLED
+  nstOperationalState:
+    description: "Defines the operational state (ENABLE, DISABLED)."
+    type: string
+    enum:
+    - ENABLE
+    - DISABLED
+  nstUsageState:
+    description: "Defines wether this NST is used or not (IN_USE, NOT_IN_USE)."
+    type: string
+    enum:
+    - IN_USE
+    - NOT_IN_USE
+  nstVersion:
     description: "The version of the service descriptor."
     type: "string"
-    pattern: "^[0-9\\-_.]+$"
-  author:
-    description: "The person or organization that created the NS descriptor."
-    type: "string"
-  description:
-    description: "A longer description of the network service."
-    type: "string"
-  logo:
-    description: "Path to slice logo."
-    type: "string"
-    pattern: "^[A-Za-z0-9\\-_./]+$"
-  licences:
-    description: "Information on the licence of this NST."
-    type: "array"
-    items:
-      anyOf:
-        - type: "object"
-          properties:
-            type:
-              description: "The type of licence, 'public' in this case."
-              type: "string"
-              enum:
-              - "public"
-          required:
-            - "type"
-          additionalProperties: false
-        - type: "object"
-          properties:
-            type:
-              description: "The type of licence, 'private' in this case."
-              type: "string"
-              enum:
-              - "private"
-            url:
-              description: "The URL to the licence file."
-              type: "string"
-          required:
-            - "type"
-            - "url"
-          additionalProperties: false
-    additionalItems: false
-    uniqueItems: true
-  network_services:
-    description: "The recursive NSs (their descriptors), that are part of this network service."
-    type: "array"
-    items: 
-      type: "object"
-      properties:
-        ns_id:
-          description: "A unique identifier of the referenced network service within the scope of this NS descriptor."
-          type: "string"
-        ns_vendor:
-          description: "The vendor id identifies the NS descriptor uniquely across all function descriptors."
-          type: "string"
-          pattern: "^[a-z0-9\\-_.]+$"
-        ns_name:
-          description: "The name of the referenced NS description."
-          type: "string"
-          pattern: "^[a-z0-9\\-_.]+$"
-        ns_version:
-          description: "The version of the referenced NS description."
-          type: "string"
-          pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
-        description:
-          description: "A longer description of the network service."
-          type: "string"
-      required:
-        - ns_id
-        - ns_vendor
-        - ns_name
-        - ns_version
-      additionalProperties: false
-    minItems: 1
-    uniqueItems: true
-  service_interface_points:
-    description: "The connection points of the overall NS, that connects the NS to the external world."
-    type: "array"
-    items:
-      type: "object"
-      properties:
-        id:
-          description: "A NS-unique id of the connection point. Can be used for references."
-          type: "string"
-        interface:
-          description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-          $ref: "#/definitions/interfaces"
-        type:
-          description: "The type of the connection point with respect to its visibility in the service platform"
-          $ref: "#/definitions/connection_point_types"
-        # TODO: Remove? Cyclic reference with virtual_links?
-        virtual_link_reference:
-          description: "A reference to a virtual link, i.e. the virtual_links:id."
-          type: "string"
-      required:
-        - id
-        - interface
-        - type
-      additionalProperties: false
-    minItems: 1
-    uniqueItems: true
+    pattern: "^[a-zA-Z0-9\\-_.]+$"
+  nstDesigner:
+    description: "Name of the NST designer/developer."
+    type: string
+  nstInvariantId:
+    description: "Common/Static ID for all versions belonging to the same NST."
+    type: string
+  notificationTypes:
+    description: "Defines multiple notification types."
+    type: string
+    enum:
+    - NstOnboardingNotification
+    - NstChangeNotification
+    - NstDeletionNotification
+  userDefinedData:
+    #this parameter needs to be better define (maybe as a hash?)
+    description: "NST user defined data."
+    type: string
+
   qos:
     description: "slice qos"
     type: "object"
@@ -175,12 +97,12 @@ properties:
         type: "integer"
       default_max_data_burst:
         description: "in bytes B"
-        type: "integer"
-        
+        type: "integer"       
+
 required: 
   - descriptor_schema
-  - vendor 
-  - name
-  - version
-  - s_nssai
-additionalProperties: false
+  - nstName 
+  - nstId
+  - nstNsdIds
+  - nstVersion
+additionalProperties: true
