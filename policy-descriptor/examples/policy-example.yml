@@ -6,6 +6,8 @@
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/policy-descriptor/policy-schema.yml"
 
 name: "policy-example"
+vendor: "tango"
+version: "0.1"
 network_service:
   vendor: "tango"
   name: "default-nsd"

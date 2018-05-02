@@ -20,6 +20,8 @@ At the root level, we first have the mandatory fields, that describe and identif
 
 Moreover, the policy signature, i.e the *name*, is of great importance as it identifies the policy uniquely.
 - **name** is the name of the policy. It can be created with any name written in lower letters and no strange symbols.
+- **vendor** is the vendor id of the policy. It can be created with any name written in lower letters and no strange symbols.
+- **version** is the version of the policy descriptor.
 - **network_service** is the metadata of the network_service this policy refers to. A network_service is defined in an unique way by the following fields (**vendor**,**name**,**version**). A network_service may have more than one policy descriptors, but a policy descriptor always refers only to one network_service.
 
 The general descriptor section also contains some optional components as outlined below.

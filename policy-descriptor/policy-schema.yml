@@ -133,6 +133,14 @@ properties:
     description: "The name of the policy description."
     type: "string"
     pattern: "^[a-z0-9\\-_.]+$"
+  vendor:
+    description: "The vendor id allows to identify a policy descriptor uniquely across all policy descriptor vendors."
+    type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
+  version: 
+    description: "The version of the service descriptor."
+    type: "string"
+    pattern: "^[0-9\\-_.]+$"
   description:
     description: "A longer description of the policy."
     type: "string"
@@ -251,6 +259,8 @@ properties:
 required:
   - descriptor_schema
   - name
+  - vendor
+  - version
   - network_service
   - policyRules
 additionalProperties: false
