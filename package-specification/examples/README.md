@@ -6,6 +6,8 @@
 
 These folder contains some example packages. Each sub-folder represents one (unzipped) example package. To generate packages from them, just zip them and append the file ending: `*.tgo`.
 
+Automatically package all examples: `./pack.sh`
+
 Manually create package file (*.tgo):
 
 ```bash
