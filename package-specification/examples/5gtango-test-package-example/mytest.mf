@@ -1,11 +1,11 @@
-test_product_name: vnf-package-example
+test_product_name: simple-ttcn3-test
 test_provider_id: eu.5gtango
 test_package_version: 0.1
-test_release_date_time: 2009-01-01T14:01:02-04:00
+test_release_date_time: 2018-05-02T14:00:00-04:00
 
-Source: Definitions/mytest.yaml
+Source: Definitions/test-descriptor.yml
 Algorithm: SHA-256
-Hash: 43a330b11451c7f27402c15000456d7bfdcc831c3e4eb59f05c981cea5e5e939
+Hash: bc2c71ca843ae68777bc9b6058e0c0dbb089ee575dc3932336cdbe43a4a149c1
 
 Source: Icons/upb_logo.png
 Algorithm: SHA-256
@@ -13,8 +13,16 @@ Hash: dd83757e632740f9f390af15eeb8bc25480a0c412c7ea9ac9abbb0e5e025e508
 
 Source: Licenses/LICENSE
 Algorithm: SHA-256
-Hash: 179f180ea1630016d585ff32321037b18972d389be0518c0192021286c4898ca
+Hash: 3cd74acbebc0a41414f342d27edbda0284ef4640ee6c077fdf00cd5a69ce181b
 
-Source: Tests/some_test.sh
+Source: Tests/MyExample
 Algorithm: SHA-256
-Hash: 4f370e2136954436635567bb0f67e6eb44a88fc060fc50f6ff825c57cc72b7ac
+Hash: ecfae4ca564f305d6061175806db394d0dba5cdcb4450124f51d98d4f7b94047
+
+Source: Tests/MyExample.cfg
+Algorithm: SHA-256
+Hash: 486ba1c3df3192abe2c863c2a30c5f709de4ef5eb63bc90a9fdf743f31aba59d
+
+Source: Tests/runner.sh
+Algorithm: SHA-256
+Hash: 3bd39a718a48c3468d36021df73b41bb9a684309f738d783d580bfe0e97eeb1e

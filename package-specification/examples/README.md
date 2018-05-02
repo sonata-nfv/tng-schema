@@ -6,9 +6,11 @@
 
 These folder contains some example packages. Each sub-folder represents one (unzipped) example package. To generate packages from them, just zip them and append the file ending: `*.tgo`.
 
-Create ZIPs (OS X)
+Automatically package all examples: `./pack.sh`
 
-```
+Manually create package file (*.tgo):
+
+```bash
 cd package-specification/examples/5gtango-ns-package-example/
-zip -r 5gtango-ns-package-example.tgo ./
+zip -r ../5gtango-ns-package-example.tgo ./
 ```
