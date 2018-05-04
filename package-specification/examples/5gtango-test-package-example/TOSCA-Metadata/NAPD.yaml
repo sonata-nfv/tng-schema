@@ -11,7 +11,7 @@ description: "This is an example 5GTANGO test package."
 logo: "Icons/upb_logo.png"                           # (optional) path to logo file (PNG or JPEG)
 
 package_content:
-  - source: "Definitions/test-descriptor.yaml"
+  - source: "Definitions/test-descriptor.yml"
     algorithm: "SHA-256"
     hash: "bc2c71ca843ae68777bc9b6058e0c0dbb089ee575dc3932336cdbe43a4a149c1"
     content-type: "application/vnd.5gtango.tstd"
@@ -33,5 +33,5 @@ package_content:
     content-type: "text/plain"
   - source: "Tests/runner.sh"
     algorithm: "SHA-256"
-    hash: "3bd39a718a48c3468d36021df73b41bb9a684309f738d783d580bfe0e97eeb1e"
+    hash: "28e7691e42c99ae89013aa228680e8bb9ff22f444a57276d9c61ca8428b10cf7"
     content-type: "text/x-shellscript"
