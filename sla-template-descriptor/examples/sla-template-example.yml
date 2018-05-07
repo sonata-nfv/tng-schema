@@ -1,24 +1,34 @@
 ---
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/sla-template-descriptor/sla-template-schema.yml"
 
-vendor: "tango-sla-template"
 name: "example-sla-template"
+vendor: "tango-sla-template"
 version: "0.5"
 author: "Evgenia Kapassa, Marios Touloupou"
 description: "A default SLA Template with initial SLOs that are expressed through metrics,parameters and an expression"
+
+costumer_details:
+    cuuid: "507f1f77bcf86cd799439011"
+    cname: "Brian"
+    csurname: "Bichel"
+    
 
 sla_template:
 
   # general details regarding the SLA Template
   offered_date: '2018-01-24 10:00:00'
   valid_until: '2019-01-24 10:00:00'
-  sla_template_version: '0.1'
-  service_provider_id: sp001
   
   # involved network service
   ns:
-    uuid: ns001
+    uuid: 413635ba-490a-46e0-a022-fc6f7186c26c 
     description: a network service description
+    network_functions:
+        - vnf_id: "vnf1"
+          vnf_vendor: "eu.5gtango"
+          vnf_name: "ubuntu-vnf"
+          vnf_version: "0.9"  
+    
     
     # high level SLOs
     objectives:

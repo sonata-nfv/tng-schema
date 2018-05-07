@@ -1,273 +1,386 @@
----
-"$id": http://example.com/example.json
-type: object
-definitions: {}
-"$schema": http://json-schema.org/draft-04/schema#
-properties:
-  descriptor_schema:
-    "$id": "/properties/descriptor_schema"
-    type: string
-    title: The Descriptor_schema Schema
-    description: An explanation about the purpose of this instance.
-    default: ''
-    examples:
-    - https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/service-descriptor/nsd-schema.yml
-  vendor:
-    "$id": "/properties/vendor"
-    type: string
-    title: The Vendor Schema
-    description: An explanation about the purpose of this instance.
-    default: ''
-    examples:
-    - tango-sla-template
-  name:
-    "$id": "/properties/name"
-    type: string
-    title: The Name Schema
-    description: An explanation about the purpose of this instance.
-    default: ''
-    examples:
-    - example-sla-template
-  version:
-    "$id": "/properties/version"
-    type: string
-    title: The Version Schema
-    description: An explanation about the purpose of this instance.
-    default: ''
-    examples:
-    - '0.5'
-  author:
-    "$id": "/properties/author"
-    type: string
-    title: The Author Schema
-    description: An explanation about the purpose of this instance.
-    default: ''
-    examples:
-    - Evgenia Kapassa, Marios Touloupou
-  description:
-    "$id": "/properties/description"
-    type: string
-    title: The Description Schema
-    description: An explanation about the purpose of this instance.
-    default: ''
-    examples:
-    - A default SLA Template with initial SLOs that are expressed through metrics,parameters
-      and an expression
-  sla_template:
-    "$id": "/properties/sla_template"
-    type: object
-    properties:
-      offered_date:
-        "$id": "/properties/sla_template/properties/offered_date"
-        type: string
-        title: The Offered_date Schema
-        description: An explanation about the purpose of this instance.
-        default: ''
-        examples:
-        - '2018-01-24 10:00:00'
-      valid_until:
-        "$id": "/properties/sla_template/properties/valid_until"
-        type: string
-        title: The Valid_until Schema
-        description: An explanation about the purpose of this instance.
-        default: ''
-        examples:
-        - '2019-01-24 10:00:00'     
-      service_provider_id:
-        "$id": "/properties/sla_template/properties/service_provider_id"
-        type: string
-        title: The Service_provider_id Schema
-        description: An explanation about the purpose of this instance.
-        default: ''
-        examples:
-        - sp001
-      ns:
-        "$id": "/properties/sla_template/properties/ns"
-        type: object
-        properties:
-          uuid:
-            "$id": "/properties/sla_template/properties/ns/properties/ns_id"
-            type: string
-            title: The Ns_id Schema
-            description: An explanation about the purpose of this instance.
-            default: ''
-            examples:
-            - ns001
-          description:
-            "$id": "/properties/sla_template/properties/ns/properties/description"
-            type: string
-            title: The Description Schema
-            description: An explanation about the purpose of this instance.
-            default: ''
-            examples:
-            - a network service description
-          objectives:
-            "$id": "/properties/sla_template/properties/ns/properties/objectives"
-            type: array
-            items:
-              "$id": "/properties/sla_template/properties/ns/properties/objectives/items"
-              type: object
-              properties:
-                slo_id:
-                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_id"
-                  type: string
-                  title: The Slo_id Schema
-                  description: An explanation about the purpose of this instance.
-                  default: ''
-                  examples:
-                  - req001
-                slo_name:
-                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_name"
-                  type: string
-                  title: The Slo_name Schema
-                  description: An explanation about the purpose of this instance.
-                  default: ''
-                  examples:
-                  - NetworkServiceAvailability
-                slo_definition:
-                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_definition"
-                  type: string
-                  title: The Slo_definition Schema
-                  description: An explanation about the purpose of this instance.
-                  default: ''
-                  examples:
-                  - Availability is the percentage of time, in a specific time interval,
-                    during which a NS can be used for the purpose that it was originally
-                    designed and built for.
-                slo_unit:
-                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_unit"
-                  type: string
-                  title: The Slo_unit Schema
-                  description: An explanation about the purpose of this instance.
-                  default: ''
-                  examples:
-                  - "%"
-                slo_value:
-                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_value"
-                  type: string
-                  title: The Slo_value Schema
-                  description: An explanation about the purpose of this instance.
-                  default: ''
-                  examples:
-                  - '99.95'
-                metric:
-                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric"
-                  type: array
-                  items:
-                    "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items"
-                    type: object
-                    properties:
-                      metric_id:
-                        "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/metric_id"
-                        type: string
-                        title: The Metric_id Schema
-                        description: An explanation about the purpose of this instance.
-                        default: ''
-                        examples:
-                        - mtr001
-                      metric_definition:
-                        "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/metric_definition"
-                        type: string
-                        title: The Metric_definition Schema
-                        description: An explanation about the purpose of this instance.
-                        default: ''
-                        examples:
-                        - Total time the NS is alive
-                      rate:
-                        "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/rate"
-                        type: object
-                        properties:
-                          parameterWindow:
-                            "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/rate/properties/parameterWindow"
-                            type: string
-                            title: The Parameterwindow Schema
-                            description: An explanation about the purpose of this
-                              instance.
-                            default: ''
-                            examples:
-                            - 1 year
-                      expression:
-                        "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression"
-                        type: object
-                        properties:
-                          expression_statement:
-                            "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/expression_statement"
-                            type: string
-                            title: The Expression_statement Schema
-                            description: An explanation about the purpose of this
-                              instance.
-                            default: ''
-                            examples:
-                            - prmtr001/prmtr002
-                          expression_language:
-                            "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/expression_language"
-                            type: string
-                            title: The Expression_language Schema
-                            description: An explanation about the purpose of this
-                              instance.
-                            default: ''
-                            examples:
-                            - ISO80000
-                          expression_unit:
-                            "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/expression_unit"
-                            type: string
-                            title: The Expression_unit Schema
-                            description: An explanation about the purpose of this
-                              instance.
-                            default: ''
-                            examples:
-                            - hour
-                          parameters:
-                            "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters"
-                            type: array
-                            items:
-                              "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items"
-                              type: object
-                              properties:
-                                parameter_id:
-                                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_id"
-                                  type: string
-                                  title: The Parameter_id Schema
-                                  description: An explanation about the purpose of
-                                    this instance.
-                                  default: ''
-                                  examples:
-                                  - prmtr001
-                                parameter_name:
-                                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_name"
-                                  type: string
-                                  title: The Parameter_name Schema
-                                  description: An explanation about the purpose of
-                                    this instance.
-                                  default: ''
-                                  examples:
-                                  - NetworkServiceUptime
-                                parameter_definition:
-                                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_definition"
-                                  type: string
-                                  title: The Parameter_definition Schema
-                                  description: An explanation about the purpose of
-                                    this instance.
-                                  default: ''
-                                  examples:
-                                  - NS Uptime refers to the amount of time that the
-                                    network service has been powered on and working
-                                    properly.
-                                parameter_unit:
-                                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_unit"
-                                  type: string
-                                  title: The Parameter_unit Schema
-                                  description: An explanation about the purpose of
-                                    this instance.
-                                  default: ''
-                                  examples:
-                                  - hour
-                                parameter_value:
-                                  "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_value"
-                                  type: string
-                                  title: The Parameter_value Schema
-                                  description: An explanation about the purpose of
-                                    this instance.
-                                  default: ''
-                                  examples:
-                                  - '8000'
+
+
+{
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "author": {
+      "$id": "/properties/author",
+      "type": "string",
+      "title": "The Author Schema ",
+      "default": "",
+      "examples": [
+        "Evgenia Kapassa, Marios Touloupou"
+      ]
+    },
+    "costumer_details": {
+      "$id": "/properties/costumer_details",
+      "type": "object",
+      "properties": {
+        "cname": {
+          "$id": "/properties/costumer_details/properties/cname",
+          "type": "string",
+          "title": "The Cname Schema ",
+          "default": "",
+          "examples": [
+            "Brian"
+          ]
+        },
+        "csurname": {
+          "$id": "/properties/costumer_details/properties/csurname",
+          "type": "string",
+          "title": "The Csurname Schema ",
+          "default": "",
+          "examples": [
+            "Bichel"
+          ]
+        },
+        "cuuid": {
+          "$id": "/properties/costumer_details/properties/cuuid",
+          "type": "string",
+          "title": "The Cuuid Schema ",
+          "default": "",
+          "examples": [
+            "507f1f77bcf86cd799439011"
+          ]
+        }
+      }
+    },
+    "description": {
+      "$id": "/properties/description",
+      "type": "string",
+      "title": "The Description Schema ",
+      "default": "",
+      "examples": [
+        "A default SLA Template with initial SLOs that are expressed through metrics,parameters and an expression"
+      ]
+    },
+    "descriptor_schema": {
+      "$id": "/properties/descriptor_schema",
+      "type": "string",
+      "title": "The Descriptor_schema Schema ",
+      "default": "",
+      "examples": [
+        "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/sla-template-descriptor/sla-template-schema.yml"
+      ]
+    },
+    "name": {
+      "$id": "/properties/name",
+      "type": "string",
+      "title": "The Name Schema ",
+      "default": "",
+      "examples": [
+        "example-sla-template"
+      ]
+    },
+    "sla_template": {
+      "$id": "/properties/sla_template",
+      "type": "object",
+      "properties": {
+        "ns": {
+          "$id": "/properties/sla_template/properties/ns",
+          "type": "object",
+          "properties": {
+            "description": {
+              "$id": "/properties/sla_template/properties/ns/properties/description",
+              "type": "string",
+              "title": "The Description Schema ",
+              "default": "",
+              "examples": [
+                "a network service description"
+              ]
+            },
+            "network_functions": {
+              "$id": "/properties/sla_template/properties/ns/properties/network_functions",
+              "type": "array",
+              "items": {
+                "$id": "/properties/sla_template/properties/ns/properties/network_functions/items",
+                "type": "object",
+                "properties": {
+                  "vnf_id": {
+                    "$id": "/properties/sla_template/properties/ns/properties/network_functions/items/properties/vnf_id",
+                    "type": "string",
+                    "title": "The Vnf_id Schema ",
+                    "default": "",
+                    "examples": [
+                      "vnf1"
+                    ]
+                  },
+                  "vnf_name": {
+                    "$id": "/properties/sla_template/properties/ns/properties/network_functions/items/properties/vnf_name",
+                    "type": "string",
+                    "title": "The Vnf_name Schema ",
+                    "default": "",
+                    "examples": [
+                      "ubuntu-vnf"
+                    ]
+                  },
+                  "vnf_vendor": {
+                    "$id": "/properties/sla_template/properties/ns/properties/network_functions/items/properties/vnf_vendor",
+                    "type": "string",
+                    "title": "The Vnf_vendor Schema ",
+                    "default": "",
+                    "examples": [
+                      "eu.5gtango"
+                    ]
+                  },
+                  "vnf_version": {
+                    "$id": "/properties/sla_template/properties/ns/properties/network_functions/items/properties/vnf_version",
+                    "type": "string",
+                    "title": "The Vnf_version Schema ",
+                    "default": "",
+                    "examples": [
+                      "0.9"
+                    ]
+                  }
+                }
+              }
+            },
+            "objectives": {
+              "$id": "/properties/sla_template/properties/ns/properties/objectives",
+              "type": "array",
+              "items": {
+                "$id": "/properties/sla_template/properties/ns/properties/objectives/items",
+                "type": "object",
+                "properties": {
+                  "metric": {
+                    "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric",
+                    "type": "array",
+                    "items": {
+                      "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items",
+                      "type": "object",
+                      "properties": {
+                        "expression": {
+                          "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression",
+                          "type": "object",
+                          "properties": {
+                            "expression_language": {
+                              "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/expression_language",
+                              "type": "string",
+                              "title": "The Expression_language Schema ",
+                              "default": "",
+                              "examples": [
+                                "ISO80000"
+                              ]
+                            },
+                            "expression_statement": {
+                              "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/expression_statement",
+                              "type": "string",
+                              "title": "The Expression_statement Schema ",
+                              "default": "",
+                              "examples": [
+                                "prmtr001/prmtr002"
+                              ]
+                            },
+                            "expression_unit": {
+                              "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/expression_unit",
+                              "type": "string",
+                              "title": "The Expression_unit Schema ",
+                              "default": "",
+                              "examples": [
+                                "hour"
+                              ]
+                            },
+                            "parameters": {
+                              "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters",
+                              "type": "array",
+                              "items": {
+                                "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items",
+                                "type": "object",
+                                "properties": {
+                                  "parameter_definition": {
+                                    "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_definition",
+                                    "type": "string",
+                                    "title": "The Parameter_definition Schema ",
+                                    "default": "",
+                                    "examples": [
+                                      "NS Uptime refers to the amount of time that the network service has been powered on and working properly."
+                                    ]
+                                  },
+                                  "parameter_id": {
+                                    "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_id",
+                                    "type": "string",
+                                    "title": "The Parameter_id Schema ",
+                                    "default": "",
+                                    "examples": [
+                                      "prmtr001"
+                                    ]
+                                  },
+                                  "parameter_name": {
+                                    "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_name",
+                                    "type": "string",
+                                    "title": "The Parameter_name Schema ",
+                                    "default": "",
+                                    "examples": [
+                                      "NetworkServiceUptime"
+                                    ]
+                                  },
+                                  "parameter_unit": {
+                                    "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_unit",
+                                    "type": "string",
+                                    "title": "The Parameter_unit Schema ",
+                                    "default": "",
+                                    "examples": [
+                                      "hour"
+                                    ]
+                                  },
+                                  "parameter_value": {
+                                    "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/expression/properties/parameters/items/properties/parameter_value",
+                                    "type": "string",
+                                    "title": "The Parameter_value Schema ",
+                                    "default": "",
+                                    "examples": [
+                                      "8000"
+                                    ]
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "metric_definition": {
+                          "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/metric_definition",
+                          "type": "string",
+                          "title": "The Metric_definition Schema ",
+                          "default": "",
+                          "examples": [
+                            "Total time the NS is alive"
+                          ]
+                        },
+                        "metric_id": {
+                          "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/metric_id",
+                          "type": "string",
+                          "title": "The Metric_id Schema ",
+                          "default": "",
+                          "examples": [
+                            "mtr001"
+                          ]
+                        },
+                        "rate": {
+                          "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/rate",
+                          "type": "object",
+                          "properties": {
+                            "parameterWindow": {
+                              "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/rate/properties/parameterWindow",
+                              "type": "string",
+                              "title": "The Parameterwindow Schema ",
+                              "default": "",
+                              "examples": [
+                                "1 year"
+                              ]
+                            },
+                            "sampleInterval": {
+                              "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/metric/items/properties/rate/properties/sampleInterval",
+                              "type": "string",
+                              "title": "The Sampleinterval Schema ",
+                              "default": "",
+                              "examples": [
+                                "sample rate every 1 hour"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "slo_definition": {
+                    "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_definition",
+                    "type": "string",
+                    "title": "The Slo_definition Schema ",
+                    "default": "",
+                    "examples": [
+                      "Availability is the percentage of time, in a specific time interval, during which a NS can be used for the purpose that it was originally designed and built for."
+                    ]
+                  },
+                  "slo_id": {
+                    "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_id",
+                    "type": "string",
+                    "title": "The Slo_id Schema ",
+                    "default": "",
+                    "examples": [
+                      "req001"
+                    ]
+                  },
+                  "slo_name": {
+                    "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_name",
+                    "type": "string",
+                    "title": "The Slo_name Schema ",
+                    "default": "",
+                    "examples": [
+                      "NetworkServiceAvailability"
+                    ]
+                  },
+                  "slo_unit": {
+                    "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_unit",
+                    "type": "string",
+                    "title": "The Slo_unit Schema ",
+                    "default": "",
+                    "examples": [
+                      "%"
+                    ]
+                  },
+                  "slo_value": {
+                    "$id": "/properties/sla_template/properties/ns/properties/objectives/items/properties/slo_value",
+                    "type": "string",
+                    "title": "The Slo_value Schema ",
+                    "default": "",
+                    "examples": [
+                      "99.95"
+                    ]
+                  }
+                }
+              }
+            },
+            "uuid": {
+              "$id": "/properties/sla_template/properties/ns/properties/uuid",
+              "type": "string",
+              "title": "The Uuid Schema ",
+              "default": "",
+              "examples": [
+                "413635ba-490a-46e0-a022-fc6f7186c26c"
+              ]
+            }
+          }
+        },
+        "offered_date": {
+          "$id": "/properties/sla_template/properties/offered_date",
+          "type": "string",
+          "title": "The Offered_date Schema ",
+          "default": "",
+          "examples": [
+            "2018-01-24 10:00:00"
+          ]
+        },
+        "valid_until": {
+          "$id": "/properties/sla_template/properties/valid_until",
+          "type": "string",
+          "title": "The Valid_until Schema ",
+          "default": "",
+          "examples": [
+            "2019-01-24 10:00:00"
+          ]
+        }
+      }
+    },
+    "vendor": {
+      "$id": "/properties/vendor",
+      "type": "string",
+      "title": "The Vendor Schema ",
+      "default": "",
+      "examples": [
+        "tango-sla-template"
+      ]
+    },
+    "version": {
+      "$id": "/properties/version",
+      "type": "string",
+      "title": "The Version Schema ",
+      "default": "",
+      "examples": [
+        "0.5"
+      ]
+    }
+  }
+}
