@@ -5,15 +5,15 @@ vnf_release_date_time: 2009-01-01T10:01:02Z
 
 Source: Definitions/myvnfd.yaml
 Algorithm: SHA-256
-Hash: a8ecb3b378c5d4c40f8a8d8afb1870e6119231f10fab3e7c6e1dd96c38b87d93
+Hash: dbb6247448f819b090d42620e97b95e7594927581274cf8254f133a1d6420d59
 
 Source: Icons/upb_logo.png
 Algorithm: SHA-256
 Hash: dd83757e632740f9f390af15eeb8bc25480a0c412c7ea9ac9abbb0e5e025e508
 
-Source: Images/mycloudinamge.ref
+Source: Images/mycloudimage.ref
 Algorithm: SHA-256
-Hash: 54cb482d72b9f454aec9197c91310273f1406ed7b62c938ebe1cf1c271b7f522
+Hash: e26ff11f2cd2efc1eed3a47a94fccbf6fc8d0c844ff15b65aeb02576c1d02640
 
 Source: Licenses/LICENSE
 Algorithm: SHA-256
