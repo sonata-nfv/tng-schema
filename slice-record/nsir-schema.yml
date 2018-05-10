@@ -10,15 +10,18 @@ description: "The core scheme for network slice instance (NSI)"
 
 type: "object"
 properties:
-  nsiId:
+  id:
     description: "Identifies the Network Slice Instance (NSI)"
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
-  nsiName:
+  name:
     description: "The name of the NSI"
     type: "string"
-  nsiDescription:
+  description:
     description: "Description of the NSI functionality"
+    type: "string"
+  vendor:
+    description: "Description of the NST vendor"
     type: "string"
   nstId:
     description: "The uuid of the NST used to instantiate the NSI."
@@ -62,7 +65,6 @@ properties:
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
     minItems: 1
-
   qos:
     description: "slice qos"
     type: "object"
@@ -91,9 +93,10 @@ properties:
      
 
 required: 
-  - nsiName 
-  - nsiId
-  - nsiDescription
+  - name 
+  - id
+  - description
+  - vendor
   - nstId
-  - ServiceInstancesUuid
+  - netServInstance_Uuid
 additionalProperties: true
