@@ -7,20 +7,20 @@
 
 #The Network Slice Template with composed by two NetServices.
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/slice-descriptor/nst-schema.yml"
-nstId: "49272f88-25aa-4762-a998-df65a048e680"
-nstName: "NST_Rubik_FW"
-nstNsdIds:
-   - NSdId: "40920a3c-9cc3-43f3-9f78-3fae65e29bad"
-   - NSdId: "467c75ff-2a1f-4c01-b2b3-531783d50b07"
-nstOnboardingState: "ENABLE"
-nstOperationalState: "ENABLE"
-nstUsageState: "NOT_IN_USE"
-nstVersion: "1"
-nstDesigner: "Pol Alemany, CTTC"
-nstInvariantId: "41cec8dc-d767-4d31-a285-bf870a63d03e"
+designer: "Pol"
+id: "8638af98-789f-462f-a373-ffc67527d82f"
+name: "Rubik_NST"
 notificationTypes: "NstOnboardingNotification"
-userDefinedData: "user defined data example"
+nstNsdIds:
+    - NSdId: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
+onboardingState: "ENABLED"
+operationalState: "ENABLED"
+usageState: "NOT_IN_USE"
+userDefinedData: ""
+vendor: "5gTango"
+version: "3.0"
 
-#The Slice Quality of Service parameter
+##The Slice Quality of Service parameter
 qos:
-  5qi_value: "6"      
+  5qi_value: "6"
+  

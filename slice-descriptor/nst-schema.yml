@@ -14,11 +14,11 @@ properties:
   descriptor_schema:
     description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
     type: "string"
-  nstId:
+  id:
     description: "Identifies the Network Slice Template (NST)"
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
-  nstName:
+  name:
     description: "The name of the NST"
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
@@ -33,29 +33,29 @@ properties:
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
     minItems: 1
-  nstOnboardingState:
+  onboardingState:
     description: "Defines the onboarding state (ENABLE, DISABLED)."
     type: string
     enum:
-    - ENABLE
+    - ENABLED
     - DISABLED
-  nstOperationalState:
+  operationalState:
     description: "Defines the operational state (ENABLE, DISABLED)."
     type: string
     enum:
-    - ENABLE
+    - ENABLED
     - DISABLED
-  nstUsageState:
+  usageState:
     description: "Defines wether this NST is used or not (IN_USE, NOT_IN_USE)."
     type: string
     enum:
     - IN_USE
     - NOT_IN_USE
-  nstVersion:
+  version:
     description: "The version of the service descriptor."
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
-  nstDesigner:
+  designer:
     description: "Name of the NST designer/developer."
     type: string
   nstInvariantId:
@@ -72,7 +72,6 @@ properties:
     #this parameter needs to be better define (maybe as a hash?)
     description: "NST user defined data."
     type: string
-
   qos:
     description: "slice qos"
     type: "object"
@@ -101,8 +100,9 @@ properties:
 
 required: 
   - descriptor_schema
-  - nstName 
-  - nstId
+  - name 
+  - id
   - nstNsdIds
-  - nstVersion
+  - version
+  - vendor
 additionalProperties: true
