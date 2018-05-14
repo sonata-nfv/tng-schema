@@ -12,12 +12,11 @@ author: "eu.5gtango"
 description: "A default ubuntu VNF descriptor"
 
 
-# TODO: use some real ubuntu image as default
 # virtual deployment units inside the VNF
 virtual_deployment_units:
   - id: "vdu01"
-    vm_image: "ubuntu16-04.qcow2"
-    vm_image_format: "qcow2" 
+    vm_image: "ubuntu:16.04"
+    vm_image_format: "docker" 
     resource_requirements:
       cpu:
         vcpus: 1
@@ -27,15 +26,6 @@ virtual_deployment_units:
       storage:
         size: 10
         size_unit: "GB"
-    monitoring_parameters:
-      - name: "vm_cpu_perc"
-        unit: "Percentage"
-      - name: "vm_mem_pers"
-        unit: "Percentage"
-      - name: "vm_net_rx_MB"
-        unit: "MB"
-      - name: "vm_net_tx_MB"
-        unit: "Mbps"
     connection_points:
       - id: "mgmt"
         interface: "ipv4"
