@@ -58,12 +58,8 @@ properties:
     description: "The list uuids of the Network Services instances generated when the NSI is requested."
     type: "array"
     items:
-      type: "object"
-      properties:
-        NSInstancesId:
-          description: "The ID of a Network Service Instance"
-          type: "string"
-          pattern: "^[a-zA-Z0-9\\-_.]+$"
+      type: "string"
+      pattern: "^[a-zA-Z0-9\\-_.]+$"
     minItems: 1
   qos:
     description: "slice qos"
