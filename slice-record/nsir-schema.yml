@@ -37,11 +37,11 @@ properties:
     description: "SAP of the NSI."
     type: "string"
   nsiState:
-    description: "State of the NSI (possible values INSTANTIATED, NOT_INSTANTIATED)."
+    description: "State of the NSI (possible values INSTANTIATED, TERMINATED)."
     type: string
     enum:
     - INSTANTIATED
-    - TERMINATE
+    - TERMINATED
   instantiateTime:
     description: "Timestamp indicating when the instantiation will be trigerred (0 means immediatly)."
     type: "string"
