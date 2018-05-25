@@ -41,7 +41,7 @@ properties:
     type: string
     enum:
     - INSTANTIATED
-    - NOT_INSTANTIATED
+    - TERMINATE
   instantiateTime:
     description: "Timestamp indicating when the instantiation will be trigerred (0 means immediatly)."
     type: "string"
