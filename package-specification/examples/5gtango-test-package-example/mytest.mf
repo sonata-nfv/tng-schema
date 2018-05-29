@@ -21,7 +21,7 @@ Hash: 8b3cd7e16558ed4a15f2ed2a08c38fcce8b5c9b70a1b665518561835f2981a3e
 
 Source: Tests/config.cfg
 Algorithm: SHA-256
-Hash: e8c542a14947ba3626c5dd9b4ebc6074c50cf18fd1cca45fb68863c299f5b43d
+Hash: 644a3eeeed49071dc2793ca6e52a4da563495e7af720347067c5cb1db69d75cd
 
 Source: Tests/runner.sh
 Algorithm: SHA-256
