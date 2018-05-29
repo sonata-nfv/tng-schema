@@ -9,11 +9,11 @@ test_type: ttcn3
 test_configuration_parameters:
       - parameter_name: "test_binary_file"
         parameter_definition: "TTCN3 binary runtime"
-        parameter_value: "MyExample"
+        parameter_value: "HTTPmsgTest"
         content_type: "application/octet-stream"
       - parameter_name: "config_file"
         parameter_definition: "location of the TTCN3 configuration file"
-        parameter_value: "MyExample.cfg"
+        parameter_value: "config.cfg"
         content_type: "text/plain"
       - parameter_name: "runner_file"
         parameter_definition: "bash script to run the TTCN3 test within docker container"
@@ -33,4 +33,4 @@ test_execution:
     - test_tag: weekly_run
       tag_id: tag_004
     - test_tag: ns_under_test
-      tag_id: ns_vendor:ns_name:ns_version
+      tag_id: eu.sonata-nfv.service-descriptor:sonata-vtc-only:0.1
