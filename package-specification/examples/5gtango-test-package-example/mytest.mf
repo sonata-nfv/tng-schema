@@ -5,7 +5,7 @@ test_release_date_time: 2018-05-02T14:00:00-04:00
 
 Source: Definitions/test-descriptor.yml
 Algorithm: SHA-256
-Hash: bc2c71ca843ae68777bc9b6058e0c0dbb089ee575dc3932336cdbe43a4a149c1
+Hash: e78a1127740b8c59534e1e7fd370334b12bf39ca9cf9f5c0fb2238dcf51ee148
 
 Source: Icons/upb_logo.png
 Algorithm: SHA-256
@@ -15,14 +15,14 @@ Source: Licenses/LICENSE
 Algorithm: SHA-256
 Hash: 3cd74acbebc0a41414f342d27edbda0284ef4640ee6c077fdf00cd5a69ce181b
 
-Source: Tests/MyExample
+Source: Tests/HTTPmsgTest
 Algorithm: SHA-256
-Hash: ecfae4ca564f305d6061175806db394d0dba5cdcb4450124f51d98d4f7b94047
+Hash: 8b3cd7e16558ed4a15f2ed2a08c38fcce8b5c9b70a1b665518561835f2981a3e
 
-Source: Tests/MyExample.cfg
+Source: Tests/config.cfg
 Algorithm: SHA-256
-Hash: 486ba1c3df3192abe2c863c2a30c5f709de4ef5eb63bc90a9fdf743f31aba59d
+Hash: e8c542a14947ba3626c5dd9b4ebc6074c50cf18fd1cca45fb68863c299f5b43d
 
 Source: Tests/runner.sh
 Algorithm: SHA-256
-Hash: 28e7691e42c99ae89013aa228680e8bb9ff22f444a57276d9c61ca8428b10cf7
+Hash: a449685c3686e942c5aaa1eb10a1fe508e1ef21407f1299ed8c9380fa4d81dac
