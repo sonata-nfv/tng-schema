@@ -29,7 +29,7 @@ package_content:
     content-type: "application/octet-stream"
   - source: "Tests/config.cfg"
     algorithm: "SHA-256"
-    hash: "644a3eeeed49071dc2793ca6e52a4da563495e7af720347067c5cb1db69d75cd"
+    hash: "442d622d51a51f9a2d751698c5fe7095aa947798ae0c90e11e1f2709576515d5"
     content-type: "text/plain"
   - source: "Tests/runner.sh"
     algorithm: "SHA-256"
