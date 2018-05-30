@@ -18,7 +18,9 @@ At the root block, we first have the mandatory fields, that describe and identif
 
 * *schema* (optional) provides a link to the schema that is used to describe the sla template and can be used to validate the sla template descriptor file. This is related to the original JSON schema specification.
 
-*  *name* is the name of the sla template.    
+*  *name* is the name of the sla template.  
+
+*  *vendor* is the vendor of the sla template.    
 
 *  *version* is the version of the sla template.  
 
@@ -30,20 +32,32 @@ The general descriptor block also contains some optional components as outlined 
  
  
 ## SLA Template Section
-An SLA template descriptor has to include an sla_template block. The following two fields are mandatory:      
+An SLA template descriptor has to include an sla_template block. The following three fields are mandatory:      
+
+*  *template_name* is the name of the SLA Template.  
 
 *  *offered_date* is the creation date of the template.     
 
 *  *valid_until* is the expiration date of the template.  
 
 
-## NS Section
-An SLA template descriptor has to include at least one ns block as child of sla_template block. The following two fields are mandatory:   
+### NS Section
+An SLA template descriptor has to include at least one ns block as child of sla_template block. The ns block include the following:
 
-*  *objectives* that describes the High Level Service Level Objective (SLO) (e.g. NS availability). The ns block contains at least one objective.   
-    - *metrics* that corresponds to how to measure the objective. Each objective contains at least one metric.  
-        - *rate* that describes the specific time window.     
-        - *expression* that describes a function under which the specific metric of the SLA should obey. Each metric contains only one expression.   
-            - *parameters* "links" the metric with a set of parameters that need to be accompanied with the metrics and included into the expression 
-			(expressing in detail each metric). An expression contains at least one parameter.   
+*  *ns_uuid* the uuid of the corresponding NS 
+*  *ns_name* the name of the corresponding NS 
+*  *ns_vendor* the vendor of the corresponding NS 
+*  *ns_version* the version of the corresponding NS 
+*  *ns_description* the description of the corresponding NS 
+
+#### Guarantee Terms Section
+An SLA template descriptor has to include an array of guarantee terms for the corresponding NS (as a child of the ns block). The guaranteeTerms array include the following:
+
+*  *guaranteeID* the identifier of the guarantee term
+*  *name* the name of the guarantee term
+*  *definition* ta definition for the guarantee term
+*  *value* the value of the guarantee term
+*  *operator* the operator of the guarantee term expression
+*  *unit* the unit of the guarantee term
+*  *serviceLevelObjetive* that is an object describing in detail the guarantee term (monitoring period, expression etc.)
 
