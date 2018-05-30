@@ -5,7 +5,7 @@ version: "1.0"
 author: "Evgenia Kapassa, Marios Touloupou"
 description: "This is a simple SLA Template for 5GTANGO Release 1"
 sla_template: 
- template_name: Premium
+ template_name: "Premium"
  offered_date: "2018-05-30 10:00:00"
  valid_until: "2019-05-30 10:00:00"
  ns: 
@@ -19,16 +19,16 @@ sla_template:
      name: "Resilience "
      definition: "Resilience is the persistence of dependability when facing changes"
      value: "1"
-     operator: greater
-     unit: mins
+     operator: "greater"
+     unit: "mins"
      serviceLevelObjetive: 
-      period: Daily
-      parameter: Resilience
+      period: "Daily"
+      parameter: "Resilience"
       serviceLevel: "1min/24h"
       serviceLevelDetail: 
-      - unit: mins
+      - unit: "mins"
         value: "1"
-        operator: greater
+        operator: "greater"
       - unit: "24"
-        value: hours
-        operator: equal
+        value: "hours"
+        operator: "equal"
