@@ -7,9 +7,6 @@ properties:
   descriptor_schema:
     "$id": "/properties/descriptor_schema"
     type: string
-    default: 'https://github.com/sonata-nfv/tng-schema/blob/master/sla-template-descriptor/sla-template-schema.yml'
-    examples:
-    - https://github.com/sonata-nfv/tng-schema/blob/master/sla-template-descriptor/sla-template-schema.yml
   vendor:
     "$id": "/properties/vendor"
     type: string
