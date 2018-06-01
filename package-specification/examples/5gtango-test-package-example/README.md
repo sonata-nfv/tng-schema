@@ -14,12 +14,12 @@ ASSUMPTION: assume the NS (`eu.sonata-nfv.service-descriptor:sonata-vtc-only:0.1
     ```
 4. find the package id via stats endpoint:
     ```
-    curl -v http://pre-int-vnv-bcn.5gtango.eu:32002/api/v3/packages/status/2bc55a82-3019-4e3e-a80c-763a78ad2908
+    curl -v http://pre-int-vnv-bcn.5gtango.eu:32002/api/v3/packages/status/dc26d20c-1c00-4bfd-88fc-b9c2606dab27
     ```
 5. trigger the test with the package id:
     ```
     curl -v -X POST "http://pre-int-vnv-bcn.5gtango.eu:6100/tng-vnv-lcm/api/v1/packages/on-change"  \
-     -H "Content-Type: application/json" -d '{ "event_name": "UPDATED", "package_id": "45e20b48-84ff-4b29-8de1-e2e78ffcd6af"}'
+     -H "Content-Type: application/json" -d '{ "event_name": "UPDATED", "package_id": "a1030acb-d392-4192-91d0-0c7724d8264e"}'
     ```
 6. while test is running, user can view the progress from [graylog](http://logs.sonata-nfv.eu/search?rangetype=relative&fields=message&width=1536&highlightMessage=&relative=7200&q=pre-int-vnv-bcn+AND+container_name%3Atng%5C-vnv%5C-tee)
 7. query the test suite result via Test Result Repository:
@@ -85,3 +85,4 @@ ASSUMPTION: assume the NS (`eu.sonata-nfv.service-descriptor:sonata-vtc-only:0.1
       }
     ]
     ```
+    
