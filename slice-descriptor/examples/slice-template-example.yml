@@ -7,12 +7,12 @@
 
 #The Network Slice Template with composed by two NetServices.
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/slice-descriptor/nst-schema.yml"
-designer: "Pol"
-id: "8638af98-789f-462f-a373-ffc67527d82f"
+author: "Pol"
+##id: "8638af98-789f-462f-a373-ffc67527d82f"
 name: "Rubik_NST"
 notificationTypes: "NstOnboardingNotification"
 nstNsdIds:
-    - NSdId: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
+    - "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
 onboardingState: "ENABLED"
 operationalState: "ENABLED"
 usageState: "NOT_IN_USE"

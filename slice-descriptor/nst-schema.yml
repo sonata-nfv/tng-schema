@@ -14,10 +14,10 @@ properties:
   descriptor_schema:
     description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
     type: "string"
-  id:
-    description: "Identifies the Network Slice Template (NST)"
-    type: "string"
-    pattern: "^[a-zA-Z0-9\\-_.]+$"
+##  id:
+##    description: "Identifies the Network Slice Template (NST)"
+##    type: "string"
+##    pattern: "^[a-zA-Z0-9\\-_.]+$"
   name:
     description: "The name of the NST"
     type: "string"
@@ -26,12 +26,8 @@ properties:
     description: "The list of Network Services uuids composing the NST"
     type: "array"
     items:
-      type: "object"
-      properties:
-        NSdId:
-          description: "The ID of a Network Service available in Sonata SP/BSS"
-          type: "string"
-          pattern: "^[a-zA-Z0-9\\-_.]+$"
+      type: "string"
+      pattern: "^[a-zA-Z0-9\\-_.]+$"
     minItems: 1
   onboardingState:
     description: "Defines the onboarding state (ENABLE, DISABLED)."
@@ -55,8 +51,8 @@ properties:
     description: "The version of the service descriptor."
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
-  designer:
-    description: "Name of the NST designer/developer."
+  author:
+    description: "Name of the NST author/developer."
     type: string
   nstInvariantId:
     description: "Common/Static ID for all versions belonging to the same NST."
@@ -101,7 +97,7 @@ properties:
 required: 
   - descriptor_schema
   - name 
-  - id
+#  - id
   - nstNsdIds
   - version
   - vendor
