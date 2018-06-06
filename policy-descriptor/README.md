@@ -29,6 +29,19 @@ The general descriptor section also contains some optional components as outline
 - **author** (optional) describes the author of the policy descriptor.
 - **description** (optional) provides an arbitrary description of the policy.
 
+#### Monitoring Rules
+
+- **monitoring_rules** (optional) The rules used for monitoring.
+
+While the parent section is optional, once it is specified it has to have at least some of the following information:
+
+- **name** The name of the monitoring rule.
+- **description** (optional) An arbitrary description of this monitoring rule.
+- **duration** The duration the condtion has to be met before an event is fired.
+- **duration_unit** (optional) The unit of the durration, such as seconds, minutes, and hours.
+- **condition** The condition, a boolean expression, that must be met to fire the event.
+- **notification** A list of notifications that are fired when the condition is met.
+
 
 #### policyRules Section
 

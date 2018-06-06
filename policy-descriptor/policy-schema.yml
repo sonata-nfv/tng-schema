@@ -163,6 +163,46 @@ properties:
         description: "The version of the service descriptor."
         type: "string"
         pattern: "^[0-9\\-_.]+$"
+  monitoring_rules:
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        name:
+          description: "The name of the monitoring rule."
+          type: "string"
+        description:
+          description: "An arbitrary descritpion of this monitoring rule."
+          type: "string"
+        duration:
+          description: "The duration the condtion has to be met before an event is fired."
+          type: "number"
+        duration_unit:
+          description: "The unit of the durration."
+          ref: "#/definitions/time_units"
+        condition:
+          description: "The condition, a boolean expression, that must be met to fire the event."
+          type: "string"
+        notification:
+          description: "A list of notifications that are fired when the condition is met."
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              name:
+                description: "The name of the notification"
+                type: "string"
+              type:
+                description: "The type of message that is send to the message bus."
+                type: "string"
+            required:
+              - name
+              - type
+      required:
+        - name
+        - duration
+        - condition
+        - notification
     required:
       - vendor
       - name
