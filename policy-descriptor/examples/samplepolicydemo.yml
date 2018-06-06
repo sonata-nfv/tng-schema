@@ -12,6 +12,15 @@ network_service:
   vendor: "tango"
   name: "default-nsd"
   version: "0.9"
+monitoring_rules:
+  - name: "mon:rule:vm_cpu_perc"
+    description: "Trigger events if CPU load is above 70 percent."
+    duration: 60
+    duration_unit: "s"
+    condition:  "vdu01:vm_cpu_perc > 70"
+    notification:
+      - name: "high_cpu_load"
+        type: "rabbitmq_message"
 policyRules:
   - name: "actionUponAlert"
     salience: 1
@@ -26,7 +35,7 @@ policyRules:
          type: string
          input: text
          operator: equal
-         value: 'mon_rule_vm_cpu_perc'
+         value: 'high_cpu_load'
     actions:
      - action_object: "ComponentResourceAllocationAction"
        action_type: "InfrastructureType"
