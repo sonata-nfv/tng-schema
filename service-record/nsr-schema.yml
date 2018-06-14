@@ -300,6 +300,14 @@ properties:
       type: "string"
     minItems: 0
     uniqueItems: true
+  sla_id:
+    description: "The UUID of the active SLA for this NS."
+    type: "string"
+    pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+  policy_id:
+    description: "The UUID of the active Policy for this NS."
+    type: "string"
+    pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
   monitoring_parameters: 
     type: "array"
     items: 
