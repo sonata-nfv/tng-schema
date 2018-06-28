@@ -1,0 +1,22 @@
+---
+descriptor_extension: yml
+version: '0.5'
+package:
+  vendor: "eu.5gtango"
+  name: "simple-ttcn3-test"
+  version: "0.1"
+  maintainer: "Manuel Peuster, Paderborn University"
+  description: "This is an example 5GTANGO test package."
+files:
+  - path: "Definitions/test-descriptor.yml"
+    type: "application/vnd.5gtango.tstd"
+  - path: "Icons/upb_logo.png"
+    type: "image/png"
+  - path: "Licenses/LICENSE"
+    type: "text/plain"
+  - path: "Tests/HTTPmsgTest"
+    type: "application/octet-stream"
+  - path: "Tests/config.cfg"
+    type: "text/plain"
+  - path: "Tests/runner.sh"
+    type: "text/x-shellscript"
