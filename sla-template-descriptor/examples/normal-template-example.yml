@@ -18,17 +18,19 @@ sla_template:
    - guaranteeID: "g2"
      name: "Resilience "
      definition: "Resilience is the persistence of dependability when facing changes"
-     value: "1"
+     value: "60000"
      operator: "greater"
-     unit: "mins"
+     unit: "sec"
      serviceLevelObjetive: 
       period: "Hours"
       parameter: "Resilience"
       serviceLevel: "1min/6h"
+      duration: "21600"
+      target_value: "60000"
       serviceLevelDetail: 
-      - unit: mins
-        value: "1"
+      - unit: ms
+        value: "60000"
         operator: "greater"
-      - unit: "6"
-        value: "hours"
+      - unit: "21600"
+        value: "s"
         operator: "equal"
