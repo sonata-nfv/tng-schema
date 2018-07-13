@@ -27,9 +27,14 @@ properties:
     description: "The uuid of the NST used to instantiate the NSI."
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
-  nstInfoId:
-    description: "More imformationa bout the NST"
+  nstName:
+    description: "The name of the NST used to instantiate the NSI."
     type: "string"
+    pattern: "^[a-zA-Z0-9\\-_.]+$"
+  nstVersion:
+    description: "The version of the NetSlice Template the instance is based on."
+    type: "string"
+    pattern: "^[a-zA-Z0-9\\-_.]+$"
   flavorId:
     description: "The flavor identifier of the NSI."
     type: "string" 
