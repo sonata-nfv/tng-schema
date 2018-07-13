@@ -1,0 +1,26 @@
+---
+descriptor_extension: yml
+version: '0.5'
+package:
+  vendor: "eu.5gtango"
+  name: "ns-package-example"
+  version: "0.1"
+  maintainer: "Manuel Peuster, Paderborn University"
+  description: "This is an example 5GTANGO network service project."
+files:
+  - path: "Definitions/mynsd.yaml"
+    type: "application/vnd.5gtango.nsd"
+    tags:  # (optional)
+      - "eu.5gtango"
+  - path: "Definitions/myvnfd.yaml"
+    type: "application/vnd.5gtango.vnfd"
+    tags:  # (optional)
+      - "eu.5gtango"
+  - path: "Icons/upb_logo.png"
+    type: "image/png"
+  - path: "Images/mycloudimage.ref"
+    type: "application/vnd.5gtango.ref"
+  - path: "Licenses/LICENSE"
+    type: "text/plain"
+  - path: "Scripts/cloud.init"
+    type: "text/x-shellscript"

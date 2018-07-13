@@ -20,12 +20,27 @@ At the root level, we first have the mandatory fields, that describe and identif
 
 Moreover, the policy signature, i.e the *name*, is of great importance as it identifies the policy uniquely.
 - **name** is the name of the policy. It can be created with any name written in lower letters and no strange symbols.
+- **vendor** is the vendor id of the policy. It can be created with any name written in lower letters and no strange symbols.
+- **version** is the version of the policy descriptor.
 - **network_service** is the metadata of the network_service this policy refers to. A network_service is defined in an unique way by the following fields (**vendor**,**name**,**version**). A network_service may have more than one policy descriptors, but a policy descriptor always refers only to one network_service.
 
 The general descriptor section also contains some optional components as outlined below.
 
 - **author** (optional) describes the author of the policy descriptor.
 - **description** (optional) provides an arbitrary description of the policy.
+
+#### Monitoring Rules
+
+- **monitoring_rules** (optional) The rules used for monitoring.
+
+While the parent section is optional, once it is specified it has to have at least some of the following information:
+
+- **name** The name of the monitoring rule.
+- **description** (optional) An arbitrary description of this monitoring rule.
+- **duration** The duration the condtion has to be met before an event is fired.
+- **duration_unit** (optional) The unit of the durration, such as seconds, minutes, and hours.
+- **condition** The condition, a boolean expression, that must be met to fire the event.
+- **notification** A list of notifications that are fired when the condition is met.
 
 
 #### policyRules Section

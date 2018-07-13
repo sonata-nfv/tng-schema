@@ -1,0 +1,36 @@
+descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/test-descriptor/testdescriptor-schema.yml"
+vendor: "eu.5gtango.huawei.simple-test-descriptor"
+name: "simple-ttcn3-test"
+version: "0.1"
+author: "Peter Twamley, Huawei Technologies Ireland"
+description: >
+  "A simple test descriptor for a demonstration of tests run against a complete vnf deployment running TTCN3 tests "
+test_type: ttcn3
+test_configuration_parameters:
+      - parameter_name: "test_binary_file"
+        parameter_definition: "TTCN3 binary runtime"
+        parameter_value: "HTTPmsgTest"
+        content_type: "application/octet-stream"
+      - parameter_name: "config_file"
+        parameter_definition: "location of the TTCN3 configuration file"
+        parameter_value: "config.cfg"
+        content_type: "text/plain"
+      - parameter_name: "runner_file"
+        parameter_definition: "bash script to run the TTCN3 test within docker container"
+        parameter_value: "runner.sh"
+        content_type: "text/plain"
+test_category:
+    - category_type: performance
+
+#test tags are
+test_execution:
+    - test_tag: moongen
+      tag_id: tag_001
+    - test_tag: io_bandwidth
+      tag_id: tag_002
+    - test_tag: basic_test_suite
+      tag_id: tag_003
+    - test_tag: weekly_run
+      tag_id: tag_004
+    - test_tag: ns_under_test
+      tag_id: eu.sonata-nfv.service-descriptor:sonata-vtc-only:0.1

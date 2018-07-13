@@ -15,5 +15,4 @@ VNFD_SCHEMA=${BASE_DIR}/../../function-descriptor/vnfd-schema.yml
 #
 # Execute the tests.
 #
-${CMD} -s ${NAPD_SCHEMA} -y ${BASE_DIR}/../examples/5gtango-test-package-example/TOSCA-Metadata/NAPD.yaml
 # TODO add test to test test descriptor :-)
