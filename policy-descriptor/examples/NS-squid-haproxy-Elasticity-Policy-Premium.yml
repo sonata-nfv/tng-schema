@@ -1,0 +1,51 @@
+# do NOT delete: this is used by tng-sdk-descriptorgen
+# default YAML description of an policy example
+
+---
+descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/policy-descriptor/policy-schema.yml"
+
+name: "test_NS-squid-haproxy-Elasticity-Policy-BestEffort"
+vendor: "eu.5gtango"
+version: "0.1"
+network_service:
+  vendor: "eu.5gtango"
+  name: "NS-squid-haproxy"
+  version: "0.1"
+monitoring_rules:
+  - name: "mon_rule_squid_cpu_util"
+    description: "Trigger events if CPU load of squid is above 50 percent."
+    duration: 60
+    duration_unit: "s"
+    condition:  "vdu01:cpu_util > 50"
+  - name: "mon_rule_haproxy_frontend_scur"
+    description: "Trigger events if haproxy frontend session are 10."
+    duration: 60
+    duration_unit: "s"
+    condition:  "haproxy_frontend_scur > 10"
+policyRules:
+  - name: "actionUponAlert"
+    salience: 1
+    inertia: 
+      value: 30
+      duration_unit: "m"
+    conditions: 
+      condition: AND
+      rules:
+       - id: squid.LogMetric
+         field: squid.LogMetric
+         type: string
+         input: text
+         operator: equal
+         value: 'mon_rule_squid_cpu_util'
+       - id: haproxy.LogMetric
+         field: haproxy.LogMetric
+         type: string
+         input: text
+         operator: equal
+         value: 'mon_rule_haproxy_frontend_scur'
+    actions:
+     - action_object: "ElasticityAction"
+       action_type: "OrchestrationType"
+       name: "Spawn"
+       value: "1"
+       target: "vnf_squid"

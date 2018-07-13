@@ -42,10 +42,11 @@ definitions:
     enum:
       - "ComponentResourceAllocationAction"   # ComponentResourceAllocationAction
       - "NetworkManagementAction"   # NetworkManagementAction
+      - "ElasticityAction"   # ElasticityAction
   action_type:
     enum:
       - "Infrastracture"   # InfraAction can be applied to a VNF/VDU. Is infrastracture related and can be either a new flavoId or a migration
-      - "Orchestration"   # OrchestrationAction. Is a loadBalancerAction such as setBalancingAlgorith or  Spawn, Deprovision
+      - "Orchestration"   # ElasticityAction. Is a loadBalancerAction such as setBalancingAlgorith or  Spawn, Deprovision
       - "LifecycleManagement"   # LifecycleManagement
       - "NetworkMechanism"   # ActivateNetworkMechanism
       - "AlterConfiguration"   # AlterConfigurationAction
@@ -132,11 +133,11 @@ properties:
   name:
     description: "The name of the policy description."
     type: "string"
-    pattern: "^[a-z0-9\\-_.]+$"
+    pattern: "^[A-Za-z0-9\\-_.]+$"
   vendor:
     description: "The vendor id allows to identify a policy descriptor uniquely across all policy descriptor vendors."
     type: "string"
-    pattern: "^[a-z0-9\\-_.]+$"
+    pattern: "^[A-Za-z0-9\\-_.]+$"
   version: 
     description: "The version of the service descriptor."
     type: "string"
@@ -154,11 +155,11 @@ properties:
       vendor:
         description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
         type: "string"
-        pattern: "^[a-z0-9\\-_.]+$"
+        pattern: "^[A-Za-z0-9\\-_.]+$"
       name: 
         description: "The name of the network service description."
         type: "string"
-        pattern: "^[a-z0-9\\-_.]+$"
+        pattern: "^[A-Za-z0-9\\-_.]+$"
       version: 
         description: "The version of the service descriptor."
         type: "string"
@@ -183,26 +184,10 @@ properties:
         condition:
           description: "The condition, a boolean expression, that must be met to fire the event."
           type: "string"
-        notification:
-          description: "A list of notifications that are fired when the condition is met."
-          type: "array"
-          items:
-            type: "object"
-            properties:
-              name:
-                description: "The name of the notification"
-                type: "string"
-              type:
-                description: "The type of message that is send to the message bus."
-                type: "string"
-            required:
-              - name
-              - type
       required:
         - name
         - duration
         - condition
-        - notification
     required:
       - vendor
       - name
