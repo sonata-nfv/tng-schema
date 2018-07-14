@@ -18,9 +18,6 @@ monitoring_rules:
     duration: 60
     duration_unit: "s"
     condition:  "vdu01:vm_cpu_perc > 70"
-    notification:
-      - name: "high_cpu_load"
-        type: "rabbitmq_message"
 policyRules:
   - name: "actionUponAlert"
     salience: 1
