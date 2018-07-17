@@ -280,9 +280,6 @@ properties:
                   - mib_name
           required:
             - version
-            - auth_protocol
-            - security_level
-            - username
             - interval
             - oids
         resource_requirements:
