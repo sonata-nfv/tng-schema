@@ -232,6 +232,59 @@ properties:
           description: "An MD5 hash of the virtual machine image."
           type: "string"
           pattern: "^[A-Fa-f0-9]{32}$"
+        snmp_parameters:
+          description: "Definition of SNMP parameters available from the VDU"
+          type: "object"
+          properties:
+            version:
+              description: "SNMP version to be used."
+              type: "string"
+            auth_protocol:
+              description: "Authentication protocol to be used when requesting SNMP data."
+              type: "string"
+            security_level:
+              description: "Security level."
+              type: "string"
+            username:
+              description: "SNMP username."
+              type: "string"
+            interval:
+              description: "Time interval between SNMP requests."
+              type: "integer"
+            oids:
+              description: "List of oids."
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  oid:
+                    description: "metric oid."
+                    type: "string"
+                  metric_name:
+                    description: "metric name."
+                    type: "string"
+                  metric_type:
+                    description: "metric type."
+                    type: "string"
+                  unit:
+                    description: "metric unit."
+                    type: "string"
+                  mib_name:
+                    description: "metric mib name."
+                    type: "string"
+                required:
+                  - oid
+                  - metric_name
+                  - metric_type
+                  - unit
+                  - mib_name
+          required:
+            - version
+            - auth_protocol
+            - security_level
+            - username
+            - interval
+            - oids
         resource_requirements:
           description: "The requirments of a (virtual) machine that hosts this VDU. The service platform has to provide machines that meet these requirements."
           type: "object"
