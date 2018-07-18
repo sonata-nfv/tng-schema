@@ -182,12 +182,16 @@ properties:
           description: "The unit of the durration."
           ref: "#/definitions/time_units"
         condition:
-          description: "The condition, a boolean expression, that must be met to fire the event."
+          description: "The condition that must be met to fire the event."
+          type: "string"
+        threshold:
+          description: "The threshold that must be met to fire the event."
           type: "string"
       required:
         - name
         - duration
         - condition
+        - threshold
     required:
       - vendor
       - name

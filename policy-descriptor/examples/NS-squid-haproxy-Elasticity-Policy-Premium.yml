@@ -4,7 +4,7 @@
 ---
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/policy-descriptor/policy-schema.yml"
 
-name: "test_NS-squid-haproxy-Elasticity-Policy-BestEffort"
+name: "test_NS-squid-haproxy-Elasticity-Policy-Premium"
 vendor: "eu.5gtango"
 version: "0.1"
 network_service:
@@ -12,18 +12,20 @@ network_service:
   name: "NS-squid-haproxy"
   version: "0.1"
 monitoring_rules:
-  - name: "mon_rule_squid_cpu_util"
+  - name: "mon_rule:vnf:squid-vnf:vdu:vdu01:cpu_util"
     description: "Trigger events if CPU load of squid is above 50 percent."
     duration: 60
     duration_unit: "s"
-    condition:  "vdu01:cpu_util > 50"
-  - name: "mon_rule_haproxy_frontend_scur"
+    condition:  "vdu01:cpu_util"
+    threshold:  "> 50"
+  - name: "mon_rule:vnf:haproxy-vnf:vdu:vdu01:haproxy_frontend_scur"
     description: "Trigger events if haproxy frontend session are 10."
     duration: 60
     duration_unit: "s"
-    condition:  "haproxy_frontend_scur > 10"
+    condition:  "haproxy_frontend_scur"
+    threshold:  " > 10"
 policyRules:
-  - name: "actionUponAlert"
+  - name: "ElasticityRule"
     salience: 1
     inertia: 
       value: 30
@@ -31,18 +33,18 @@ policyRules:
     conditions: 
       condition: AND
       rules:
-       - id: squid.LogMetric
-         field: squid.LogMetric
+       - id: squid-vnf.LogMetric
+         field: squid-vnf.LogMetric
          type: string
          input: text
          operator: equal
-         value: 'mon_rule_squid_cpu_util'
-       - id: haproxy.LogMetric
-         field: haproxy.LogMetric
+         value: 'mon_rule_vnf_squid-vnf_vdu_vdu01_cpu_util'
+       - id: haproxy-vnf.LogMetric
+         field: haproxy-vnf.LogMetric
          type: string
          input: text
          operator: equal
-         value: 'mon_rule_haproxy_frontend_scur'
+         value: 'mon_rule_vnf_haproxy-vnf_vdu_vdu01_haproxy_frontend_scur'
     actions:
      - action_object: "ElasticityAction"
        action_type: "OrchestrationType"
