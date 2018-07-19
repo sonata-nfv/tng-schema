@@ -17,7 +17,8 @@ monitoring_rules:
     description: "Trigger events if CPU load is above 70 percent."
     duration: 60
     duration_unit: "s"
-    condition:  "vdu01:vm_cpu_perc > 70"
+    condition:  "vdu01:vm_cpu_perc"
+    threshold:  " > 70"
 policyRules:
   - name: "actionUponAlert"
     salience: 1
