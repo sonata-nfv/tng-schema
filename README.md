@@ -14,6 +14,12 @@ The schema files are written in JSON-Schema Draft-04.
 
 The documentation can be found in the [wiki](https://github.com/sonata-nfv/tng-schema/wiki), e.g., linking to the [5GTANGO Package Specification (latest)](https://github.com/sonata-nfv/tng-schema/wiki/PkgSpec_LATEST).
 
+## Dependencies
+
+The schemas and descriptors are based on JSON-Schema Draft-04.
+
+The validation tests of descriptors against their schemas depend on a number of Python packages that are listed and can be installed through [`setup.py`](/tools/validate/setup.py).
+
 ## Development
 
 To contribute to the development of the 5GTANGO schema files, you may use the very same development workflow as for any other 5GTANGO Github project. That is, you have to fork the repository and create pull requests. Moreover, all discussions regarding the 5GTANGO schemas take place on GitHub, and NOT on the wiki.
