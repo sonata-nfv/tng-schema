@@ -156,7 +156,7 @@ properties:
     description: "Reference to the VNFD used to instanciate this VNF."
     type: "string"
     pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-  deployment_favour:
+  deployment_flavour:
     description: "Reference to the selected deployment flavour (vnfd:deployment_flavour:id)."
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.:]+$"
