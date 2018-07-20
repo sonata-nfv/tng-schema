@@ -2,9 +2,9 @@
 
 <p align="center"><img src="https://github.com/sonata-nfv/tng-api-gtw/wiki/images/sonata-5gtango-logo-500px.png" /></p>
 
-# tango-schema
+# tng-schema
 
-The schema files for the various descriptors used by 5GTANGO as well as some examples and tests. The schema files in this repository serve as ground truth for the whole 5GTANGO project. Thus, every tool and sub-project should be able to parse and handle the latest versions of these files (or - once available - tagged versions in corresponding branches).
+The `tng-schema` repository contains the schema files for the various descriptors used by 5GTANGO as well as some examples and tests. The schema files in this repository serve as ground truth for the whole 5GTANGO project. Thus, every tool and sub-project should be able to parse and handle the latest versions of these files (or - once available - tagged versions in corresponding branches).
 
 The 5GTANGO schemas are a fork of the SONATA NFV schemas which have been developed in the 5GPPP project SONATA ([http://sonata-nfv.eu](http://sonata-nfv.eu)).
 
@@ -12,7 +12,13 @@ The schema files are written in JSON-Schema Draft-04.
 
 ## Documentation
 
-* [5GTANGO Package Specification (latest)](https://github.com/sonata-nfv/tng-schema/wiki/PkgSpec_LATEST)
+The documentation can be found in the [wiki](https://github.com/sonata-nfv/tng-schema/wiki), e.g., linking to the [5GTANGO Package Specification (latest)](https://github.com/sonata-nfv/tng-schema/wiki/PkgSpec_LATEST).
+
+## Dependencies
+
+The schemas and descriptors are based on JSON-Schema Draft-04.
+
+The validation tests of descriptors against their schemas depend on a number of Python packages that are listed and can be installed through [`setup.py`](/tools/validate/setup.py).
 
 ## Development
 
@@ -41,7 +47,7 @@ Once you did this you can trigger the tests like this (in the root of this repos
 test.sh
 ```
 
-### Useful Tools
+### Useful Tools and Links
 
 There are some useful tools that support working the JSON and YAML files.
 
@@ -51,14 +57,12 @@ There are some useful tools that support working the JSON and YAML files.
 - http://jsonschemalint.com/draft4/#/ Write JSON-Schema documents and validate JSON
 - http://jsonschema.net/#/ Create JSON-Schema from JSON documents
 
-## License
-
-The 5GTANGO schemata for the VNF descriptor as well as the NS descriptor is published under Apache 2.0 license. Please see the LICENSE file for more details.
-
-## Useful Links
-
 - http://json-schema.org/ The general JSON-Schema standard
 - https://spacetelescope.github.io/understanding-json-schema/index.html Easy introduction into JSON-Schemas
+
+## License
+
+The 5GTANGO schemata and descriptors are published under Apache 2.0 license. Please see the [LICENSE file](LICENSE) for more details.
 
 ---
 #### Lead Developers

@@ -34,22 +34,28 @@
 ---
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/policy-descriptor/policy-schema.yml"
 
-name: "samplepolicydemo"
-vendor: "tango"
+name: "test_NS-squid-haproxy-Elasticity-Policy-Premium"
+vendor: "eu.5gtango"
 version: "0.1"
 network_service:
-  vendor: "tango"
-  name: "default-nsd"
-  version: "0.9"
+  vendor: "eu.5gtango"
+  name: "NS-squid-haproxy"
+  version: "0.1"
 monitoring_rules:
-  - name: "mon:rule:vm_cpu_perc"
-    description: "Trigger events if CPU load is above 70 percent."
+  - name: "mon_rule:vnf:squid-vnf:vdu:vdu01:cpu_util"
+    description: "Trigger events if CPU load of squid is above 50 percent."
     duration: 60
     duration_unit: "s"
-    condition:  "vdu01:vm_cpu_perc"
-    threshold:  " > 70"
+    condition:  "vdu01:cpu_util"
+    threshold:  "> 50"
+  - name: "mon_rule:vnf:haproxy-vnf:vdu:vdu01:haproxy_frontend_scur"
+    description: "Trigger events if haproxy frontend session are 10."
+    duration: 60
+    duration_unit: "s"
+    condition:  "haproxy_frontend_scur"
+    threshold:  " > 10"
 policyRules:
-  - name: "actionUponAlert"
+  - name: "ElasticityRule"
     salience: 1
     inertia: 
       value: 30
@@ -57,45 +63,21 @@ policyRules:
     conditions: 
       condition: AND
       rules:
-       - id: vnf1.LogMetric
-         field: vnf1.LogMetric
+       - id: squid-vnf.LogMetric
+         field: squid-vnf.LogMetric
          type: string
          input: text
          operator: equal
-         value: 'high_cpu_load'
+         value: 'mon_rule_vnf_squid-vnf_vdu_vdu01_cpu_util'
+       - id: haproxy-vnf.LogMetric
+         field: haproxy-vnf.LogMetric
+         type: string
+         input: text
+         operator: equal
+         value: 'mon_rule_vnf_haproxy-vnf_vdu_vdu01_haproxy_frontend_scur'
     actions:
-     - action_object: "ComponentResourceAllocationAction"
-       action_type: "InfrastructureType"
-       name: "ApplyFlavour"
-       value: "3"
-       target: "vnf1"
-  - name: "highTranscodingRateRule"
-    salience: 1
-    inertia: 
-      value: 30
-      duration_unit: "m"
-    duration: 
-      value: 10
-      duration_unit: "m"
-    aggregation : "avg"
-    conditions: 
-      condition: AND
-      rules:
-       - id: vnf1.CPULoad
-         field: vnf1.CPULoad
-         type: double
-         input: number
-         operator: greater
-         value: '70'
-       - id: vnf2.RAM
-         field: vnf2.RAM
-         type: integer
-         input: select
-         operator: less
-         value: '8'
-    actions:
-     - action_object: "ComponentResourceAllocationAction"
-       action_type: "InfrastructureType"
-       name: "ApplyFlavour"
-       value: "3"
-       target: "vnf1"
+     - action_object: "ElasticityAction"
+       action_type: "OrchestrationType"
+       name: "Spawn"
+       value: "1"
+       target: "vnf_squid"
