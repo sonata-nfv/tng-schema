@@ -80,6 +80,7 @@ properties:
     enum:
     - INSTANTIATED
     - TERMINATED
+    - ERROR
   instantiateTime:
     description: "Timestamp indicating when the instantiation will be trigerred (0 means immediatly)."
     type: "string"
