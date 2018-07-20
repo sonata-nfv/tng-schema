@@ -101,6 +101,12 @@ properties:
     #this parameter needs to be better define (maybe as a hash?)
     description: "NST user defined data."
     type: string
+  NSI_list_ref:
+    description: "The reference list of uuid instances based on the NST"
+    type: "array"
+    items:
+      type: "string"
+      pattern: "^[a-zA-Z0-9\\-_.]+$"
   qos:
     description: "slice qos"
     type: "object"

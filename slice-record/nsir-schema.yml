@@ -31,7 +31,7 @@
 ## partner consortium (www.5gtango.eu).
 
 
----
+--- 
 $schema: "http://json-schema.org/draft-04/schema#"
 #id: "http://www.sonata-nfv.eu/schema/nst-schema"
 version: 0.9
@@ -75,7 +75,7 @@ properties:
     description: "SAP of the NSI."
     type: "string"
   nsiState:
-    description: "State of the NSI (possible values INSTANTIATED, TERMINATED)."
+    description: "State of the NSI (possible values INSTANTIATED, TERMINATED, ERROR)."
     type: string
     enum:
     - INSTANTIATED
