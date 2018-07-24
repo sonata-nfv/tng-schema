@@ -281,6 +281,9 @@ properties:
             username:
               description: "SNMP username."
               type: "string"
+            port:
+              description: "SNMP port."
+              type: "integer"
             interval:
               description: "Time interval between SNMP requests."
               type: "integer"
