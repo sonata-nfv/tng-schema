@@ -59,8 +59,21 @@ properties:
     description: "The list of Network Services uuids composing the NST"
     type: "array"
     items:
-      type: "string"
-      pattern: "^[a-zA-Z0-9\\-_.]+$"
+      #type: "string"
+      #pattern: "^[a-zA-Z0-9\\-_.]+$"
+      description: "A service uuid with related parameters (i.e slaId)"
+      type: "object"
+      properties:
+        servID:
+          description: "An arbitrary description of the FSM."
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        slaID:
+          description: "A unique identifier of this FSM within the scope of this VNF descriptor."
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+      required:
+        - servID
     minItems: 1
   onboardingState:
     description: "Defines the onboarding state (ENABLE, DISABLED)."
