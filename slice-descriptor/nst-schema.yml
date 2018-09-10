@@ -1,156 +1,130 @@
+## Copyright (c) 2015 SONATA-NFV, 2017 5GTANGO
+## ALL RIGHTS RESERVED.
+##
+## Licensed under the Apache License, Version 2.0 (the "License");
+## you may not use this file except in compliance with the License.
+## You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing, software
+## distributed under the License is distributed on an "AS IS" BASIS,
+## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+## See the License for the specific language governing permissions and
+## limitations under the License.
+##
+## Neither the name of the SONATA-NFV, 5GTANGO
+## nor the names of its contributors may be used to endorse or promote
+## products derived from this software without specific prior written
+## permission.
+##
+## This work has been performed in the framework of the SONATA project,
+## funded by the European Commission under Grant number 671517 through
+## the Horizon 2020 and 5G-PPP programmes. The authors would like to
+## acknowledge the contributions of their colleagues of the SONATA
+## partner consortium (www.sonata-nfv.eu).
+##
+## This work has been performed in the framework of the 5GTANGO project,
+## funded by the European Commission under Grant number 761493 through
+## the Horizon 2020 and 5G-PPP programmes. The authors would like to
+## acknowledge the contributions of their colleagues of the 5GTANGO
+## partner consortium (www.5gtango.eu).
+
+
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
 #id: "http://www.sonata-nfv.eu/schema/nst-schema"
 title: "Network Slice Template Schema"
 version: 0.9
-description: "The core scheme for network slice template"
-
-##
-## Some definitions used later on.
-##
-definitions:
-  connection_point_types:
-    enum:
-      - "internal"
-      - "external"
-      - "management"
-  interfaces:
-    enum:
-      - "ethernet"
-      - "ipv4"
-      - "ipv6"
+#description: "The core scheme for network slice template (NST)"
 
 ##
 ## Network Slice Template JSON SCHEMA
 ##
-type: "object" 
+
+type: "object"
 properties:
-  s_nssai:
-    description: "s-nssai identifies a network slice"
-    type: "object"
-    properties:
-      sst:
-        description: "slice/service type"
-        type: "integer"
-      sd:
-        description: "slice differentiator"
-        type: "integer"
-    required:
-      - sst      
   descriptor_schema:
     description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
     type: "string"
-  vendor:
-    description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
+##  id:
+##    description: "Identifies the Network Slice Template (NST)"
+##    type: "string"
+##    pattern: "^[a-zA-Z0-9\\-_.]+$"
+  name:
+    description: "The name of the NST"
     type: "string"
-    pattern: "^[a-z0-9\\-_.]+$"
-  name: 
-    description: "The name of the network service description."
-    type: "string"
-    pattern: "^[a-z0-9\\-_.]+$"
-  version: 
+    pattern: "^[a-zA-Z0-9\\-_.]+$"
+  sliceServices:
+    description: "The list of Network Services uuids composing the NST"
+    type: "array"
+    items:
+      #type: "string"
+      #pattern: "^[a-zA-Z0-9\\-_.]+$"
+      description: "A service uuid with related parameters (i.e slaId)"
+      type: "object"
+      properties:
+        servID:
+          description: "An arbitrary description of the FSM."
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        servname:
+          description: "The name of the selected service to instantiate."
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        slaID:
+          description: "A unique identifier of this FSM within the scope of this VNF descriptor."
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+      required:
+        - servID
+        - servname
+    minItems: 1
+  onboardingState:
+    description: "Defines the onboarding state (ENABLE, DISABLED)."
+    type: string
+    enum:
+    - ENABLED
+    - DISABLED
+  operationalState:
+    description: "Defines the operational state (ENABLE, DISABLED)."
+    type: string
+    enum:
+    - ENABLED
+    - DISABLED
+  usageState:
+    description: "Defines wether this NST is used or not (IN_USE, NOT_IN_USE)."
+    type: string
+    enum:
+    - IN_USE
+    - NOT_IN_USE
+  version:
     description: "The version of the service descriptor."
     type: "string"
-    pattern: "^[0-9\\-_.]+$"
+    pattern: "^[a-zA-Z0-9\\-_.]+$"
   author:
-    description: "The person or organization that created the NS descriptor."
-    type: "string"
-  description:
-    description: "A longer description of the network service."
-    type: "string"
-  logo:
-    description: "Path to slice logo."
-    type: "string"
-    pattern: "^[A-Za-z0-9\\-_./]+$"
-  licences:
-    description: "Information on the licence of this NST."
+    description: "Name of the NST author/developer."
+    type: string
+  nstInvariantId:
+    description: "Common/Static ID for all versions belonging to the same NST."
+    type: string
+  notificationTypes:
+    description: "Defines multiple notification types."
+    type: string
+    enum:
+    - NstOnboardingNotification
+    - NstChangeNotification
+    - NstDeletionNotification
+  userDefinedData:
+    #this parameter needs to be better define (maybe as a hash?)
+    description: "NST user defined data."
+    type: string
+  NSI_list_ref:
+    description: "The reference list of uuid instances based on the NST"
     type: "array"
     items:
-      anyOf:
-        - type: "object"
-          properties:
-            type:
-              description: "The type of licence, 'public' in this case."
-              type: "string"
-              enum:
-              - "public"
-          required:
-            - "type"
-          additionalProperties: false
-        - type: "object"
-          properties:
-            type:
-              description: "The type of licence, 'private' in this case."
-              type: "string"
-              enum:
-              - "private"
-            url:
-              description: "The URL to the licence file."
-              type: "string"
-          required:
-            - "type"
-            - "url"
-          additionalProperties: false
-    additionalItems: false
-    uniqueItems: true
-  network_services:
-    description: "The recursive NSs (their descriptors), that are part of this network service."
-    type: "array"
-    items: 
-      type: "object"
-      properties:
-        ns_id:
-          description: "A unique identifier of the referenced network service within the scope of this NS descriptor."
-          type: "string"
-        ns_vendor:
-          description: "The vendor id identifies the NS descriptor uniquely across all function descriptors."
-          type: "string"
-          pattern: "^[a-z0-9\\-_.]+$"
-        ns_name:
-          description: "The name of the referenced NS description."
-          type: "string"
-          pattern: "^[a-z0-9\\-_.]+$"
-        ns_version:
-          description: "The version of the referenced NS description."
-          type: "string"
-          pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
-        description:
-          description: "A longer description of the network service."
-          type: "string"
-      required:
-        - ns_id
-        - ns_vendor
-        - ns_name
-        - ns_version
-      additionalProperties: false
-    minItems: 1
-    uniqueItems: true
-  service_interface_points:
-    description: "The connection points of the overall NS, that connects the NS to the external world."
-    type: "array"
-    items:
-      type: "object"
-      properties:
-        id:
-          description: "A NS-unique id of the connection point. Can be used for references."
-          type: "string"
-        interface:
-          description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-          $ref: "#/definitions/interfaces"
-        type:
-          description: "The type of the connection point with respect to its visibility in the service platform"
-          $ref: "#/definitions/connection_point_types"
-        # TODO: Remove? Cyclic reference with virtual_links?
-        virtual_link_reference:
-          description: "A reference to a virtual link, i.e. the virtual_links:id."
-          type: "string"
-      required:
-        - id
-        - interface
-        - type
-      additionalProperties: false
-    minItems: 1
-    uniqueItems: true
+      type: "string"
+      pattern: "^[a-zA-Z0-9\\-_.]+$"
   qos:
     description: "slice qos"
     type: "object"
@@ -175,12 +149,13 @@ properties:
         type: "integer"
       default_max_data_burst:
         description: "in bytes B"
-        type: "integer"
-        
+        type: "integer"       
+
 required: 
   - descriptor_schema
-  - vendor 
-  - name
+  - name 
+#  - id
+  - sliceServices
   - version
-  - s_nssai
-additionalProperties: false
+  - vendor
+additionalProperties: true

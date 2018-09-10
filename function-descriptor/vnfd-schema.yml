@@ -1,3 +1,36 @@
+## Copyright (c) 2015 SONATA-NFV, 2017 5GTANGO
+## ALL RIGHTS RESERVED.
+##
+## Licensed under the Apache License, Version 2.0 (the "License");
+## you may not use this file except in compliance with the License.
+## You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing, software
+## distributed under the License is distributed on an "AS IS" BASIS,
+## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+## See the License for the specific language governing permissions and
+## limitations under the License.
+##
+## Neither the name of the SONATA-NFV, 5GTANGO
+## nor the names of its contributors may be used to endorse or promote
+## products derived from this software without specific prior written
+## permission.
+##
+## This work has been performed in the framework of the SONATA project,
+## funded by the European Commission under Grant number 671517 through
+## the Horizon 2020 and 5G-PPP programmes. The authors would like to
+## acknowledge the contributions of their colleagues of the SONATA
+## partner consortium (www.sonata-nfv.eu).
+##
+## This work has been performed in the framework of the 5GTANGO project,
+## funded by the European Commission under Grant number 761493 through
+## the Horizon 2020 and 5G-PPP programmes. The authors would like to
+## acknowledge the contributions of their colleagues of the 5GTANGO
+## partner consortium (www.5gtango.eu).
+
+
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
 title: "Virtual Network Function Descriptor Schema"
@@ -232,6 +265,59 @@ properties:
           description: "An MD5 hash of the virtual machine image."
           type: "string"
           pattern: "^[A-Fa-f0-9]{32}$"
+        snmp_parameters:
+          description: "Definition of SNMP parameters available from the VDU"
+          type: "object"
+          properties:
+            version:
+              description: "SNMP version to be used."
+              type: "string"
+            auth_protocol:
+              description: "Authentication protocol to be used when requesting SNMP data."
+              type: "string"
+            security_level:
+              description: "Security level."
+              type: "string"
+            username:
+              description: "SNMP username."
+              type: "string"
+            port:
+              description: "SNMP port."
+              type: "integer"
+            interval:
+              description: "Time interval between SNMP requests."
+              type: "integer"
+            oids:
+              description: "List of oids."
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  oid:
+                    description: "metric oid."
+                    type: "string"
+                  metric_name:
+                    description: "metric name."
+                    type: "string"
+                  metric_type:
+                    description: "metric type."
+                    type: "string"
+                  unit:
+                    description: "metric unit."
+                    type: "string"
+                  mib_name:
+                    description: "metric mib name."
+                    type: "string"
+                required:
+                  - oid
+                  - metric_name
+                  - metric_type
+                  - unit
+                  - mib_name
+          required:
+            - version
+            - interval
+            - oids
         resource_requirements:
           description: "The requirments of a (virtual) machine that hosts this VDU. The service platform has to provide machines that meet these requirements."
           type: "object"
@@ -399,6 +485,9 @@ properties:
               minimum: 0
               default: 1
           additionalProperties: false
+        user_data:
+          description: "A script that configures the VDU during boot time."
+          type: "string"
       required:
         - id
         - resource_requirements

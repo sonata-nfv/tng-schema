@@ -15,6 +15,5 @@ VNFD_SCHEMA=${BASE_DIR}/../../function-descriptor/vnfd-schema.yml
 #
 # Execute the tests.
 #
-${CMD} -s ${NAPD_SCHEMA} -y ${BASE_DIR}/../examples/5gtango-vnf-package-example/TOSCA-Metadata/NAPD.yaml
-${CMD} -s ${VNFD_SCHEMA} -y ${BASE_DIR}/../examples/5gtango-vnf-package-example/Definitions/myvnfd.yaml
-${CMD} -s ${REF_SCHEMA} -y ${BASE_DIR}/../examples/5gtango-vnf-package-example/Images/mycloudimage.ref
+${CMD} -s ${VNFD_SCHEMA} -y ${BASE_DIR}/../example-projects/5gtango-vnf-project-example/Definitions/myvnfd.yaml
+${CMD} -s ${REF_SCHEMA} -y ${BASE_DIR}/../example-projects/5gtango-vnf-project-example/Images/mycloudimage.ref

@@ -5,4 +5,4 @@
 * [5GTANGO Package Specification (latest)](https://github.com/sonata-nfv/tng-schema/wiki/PkgSpec_LATEST)
 
 
-There are some example packages given in the `examples/` folder.
+There are some example packages given in the `example-projects/` folder.
