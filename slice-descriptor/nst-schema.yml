@@ -55,12 +55,30 @@ properties:
     description: "The name of the NST"
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
-  nstNsdIds:
+  sliceServices:
     description: "The list of Network Services uuids composing the NST"
     type: "array"
     items:
-      type: "string"
-      pattern: "^[a-zA-Z0-9\\-_.]+$"
+      #type: "string"
+      #pattern: "^[a-zA-Z0-9\\-_.]+$"
+      description: "A service uuid with related parameters (i.e slaId)"
+      type: "object"
+      properties:
+        servID:
+          description: "An arbitrary description of the FSM."
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        servname:
+          description: "The name of the selected service to instantiate."
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        slaID:
+          description: "A unique identifier of this FSM within the scope of this VNF descriptor."
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+      required:
+        - servID
+        - servname
     minItems: 1
   onboardingState:
     description: "Defines the onboarding state (ENABLE, DISABLED)."
@@ -137,7 +155,7 @@ required:
   - descriptor_schema
   - name 
 #  - id
-  - nstNsdIds
+  - sliceServices
   - version
   - vendor
 additionalProperties: true
