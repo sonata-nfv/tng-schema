@@ -70,7 +70,10 @@ policyRules:
      - action_type: "Infrastracture"
        name: "ApplyFlavour"
        value: "3"
-       target: "vnf1"
+       target:
+        name: squid-vnf
+        vendor: eu.5gtango
+        version: '0.1'
   - name: "lowTranscodingRateRule"
     duration: 
       value: 10
@@ -103,15 +106,24 @@ policyRules:
      - action_type: "NetworkMechanism"
        name: "ProvideDedicatedBandwidth"
        value: "200"
-       target: "VirtualLinkA"
+       target: 
+         name: "VirtualLinkA"
+         vendor: eu.5gtango
+         version: '0.1'
      - action_type: "LifecycleManagement"
        name: "restart"
-       target: "vnf1"
+       target: 
+         name: "vnf1"
+         vendor: eu.5gtango
+         version: '0.1'
        stability_period: 
          value: 30
          duration_unit: "m"
      - action_type: "Profile"
        name: "setProfile"
        profile_tag: "Green"
-       target: "vnf1"
+       target:
+        name: squid-vnf
+        vendor: eu.5gtango
+        version: '0.1'
 
