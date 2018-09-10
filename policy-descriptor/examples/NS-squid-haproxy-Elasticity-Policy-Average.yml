@@ -1,53 +1,98 @@
-# do NOT delete: this is used by tng-sdk-descriptorgen
-# default YAML description of an policy example
-
 ---
-descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/policy-descriptor/policy-schema.yml"
-
-name: "test_NS-squid-haproxy-Elasticity-Policy-Average"
-vendor: "eu.5gtango"
-version: "0.1"
+descriptor_schema: https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/policy-descriptor/policy-schema.yml
+name: NS-squid-haproxy-Elasticity-Policy-Average
+vendor: eu.5gtango
+version: '0.1'
 network_service:
-  vendor: "eu.5gtango"
-  name: "NS-squid-haproxy"
-  version: "0.1"
+  vendor: eu.5gtango
+  name: ns-squid-haproxy
+  version: '0.1'
 monitoring_rules:
-  - name: "mon_rule:vnf:squid-vnf:vdu:vdu01:cpu_util"
-    description: "Trigger events if CPU load of squid is above 60 percent."
-    duration: 60
-    duration_unit: "s"
-    condition:  "vdu01:cpu_util"
-    threshold:  "> 60"
-  - name: "mon_rule:vnf:haproxy-vnf:vdu:vdu01:haproxy_frontend_scur"
-    description: "Trigger events if haproxy frontend session are 20."
-    duration: 60
-    duration_unit: "s"
-    condition:  "haproxy_frontend_scur"
-    threshold:  " > 20"
+- name: haproxy-vnf:vdu01:haproxy_backend_sespsrv:more300
+  description: Trigger events if haproxy number of the active sessions per squid server
+    are more than 300.
+  duration: 20
+  duration_unit: s
+  condition: haproxy_backend_sespsrv
+  threshold: " > 300"
+- name: haproxy-vnf:vdu01:haproxy_backend_sespsrv:less50
+  description: Trigger events if haproxy number of the active sessions per squid server
+    are less than 50.
+  duration: 1
+  duration_unit: m
+  condition: haproxy_backend_sespsrv
+  threshold: " < 50"
+- name: haproxy-vnf:vdu01:haproxy_backend_actsrvs:more1
+  description: Trigger events if haproxy number of the squid servers which are in
+    active state are more than 1.
+  duration: 20
+  duration_unit: s
+  condition: haproxy_backend_actsrvs
+  threshold: " > 1"
+- name: haproxy-vnf:vdu01:haproxy_backend_actsrvs:less4
+  description: Trigger events if haproxy number of the squid servers which are in
+    active state are less than 4.
+  duration: 20
+  duration_unit: s
+  condition: haproxy_backend_actsrvs
+  threshold: " < 4"
 policyRules:
-  - name: "ElasticityRule"
-    salience: 1
-    inertia: 
-      value: 30
-      duration_unit: "m"
-    conditions: 
-      condition: AND
-      rules:
-       - id: squid-vnf.LogMetric
-         field: squid-vnf.LogMetric
-         type: string
-         input: text
-         operator: equal
-         value: 'mon_rule_vnf_squid-vnf_vdu_vdu01_cpu_util'
-       - id: haproxy-vnf.LogMetric
-         field: haproxy-vnf.LogMetric
-         type: string
-         input: text
-         operator: equal
-         value: 'mon_rule_vnf_haproxy-vnf_vdu_vdu01_haproxy_frontend_scur'
-    actions:
-     - action_object: "ElasticityAction"
-       action_type: "OrchestrationType"
-       name: "Spawn"
-       value: "1"
-       target: "vnf_squid"
+- name: ElasticityRuleScaleOut
+  salience: 1
+  inertia:
+    value: 30
+    duration_unit: m
+  conditions:
+    condition: AND
+    rules:
+    - id: haproxy-vnf.LogMetric
+      field: haproxy-vnf.LogMetric
+      type: string
+      input: text
+      operator: equal
+      value: haproxy_vnf_vdu01_haproxy_backend_sespsrv_more300
+    - id: haproxy-vnf.LogMetric
+      field: haproxy-vnf.LogMetric
+      type: string
+      input: text
+      operator: equal
+      value: haproxy_vnf_vdu01_haproxy_backend_actsrvs_less4
+  actions:
+  - action_object: ElasticityAction
+    action_type: ScalingType
+    name: addvnf
+    value: '1'
+    target:
+      name: squid-vnf
+      vendor: eu.5gtango
+      version: '0.1'
+- name: ElasticityRuleScaleIn
+  salience: 1
+  inertia:
+    value: 30
+    duration_unit: m
+  conditions:
+    condition: AND
+    rules:
+    - id: haproxy-vnf.LogMetric
+      field: haproxy-vnf.LogMetric
+      type: string
+      input: text
+      operator: equal
+      value: haproxy_vnf_vdu01_haproxy_backend_sespsrv_less50
+    - id: haproxy-vnf.LogMetric
+      field: haproxy-vnf.LogMetric
+      type: string
+      input: text
+      operator: equal
+      value: haproxy_vnf_vdu01_haproxy_backend_actsrvs_more1
+  actions:
+  - action_object: ElasticityAction
+    action_type: ScalingType
+    name: removevnf
+    value: '1'
+    criterion: random
+    target:
+      name: squid-vnf
+      vendor: eu.5gtango
+      version: '0.1'

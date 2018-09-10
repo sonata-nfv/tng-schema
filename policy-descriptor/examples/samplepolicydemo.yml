@@ -39,7 +39,10 @@ policyRules:
        action_type: "InfrastructureType"
        name: "ApplyFlavour"
        value: "3"
-       target: "vnf1"
+       target:
+        name: squid-vnf
+        vendor: eu.5gtango
+        version: '0.1'
   - name: "highTranscodingRateRule"
     salience: 1
     inertia: 
@@ -69,4 +72,7 @@ policyRules:
        action_type: "InfrastructureType"
        name: "ApplyFlavour"
        value: "3"
-       target: "vnf1"
+       target:
+        name: squid-vnf
+        vendor: eu.5gtango
+        version: '0.1'
