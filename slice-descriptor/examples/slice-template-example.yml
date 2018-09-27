@@ -43,6 +43,7 @@ descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/mast
 author: "Pol"
 ##id: "8638af98-789f-462f-a373-ffc67527d82f"
 name: "Rubik_NST"
+description: "This is the description of a NST."
 notificationTypes: "NstOnboardingNotification"
 sliceServices:
     - servID: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
