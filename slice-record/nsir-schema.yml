@@ -151,7 +151,6 @@ properties:
 required: 
   - name 
   - id
-  - description
   - vendor
   - nstId
   - netServInstance_Uuid

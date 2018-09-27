@@ -50,6 +50,9 @@ properties:
   name:
     description: "The name of the NST"
     type: "string"
+  description:
+    description: "Description of the NetSlice Template (services, functions, etc.)"
+    type: "string"
   sliceServices:
     description: "The list of Network Services uuids composing the NST"
     type: "array"
@@ -146,6 +149,7 @@ properties:
 required: 
   - descriptor_schema
   - name 
+  - description
   - sliceServices
   - version
   - vendor
