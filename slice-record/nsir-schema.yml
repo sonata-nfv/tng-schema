@@ -77,6 +77,7 @@ properties:
     description: "State of the NSI (possible values INSTANTIATED, TERMINATED, ERROR)."
     type: string
     enum:
+    - INSTANTIATING
     - INSTANTIATED
     - TERMINATED
     - ERROR
@@ -91,6 +92,9 @@ properties:
     type: "string"
   updateTime:
     description: "Timestamp indicating when the update will be tigerred (0 means immediatly)."
+    type: "string"
+  sliceReadyCallback:
+    description: "Contains the URL to callback the GK when the slice is READY"
     type: "string"
   netServInstance_Uuid:
     description: "The list uuids of the Network Services instances generated when the NSI is requested."
@@ -107,7 +111,9 @@ properties:
           description: "Status of the service instantiation."
           type: "string"
           enum:
-          - INSTANTIATED
+          - INSTANTIATING
+          - READY
+          - TERMINATED
           - ERROR
         servName:
           description: "Name of the service used for this instance."
