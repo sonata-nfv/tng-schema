@@ -79,6 +79,7 @@ properties:
     enum:
     - INSTANTIATING
     - INSTANTIATED
+    - TERMINATING
     - TERMINATED
     - ERROR
   instantiateTime:
@@ -93,7 +94,7 @@ properties:
   updateTime:
     description: "Timestamp indicating when the update will be tigerred (0 means immediatly)."
     type: "string"
-  sliceReadyCallback:
+  sliceCallback:
     description: "Contains the URL to callback the GK when the slice is READY"
     type: "string"
   netServInstance_Uuid:
@@ -112,6 +113,7 @@ properties:
           type: "string"
           enum:
           - INSTANTIATING
+          - TERMINATING
           - READY
           - TERMINATED
           - ERROR
@@ -122,6 +124,9 @@ properties:
           description: "UUID of the service used for this instance."
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
+        requestId:
+          description: "ID of the current request (create/terminate) being carried on. If empty, no action assigned."
+          type: "string"
       required:
         - workingStatus
         - servName
