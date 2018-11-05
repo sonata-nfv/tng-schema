@@ -494,6 +494,16 @@ properties:
       additionalProperties: false
     minItems: 1
     uniqueItems: true
+  cloudnative_deployment_units: 
+    description: "The cloud native deployment units (CNDUs) of the virtual network function."
+    type: "array"
+    minItems: 1
+    uniqueItems: false
+  physical_deployment_units: 
+    description: "The pythical deployment units (PDUs) of the physical network function."
+    type: "array"
+    minItems: 1
+    uniqueItems: false
   connection_points:
     description: "The connection points of the overall VNF, that connects the VNF to the external world."
     type: "array"
@@ -736,5 +746,12 @@ required:
   - vendor 
   - name
   - version
-  - virtual_deployment_units 
+# have at least of deployment unit of any type
+anyOf:
+  - required:
+    - virtual_deployment_units
+  - required:
+    - physical_deployment_units
+  - required:
+    - cloudnative_deployment_units
 additionalProperties: false
