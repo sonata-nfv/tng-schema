@@ -72,6 +72,17 @@ virtual_deployment_units:
 
 cloudnative_deployment_units:
   - id: "cndu01"
+    image: some-docker-hub/nginx:latest
+    connection_points:
+      - id: "http"
+        port: 80
+      - id: "https"
+        port: 443
+    parameters:                 # (optional)
+        k8s_deployment:
+          key1: value2
+        k8s_service:
+          keyA: valueB
 
 physical_deployment_units:
   - id: "pdu01"       

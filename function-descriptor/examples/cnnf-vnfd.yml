@@ -45,62 +45,42 @@ author: "5GTANGO Developer"
 description: "A clound native VNF example."
 
 
-# virtual deployment units inside the VNF
+# cloud native deployment units inside the VNF
 cloudnative_deployment_units:
   - id: "cndu01"
-    #vm_image: "ubuntu:16.04"
-    #vm_image_format: "docker" 
-    #resource_requirements:
-    #  cpu:
-    #    vcpus: 1
-    #  memory:
-    #    size: 512
-    #    size_unit: "MB"
-    #  storage:
-    #    size: 10
-    #    size_unit: "GB"
-    #connection_points:
-    #  - id: "mgmt"
-    #    interface: "ipv4"
-    #    type: "internal"
-    #  - id: "input"
-    #    interface: "ipv4"
-    #    type: "internal"
-    #  - id: "output"
-    #    interface: "ipv4"
-    #    type: "internal"
-        
-        
+    image: some-docker-hub/nginx:latest
+    connection_points:
+      - id: "int-http"
+        port: 80
+      - id: "int-https"
+        port: 443
+    parameters:                 # (optional)
+        k8s_deployment:
+          key1: value2
+        k8s_service:
+          keyA: valueB
+      
 # VNF connection points to the outside world
 connection_points:
-  - id: "mgmt"
+  - id: "http"
     interface: "ipv4"
-    type: "management"
-  - id: "input"
+    type: "serviceendpoint"
+    port: 80
+  - id: "https"
     interface: "ipv4"
-    type: "external"
-  - id: "output"
-    interface: "ipv4"
-    type: "external"
-    
+    type: "serviceendpoint"
+    port: 443
+  
 
-# virtual links connecting the VDUs' connection points with each other and with the VNF's connection points
+# CNNFs only use E-Tree links to map external ports to internal ports
 virtual_links:
-  - id: "mgmt"
-    connectivity_type: "E-LAN"
+  - id: "http-link"
+    connectivity_type: "E-Tree"
     connection_points_reference:
-      - "vdu01:mgmt"
-      - "mgmt"
-    dhcp: True
-  - id: "input"
-    connectivity_type: "E-Line"
+      - "http"
+      - "cdu01:int-http"
+  - id: "https-link"
+    connectivity_type: "E-Tree"
     connection_points_reference:
-      - "vdu01:input"
-      - "input"
-    dhcp: True
-  - id: "output"
-    connectivity_type: "E-Line"
-    connection_points_reference:
-      - "vdu01:output"
-      - "output"
-    dhcp: True
+      - "https"
+      - "cdu01:int-https"

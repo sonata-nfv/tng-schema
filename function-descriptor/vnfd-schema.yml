@@ -96,6 +96,7 @@ definitions:
       - "internal"
       - "external"
       - "management"
+      - "serviceendpoint"
   interfaces:
     enum:
       - "ethernet"
@@ -524,6 +525,105 @@ properties:
   cloudnative_deployment_units: 
     description: "The cloud native deployment units (CNDUs) of the virtual network function."
     type: "array"
+    items:
+      type: "object"
+      properties:
+        description:
+          description: "An arbitrary description of the CNDU:"
+          type: "string"
+        id:
+          description: "A unique identifier of this CNDU within the scope of this VNF descriptor."
+          type: "string"
+        image:
+          description: "The container image of this CNDU."
+          type: "string"  
+        snmp_parameters:
+          description: "Definition of SNMP parameters available from the VDU"
+          type: "object"
+          properties:
+            version:
+              description: "SNMP version to be used."
+              type: "string"
+            auth_protocol:
+              description: "Authentication protocol to be used when requesting SNMP data."
+              type: "string"
+            security_level:
+              description: "Security level."
+              type: "string"
+            username:
+              description: "SNMP username."
+              type: "string"
+            port:
+              description: "SNMP port."
+              type: "integer"
+            interval:
+              description: "Time interval between SNMP requests."
+              type: "integer"
+            oids:
+              description: "List of oids."
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  oid:
+                    description: "metric oid."
+                    type: "string"
+                  metric_name:
+                    description: "metric name."
+                    type: "string"
+                  metric_type:
+                    description: "metric type."
+                    type: "string"
+                  unit:
+                    description: "metric unit."
+                    type: "string"
+                  mib_name:
+                    description: "metric mib name."
+                    type: "string"
+                required:
+                  - oid
+                  - metric_name
+                  - metric_type
+                  - unit
+                  - mib_name
+          required:
+            - version
+            - interval
+            - oids
+        connection_points:
+          # Attention: CNDU connection points are slightly different than usual connection points for VDUs!
+          description: "The connection points of this CNDU. Connects the VDU to other CNDUs or the external world."
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              id:
+                description: "A VNF-unique id of the connection point. Can be used for references."
+                type: "string"
+              port:
+                description: "Port of the container's connection point."
+                type: "integer"
+            required:
+              - id
+              - port
+            additionalProperties: false
+          minItems: 1
+          uniqueItems: true
+        parameters:
+          description: "Additional CNDU parameter dictionaries."
+          type: "object"
+          properties:
+            k8s_deployment:
+              description: "Dictionary of key/values forwarded to K8s."
+              type: "object"
+            k8s_service:
+              description: "Dictionary of key/values forwarded to K8s."
+              type: "object"
+          additionalProperties: true # allow flexability here
+      required:
+        - id
+        - image
+      additionalProperties: false
     minItems: 1
     uniqueItems: false
   physical_deployment_units: 
@@ -551,6 +651,9 @@ properties:
           description: "The type of the connection point with respect to its visibility in the service platform"
           oneOf:
             - $ref: "#/definitions/connection_point_types"
+        port:
+          description: "Port of the connection point (in case it is of type 'serviceendpoint')"
+          type: "integer"
       required:
         - id
         - interface
