@@ -255,6 +255,7 @@ properties:
         id:
           description: "A unique identifier of this VDU within the scope of this VNF descriptor."
           type: "string"
+        # required default image
         vm_image:
           description: "The reference to a virtual machine image."
           type: "string"
@@ -265,6 +266,32 @@ properties:
           description: "An MD5 hash of the virtual machine image."
           type: "string"
           pattern: "^[A-Fa-f0-9]{32}$"
+        # optional alternative images for x86, ARM, etc
+        alternative_images:
+          description: "Alternative images for other architectures"
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              vm_image:
+                description: "The reference to a virtual machine image."
+                type: "string"
+              vm_image_format:
+                description: "The format of the virtual machine image."
+                $ref: "#/definitions/images_formats"
+              vm_image_md5:
+                description: "An MD5 hash of the virtual machine image."
+                type: "string"
+                pattern: "^[A-Fa-f0-9]{32}$"
+              vm_image_arch:
+                description: "Target architecture for this image"
+                type: "string"
+            required:
+              - vm_image
+              - vm_image_format
+              - vm_image_arch
+            additionalProperties: false
+          uniqueItems: true
         snmp_parameters:
           description: "Definition of SNMP parameters available from the VDU"
           type: "object"
