@@ -301,7 +301,18 @@ properties:
             dhcp:
               type: "boolean"
             qos:
-              type: "string"
+              type: "array"
+              items:
+                # arbitrary key/value pairs
+                type: "object"
+                patternProperties:
+                  # keys can be arbitrary strings
+                  "^.*$":
+                    # values need to be strings or numbers (int or float)
+                    anyOf:
+                      - type: string
+                      - type: number
+                additionalProperties: false
           required:
             - id
             - connectivity_type
