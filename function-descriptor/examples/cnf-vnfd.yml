@@ -72,7 +72,7 @@ connection_points:
     port: 443
   
 
-# CNNFs only use E-Tree links to map external ports to internal ports
+# CNFs only use E-Tree links to map external ports to internal ports
 virtual_links:
   - id: "http-link"
     connectivity_type: "E-Tree"

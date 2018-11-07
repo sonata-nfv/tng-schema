@@ -45,7 +45,7 @@
 CMD=yamlvalidate
 BASE_DIR=`dirname $0`
 SCHEMA=${BASE_DIR}/../vnfd-schema.yml
-FILE=${BASE_DIR}/../examples/cnnf-vnfd.yml
+FILE=${BASE_DIR}/../examples/cnf-vnfd.yml
 
 #
 # We can provide an argument that overrides
