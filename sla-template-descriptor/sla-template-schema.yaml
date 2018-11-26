@@ -1,0 +1,124 @@
+---
+"$schema": http://json-schema.org/draft-04/schema#
+definitions: {}
+properties:
+  author:
+    "$id": "/properties/author"
+    type: string
+  descriptor_schema:
+    "$id": "/properties/descriptor_schema"
+    type: string
+  name:
+    "$id": "/properties/name"
+    type: string
+  vendor:
+    "$id": "/properties/vendor"
+    type: string
+  version:
+    "$id": "/properties/version"
+    type: string
+  sla_template:
+    "$id": "/properties/sla_template"
+    type: object
+    properties:
+      offer_date:
+        "$id": "/properties/sla_template/properties/offer_date"
+        type: string
+      expiration_date:
+        "$id": "/properties/sla_template/properties/expiration_date"
+        type: string
+      template_name:
+        "$id": "/properties/sla_template/properties/template_name"
+        type: string
+      provider_name:
+        "$id": "/properties/sla_template/properties/provider_name"
+        type: string
+      template_initiator:
+        "$id": "/properties/sla_template/properties/template_initiator"
+        type: string
+      service:
+        "$id": "/properties/sla_template/properties/service"
+        type: object
+        properties:
+          ns_uuid:
+            "$id": "/properties/sla_template/properties/service/properties/ns_uuid"
+            type: string
+          ns_name:
+            "$id": "/properties/sla_template/properties/service/properties/ns_name"
+            type: string
+          ns_vendor:
+            "$id": "/properties/sla_template/properties/service/properties/ns_vendor"
+            type: string
+          ns_version:
+            "$id": "/properties/sla_template/properties/service/properties/ns_version"
+            type: string
+      guaranteeTerms:
+        "$id": "/properties/sla_template/properties/guaranteeTerms"
+        type: array
+        items:
+          "$id": "/properties/sla_template/properties/guaranteeTerms/items"
+          properties:
+            guaranteeID:
+              "$id": "/properties/sla_template/properties/guaranteeTerms/items/guaranteeID"
+              type: string
+            guarantee_name:
+              "$id": "/properties/sla_template/properties/guaranteeTerms/items/guarantee_name"
+              type: string
+            guarantee_threshold:
+              "$id": "/properties/sla_template/properties/guaranteeTerms/items/guarantee_threshold"
+              type: string
+            guarantee_operator:
+              "$id": "/properties/sla_template/properties/guaranteeTerms/items/guarantee_operator"
+              type: string
+            guarantee_unit:
+              "$id": "/properties/sla_template/properties/guaranteeTerms/items/guarantee_unit"
+              type: string
+            guarantee_period:
+              "$id": "/properties/sla_template/properties/guaranteeTerms/items/guarantee_period"
+              type: string
+            guarantee_definition:
+              "$id": "/properties/sla_template/properties/guaranteeTerms/items/guarantee_definition"
+              type: string
+            target_slo:
+              "$id": "/properties/sla_template/properties/guaranteeTerms/items/target_slo"
+              type: array
+              items:
+                "$id": "/properties/sla_template/properties/guaranteeTerms/items/target_slo/items"
+                properties:
+                  target_kpi:
+                    "$id": "/properties/sla_template/properties/guaranteeTerms/items/target_slo/items/target_kpi"
+                    type: string
+                  target_value:
+                    "$id": "/properties/sla_template/properties/guaranteeTerms/items/target_slo/items/target_value"
+                    type: string
+                  target_operator:
+                    "$id": "/properties/sla_template/properties/guaranteeTerms/items/target_slo/items/target_operator"
+                    type: string
+                  target_duration:
+                    "$id": "/properties/sla_template/properties/guaranteeTerms/items/target_slo/items/target_duration"
+                    type: string
+                  target_period:
+                    "$id": "/properties/sla_template/properties/guaranteeTerms/items/target_slo/items/target_period"
+                    type: string
+      licensing:
+        "$id": "/properties/sla_template/properties/licensing"
+        type: object
+        properties:
+          service_based:
+            "$id": "/properties/sla_template/properties/licensing/service_based"
+            type: object
+            properties:
+              service_licence_type:
+                "$id": "/properties/sla_template/properties/licensing/service_based/service_licence_type"
+                description: Trial | Private | Public
+                type: string
+              service_licence_instances:
+                "$id": "/properties/sla_template/properties/licensing/service_based/service_licence_instances"
+                description: Number of allowed instances
+                type: string
+              service_licence_period:
+                "$id": "/properties/sla_template/properties/licensing/service_based/service_licence_period"
+                type: string
+              service_licence_expiration_date:
+                "$id": "/properties/sla_template/properties/licensing/service_based/service_licence_expiration_date"
+                type: string
