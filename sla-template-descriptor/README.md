@@ -17,28 +17,24 @@ be present in each and every sla template descriptor.
 At the root block, we first have the mandatory fields, that describe and identify the sla template descriptor in a unique way.
 
 * *schema* (optional) provides a link to the schema that is used to describe the sla template and can be used to validate the sla template descriptor file. This is related to the original JSON schema specification.
-
 *  *name* is the name of the sla template.  
-
 *  *vendor* is the vendor of the sla template.    
-
 *  *version* is the version of the sla template.  
 
 The general descriptor block also contains some optional components as outlined below.
 
 *  *author* (optional) describes the author of the sla template descriptor.
-
 *  *description* (optional) provides an arbitrary description of the sla template.
  
  
 ## SLA Template Section
 An SLA template descriptor has to include an sla_template block. The following three fields are mandatory:      
 
-*  *template_name* is the name of the SLA Template.  
-
-*  *offered_date* is the creation date of the template.     
-
-*  *valid_until* is the expiration date of the template.  
+*  *template_name* - is the name of the SLA Template.  
+*  *offer_date* - is the creation date of the template.     
+*  *expiration_date* - is the expiration date of the template.  
+*  *provider_name* - the network operator that provides the specific template (e.g. Telefonica)
+*  *template_initiator* - the initiator of the template (on behalf of the provider)
 
 
 ### NS Section
@@ -54,10 +50,21 @@ An SLA template descriptor has to include at least one ns block as child of sla_
 An SLA template descriptor has to include an array of guarantee terms for the corresponding NS (as a child of the ns block). The guaranteeTerms array include the following:
 
 *  *guaranteeID* the identifier of the guarantee term
-*  *name* the name of the guarantee term
-*  *definition* ta definition for the guarantee term
-*  *value* the value of the guarantee term
-*  *operator* the operator of the guarantee term expression
-*  *unit* the unit of the guarantee term
-*  *serviceLevelObjetive* that is an object describing in detail the guarantee term (monitoring period, expression etc.)
+*  *guarantee_name* the name of the guarantee term
+*  *guarantee_definition* ta definition for the guarantee term
+*  *guarantee_threshold* the value of the guarantee term
+*  *guarantee_operator* the operator of the guarantee term expression
+*  *guarantee_unit* the unit of the guarantee term
+*  *guarantee_period
+*  *target_slo* that is an object describing in detail the guarantee term (monitoring period, expression etc.)
+
+#### Licensing Section
+An SLA template descriptor include an object which define the type of license for the Network Service described in th template. The Licensing object include the following:
+
+*  *service_licence_type* - the type of the license (Trial | Public | Private)
+*  *service_licence_instances* - the allowed NS instances per user and per license 
+*  *service_licence_period* - - The license period. 
+*  *service_licence_expiration_date* - the license expiration date 
+
+
 
