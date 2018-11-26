@@ -13,7 +13,7 @@
 CMD=yamlvalidate
 BASE_DIR=`dirname $0`
 SCHEMA=${BASE_DIR}/../sla-template-schema.yml
-FILE=${BASE_DIR}/../examples/premium-template-example.yml
+FILE=${BASE_DIR}/../examples/silver-template-example.yml
 
 #
 # We can provide an argument that overrides
