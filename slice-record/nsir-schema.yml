@@ -81,6 +81,7 @@ properties:
     - INSTANTIATED
     - TERMINATING
     - TERMINATED
+    - READY
     - ERROR
   instantiateTime:
     description: "Timestamp indicating when the instantiation will be trigerred (0 means immediatly)."
@@ -113,9 +114,10 @@ properties:
           type: "string"
           enum:
           - INSTANTIATING
+          - INSTANTIATED
           - TERMINATING
-          - READY
           - TERMINATED
+          - READY
           - ERROR
         servName:
           description: "Name of the service used for this instance."
