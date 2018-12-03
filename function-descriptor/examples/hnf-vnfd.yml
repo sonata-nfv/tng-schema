@@ -85,7 +85,24 @@ cloudnative_deployment_units:
           keyA: valueB
 
 physical_deployment_units:
-  - id: "pdu01"       
+  - id: "pdu01"    
+    address: "example.ip"
+    port: 1234
+    geo_location: "AthensNorth-room6-rack3-slot6"
+    performance:
+      - throughput:      
+          value: 100
+          unit: "mbps" 
+    connection_points:
+      - id: "mgmt"
+        interface: "ipv4"
+        type: "internal"
+      - id: "input"
+        interface: "ipv4"
+        type: "internal"
+      - id: "output"
+        interface: "ipv4"
+        type: "internal"
         
 # VNF connection points to the outside world
 connection_points:

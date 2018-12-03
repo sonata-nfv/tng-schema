@@ -629,6 +629,69 @@ properties:
   physical_deployment_units: 
     description: "The pythical deployment units (PDUs) of the physical network function."
     type: "array"
+    items:
+      type: "object"
+      properties:
+        id:
+          description: "A unique identifier of this PDU within the scope of this VNF descriptor."
+          type: "string"
+        vendor:
+          description: "The vendor of this PDU."
+          type: "string"
+        version:
+          description: "The version of this PDU."
+          type: "string" 
+        description:
+          description: "An arbitrary description of the PDU"
+          type: "string"
+        address:
+          description: "The address to reach the PDU (eg, IP address)"
+          type: "string"
+        port:
+          description: "The PDU's port number"
+          type: "number"
+        geo_location:
+          description: "The geographical location of the PDU. Either descriptive or as GPS coordinates"
+          type: "string"
+        performance:
+          description: "Specification of the possible performance with this PDU"
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              throughput:
+                type: "object"
+                description: "An example performance item with a value and a unit. There might be more"
+                properties:
+                  value:
+                    type: "number"
+                  unit:
+                    type: "string"
+            additionalProperties: true
+        connection_points:
+          description: "The connection points of this PDU. Connects it to other PDUs or the external world."
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              id:
+                description: "A VNF-unique id of the connection point. Can be used for references."
+                type: "string"
+              interface:
+                description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
+                $ref: "#/definitions/interfaces"
+              type:
+                description: "The type of the connection point with respect to its visibility in the service platform"
+                $ref: "#/definitions/connection_point_types"
+              # TODO: Remove? Cyclic reference with virtual_links?
+              virtual_link_reference:
+                description: "A reference to a virtual link, i.e. the virtual_links:id."
+                type: "string"
+      required:
+        - id
+        - address
+        - port
+      additionalProperties: false
     minItems: 1
     uniqueItems: false
   connection_points:

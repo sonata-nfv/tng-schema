@@ -36,6 +36,7 @@
 
 
 ---
+# the VNFD header doesn't change for PDUs
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/function-descriptor/vnfd-schema.yml"
 
 vendor: "eu.5gtango"
@@ -45,33 +46,38 @@ author: "5GTANGO Developer"
 description: "A PNF example."
 
 
-# virtual deployment units inside the VNF
+# this is the only new section
 physical_deployment_units:
-  - id: "pdu01"
-    #vm_image: "ubuntu:16.04"
-    #vm_image_format: "docker" 
-    #resource_requirements:
-    #  cpu:
-    #    vcpus: 1
-    #  memory:
-    #    size: 512
-    #    size_unit: "MB"
-    #  storage:
-    #    size: 10
-    #    size_unit: "GB"
-    #connection_points:
-    #  - id: "mgmt"
-    #    interface: "ipv4"
-    #    type: "internal"
-    #  - id: "input"
-    #    interface: "ipv4"
-    #    type: "internal"
-    #  - id: "output"
-    #    interface: "ipv4"
-    #    type: "internal"
+    # mandatory: info to identify the PDU and connect to it
+  - id: "pdu01"    
+    address: "example.ip"           # simple info on how to connect to the PDU
+    port: 1234
+    
+    # optional: further useful but not critical info (which might not always be available)
+    vendor: "cisco"
+    version: "16.9"
+    description: "cisco-router-CSR1000v"
+    geo_location: "AthensNorth-room6-rack3-slot6"
+    performance:
+      - throughput:         # predefined types like throughput, processing_delay
+          value: 100
+          unit: "mbps"      # unit may be any string like "mbps" or "reqs_per_sec"
+    
+    # mandatory: similar to VDU connection points. can we use those of PDUs as well?
+    connection_points:
+      - id: "mgmt"
+        interface: "ipv4"
+        type: "internal"
+        # optional: role, description
+      - id: "input"
+        interface: "ipv4"
+        type: "internal"
+      - id: "output"
+        interface: "ipv4"
+        type: "internal"
         
-        
-# VNF connection points to the outside world
+
+# remaining sections are the same for all VNFDs (indep. of VDU, CDU, or PDU)
 connection_points:
   - id: "mgmt"
     interface: "ipv4"
@@ -84,7 +90,6 @@ connection_points:
     type: "external"
     
 
-# virtual links connecting the VDUs' connection points with each other and with the VNF's connection points
 virtual_links:
   - id: "mgmt"
     connectivity_type: "E-LAN"
