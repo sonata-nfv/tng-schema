@@ -1,0 +1,170 @@
+## Copyright (c) 2015 SONATA-NFV, 2017 5GTANGO
+## ALL RIGHTS RESERVED.
+##
+## Licensed under the Apache License, Version 2.0 (the "License");
+## you may not use this file except in compliance with the License.
+## You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing, software
+## distributed under the License is distributed on an "AS IS" BASIS,
+## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+## See the License for the specific language governing permissions and
+## limitations under the License.
+##
+## Neither the name of the SONATA-NFV, 5GTANGO
+## nor the names of its contributors may be used to endorse or promote
+## products derived from this software without specific prior written
+## permission.
+##
+## This work has been performed in the framework of the SONATA project,
+## funded by the European Commission under Grant number 671517 through
+## the Horizon 2020 and 5G-PPP programmes. The authors would like to
+## acknowledge the contributions of their colleagues of the SONATA
+## partner consortium (www.sonata-nfv.eu).
+##
+## This work has been performed in the framework of the 5GTANGO project,
+## funded by the European Commission under Grant number 761493 through
+## the Horizon 2020 and 5G-PPP programmes. The authors would like to
+## acknowledge the contributions of their colleagues of the 5GTANGO
+## partner consortium (www.5gtango.eu).
+
+
+--- 
+$schema: "http://json-schema.org/draft-04/schema#"
+definitions: {}
+properties: 
+  author: 
+    $id: /properties/author
+    type: string
+  description: 
+    $id: /properties/description
+    type: string
+  descriptor_schema: 
+    $id: /properties/descriptor_schema
+    type: string
+  name: 
+    $id: /properties/name
+    type: string
+  sla_template: 
+    $id: /properties/sla_template
+    properties: 
+      ns: 
+        $id: /properties/sla_template/properties/ns
+        properties: 
+          guaranteeTerms: 
+            $id: /properties/sla_template/properties/ns/properties/guaranteeTerms
+            items: 
+              $id: /properties/sla_template/properties/ns/properties/objectives/items
+              properties: 
+                definition: 
+                  $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/definition
+                  description: "The derfinition of the guarantee term."
+                  type: string
+                guaranteeID: 
+                  $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/guaranteeID
+                  description: "The ID of the guarantee term"
+                  type: string
+                name: 
+                  $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/name
+                  description: "The name of the guarantee term."
+                  type: string
+                operator: 
+                  $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/operator
+                  description: "The operator of the expression used in the guarantee term"
+                  type: string
+                serviceLevelObjetive: 
+                  $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/serviceLevelObjetive
+                  properties: 
+                    duration: 
+                      $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/serviceLevelObjetive/properties/duration
+                      description: "The monitoring duration of the guarantee"
+                      type: string
+                    parameter: 
+                      $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/serviceLevelObjetive/properties/parameter
+                      description: "The service level objective that is going to be guaranteed"
+                      type: string
+                    period: 
+                      $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/serviceLevelObjetive/properties/period
+                      description: "The period that the guarantee term will be calculated"
+                      type: string
+                    serviceLevel: 
+                      $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/serviceLevelObjetive/properties/serviceLevel
+                      description: "The service level expression that is guaranteed"
+                      type: string
+                    serviceLevelDetail: 
+                      $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/serviceLevelObjetive/properties/serviceLevelDetail
+                      description: "The service level expression in detail"
+                      items: 
+                        $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/serviceLevelObjetive/properties/serviceLevelDetail/items
+                        properties: 
+                          operator: 
+                            $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/serviceLevelObjetive/properties/serviceLevelDetail/items/operator
+                            description: "The operator of the expression used in the guarantee term"
+                            type: string
+                          unit: 
+                            $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/serviceLevelObjetive/properties/serviceLevelDetail/items/unit
+                            description: "The unit of the guarantee term"
+                            type: string
+                          value: 
+                            $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/serviceLevelObjetive/properties/serviceLevelDetail/items/value
+                            description: "The value of the guarantee term"
+                            type: string
+                        type: object
+                      type: array
+                    target_value: 
+                      $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/serviceLevelObjetive/properties/target_value
+                      description: "The monitoring target_value of the guarantee"
+                      type: string
+                  type: object
+                unit: 
+                  $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/unit
+                  description: "The unit of the guarantee term"
+                  type: string
+                value: 
+                  $id: /properties/sla_template/properties/ns/properties/objectives/items/properties/value
+                  description: "The value of the guarantee term"
+                  type: string
+              type: object
+            type: array
+          ns_description: 
+            $id: /properties/sla_template/properties/ns/properties/ns_description
+            description: "The description of the correasponding NS"
+            type: string
+          ns_name: 
+            $id: /properties/sla_template/properties/ns/properties/ns_name
+            description: "The correasponding NS name"
+            type: string
+          ns_uuid: 
+            $id: /properties/sla_template/properties/ns/properties/ns_uuid
+            description: "The correasponding NS uuid"
+            type: string
+          ns_vendor: 
+            $id: /properties/sla_template/properties/ns/properties/ns_vendor
+            description: "The correasponding NS vendor"
+            type: string
+          ns_version: 
+            $id: /properties/sla_template/properties/ns/properties/ns_version
+            description: "The correasponding NS version"
+            type: string
+        type: object
+      offered_date: 
+        $id: /properties/sla_template/properties/offered_date
+        description: "The offered date of the SLA Template"
+        type: string
+      template_name: 
+        $id: /properties/sla_template/properties/template_name
+        description: "The oname of the SLA Template"
+        type: string
+      valid_until: 
+        $id: /properties/sla_template/properties/valid_until
+        description: "The expiration date of the SLA Template"
+        type: string
+    type: object
+  vendor: 
+    $id: /properties/vendor
+    type: string
+  version: 
+    $id: /properties/version
+    type: string

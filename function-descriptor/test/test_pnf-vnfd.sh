@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## Copyright (c) 2015 SONATA-NFV, 2017 5GTANGO
 ## ALL RIGHTS RESERVED.
 ##
@@ -30,40 +32,31 @@
 ## acknowledge the contributions of their colleagues of the 5GTANGO
 ## partner consortium (www.5gtango.eu).
 
+##
+## Tests the simplest-example package descriptor against
+## the package descriptor schema.
+##
+## Since simplest-example does not contain a '$schema' key
+## it is only tested against the standard JSON Schema 
+## schema by default. To test it agains our package
+## descriptor schema, we need this test.
+##
 
-descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/sla-template-descriptor/sla-template-schema.yml"
-name: "example-sla-template-premium"
-vendor: "tango-sla-template"
-version: "1.0"
-author: "Evgenia Kapassa, Marios Touloupou"
-description: "This is a simple SLA Template for 5GTANGO Release 1"
-sla_template: 
- template_name: "Premium"
- offered_date: "2018-05-30 10:00:00"
- valid_until: "2019-05-30 10:00:00"
- ns: 
-  ns_uuid: "413635ba-490a-46e0-a022-fc6f7186c26c"
-  ns_vendor: "eu.sonata-nfv.service-descriptor"
-  ns_name: "sonata-demo"
-  ns_version: "0.2.1"
-  ns_description: "The network service descriptor for the SONATA demo, comprising iperf, a firewall, and tcpump."
-  guaranteeTerms: 
-   - guaranteeID: "g1"
-     name: "Resilience "
-     definition: "Resilience is the persistence of dependability when facing changes"
-     value: "60000"
-     operator: "greater"
-     unit: "sec"
-     serviceLevelObjetive: 
-      period: "Daily"
-      parameter: "Resilience"
-      serviceLevel: "1min/24h"
-      duration: "86400"
-      target_value: "60000"
-      serviceLevelDetail: 
-      - unit: "ms"
-        value: "6000"
-        operator: "greater"
-      - unit: "86400"
-        value: "sec"
-        operator: "equal"
+CMD=yamlvalidate
+BASE_DIR=`dirname $0`
+SCHEMA=${BASE_DIR}/../vnfd-schema.yml
+FILE=${BASE_DIR}/../examples/pnf-vnfd.yml
+
+#
+# We can provide an argument that overrides
+# the given CMD variable.
+#
+if [ $# -eq 1 ]
+then
+  CMD=$1 
+fi
+
+#
+# Execute the test.
+#
+${CMD} -s ${SCHEMA} -y ${FILE}

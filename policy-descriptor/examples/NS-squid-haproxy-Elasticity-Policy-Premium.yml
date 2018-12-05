@@ -29,55 +29,88 @@
 ## the Horizon 2020 and 5G-PPP programmes. The authors would like to
 ## acknowledge the contributions of their colleagues of the 5GTANGO
 ## partner consortium (www.5gtango.eu).
-
-
 ---
-descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/policy-descriptor/policy-schema.yml"
-
-name: "test_NS-squid-haproxy-Elasticity-Policy-Premium"
-vendor: "eu.5gtango"
-version: "0.1"
+descriptor_schema: https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/policy-descriptor/policy-schema.yml
+name: NS-squid-haproxy-Elasticity-Policy-Premium
+vendor: eu.5gtango
+version: '0.1'
 network_service:
-  vendor: "eu.5gtango"
-  name: "NS-squid-haproxy"
-  version: "0.1"
+  vendor: eu.5gtango
+  name: ns-squid-haproxy
+  version: '0.1'
 monitoring_rules:
-  - name: "mon_rule:vnf:squid-vnf:vdu:vdu01:cpu_util"
-    description: "Trigger events if CPU load of squid is above 50 percent."
-    duration: 60
-    duration_unit: "s"
-    condition:  "vdu01:cpu_util"
-    threshold:  "> 50"
-  - name: "mon_rule:vnf:haproxy-vnf:vdu:vdu01:haproxy_frontend_scur"
-    description: "Trigger events if haproxy frontend session are 10."
-    duration: 60
-    duration_unit: "s"
-    condition:  "haproxy_frontend_scur"
-    threshold:  " > 10"
+- name: haproxy-vnf:vdu01:haproxy_backend_sespsrv:more150
+  description: Trigger events if haproxy number of the active sessions per squid server
+    are more than 150.
+  duration: 20
+  duration_unit: s
+  condition: haproxy_backend_sespsrv
+  threshold: " > 150"
+- name: haproxy-vnf:vdu01:haproxy_backend_sespsrv:less30
+  description: Trigger events if haproxy number of the active sessions per squid server
+    are less than 30.
+  duration: 1
+  duration_unit: m
+  condition: haproxy_backend_sespsrv
+  threshold: " < 30"
+- name: haproxy-vnf:vdu01:haproxy_backend_actsrvs:more1
+  description: Trigger events if haproxy number of the squid servers which are in
+    active state are more than 1.
+  duration: 1
+  duration_unit: m
+  condition: haproxy_backend_actsrvs
+  threshold: " > 1"
 policyRules:
-  - name: "ElasticityRule"
-    salience: 1
-    inertia: 
-      value: 30
-      duration_unit: "m"
-    conditions: 
-      condition: AND
-      rules:
-       - id: squid-vnf.LogMetric
-         field: squid-vnf.LogMetric
-         type: string
-         input: text
-         operator: equal
-         value: 'mon_rule_vnf_squid-vnf_vdu_vdu01_cpu_util'
-       - id: haproxy-vnf.LogMetric
-         field: haproxy-vnf.LogMetric
-         type: string
-         input: text
-         operator: equal
-         value: 'mon_rule_vnf_haproxy-vnf_vdu_vdu01_haproxy_frontend_scur'
-    actions:
-     - action_object: "ElasticityAction"
-       action_type: "OrchestrationType"
-       name: "Spawn"
-       value: "1"
-       target: "vnf_squid"
+- name: ElasticityRuleScaleOut
+  salience: 1
+  inertia:
+    value: 30
+    duration_unit: m
+  conditions:
+    condition: AND
+    rules:
+    - id: haproxy-vnf.LogMetric
+      field: haproxy-vnf.LogMetric
+      type: string
+      input: text
+      operator: equal
+      value: haproxy_vnf_vdu01_haproxy_backend_sespsrv_more150
+  actions:
+  - action_object: ElasticityAction
+    action_type: ScalingType
+    name: addvnf
+    value: '1'
+    target:
+      name: squid-vnf
+      vendor: eu.5gtango
+      version: '0.1'
+- name: ElasticityRuleScaleIn
+  salience: 1
+  inertia:
+    value: 30
+    duration_unit: m
+  conditions:
+    condition: AND
+    rules:
+    - id: haproxy-vnf.LogMetric
+      field: haproxy-vnf.LogMetric
+      type: string
+      input: text
+      operator: equal
+      value: haproxy_vnf_vdu01_haproxy_backend_sespsrv_less30
+    - id: haproxy-vnf.LogMetric
+      field: haproxy-vnf.LogMetric
+      type: string
+      input: text
+      operator: equal
+      value: haproxy_vnf_vdu01_haproxy_backend_actsrvs_more1
+  actions:
+  - action_object: ElasticityAction
+    action_type: ScalingType
+    name: removevnf
+    value: '1'
+    criterion: random
+    target:
+      name: squid-vnf
+      vendor: eu.5gtango
+      version: '0.1'

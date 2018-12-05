@@ -96,6 +96,7 @@ definitions:
       - "internal"
       - "external"
       - "management"
+      - "serviceendpoint"
   interfaces:
     enum:
       - "ethernet"
@@ -255,6 +256,7 @@ properties:
         id:
           description: "A unique identifier of this VDU within the scope of this VNF descriptor."
           type: "string"
+        # required default image
         vm_image:
           description: "The reference to a virtual machine image."
           type: "string"
@@ -265,6 +267,32 @@ properties:
           description: "An MD5 hash of the virtual machine image."
           type: "string"
           pattern: "^[A-Fa-f0-9]{32}$"
+        # optional alternative images for x86, ARM, etc
+        alternative_images:
+          description: "Alternative images for other architectures"
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              vm_image:
+                description: "The reference to a virtual machine image."
+                type: "string"
+              vm_image_format:
+                description: "The format of the virtual machine image."
+                $ref: "#/definitions/images_formats"
+              vm_image_md5:
+                description: "An MD5 hash of the virtual machine image."
+                type: "string"
+                pattern: "^[A-Fa-f0-9]{32}$"
+              vm_image_arch:
+                description: "Target architecture for this image"
+                type: "string"
+            required:
+              - vm_image
+              - vm_image_format
+              - vm_image_arch
+            additionalProperties: false
+          uniqueItems: true
         snmp_parameters:
           description: "Definition of SNMP parameters available from the VDU"
           type: "object"
@@ -281,6 +309,9 @@ properties:
             username:
               description: "SNMP username."
               type: "string"
+            port:
+              description: "SNMP port."
+              type: "integer"
             interval:
               description: "Time interval between SNMP requests."
               type: "integer"
@@ -491,6 +522,178 @@ properties:
       additionalProperties: false
     minItems: 1
     uniqueItems: true
+  cloudnative_deployment_units: 
+    description: "The cloud native deployment units (CNDUs) of the virtual network function."
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        description:
+          description: "An arbitrary description of the CNDU:"
+          type: "string"
+        id:
+          description: "A unique identifier of this CNDU within the scope of this VNF descriptor."
+          type: "string"
+        image:
+          description: "The container image of this CNDU."
+          type: "string"  
+        snmp_parameters:
+          description: "Definition of SNMP parameters available from the VDU"
+          type: "object"
+          properties:
+            version:
+              description: "SNMP version to be used."
+              type: "string"
+            auth_protocol:
+              description: "Authentication protocol to be used when requesting SNMP data."
+              type: "string"
+            security_level:
+              description: "Security level."
+              type: "string"
+            username:
+              description: "SNMP username."
+              type: "string"
+            port:
+              description: "SNMP port."
+              type: "integer"
+            interval:
+              description: "Time interval between SNMP requests."
+              type: "integer"
+            oids:
+              description: "List of oids."
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  oid:
+                    description: "metric oid."
+                    type: "string"
+                  metric_name:
+                    description: "metric name."
+                    type: "string"
+                  metric_type:
+                    description: "metric type."
+                    type: "string"
+                  unit:
+                    description: "metric unit."
+                    type: "string"
+                  mib_name:
+                    description: "metric mib name."
+                    type: "string"
+                required:
+                  - oid
+                  - metric_name
+                  - metric_type
+                  - unit
+                  - mib_name
+          required:
+            - version
+            - interval
+            - oids
+        connection_points:
+          # Attention: CNDU connection points are slightly different than usual connection points for VDUs!
+          description: "The connection points of this CNDU. Connects the VDU to other CNDUs or the external world."
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              id:
+                description: "A VNF-unique id of the connection point. Can be used for references."
+                type: "string"
+              port:
+                description: "Port of the container's connection point."
+                type: "integer"
+            required:
+              - id
+              - port
+            additionalProperties: false
+          minItems: 1
+          uniqueItems: true
+        parameters:
+          description: "Additional CNDU parameter dictionaries."
+          type: "object"
+          properties:
+            k8s_deployment:
+              description: "Dictionary of key/values forwarded to K8s."
+              type: "object"
+            k8s_service:
+              description: "Dictionary of key/values forwarded to K8s."
+              type: "object"
+          additionalProperties: true # allow flexability here
+      required:
+        - id
+        - image
+      additionalProperties: false
+    minItems: 1
+    uniqueItems: false
+  physical_deployment_units: 
+    description: "The pythical deployment units (PDUs) of the physical network function."
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        id:
+          description: "A unique identifier of this PDU within the scope of this VNF descriptor."
+          type: "string"
+        vendor:
+          description: "The vendor of this PDU."
+          type: "string"
+        version:
+          description: "The version of this PDU."
+          type: "string" 
+        description:
+          description: "An arbitrary description of the PDU"
+          type: "string"
+        address:
+          description: "The address to reach the PDU (eg, IP address)"
+          type: "string"
+        port:
+          description: "The PDU's port number"
+          type: "number"
+        geo_location:
+          description: "The geographical location of the PDU. Either descriptive or as GPS coordinates"
+          type: "string"
+        performance:
+          description: "Specification of the possible performance with this PDU"
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              throughput:
+                type: "object"
+                description: "An example performance item with a value and a unit. There might be more"
+                properties:
+                  value:
+                    type: "number"
+                  unit:
+                    type: "string"
+            additionalProperties: true
+        connection_points:
+          description: "The connection points of this PDU. Connects it to other PDUs or the external world."
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              id:
+                description: "A VNF-unique id of the connection point. Can be used for references."
+                type: "string"
+              interface:
+                description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
+                $ref: "#/definitions/interfaces"
+              type:
+                description: "The type of the connection point with respect to its visibility in the service platform"
+                $ref: "#/definitions/connection_point_types"
+              # TODO: Remove? Cyclic reference with virtual_links?
+              virtual_link_reference:
+                description: "A reference to a virtual link, i.e. the virtual_links:id."
+                type: "string"
+      required:
+        - id
+        - address
+        - port
+      additionalProperties: false
+    minItems: 1
+    uniqueItems: false
   connection_points:
     description: "The connection points of the overall VNF, that connects the VNF to the external world."
     type: "array"
@@ -511,6 +714,9 @@ properties:
           description: "The type of the connection point with respect to its visibility in the service platform"
           oneOf:
             - $ref: "#/definitions/connection_point_types"
+        port:
+          description: "Port of the connection point (in case it is of type 'serviceendpoint')"
+          type: "integer"
       required:
         - id
         - interface
@@ -733,5 +939,12 @@ required:
   - vendor 
   - name
   - version
-  - virtual_deployment_units 
+# have at least of deployment unit of any type
+anyOf:
+  - required:
+    - virtual_deployment_units
+  - required:
+    - physical_deployment_units
+  - required:
+    - cloudnative_deployment_units
 additionalProperties: false

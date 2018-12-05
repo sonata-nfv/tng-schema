@@ -294,7 +294,20 @@ properties:
                 ref: "#/definitions/profile_tag"
               target:
                 description: "The component to apply the action"
-                type: "string"
+                type: "object"
+                properties:
+                  vendor:
+                    description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
+                    type: "string"
+                    pattern: "^[A-Za-z0-9\\-_.]+$"
+                  name: 
+                    description: "The name of the network service description."
+                    type: "string"
+                    pattern: "^[A-Za-z0-9\\-_.]+$"
+                  version: 
+                    description: "The version of the service descriptor."
+                    type: "string"
+                    pattern: "^[0-9\\-_.]+$"
               stability_period:
                 description: "The inertia period of the policy rule."
                 type: "object"
