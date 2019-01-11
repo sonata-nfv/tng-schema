@@ -108,7 +108,6 @@ properties:
         servInstanceId:   #TODO: do refractor with this name: nsr-ref:
           description: "UUID of a service instanance"
           type: "string"
-          pattern: "^[a-zA-Z0-9\\-_.]+$"
         workingStatus:
           description: "Status of the service instantiation."
           type: "string"
