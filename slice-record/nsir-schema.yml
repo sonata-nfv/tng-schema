@@ -56,7 +56,7 @@ properties:
   vendor:
     description: "Description of the NST vendor"
     type: "string"
-  nstId:
+  nstId:     #TODO: do refractor with this name: nst-ref:
     description: "The uuid of the NST used to instantiate the NSI."
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
@@ -98,17 +98,16 @@ properties:
   sliceCallback:
     description: "Contains the URL to callback the GK when the slice is READY"
     type: "string"
-  netServInstance_Uuid:
+  netServInstance_Uuid:       #TODO: do refractor with this name: nsr-ref-list:
     description: "The list uuids of the Network Services instances generated when the NSI is requested."
     type: "array"
     items:
       description: "A service uuid with related parameters (i.e slaId)"
       type: "object"
       properties:
-        servInstanceId:
+        servInstanceId:   #TODO: do refractor with this name: nsr-ref:
           description: "UUID of a service instanance"
           type: "string"
-          pattern: "^[a-zA-Z0-9\\-_.]+$"
         workingStatus:
           description: "Status of the service instantiation."
           type: "string"
@@ -134,6 +133,19 @@ properties:
         - servName
         - servId
     minItems: 1
+  vlr-list:
+    description: "The list of VLD uuids generated due to the instantiation of the selected NST."
+    type: "array"
+    items:
+      description: "A service uuid with related parameters (i.e slaId)"
+      type: "object"
+      properties:
+        id:
+          description: "UUID of a vlr"
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+      required:
+        - id 
   qos:
     description: "slice qos"
     type: "object"
@@ -159,12 +171,10 @@ properties:
       default_max_data_burst:
         description: "in bytes B"
         type: "integer"
-     
-
 required: 
   - name 
   - id
   - vendor
-  - nstId
-  - netServInstance_Uuid
+  - nstId     #nst-ref
+  - netServInstance_Uuid      #nsr-ref-list
 additionalProperties: true
