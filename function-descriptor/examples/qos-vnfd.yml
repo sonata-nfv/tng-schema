@@ -48,6 +48,7 @@ virtual_deployment_units:
   - id: "vdu01"
     vm_image: "ubuntu:16.04"
     vm_image_format: "docker" 
+    vm_flavor: "m1.small"
     resource_requirements:
       cpu:
         vcpus: 1
@@ -71,6 +72,11 @@ virtual_deployment_units:
       # QoS policy name
       - id: "eth0"
         qos: "bw-limiter"
+        # optionally, specify a MAC, IP address or security groups
+        mac: fa:11:22:33:44:55
+        security_groups:
+          - default
+          - ssh-secgrp
       # explicit QoS requirements (supported by OpenStack)
       - id: "eth1"
         qos_requirements:
@@ -102,6 +108,7 @@ virtual_links:
       - "vdu01:mgmt"
       - "mgmt"
     dhcp: True
+    cidr: 10.0.0.0/24
   - id: "input"
     connectivity_type: "E-Line"
     connection_points_reference:

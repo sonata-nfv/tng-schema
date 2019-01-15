@@ -111,8 +111,15 @@ definitions:
       items:
         type: "object"
         properties:
+          # id is the only required attribute
           id:
             description: "A VNF-unique id of the connection point. Can be used for references."
+            type: "string"
+          mac:
+            description: "MAC address of the connection point"
+            type: "string"
+          ip:
+            description: "IP address of the connection point"
             type: "string"
           port:
             description: "For CUDs only: Port of the container's connection point."
@@ -127,6 +134,11 @@ definitions:
           virtual_link_reference:
             description: "A reference to a virtual link, i.e. the virtual_links:id."
             type: "string"
+          security_groups:
+            description: "List of security groups assigned to the connection point"
+            type: "array"
+            items:
+              type: "string"
           # QoS requirements: either policy name or explicit requirements
           qos:
             description: "Name of a pre-defined QoS policy"
@@ -162,6 +174,7 @@ definitions:
           - id
         minItems: 1
         uniqueItems: true
+        additionalProperties: false
   monitoring:
     type: "object"
     properties:
@@ -327,6 +340,9 @@ properties:
           description: "An MD5 hash of the virtual machine image."
           type: "string"
           pattern: "^[A-Fa-f0-9]{32}$"
+        vm_flavor:
+          description: "Predefined flavor of the VM (e.g., EC2 instance instead of resource_requirements"
+          type: "string"
         # optional alternative images for x86, ARM, etc
         alternative_images:
           description: "Alternative images for other architectures"
@@ -554,7 +570,6 @@ properties:
           type: "string"
       required:
         - id
-        - resource_requirements
       additionalProperties: false
     minItems: 1
     uniqueItems: true
@@ -730,7 +745,7 @@ properties:
           type: "string"
         dhcp:
           type: "boolean"
-        qos:
+        cidr:
           type: "string"
       required:
         - id
