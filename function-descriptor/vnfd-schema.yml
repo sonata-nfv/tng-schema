@@ -127,6 +127,37 @@ definitions:
           virtual_link_reference:
             description: "A reference to a virtual link, i.e. the virtual_links:id."
             type: "string"
+          # QoS requirements: either policy name or explicit requirements
+          qos:
+            description: "Name of a pre-defined QoS policy"
+            type: "string"
+          qos_requirements:
+            description: "Explicit QoS requirements supported by OpenStack"
+            type: "object"
+            properties:
+              # currently three supported QoS requirements
+              bandwidth_limit:
+                description: "Bandwidth limitations on networks, ports or floating IPs"
+                type: "object"
+                properties:
+                  bandwidth:
+                    type: "number"
+                  bandwidth_unit:
+                    $ref: "#/definitions/bandwidth_units"
+                additionalProperties: false
+              minimum_bandwidth:
+                description: "Minimum bandwidth constraints on certain types of traffic"
+                type: "object"
+                properties:
+                  bandwidth:
+                    type: "number"
+                  bandwidth_unit:
+                    $ref: "#/definitions/bandwidth_units"
+                additionalProperties: false
+              dscp_marking:
+                description: "Marking network traffic with a DSCP value"
+                type: "string"
+            additionalProperties: false
         required:
           - id
         minItems: 1
