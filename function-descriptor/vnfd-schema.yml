@@ -102,6 +102,35 @@ definitions:
       - "ethernet"
       - "ipv4"
       - "ipv6"
+  # single connection point definition reused in VDUs, CDUs, and PDUs (avoid redundant, copy&paste code)
+  # VDUs, PDUs, VNFs: id, interface, type
+  # CDUs: id, port
+  connection_points:
+      description: "The connection points of a VDU, CDU, PDU or complete VNF. Connects it to other units or the external world."
+      type: "array"
+      items:
+        type: "object"
+        properties:
+          id:
+            description: "A VNF-unique id of the connection point. Can be used for references."
+            type: "string"
+          port:
+            description: "For CUDs only: Port of the container's connection point."
+            type: "integer"
+          interface:
+            description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
+            $ref: "#/definitions/interfaces"
+          type:
+            description: "The type of the connection point with respect to its visibility in the service platform"
+            $ref: "#/definitions/connection_point_types"
+          # TODO: Remove? Cyclic reference with virtual_links?
+          virtual_link_reference:
+            description: "A reference to a virtual link, i.e. the virtual_links:id."
+            type: "string"
+        required:
+          - id
+        minItems: 1
+        uniqueItems: true
   monitoring:
     type: "object"
     properties:
@@ -467,31 +496,7 @@ properties:
             - memory
           additionalProperties: false
         connection_points:
-          description: "The connection points of this VDU. Connects the VDU to other VDUs or the external world."
-          type: "array"
-          items:
-            type: "object"
-            properties:
-              id:
-                description: "A VNF-unique id of the connection point. Can be used for references."
-                type: "string"
-              interface:
-                description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-                $ref: "#/definitions/interfaces"
-              type:
-                description: "The type of the connection point with respect to its visibility in the service platform"
-                $ref: "#/definitions/connection_point_types"
-              # TODO: Remove? Cyclic reference with virtual_links?
-              virtual_link_reference:
-                description: "A reference to a virtual link, i.e. the virtual_links:id."
-                type: "string"
-            required:
-              - id
-              - interface
-              - type
-            additionalProperties: false
-          minItems: 1
-          uniqueItems: true
+          $ref: "#/definitions/connection_points"
         monitoring_parameters:
           description: "The various metrics and parameters to monitor."
           type: "array"
@@ -591,24 +596,7 @@ properties:
             - interval
             - oids
         connection_points:
-          # Attention: CNDU connection points are slightly different than usual connection points for VDUs!
-          description: "The connection points of this CNDU. Connects the VDU to other CNDUs or the external world."
-          type: "array"
-          items:
-            type: "object"
-            properties:
-              id:
-                description: "A VNF-unique id of the connection point. Can be used for references."
-                type: "string"
-              port:
-                description: "Port of the container's connection point."
-                type: "integer"
-            required:
-              - id
-              - port
-            additionalProperties: false
-          minItems: 1
-          uniqueItems: true
+          $ref: "#/definitions/connection_points"
         parameters:
           description: "Additional CNDU parameter dictionaries."
           type: "object"
@@ -669,24 +657,7 @@ properties:
                     type: "string"
             additionalProperties: true
         connection_points:
-          description: "The connection points of this PDU. Connects it to other PDUs or the external world."
-          type: "array"
-          items:
-            type: "object"
-            properties:
-              id:
-                description: "A VNF-unique id of the connection point. Can be used for references."
-                type: "string"
-              interface:
-                description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-                $ref: "#/definitions/interfaces"
-              type:
-                description: "The type of the connection point with respect to its visibility in the service platform"
-                $ref: "#/definitions/connection_point_types"
-              # TODO: Remove? Cyclic reference with virtual_links?
-              virtual_link_reference:
-                description: "A reference to a virtual link, i.e. the virtual_links:id."
-                type: "string"
+          $ref: "#/definitions/connection_points"
       required:
         - id
         - address
@@ -695,35 +666,7 @@ properties:
     minItems: 1
     uniqueItems: false
   connection_points:
-    description: "The connection points of the overall VNF, that connects the VNF to the external world."
-    type: "array"
-    items:
-      type: "object"
-      properties:
-        id:
-          description: "A VNF-unique id of the connection point. Can be used for references."
-          type: "string"
-        interface:
-          description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-          $ref: "#/definitions/interfaces"
-        # TODO: Remove? Cyclic reference with virtual_links?
-        virtual_link_reference:
-          description: "A reference to a virtual link, i.e. the virtual_links:id."
-          type: "string"
-        type:
-          description: "The type of the connection point with respect to its visibility in the service platform"
-          oneOf:
-            - $ref: "#/definitions/connection_point_types"
-        port:
-          description: "Port of the connection point (in case it is of type 'serviceendpoint')"
-          type: "integer"
-      required:
-        - id
-        - interface
-        - type
-      additionalProperties: false
-    minItems: 1
-    uniqueItems: true
+    $ref: "#/definitions/connection_points"
   virtual_links:
     description: "VNF internal virtual link. A link interconnects at least two connection points."
     type: "array"
