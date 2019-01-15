@@ -50,6 +50,76 @@ definitions:
       - "ethernet"
       - "ipv4"
       - "ipv6"
+  connection_points:
+    description: "The connection points of a VDU, CDU, PDU or complete VNF. Connects it to other units or the external world."
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        # id is the only required attribute
+        id:
+          description: "A VNF-unique id of the connection point. Can be used for references."
+          type: "string"
+        mac:
+          description: "MAC address of the connection point"
+          type: "string"
+        ip:
+          description: "IP address of the connection point"
+          type: "string"
+        port:
+          description: "For CUDs only: Port of the container's connection point."
+          type: "integer"
+        interface:
+          description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
+          $ref: "#/definitions/interfaces"
+        type:
+          description: "The type of the connection point with respect to its visibility in the service platform"
+          $ref: "#/definitions/connection_point_types"
+        # TODO: Remove? Cyclic reference with virtual_links?
+        virtual_link_reference:
+          description: "A reference to a virtual link, i.e. the virtual_links:id."
+          type: "string"
+        security_groups:
+          description: "List of security groups assigned to the connection point"
+          type: "array"
+          items:
+            type: "string"
+        # QoS requirements: either policy name or explicit requirements
+        qos:
+          description: "Name of a pre-defined QoS policy"
+          type: "string"
+        qos_requirements:
+          description: "Explicit QoS requirements supported by OpenStack"
+          type: "object"
+          properties:
+            # currently three supported QoS requirements
+            bandwidth_limit:
+              description: "Bandwidth limitations on networks, ports or floating IPs"
+              type: "object"
+              properties:
+                bandwidth:
+                  type: "number"
+                bandwidth_unit:
+                  $ref: "#/definitions/bandwidth_units"
+              additionalProperties: false
+            minimum_bandwidth:
+              description: "Minimum bandwidth constraints on certain types of traffic"
+              type: "object"
+              properties:
+                bandwidth:
+                  type: "number"
+                bandwidth_unit:
+                  $ref: "#/definitions/bandwidth_units"
+              additionalProperties: false
+            dscp_marking:
+              description: "Marking network traffic with a DSCP value"
+              type: "string"
+          additionalProperties: false
+      required:
+        - id
+      minItems: 1
+      uniqueItems: true
+      additionalProperties: false
   
 
 # actual schema of NSDs
@@ -227,31 +297,7 @@ properties:
     minItems: 1
     uniqueItems: true
   connection_points:
-    description: "The connection points of the overall NS, that connects the NS to the external world."
-    type: "array"
-    items:
-      type: "object"
-      properties:
-        id:
-          description: "A NS-unique id of the connection point. Can be used for references."
-          type: "string"
-        interface:
-          description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-          $ref: "#/definitions/interfaces"
-        type:
-          description: "The type of the connection point with respect to its visibility in the service platform"
-          $ref: "#/definitions/connection_point_types"
-        # TODO: Remove? Cyclic reference with virtual_links?
-        virtual_link_reference:
-          description: "A reference to a virtual link, i.e. the virtual_links:id."
-          type: "string"
-      required:
-        - id
-        - interface
-        - type
-      additionalProperties: false
-    minItems: 1
-    uniqueItems: true
+    $ref: "#/definitions/connection_points"
   virtual_links: 
     type: "array"
     items:
@@ -300,19 +346,8 @@ properties:
               type: "string"
             dhcp:
               type: "boolean"
-            qos:
-              type: "array"
-              items:
-                # arbitrary key/value pairs
-                type: "object"
-                patternProperties:
-                  # keys can be arbitrary strings
-                  "^.*$":
-                    # values need to be strings or numbers (int or float)
-                    anyOf:
-                      - type: string
-                      - type: number
-                additionalProperties: false
+            cidr:
+              type: "string"
           required:
             - id
             - connectivity_type
