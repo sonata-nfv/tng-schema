@@ -348,6 +348,37 @@ properties:
               type: "boolean"
             cidr:
               type: "string"
+            # QoS requirements: either policy name or explicit requirements. If specified at a vLink, the QoS req. will be applied to all corresponding connection points.
+            qos:
+              description: "Name of a pre-defined QoS policy"
+              type: "string"
+            qos_requirements:
+              description: "Explicit QoS requirements supported by OpenStack"
+              type: "object"
+              properties:
+                # currently three supported QoS requirements
+                bandwidth_limit:
+                  description: "Bandwidth limitations on networks, ports or floating IPs"
+                  type: "object"
+                  properties:
+                    bandwidth:
+                      type: "number"
+                    bandwidth_unit:
+                      $ref: "#/definitions/bandwidth_units"
+                  additionalProperties: false
+                minimum_bandwidth:
+                  description: "Minimum bandwidth constraints on certain types of traffic"
+                  type: "object"
+                  properties:
+                    bandwidth:
+                      type: "number"
+                    bandwidth_unit:
+                      $ref: "#/definitions/bandwidth_units"
+                  additionalProperties: false
+                dscp_marking:
+                  description: "Marking network traffic with a DSCP value"
+                  type: "string"
+              additionalProperties: false
           required:
             - id
             - connectivity_type
