@@ -109,6 +109,8 @@ virtual_links:
       - "mgmt"
     dhcp: True
     cidr: 10.0.0.0/24
+    # QoS requirements can also be specified at vLinks, which applies them to the corresponding connection points
+    qos: "bw-limiter"
   - id: "input"
     connectivity_type: "E-Line"
     connection_points_reference:
