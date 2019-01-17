@@ -48,6 +48,7 @@ virtual_deployment_units:
   - id: "vdu01"
     vm_image: "ubuntu:16.04"
     vm_image_format: "docker" 
+    # resource_requirements are always required (for MANO), optionally vm_flavor can also be specified and is then used by the SP
     vm_flavor: "m1.small"
     resource_requirements:
       cpu:

@@ -570,6 +570,7 @@ properties:
           type: "string"
       required:
         - id
+        - resource_requirements
       additionalProperties: false
     minItems: 1
     uniqueItems: true
