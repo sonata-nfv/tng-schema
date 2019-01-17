@@ -568,8 +568,14 @@ properties:
         user_data:
           description: "A script that configures the VDU during boot time."
           type: "string"
-      required:
-        - id
+      # use EITHER vm_flavor (preferred) OR resource_requirements (id is always required)
+      oneOf:
+        - required:
+            - id
+            - vm_flavor
+        - required:
+            - id
+            - resource_requirements
       additionalProperties: false
     minItems: 1
     uniqueItems: true

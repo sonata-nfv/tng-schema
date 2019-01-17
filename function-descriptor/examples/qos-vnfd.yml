@@ -48,16 +48,17 @@ virtual_deployment_units:
   - id: "vdu01"
     vm_image: "ubuntu:16.04"
     vm_image_format: "docker" 
+    # use EITHER vm_flavor (preferred) OR resource_requirements
     vm_flavor: "m1.small"
-    resource_requirements:
-      cpu:
-        vcpus: 1
-      memory:
-        size: 512
-        size_unit: "MB"
-      storage:
-        size: 10
-        size_unit: "GB"
+    # resource_requirements:
+      # cpu:
+        # vcpus: 1
+      # memory:
+        # size: 512
+        # size_unit: "MB"
+      # storage:
+        # size: 10
+        # size_unit: "GB"
     connection_points:
       - id: "mgmt"
         interface: "ipv4"
