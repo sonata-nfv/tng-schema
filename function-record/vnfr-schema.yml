@@ -228,8 +228,14 @@ properties:
           type: "string"
         load_balancer_ip:
           description: "The IP of the load balancer in front of the CDU"
-          oneOf:
-            - $ref: "#/definitions/interfaces"
+          type: "object"
+          properties:
+            floating_ip:
+              description: "The public IP of the load balancer"
+              type: "string"
+            internal_ip:
+              description: "The internal IP of the load balancer"
+              type: "string"
         connection_points:
           description: "The connection points of this CNFC. Connects the Pod to other Pods or the external world."
           type: "array"
