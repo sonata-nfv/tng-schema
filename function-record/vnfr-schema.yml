@@ -88,6 +88,7 @@ definitions:
       - "internal"
       - "external"
       - "management"
+      - "serviceendpoint"
   interfaces:
     ethernet:
       description: "An Ethernet capable interface"
@@ -233,6 +234,9 @@ properties:
               id:
                 description: "A CNF-unique id of the connection point. Can be used for references."
                 type: "string"
+              type:
+                description: "The type of the connection point with respect to its visibility in the service platform"
+                $ref: "#/definitions/connection_point_types"
               port:
                 description: "The used port for this connection point."
                 type: "integer"
