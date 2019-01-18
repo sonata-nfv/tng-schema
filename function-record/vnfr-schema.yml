@@ -89,6 +89,11 @@ definitions:
       - "external"
       - "management"
       - "serviceendpoint"
+  interfaces_types:
+    enum:
+      - "ethernet"
+      - "ipv4"
+      - "ipv6"
   interfaces:
     ethernet:
       description: "An Ethernet capable interface"
@@ -438,35 +443,79 @@ properties:
       additionalProperties: false
     minItems: 1
     uniqueItems: true
+  # single connection point definition reused in VDUs, CDUs, and PDUs (avoid redundant, copy&paste code)
+  # VDUs, PDUs, VNFs: id, interface, type
+  # CDUs: id, port
   connection_points:
-    description: "The connection points of the overall VNF, that connects the VNF to the external world."
-    type: "array"
-    items:
-      type: "object"
-      properties:
-        id:
-          description: "A VNF-unique id of the connection point. Can be used for references."
-          type: "string"
-        interface:
-          description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
-          oneOf:
-            - $ref: "#/definitions/interfaces/ethernet"
-            - $ref: "#/definitions/interfaces/ipv4"
-            - $ref: "#/definitions/interfaces/ipv6"
-        type:
-          description: "The type of the connection point with respect to its visibility in the service platform"
-          $ref: "#/definitions/connection_point_types"
-        # TODO: Remove? Cyclic reference with virtual_links?
-        virtual_link_reference:
-          description: "A reference to a virtual link, i.e. the virtual_links:id."
-          type: "string"
-      required:
-        - id
-        - interface
-        - type
-      additionalProperties: false
-    minItems: 1
-    uniqueItems: true
+      description: "The connection points of a VDU, CDU, PDU or complete VNF. Connects it to other units or the external world."
+      type: "array"
+      items:
+        type: "object"
+        properties:
+          # id is the only required attribute
+          id:
+            description: "A VNF-unique id of the connection point. Can be used for references."
+            type: "string"
+          mac:
+            description: "MAC address of the connection point"
+            type: "string"
+          ip:
+            description: "IP address of the connection point"
+            type: "string"
+          port:
+            description: "For CUDs only: Port of the container's connection point."
+            type: "integer"
+          interface:
+            description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
+            $ref: "#/definitions/interfaces_types"
+          type:
+            description: "The type of the connection point with respect to its visibility in the service platform"
+            $ref: "#/definitions/connection_point_types"
+          # TODO: Remove? Cyclic reference with virtual_links?
+          virtual_link_reference:
+            description: "A reference to a virtual link, i.e. the virtual_links:id."
+            type: "string"
+          security_groups:
+            description: "List of security groups assigned to the connection point"
+            type: "array"
+            items:
+              type: "string"
+          qos:
+            description: "Name of a pre-defined QoS policy"
+            type: "string"
+          qos_requirements:
+            description: "Explicit QoS requirements supported by OpenStack"
+            type: "object"
+            properties:
+              # currently three supported QoS requirements
+              bandwidth_limit:
+                description: "Bandwidth limitations on networks, ports or floating IPs"
+                type: "object"
+                properties:
+                  bandwidth:
+                    type: "number"
+                  bandwidth_unit:
+                    $ref: "#/definitions/bandwidth_units"
+                additionalProperties: false
+              minimum_bandwidth:
+                description: "Minimum bandwidth constraints on certain types of traffic"
+                type: "object"
+                properties:
+                  bandwidth:
+                    type: "number"
+                  bandwidth_unit:
+                    $ref: "#/definitions/bandwidth_units"
+                additionalProperties: false
+              dscp_marking:
+                description: "Marking network traffic with a DSCP value"
+                type: "string"
+            additionalProperties: false
+        required:
+          - id
+        minItems: 1
+        uniqueItems: true
+        additionalProperties: false
+
   virtual_links:
     description: "VNF internal virtual link. A link interconnects at least two connection points."
     type: "array"
