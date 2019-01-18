@@ -88,6 +88,7 @@ definitions:
       - "internal"
       - "external"
       - "management"
+      - "serviceendpoint"
   interfaces:
     ethernet:
       description: "An Ethernet capable interface"
@@ -198,6 +199,48 @@ properties:
     description: "Reference to records of network service (nsr:id) that this VNF instance is part of."
     type: "string"
     pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+  cloudnative_deployment_units:
+    description: "The cloudnative deployment units (CDUs) of the network function"
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        id:
+          description: "A unique identifier of this CDU within the scope of this CNF descriptor"
+          type: "string"
+        image:
+          description: "The reference to a cloudnative machine image used for this instance."
+          type: "string"
+        cdu_reference:
+          description: "The reference to the CDU (vnfd:vdu:id) used to instantiate this element:"
+          type: "string"
+        number_of_instances:
+          description: "The number of instances of this CDU element."
+          type: "integer"
+          minimum: 0
+        vim_id:
+          description: "Identifier of the VIM this CDU is running in."
+          type: "string"
+        load_balancer_ip:
+          description: "The IP of the load balancer in front of the CDU"
+          oneOf:
+            - $ref: "#/definitions/interfaces"
+        connection_points:
+          description: "The connection points of this CNFC. Connects the Pod to other Pods or the external world."
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              id:
+                description: "A CNF-unique id of the connection point. Can be used for references."
+                type: "string"
+              type:
+                description: "The type of the connection point with respect to its visibility in the service platform"
+                $ref: "#/definitions/connection_point_types"
+              port:
+                description: "The used port for this connection point."
+                type: "integer"
+
   virtual_deployment_units: 
     description: "The virtual deployment units (VDUs) of the virtual network record."
     type: "array"
@@ -550,5 +593,4 @@ required:
   - descriptor_version
   - id
   - status
-  - virtual_deployment_units 
 additionalProperties: false
