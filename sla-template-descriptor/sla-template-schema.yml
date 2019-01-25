@@ -2,9 +2,6 @@
 "$schema": http://json-schema.org/draft-04/schema#
 definitions: {}
 properties:
-  author:
-    "$id": "/properties/author"
-    type: string
   descriptor_schema:
     "$id": "/properties/descriptor_schema"
     type: string
@@ -100,7 +97,7 @@ properties:
                   target_period:
                     "$id": "/properties/sla_template/properties/guaranteeTerms/items/target_slo/items/target_period"
                     type: string
-      licensing:
+      licenses:
         "$id": "/properties/sla_template/properties/licensing"
         type: object
         properties:
@@ -112,7 +109,7 @@ properties:
                 "$id": "/properties/sla_template/properties/licensing/service_based/service_licence_type"
                 description: Trial | Private | Public
                 type: string
-              service_licence_instances:
+              allowed_service_instances:
                 "$id": "/properties/sla_template/properties/licensing/service_based/service_licence_instances"
                 description: Number of allowed instances
                 type: string
