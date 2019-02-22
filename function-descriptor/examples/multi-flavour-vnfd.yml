@@ -117,8 +117,9 @@ deployment_flavours:
             interface: "ipv4"
             type: "internal"
             qos_requirements:
-              bandwidth: 30
-              bandwidth_unit: Mbps
+              bandwidth_limit:
+                bandwidth: 30
+                bandwidth_unit: Mbps
      
     connection_points:
       - id: "mgmt"
