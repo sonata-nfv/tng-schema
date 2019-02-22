@@ -252,6 +252,9 @@ properties:
           description: "The version of the function descriptor."
           type: "string"
           pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
+        vnf_flavour:
+          description: "Name of deployment flavour to be used (if any)."
+          type: "string"
         description:
           description: "A longer description of the network function."
           type: "string"
@@ -540,6 +543,17 @@ properties:
           maxItems: 2
           items:
             type: "string"
+            
+  # deployment flavours: copied and adjusted fields using different VNFs of different flavours
+  deployment_flavours:
+    type: "array"
+    uniqueItems: true
+    items:
+      type: "object"
+      properties:
+        # TODO: update
+        test:
+          type: "string"
   
 required: 
   - descriptor_schema
