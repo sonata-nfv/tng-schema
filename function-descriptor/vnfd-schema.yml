@@ -785,64 +785,14 @@ properties:
         - connection_points_reference
       additionalProperties: false
   deployment_flavours:
-    description: "The flavours of the VNF that can be deployed."
+    description: "The flavours of the VNF that can be deployed. Adjusted copies of fields above."
     type: "array"
     items:
       type: "object"
       properties:
-        vdu_reference:
-          type: "array"
-          items:
-            type: "string"
-        constraint:
+        test:
           type: "string"
-        flavour_key:
-          type: "string"
-        vlink_reference:
-          type: "array"
-          items:
-            type: "string"
-        id:
-          type: "string"
-        assurance_parameters:
-          type: "array"
-          items:
-            type: "object"
-            properties:
-              violation:
-                type: "array"
-                items:
-                  type: "object"
-                  properties:
-                    interval:
-                      type: "integer"
-                    breaches_count:
-                      type: "integer"
-                  additionalProperties: false
-              value:
-                type: "integer"
-              penalty:
-                type: "object"
-                properties:
-                  type:
-                    type: "string"
-                  expression:
-                    type: "integer"
-                  validity:
-                    type: "string"
-                  unit:
-                    type: "string"
-                additionalProperties: false
-              formula:
-                type: "string"
-              rel_id:
-                type: "string"
-              id:
-                type: "string"
-              unit:
-                type: "string"
-            additionalProperties: false
-      additionalProperties: false
+      additionalProperties: true
   lifecycle_events:
     type: "array"
     items:
