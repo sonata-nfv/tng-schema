@@ -3,8 +3,6 @@ descriptor_schema: https://raw.githubusercontent.com/sonata-nfv/tng-schema/maste
 name: silver-template-example
 vendor: UPRC
 version: '2.0'
-author: Evgenia Kapassa, Marios Touloupou
-description: This is a silver SLA Template for Haproxy service
 sla_template:
   template_name: Silver
   offer_date: '2018-11-14T11:35:10Z'
@@ -31,9 +29,9 @@ sla_template:
         target_duration: 10s
         target_period: 24h
         target_service_level: Downtime less 1728s
-  licensing:
+  licenses:
     service_based:
       service_licence_type: Trial
-      service_licence_instances: '10'
+      allowed_service_instances: '10'
       service_licence_period: 30 days
       service_licence_expiration_date: '2018-12-14T11:35:10Z'

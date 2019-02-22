@@ -25,6 +25,8 @@ tng-pkg -p 5gtango-ns-project-example/
 tng-pkg -p 5gtango-vnf-project-example/
 # Test project (contains a test for the 5GTANGO V&v)
 tng-pkg -p 5gtango-test-project-example/
+# Mixed NS package with 5GTANGO, OSM, and ONAP descriptors
+tng-pkg -p mixed-5gtango-osm-onap-ns-project-example/
 ```
 
 ###  Full examples
