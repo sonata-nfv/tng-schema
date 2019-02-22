@@ -205,118 +205,7 @@ definitions:
       - name
       - unit
     additionalProperties: false
-
-##
-## The actual document description.
-##
-type: "object"
-properties:
-  descriptor_schema:
-    description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
-    type: "string"
-  vendor:
-    description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
-    type: "string"
-    pattern: "^[a-z0-9\\-_.]+$"
-  name:
-    description: "The name of the function description."
-    type: "string"
-    pattern: "^[a-z0-9\\-_.]+$"
-  version:
-    description: "The version of the function descriptor."
-    type: "string"
-    pattern: "^[0-9\\-_.]+$"
-  author:
-    description: "The person or organization that created the VNF descriptor."
-    type: "string"
-  description:
-    description: "A longer description of the network function."
-    type: "string"
-  logo:
-    description: "Path to VNF logo."
-    type: "string"
-    pattern: "^[A-Za-z0-9\\-_./]+$"
-  licenses:
-    description: "Information on the license of this VNFD."
-    type: "array"
-    items:
-      anyOf:
-        - type: "object"
-          properties:
-            type:
-              description: "The type of license, 'public' in this case."
-              type: "string"
-              enum:
-              - "public"
-          required:
-            - "type"
-          additionalProperties: false
-        - type: "object"
-          properties:
-            type:
-              description: "The type of license, 'private' in this case."
-              type: "string"
-              enum:
-              - "private"
-            url:
-              description: "The URL to the license file."
-              type: "string"
-          required:
-            - "type"
-            - "url"
-          additionalProperties: false
-    additionalItems: false
-    uniqueItems: true
-  function_specific_managers:
-    description: "A list of FSMs used to manage this VNF."
-    type: "array"
-    items:
-      description: "An FSM object of this VNF. FSMs are always Docker containers."
-      type: "object"
-      properties:
-        description:
-          description: "An arbitrary description of the FSM."
-          type: "string"
-        id:
-          description: "A unique identifier of this FSM within the scope of this VNF descriptor."
-          type: "string"
-        image:
-          description: "The reference to a Docker image."
-          type: "string"
-        image_md5:
-          description: "An MD5 hash of the Docker image."
-          type: "string"
-          pattern: "^[A-Fa-f0-9]{32}$"
-        resource_requirements:
-          description: "The requirements for the Docker environment that runs the FSM."
-          type: "object"
-          properties:
-            docker_version:
-              description: "The version of Docker needed for this FSM."
-              type: "string"
-              pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
-        options:
-          description: "The options as key-value parameters that are passed to the Docker container. Can be used to configure the Docker."
-          type: "array"
-          items:
-            description: "A key-value parameter object."
-            type: "object"
-            properties:
-              key:
-                type: "string"
-              value:
-                type: "string"
-            required:
-              - key
-              - value
-            additionalProperties: false
-          uniqueItems: true
-      required:
-        - id
-        - image
-      additionalProperties: false
-    uniqueItems: true
-    minItems: 0
+    
   virtual_deployment_units: 
     description: "The virtual deployment units (VDUs) of the virtual network function."
     type: "array"
@@ -574,6 +463,7 @@ properties:
       additionalProperties: false
     minItems: 1
     uniqueItems: true
+    
   cloudnative_deployment_units: 
     description: "The cloud native deployment units (CNDUs) of the virtual network function."
     type: "array"
@@ -661,6 +551,7 @@ properties:
       additionalProperties: false
     minItems: 1
     uniqueItems: false
+    
   physical_deployment_units: 
     description: "The pythical deployment units (PDUs) of the physical network function."
     type: "array"
@@ -712,8 +603,7 @@ properties:
       additionalProperties: false
     minItems: 1
     uniqueItems: false
-  connection_points:
-    $ref: "#/definitions/connection_points"
+    
   virtual_links:
     description: "VNF internal virtual link. A link interconnects at least two connection points."
     type: "array"
@@ -784,65 +674,148 @@ properties:
         - connectivity_type
         - connection_points_reference
       additionalProperties: false
+
+    
+    
+    
+##
+## The actual document description.
+##
+type: "object"
+properties:
+  descriptor_schema:
+    description: "Reference to the schema corresponding to the descriptor (e.g., URL or local path)."
+    type: "string"
+  vendor:
+    description: "The vendor id allows to identify a VNF descriptor uniquely across all function descriptor vendors."
+    type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
+  name:
+    description: "The name of the function description."
+    type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
+  version:
+    description: "The version of the function descriptor."
+    type: "string"
+    pattern: "^[0-9\\-_.]+$"
+  author:
+    description: "The person or organization that created the VNF descriptor."
+    type: "string"
+  description:
+    description: "A longer description of the network function."
+    type: "string"
+  logo:
+    description: "Path to VNF logo."
+    type: "string"
+    pattern: "^[A-Za-z0-9\\-_./]+$"
+  licenses:
+    description: "Information on the license of this VNFD."
+    type: "array"
+    items:
+      anyOf:
+        - type: "object"
+          properties:
+            type:
+              description: "The type of license, 'public' in this case."
+              type: "string"
+              enum:
+              - "public"
+          required:
+            - "type"
+          additionalProperties: false
+        - type: "object"
+          properties:
+            type:
+              description: "The type of license, 'private' in this case."
+              type: "string"
+              enum:
+              - "private"
+            url:
+              description: "The URL to the license file."
+              type: "string"
+          required:
+            - "type"
+            - "url"
+          additionalProperties: false
+    additionalItems: false
+    uniqueItems: true
+  function_specific_managers:
+    description: "A list of FSMs used to manage this VNF."
+    type: "array"
+    items:
+      description: "An FSM object of this VNF. FSMs are always Docker containers."
+      type: "object"
+      properties:
+        description:
+          description: "An arbitrary description of the FSM."
+          type: "string"
+        id:
+          description: "A unique identifier of this FSM within the scope of this VNF descriptor."
+          type: "string"
+        image:
+          description: "The reference to a Docker image."
+          type: "string"
+        image_md5:
+          description: "An MD5 hash of the Docker image."
+          type: "string"
+          pattern: "^[A-Fa-f0-9]{32}$"
+        resource_requirements:
+          description: "The requirements for the Docker environment that runs the FSM."
+          type: "object"
+          properties:
+            docker_version:
+              description: "The version of Docker needed for this FSM."
+              type: "string"
+              pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
+        options:
+          description: "The options as key-value parameters that are passed to the Docker container. Can be used to configure the Docker."
+          type: "array"
+          items:
+            description: "A key-value parameter object."
+            type: "object"
+            properties:
+              key:
+                type: "string"
+              value:
+                type: "string"
+            required:
+              - key
+              - value
+            additionalProperties: false
+          uniqueItems: true
+      required:
+        - id
+        - image
+      additionalProperties: false
+    uniqueItems: true
+    minItems: 0
+  virtual_deployment_units:
+    $ref: "#/definitions/virtual_deployment_units"
+  cloudnative_deployment_units:
+    $ref: "#/definitions/cloudnative_deployment_units"
+  physical_deployment_units:
+    $ref: "#/definitions/physical_deployment_units"
+  connection_points:
+    $ref: "#/definitions/connection_points"
+  virtual_links:
+    $ref: "#/definitions/virtual_links"
   deployment_flavours:
-    description: "The flavours of the VNF that can be deployed."
+    description: "The flavours of the VNF that can be deployed. Adjusted copies of fields above."
     type: "array"
     items:
       type: "object"
       properties:
-        vdu_reference:
-          type: "array"
-          items:
-            type: "string"
-        constraint:
-          type: "string"
-        flavour_key:
-          type: "string"
-        vlink_reference:
-          type: "array"
-          items:
-            type: "string"
-        id:
-          type: "string"
-        assurance_parameters:
-          type: "array"
-          items:
-            type: "object"
-            properties:
-              violation:
-                type: "array"
-                items:
-                  type: "object"
-                  properties:
-                    interval:
-                      type: "integer"
-                    breaches_count:
-                      type: "integer"
-                  additionalProperties: false
-              value:
-                type: "integer"
-              penalty:
-                type: "object"
-                properties:
-                  type:
-                    type: "string"
-                  expression:
-                    type: "integer"
-                  validity:
-                    type: "string"
-                  unit:
-                    type: "string"
-                additionalProperties: false
-              formula:
-                type: "string"
-              rel_id:
-                type: "string"
-              id:
-                type: "string"
-              unit:
-                type: "string"
-            additionalProperties: false
-      additionalProperties: false
+        virtual_deployment_units:
+          $ref: "#/definitions/virtual_deployment_units"
+        cloudnative_deployment_units:
+          $ref: "#/definitions/cloudnative_deployment_units"
+        physical_deployment_units:
+          $ref: "#/definitions/physical_deployment_units"
+        connection_points:
+          $ref: "#/definitions/connection_points"
+        virtual_links:
+          $ref: "#/definitions/virtual_links"
+      additionalProperties: true
   lifecycle_events:
     type: "array"
     items:

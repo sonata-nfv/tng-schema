@@ -120,6 +120,231 @@ definitions:
       minItems: 1
       uniqueItems: true
       additionalProperties: false
+      
+  network_functions: 
+    description: "The VNFs (their descriptors), that are part of this network service."
+    type: "array"
+    items: 
+      type: "object"
+      properties:
+        vnf_id:
+          description: "A unique identifier of this network function within the scope of this NS descriptor."
+          type: "string"
+        vnf_vendor:
+          description: "The vendor id identifies the VNF descriptor uniquely across all function descriptors."
+          type: "string"
+          pattern: "^[a-z0-9\\-_.]+$"
+        vnf_name:
+          description: "The name of the function description."
+          type: "string"
+          pattern: "^[a-z0-9\\-_.]+$"
+        vnf_version:
+          description: "The version of the function descriptor."
+          type: "string"
+          pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
+        vnf_flavour:
+          description: "Name of deployment flavour to be used (if any)."
+          type: "string"
+        description:
+          description: "A longer description of the network function."
+          type: "string"
+      required:
+        - vnf_id
+        - vnf_vendor
+        - vnf_name
+        - vnf_version
+      additionalProperties: false
+    minItems: 1
+    uniqueItems: true
+    # why unique? What if I want to add the same VNF twice? Eg, to measure traffic before and after traversal of other VNFs.
+    
+  network_services:
+    description: "The recursive NSs (their descriptors), that are part of this network service."
+    type: "array"
+    items: 
+      type: "object"
+      properties:
+        ns_id:
+          description: "A unique identifier of the referenced network service within the scope of this NS descriptor."
+          type: "string"
+        ns_vendor:
+          description: "The vendor id identifies the NS descriptor uniquely across all function descriptors."
+          type: "string"
+          pattern: "^[a-z0-9\\-_.]+$"
+        ns_name:
+          description: "The name of the referenced NS description."
+          type: "string"
+          pattern: "^[a-z0-9\\-_.]+$"
+        ns_version:
+          description: "The version of the referenced NS description."
+          type: "string"
+          pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
+        description:
+          description: "A longer description of the network service."
+          type: "string"
+      required:
+        - ns_id
+        - ns_vendor
+        - ns_name
+        - ns_version
+      additionalProperties: false
+    minItems: 1
+    uniqueItems: true
+    
+  virtual_links: 
+    type: "array"
+    items:
+      type: "object"
+      oneOf:
+        - description: "A reference to an external virtual link descriptor (VLD)."
+          type: "object"
+          properties:
+            vl_group:
+              type: "string"
+            vl_name:
+              type: "string"
+            vl_version:
+              type: "string"
+            vl_description:
+              type: "string"
+          required:
+            - vl_group
+            - vl_name
+            - vl_version
+          additionalProperties: false
+        - description: "A full-featured virtual link description."
+          type: "object"
+          properties:
+            id:
+              type: "string"
+            connectivity_type: 
+              enum:
+                - "E-Line" # Point-to-point
+                - "E-Tree" # Point-to-multipoint
+                - "E-LAN"  # Multipoint-to-multipoint
+            connection_points_reference:
+              type: "array"
+              items:
+                description: "The connection point reference has to uniquely reference the connection point of the VNF/NS. To this end, it should name the vnf_id of the network_function/ns_id of the network_services section and the name of the connection point of this VNF/NS as specified in the VNFD/NSD."
+                type: "string"
+                minItems: 2
+                uniqueItems: true
+            access:
+              type: "boolean"
+            external_access:
+              type: "boolean"
+            root_requirement:
+              type: "string"
+            leaf_requirement:
+              type: "string"
+            dhcp:
+              type: "boolean"
+            cidr:
+              type: "string"
+            # QoS requirements: either policy name or explicit requirements. If specified at a vLink, the QoS req. will be applied to all corresponding connection points.
+            qos:
+              description: "Name of a pre-defined QoS policy"
+              type: "string"
+            qos_requirements:
+              description: "Explicit QoS requirements supported by OpenStack"
+              type: "object"
+              properties:
+                # currently three supported QoS requirements
+                bandwidth_limit:
+                  description: "Bandwidth limitations on networks, ports or floating IPs"
+                  type: "object"
+                  properties:
+                    bandwidth:
+                      type: "number"
+                    bandwidth_unit:
+                      $ref: "#/definitions/bandwidth_units"
+                  additionalProperties: false
+                minimum_bandwidth:
+                  description: "Minimum bandwidth constraints on certain types of traffic"
+                  type: "object"
+                  properties:
+                    bandwidth:
+                      type: "number"
+                    bandwidth_unit:
+                      $ref: "#/definitions/bandwidth_units"
+                  additionalProperties: false
+                dscp_marking:
+                  description: "Marking network traffic with a DSCP value"
+                  type: "string"
+              additionalProperties: false
+          required:
+            - id
+            - connectivity_type
+            - connection_points_reference
+          additionalProperties: false
+          
+  forwarding_graphs:
+    description: "The forwarding graph."
+    type: "array"
+    items:
+      type: "object"
+      oneOf:
+        - description: "A reference to an external forwarding graph descriptor (VNFFGD)."
+          type: "object"
+          properties:
+            fg_group: 
+              type: "string"
+            fg_name:
+              type: "string"
+            fg_version:
+              type: "string"
+            fg_description:
+              type: "string"
+          required:
+            - fg_group
+            - fg_name
+            - fg_version
+          additionalProperties: false
+        - description: "A full-featured forwarding graph description."
+          type: "object"
+          properties:
+            fg_id:
+              description: "A unique identifier of this forwarding graph within the scope of this NS descriptor."
+              type: "string"
+            number_of_endpoints: 
+              type: "integer"
+            number_of_virtual_links: 
+              type: "integer"
+            constituent_virtual_links: 
+              type: "array"
+              items: 
+                - type: "string"
+            constituent_vnfs: 
+              type: "array"
+              items: 
+                - type: "string"
+            constituent_services: 
+              type: "array"
+              items: 
+                - type: "string"
+            network_forwarding_paths: 
+              type: "array"
+              items: 
+                type: "object"
+                properties: 
+                  fp_id: 
+                    type: "string"
+                  policy:
+                    type: "string"
+                  connection_points: 
+                    type: "array"
+                    items: 
+                      type: "object"
+                      properties:
+                        connection_point_ref:
+                          description: "A connection point reference, referenced by a connection point id."
+                          type: "string"
+                        position:
+                          description: "The possition of the connection point with the forwarding graph"
+                          type: "integer"
+          required:
+            - fg_id
+    
   
 
 # actual schema of NSDs
@@ -231,225 +456,16 @@ properties:
       additionalProperties: false
     uniqueItems: true
     minItems: 0
-  network_functions: 
-    description: "The VNFs (their descriptors), that are part of this network service."
-    type: "array"
-    items: 
-      type: "object"
-      properties:
-        vnf_id:
-          description: "A unique identifier of this network function within the scope of this NS descriptor."
-          type: "string"
-        vnf_vendor:
-          description: "The vendor id identifies the VNF descriptor uniquely across all function descriptors."
-          type: "string"
-          pattern: "^[a-z0-9\\-_.]+$"
-        vnf_name:
-          description: "The name of the function description."
-          type: "string"
-          pattern: "^[a-z0-9\\-_.]+$"
-        vnf_version:
-          description: "The version of the function descriptor."
-          type: "string"
-          pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
-        description:
-          description: "A longer description of the network function."
-          type: "string"
-      required:
-        - vnf_id
-        - vnf_vendor
-        - vnf_name
-        - vnf_version
-      additionalProperties: false
-    minItems: 1
-    uniqueItems: true
-    # why unique? What if I want to add the same VNF twice? Eg, to measure traffic before and after traversal of other VNFs.
+  network_functions:
+    $ref: "#/definitions/network_functions"
   network_services:
-    description: "The recursive NSs (their descriptors), that are part of this network service."
-    type: "array"
-    items: 
-      type: "object"
-      properties:
-        ns_id:
-          description: "A unique identifier of the referenced network service within the scope of this NS descriptor."
-          type: "string"
-        ns_vendor:
-          description: "The vendor id identifies the NS descriptor uniquely across all function descriptors."
-          type: "string"
-          pattern: "^[a-z0-9\\-_.]+$"
-        ns_name:
-          description: "The name of the referenced NS description."
-          type: "string"
-          pattern: "^[a-z0-9\\-_.]+$"
-        ns_version:
-          description: "The version of the referenced NS description."
-          type: "string"
-          pattern: "^(== |>= |<= |!= )?[0-9\\-_.]+$"
-        description:
-          description: "A longer description of the network service."
-          type: "string"
-      required:
-        - ns_id
-        - ns_vendor
-        - ns_name
-        - ns_version
-      additionalProperties: false
-    minItems: 1
-    uniqueItems: true
+    $ref: "#/definitions/network_services"
   connection_points:
     $ref: "#/definitions/connection_points"
-  virtual_links: 
-    type: "array"
-    items:
-      type: "object"
-      oneOf:
-        - description: "A reference to an external virtual link descriptor (VLD)."
-          type: "object"
-          properties:
-            vl_group:
-              type: "string"
-            vl_name:
-              type: "string"
-            vl_version:
-              type: "string"
-            vl_description:
-              type: "string"
-          required:
-            - vl_group
-            - vl_name
-            - vl_version
-          additionalProperties: false
-        - description: "A full-featured virtual link description."
-          type: "object"
-          properties:
-            id:
-              type: "string"
-            connectivity_type: 
-              enum:
-                - "E-Line" # Point-to-point
-                - "E-Tree" # Point-to-multipoint
-                - "E-LAN"  # Multipoint-to-multipoint
-            connection_points_reference:
-              type: "array"
-              items:
-                description: "The connection point reference has to uniquely reference the connection point of the VNF/NS. To this end, it should name the vnf_id of the network_function/ns_id of the network_services section and the name of the connection point of this VNF/NS as specified in the VNFD/NSD."
-                type: "string"
-                minItems: 2
-                uniqueItems: true
-            access:
-              type: "boolean"
-            external_access:
-              type: "boolean"
-            root_requirement:
-              type: "string"
-            leaf_requirement:
-              type: "string"
-            dhcp:
-              type: "boolean"
-            cidr:
-              type: "string"
-            # QoS requirements: either policy name or explicit requirements. If specified at a vLink, the QoS req. will be applied to all corresponding connection points.
-            qos:
-              description: "Name of a pre-defined QoS policy"
-              type: "string"
-            qos_requirements:
-              description: "Explicit QoS requirements supported by OpenStack"
-              type: "object"
-              properties:
-                # currently three supported QoS requirements
-                bandwidth_limit:
-                  description: "Bandwidth limitations on networks, ports or floating IPs"
-                  type: "object"
-                  properties:
-                    bandwidth:
-                      type: "number"
-                    bandwidth_unit:
-                      $ref: "#/definitions/bandwidth_units"
-                  additionalProperties: false
-                minimum_bandwidth:
-                  description: "Minimum bandwidth constraints on certain types of traffic"
-                  type: "object"
-                  properties:
-                    bandwidth:
-                      type: "number"
-                    bandwidth_unit:
-                      $ref: "#/definitions/bandwidth_units"
-                  additionalProperties: false
-                dscp_marking:
-                  description: "Marking network traffic with a DSCP value"
-                  type: "string"
-              additionalProperties: false
-          required:
-            - id
-            - connectivity_type
-            - connection_points_reference
-          additionalProperties: false
+  virtual_links:
+    $ref: "#/definitions/virtual_links"
   forwarding_graphs:
-    description: "The forwarding graph."
-    type: "array"
-    items:
-      type: "object"
-      oneOf:
-        - description: "A reference to an external forwarding graph descriptor (VNFFGD)."
-          type: "object"
-          properties:
-            fg_group: 
-              type: "string"
-            fg_name:
-              type: "string"
-            fg_version:
-              type: "string"
-            fg_description:
-              type: "string"
-          required:
-            - fg_group
-            - fg_name
-            - fg_version
-          additionalProperties: false
-        - description: "A full-featured forwarding graph description."
-          type: "object"
-          properties:
-            fg_id:
-              description: "A unique identifier of this forwarding graph within the scope of this NS descriptor."
-              type: "string"
-            number_of_endpoints: 
-              type: "integer"
-            number_of_virtual_links: 
-              type: "integer"
-            constituent_virtual_links: 
-              type: "array"
-              items: 
-                - type: "string"
-            constituent_vnfs: 
-              type: "array"
-              items: 
-                - type: "string"
-            constituent_services: 
-              type: "array"
-              items: 
-                - type: "string"
-            network_forwarding_paths: 
-              type: "array"
-              items: 
-                type: "object"
-                properties: 
-                  fp_id: 
-                    type: "string"
-                  policy:
-                    type: "string"
-                  connection_points: 
-                    type: "array"
-                    items: 
-                      type: "object"
-                      properties:
-                        connection_point_ref:
-                          description: "A connection point reference, referenced by a connection point id."
-                          type: "string"
-                        position:
-                          description: "The possition of the connection point with the forwarding graph"
-                          type: "integer"
-          required:
-            - fg_id
+    $ref: "#/definitions/forwarding_graphs"
   lifecycle_events: 
     type: "object"
     properties: 
@@ -540,6 +556,25 @@ properties:
           maxItems: 2
           items:
             type: "string"
+            
+  # deployment flavours: copied and adjusted fields using different VNFs of different flavours
+  deployment_flavours:
+    type: "array"
+    uniqueItems: true
+    items:
+      type: "object"
+      properties:
+        network_functions:
+          $ref: "#/definitions/network_functions"
+        network_services:
+          $ref: "#/definitions/network_services"
+        connection_points:
+          $ref: "#/definitions/connection_points"
+        virtual_links:
+          $ref: "#/definitions/virtual_links"
+        forwarding_graphs:
+          $ref: "#/definitions/forwarding_graphs"
+      additionalProperties: true
   
 required: 
   - descriptor_schema
