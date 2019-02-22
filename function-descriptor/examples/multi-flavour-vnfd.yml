@@ -39,7 +39,7 @@
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/function-descriptor/vnfd-schema.yml"
 
 vendor: "eu.5gtango"
-name: "ubuntu-vnf"
+name: "multi-flavour-vnf"
 version: "0.9"
 author: "5GTANGO Developer"
 description: "A VNF with multiple deployment flavours"
