@@ -34,7 +34,7 @@
 ---
 $schema: "http://json-schema.org/draft-04/schema#"
 title: "Test Descriptor Schema"
-version: 0.9
+version: 1.0
 description: "The schema for 5GTANGO Test Descriptor"
 
 ##
