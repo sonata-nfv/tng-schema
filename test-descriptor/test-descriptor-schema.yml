@@ -38,18 +38,17 @@ version: 0.9
 description: "The schema for 5GTANGO Test Descriptor"
 
 ##
-## Some definitions used later on.
+## Some definitions used in the document schema definition.
 ##
 definitions:
-  testtype:
+  platform:
      enum:
-       - "TTCN3"
-       - "bash"
-       - "Python"
-       - "moongen"
+       - "SONATA"
+       - "OSM"
+       - "ONAP"
 
 ##
-## The actual document description.
+## The main document schema definition.
 ##
 type: "object"
 properties:
@@ -74,34 +73,23 @@ properties:
   description:
     description: "A longer description of the test descriptor."
     type: "string"
-  test_type:
-    description: "test type"
-    $ref: "#/definitions/testtype"
-  test_execution_file:
-    description: "test execution binary files"
-    type: "string"
-    pattern: "^[a-z0-9\\-_.]+$"
-  test_configuration_parameters:
+  service_platforms:
     type: array
-    items: 
+    items:
      type: object
      properties:
-      parameter_name:
-       type: string
-       description: "parameter string"
-#       pattern: "^[a-z0-9\\-_.]+$"
-      parameter_definition:
-       type: string
-       description: "parameter string"
-#       pattern: "^[a-z0-9\\-_.]+$"
-      parameter_value:
-       type: string
-       description: "parameter value string"
-#       pattern: "^[a-z0-9\\-_.]+$"
-      content_type:
-       type: string
-       description: "content type string"
-#       pattern: "^[a-z0-9\\-_.]+$"
+      service_platform:
+        description: "service platform"
+        $ref: "#/definitions/platform"
+  test_tags:
+     type: array
+     items:
+      type: object
+      properties:
+       test_tag:
+        type: string
+        description: "test tag"
+        pattern: "^[a-z0-9\\-_.]+$"
   test_category:
     type: array
     items:  
@@ -111,16 +99,112 @@ properties:
         type: string
         description: "category type"
         pattern: "^[a-z0-9\\-_.]+$" 
-test_execution:
-   type: array
-   items:
-    type: object
-    properties:
-     test_tag:
-      type: string
-      description: "test tag"
-      pattern: "^[a-z0-9\\-_.]+$" 
-     test_id:
-      type: string
-      description: "test id"
-      pattern: "^[a-z0-9\\-_.]+$"  
+  phases:
+    type: array
+    description: "test phases array"
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "phase name or reference definition"
+          pattern: "^[a-z0-9\\-_.]+$"
+        steps:
+          type: array
+          description: "phase's steps array"
+          items:
+            type: object
+            properties:
+              name:
+               type: string
+               description: "step name string"
+        #       pattern: "^[a-z0-9\\-_.]+$"
+                parameter_definition:
+               type: string
+               description: "step description string"
+        #      pattern: "^[a-z0-9\\-_.]+$"
+              action:
+               type: string
+               description: "step's action name string"
+        #      pattern: "^[a-z0-9\\-_.]+$"
+              instantiation_parameters:
+                type: array
+                description: "step's instantiation parameters array"
+                items:
+                  type: object
+                  properties:
+                    ingress:
+                     type: string
+                     description: "ingress string"
+              #       pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}↵
+                                              #(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+              #     e.g. ingress: x.x.x.x
+                    egress:
+                     type: string
+                     description: "egress string"
+              #      pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}↵
+                                             #(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+              #     e.g. engress: x.x.x.x
+              run: cpe
+               type: string
+               description: "step run reference string"
+        #      pattern: "^[a-z0-9\\-_.]+$"
+              index:
+               type: string
+               description: "step index string"
+        #      pattern: "^[0-9]+$"
+              start_delay:
+               type: string
+               description: "step start delay string"
+        #      pattern: "^[0-9]*$"
+              instances:
+               type: string
+               description: "step number of instances string"
+        #      pattern: "^[0-9]+$"
+              dependency:
+                type: array
+                description: "probe dependency string ###george: dependency will better plural as 'dependencies' as a list of elements "
+                items:
+                  type: string
+                  description: "probe dependency string"
+        #         pattern: "^[a-z0-9\\-_.]+$"
+              output:
+                 type: array
+                 description: "test output array"
+                 items:
+                  type: object
+                  properties:
+                    results:
+                     type: string
+                     description: "output results filename"
+              #       pattern: "^[a-z0-9\\-_.]+$"
+                    graphs:
+                     type: string
+                     description: "output graphs filename"
+              #       pattern: "^[a-z0-9\\-_.]+$"
+              probes:
+               type: array
+               description: "probes array"
+               items:
+                type: object
+                properties:
+                  id:
+                   type: string
+                   description: "probe reference id string"
+            #       pattern: "^[a-z0-9\\-_.]+$"
+                  name:
+                   type: string
+                   description: "probe name string"
+            #       pattern: "^[a-z0-9\\-_.]+$"
+                  image:
+                   type: string
+                   description: "probe container image name string"
+            #       pattern: "^[a-z0-9\\-_.]+$"
+                  description:
+                   type: string
+            #       pattern: "^[a-z0-9\\-_.]+$"
+                  parameters:
+                   type: array
+                   items:
+                    type: object
+            #       pattern: "###george: parameters might need to break to name and value in order to be validated"
