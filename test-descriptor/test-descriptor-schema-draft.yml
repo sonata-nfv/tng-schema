@@ -119,10 +119,10 @@ properties:
                type: string
                description: "step name string"
         #       pattern: "^[a-z0-9\\-_.]+$"
-                parameter_definition:
+              step:
                type: string
-               description: "step description string"
-        #      pattern: "^[a-z0-9\\-_.]+$"
+               description: "reference step name string"
+        #       pattern: "^[a-z0-9\\-_.]+$"
               action:
                type: string
                description: "step action name string"
@@ -142,7 +142,7 @@ properties:
                      description: "egress IP string"
               #      pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}↵
                                              #(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
-              run: cpe
+              run:
                type: string
                description: "step run reference string"
         #      pattern: "^[a-z0-9\\-_.]+$"
@@ -178,6 +178,35 @@ properties:
                      type: string
                      description: "output graphs filename"
               #       pattern: "^[a-z0-9\\-_.]+$"
+              condition:
+                 type: array
+#                 description: "condition of the step which should be accepted"
+                 items:
+                  type: object
+                  properties:
+                    parser:
+                      type: array
+#                     description: "condition of the step which should be accepted"
+                      items:
+                        type: object
+                        properties:
+                          file:
+                           type: string
+                           description: "filename"
+                    #       pattern: "^[a-z0-9\\-_.]+$"
+                          find:
+                           type: string
+                           description: "???"
+                    #       pattern: "^[a-z0-9\\-_.]+$"
+                          value:
+                           type: string
+                           description: "expected value"
+                    #       pattern: "^[a-z0-9\\-_.]+$"
+                          verdict:
+                           type: string
+                           description: "expected verdict"
+                    #       pattern: "^[a-z0-9\\-_.]+$"
+
               probes:
                type: array
 #               description: "probes array"
