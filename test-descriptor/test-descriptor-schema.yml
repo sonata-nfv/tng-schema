@@ -161,9 +161,9 @@ properties:
                type: string
                description: "step number of instances string"
         #      pattern: "^[0-9]+$"
-              dependency:
+              dependencies:
                 type: array
-                description: "probe dependency string ###george: dependency will better plural as 'dependencies' as a list of elements "
+                description: "probe dependency string"
                 items:
                   type: string
                   description: "probe dependency string"
@@ -204,7 +204,16 @@ properties:
                    type: string
             #       pattern: "^[a-z0-9\\-_.]+$"
                   parameters:
-                   type: array
-                   items:
-                    type: object
-            #       pattern: "###george: parameters might need to break to name and value in order to be validated"
+                    type: array
+                    description: "parameters array ###george: parameters might need to break to name and value in order to be validated! need to be reviewed"
+                    items:
+                      type: object
+                      properties:
+                        name:
+                         type: string
+                         description: "probe reference id string"
+            #            pattern: "^[a-z0-9\\-_.]+$"
+                        value:
+                         type: string
+                         description: "probe name string"
+            #            pattern: "^[a-z0-9\\-_.]+$"
