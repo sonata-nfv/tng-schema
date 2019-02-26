@@ -76,11 +76,7 @@ properties:
   service_platforms:
     type: array
     items:
-     type: object
-     properties:
-      service_platform:
-        description: "service platform"
-        $ref: "#/definitions/platform"
+      $ref: "#/definitions/platform"
   test_tags:
      type: array
      items:
