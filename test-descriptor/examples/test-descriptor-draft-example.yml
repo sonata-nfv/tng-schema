@@ -95,7 +95,7 @@ phases:
         output:
           - results: logs.txt
             graphs: detail.json
-        dependency:
+        dependencies:
           - initiator
       - name: run_players
         description: Starting the CCE that simulates the consumer
@@ -106,7 +106,7 @@ phases:
         output:
           - results: logs.txt
             graphs: detail.json
-        dependency:
+        dependencies:
           - cpe
   - id: verification
     steps:
