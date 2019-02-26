@@ -111,7 +111,7 @@ properties:
           pattern: "^[a-z0-9\\-_.]+$"
         steps:
           type: array
-#          description: "phase's steps array"
+#          description: "phase steps array"
           items:
             type: object
             properties:
@@ -125,26 +125,23 @@ properties:
         #      pattern: "^[a-z0-9\\-_.]+$"
               action:
                type: string
-               description: "step's action name string"
+               description: "step action name string"
         #      pattern: "^[a-z0-9\\-_.]+$"
               instantiation_parameters:
                 type: array
-#                description: "step's instantiation parameters array"
                 items:
                   type: object
                   properties:
                     ingress:
                      type: string
-                     description: "ingress string"
+                     description: "ingress IP string"
               #       pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}↵
                                               #(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
-              #     e.g. ingress: x.x.x.x
                     egress:
                      type: string
-                     description: "egress string"
+                     description: "egress IP string"
               #      pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}↵
                                              #(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
-              #     e.g. engress: x.x.x.x
               run: cpe
                type: string
                description: "step run reference string"
@@ -204,7 +201,6 @@ properties:
             #       pattern: "^[a-z0-9\\-_.]+$"
                   parameters:
                     type: array
-#                    description: "parameters array ###george: parameters might need to break to name and value in order to be validated! need to be reviewed"
                     items:
                       type: object
                       properties:
