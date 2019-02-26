@@ -137,17 +137,14 @@ properties:
                description: "step run reference string"
         #      pattern: "^[a-z0-9\\-_.]+$"
               index:
-               type: string
+                type: integer
                description: "step index string"
-        #      pattern: "^[0-9]+$"
               start_delay:
-               type: string
-               description: "step start delay string"
-        #      pattern: "^[0-9]*$"
+                type: integer
+                description: "step start delay string"
               instances:
-               type: string
+                type: integer
                description: "step number of instances string"
-        #      pattern: "^[0-9]+$"
               dependencies:
                 type: array
                 items:
