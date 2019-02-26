@@ -42,7 +42,7 @@ service_platforms:
 test_tags:
   - rtmp-media-service
 test_category:
-  - benchmarkingdescription: "step index string"
+  - benchmarking
 phases:
   - id: setup
     steps:
