@@ -185,6 +185,10 @@ properties:
                            type: string
                            description: "???"
                     #       pattern: "^[a-z0-9\\-_.]+$"
+                          type:
+                           type: string
+                           description: "???"
+                    #       pattern: "^[a-z0-9\\-_.]+$"
                           value:
                            type: string
                            description: "expected value"
