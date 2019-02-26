@@ -80,21 +80,15 @@ properties:
   test_tags:
      type: array
      items:
-      type: object
-      properties:
-       test_tag:
-        type: string
-        description: "test tag"
-        pattern: "^[a-z0-9\\-_.]+$"
+      type: string
+      description: "test tag"
+      pattern: "^[a-z0-9\\-_.]+$"
   test_category:
     type: array
     items:
-     type: object
-     properties:
-      category_type:
-        type: string
-        description: "category type"
-        pattern: "^[a-z0-9\\-_.]+$"
+      type: string
+      description: "category type"
+      pattern: "^[a-z0-9\\-_.]+$"
   phases:
     type: array
 #    description: "test phases array"
