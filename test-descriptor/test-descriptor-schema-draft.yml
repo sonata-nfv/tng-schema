@@ -138,13 +138,13 @@ properties:
         #      pattern: "^[a-z0-9\\-_.]+$"
               index:
                 type: integer
-               description: "step index string"
+                description: "step index string"
               start_delay:
                 type: integer
                 description: "step start delay string"
               instances:
                 type: integer
-               description: "step number of instances string"
+                description: "step number of instances string"
               dependencies:
                 type: array
                 items:
