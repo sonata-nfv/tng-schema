@@ -117,7 +117,7 @@ phases:
         description: Check service was configured
         step: configure_service
         condition:
-          - parser:
+          parser:
               file: status.txt
               find: "OK"
               value: present
@@ -126,7 +126,7 @@ phases:
         description: Check bandwithd received
         step: run_players
         condition:
-          - parser:
+          parser:
               - file: detail.json
                 file_type: json
                 find: 'error_rate'

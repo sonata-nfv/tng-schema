@@ -171,9 +171,8 @@ properties:
                  items:
                   type: object
                   properties:
-                    parser:
+                    parser:steps
                       type: array
-#                     description: "condition of the step which should be accepted"
                       items:
                         type: object
                         properties:
