@@ -206,7 +206,6 @@ properties:
                            type: string
                            description: "expected verdict"
                     #       pattern: "^[a-z0-9\\-_.]+$"
-
               probes:
                type: array
 #               description: "probes array"
@@ -229,15 +228,18 @@ properties:
                    type: string
             #       pattern: "^[a-z0-9\\-_.]+$"
                   parameters:
+                    description: "The parameters as key-value pair that are passed to the Docker container. Can be used to configure the Docker."
                     type: array
                     items:
+                      description: "A key-value parameter object."
                       type: object
                       properties:
-                        name:
-                         type: string
-                         description: "probe reference id string"
-            #            pattern: "^[a-z0-9\\-_.]+$"
+                        key:
+                          type: string
                         value:
-                         type: string
-                         description: "probe name string"
-            #            pattern: "^[a-z0-9\\-_.]+$"
+                          type: string
+                      required:
+                        - key
+                        - value
+                      additionalProperties: false
+                    uniqueItems: true
