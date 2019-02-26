@@ -39,8 +39,10 @@ description: >
   "Performance test for video analysis"
 service_platforms:
   - sonata
-test_tags: rtmp-media-service
-test_category: benchmarking
+test_tags:
+  - rtmp-media-service
+test_category:
+  - benchmarking
 phases:
   - id: setup
     steps:
