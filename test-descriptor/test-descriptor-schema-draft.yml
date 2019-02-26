@@ -181,11 +181,11 @@ properties:
                            type: string
                            description: "filename"
                     #       pattern: "^[a-z0-9\\-_.]+$"
-                          find:
+                          file_type:
                            type: string
                            description: "???"
                     #       pattern: "^[a-z0-9\\-_.]+$"
-                          type:
+                          find:
                            type: string
                            description: "???"
                     #       pattern: "^[a-z0-9\\-_.]+$"
