@@ -124,9 +124,9 @@ definitions:
           port:
             description: "For CUDs only: Port of the container's connection point."
             type: "integer"
-          publish:
+          publish:  # see: https://github.com/containernet/containernet/wiki/Exposing-and-mapping-network-ports
             description: "For CUDs only: Directly publish a port of a CDU, e.g., for debugging."
-            type: "string"
+            type: "object"
           interface:
             description: "The type of connection point, such as a virtual port, a virtual NIC address, a physical port, a physcial NIC address, or the endpoint of a VPN tunnel."
             $ref: "#/definitions/interfaces"
