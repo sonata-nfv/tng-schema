@@ -55,6 +55,9 @@ cloudnative_deployment_units:
       - id: "int-https"
         port: 443
     parameters:                 # (optional)
+        env:                    # In case of set environment variables to the containers
+          key1: valueA
+          key2: valueB
         k8s_deployment:
           key1: value2
         k8s_service:
