@@ -538,6 +538,9 @@ definitions:
           description: "Additional CNDU parameter dictionaries."
           type: "object"
           properties:
+            env:
+              description: "Dictionary of key/values of environment variables for CNFs."
+              type: "object"
             k8s_deployment:
               description: "Dictionary of key/values forwarded to K8s."
               type: "object"
