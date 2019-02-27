@@ -61,23 +61,30 @@ phases:
             image: sonatanfv/tng-media-pilot-initiator
             description: "A service initial configuration container"
             parameters:
-              - CAMERA: test
-              - CMS: cms-vnfd.api.serviceendpoint
+              - key: CAMERA
+                value: test
+              - key: CMS
+                value: cms-vnfd.api.serviceendpoint
           - id: cpe
             name: cpe
             image: sonatanfv/tng-media-pilot-cpe
             description: "Content Producer Emulator (CPE) To generate a RTMP flow"
             parameters:
-              - AGGREGATOR: ma-vnfd.rtmp.serviceendpoint
-              - APP: test
-              - STREAM: test
+              - key: AGGREGATOR
+                value: ma-vnfd.rtmp.serviceendpoint
+              - key: APP
+                value: test
+              - key: STREAM
+                value: test
           - id: cce
             name: cce
             image: sonatanfv/tng-media-pilot-cce
             description: "Content Consumer Emulator (CCE) To play HLS flows from Streaming engine"
             parameters:
-              - STREAMMING_ENGINE: mse-vnfd.hls.serviceendpoint
-              - STREAM: test
+              - key: STREAMMING_ENGINE
+                value: mse-vnfd.hls.serviceendpoint
+              - key: STREAM
+                value: test
   - id: excercise
     steps:
       - name: configure_service
