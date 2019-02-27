@@ -52,7 +52,7 @@ cloudnative_deployment_units:
     connection_points:
       - id: "int-http"
         port: 8080
-        publish: "80:8080"      # directly publish port of CDU (mostly for debugging, not needed for K8s)
+        publish: {80: 8080}      # directly publish port of CDU (mostly for debugging, not needed for K8s)
       - id: "int-https"
         port: 443
     parameters:                 # (optional)
