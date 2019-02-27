@@ -128,7 +128,7 @@ phases:
         condition:
           - parser:
             - file: detail.json
-              file_type: json
+              type: json
               find: 'error_rate'
               value: "< 0.05"
               verdict: pass

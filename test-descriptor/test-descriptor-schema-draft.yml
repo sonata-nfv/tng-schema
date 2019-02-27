@@ -181,7 +181,7 @@ properties:
                          type: string
                          description: "filename"
                   #       pattern: "^[a-z0-9\\-_.]+$"
-                        file_type:
+                        type:
                          type: string
                          description: "file type"
                   #       pattern: "^[a-z0-9\\-_.]+$"
