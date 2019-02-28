@@ -175,7 +175,7 @@ definitions:
             additionalProperties: false
         required:
           - id
-        minItems: 1
+        minItems: 0
         uniqueItems: true
         additionalProperties: false
   monitoring:
