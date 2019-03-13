@@ -128,10 +128,6 @@ properties:
         requestId:
           description: "ID of the current request (create/terminate) being carried on. If empty, no action assigned."
           type: "string"
-      required:
-        - workingStatus
-        - servName
-        - servId
   vlr-list:
     description: "The list of VLD uuids generated due to the instantiation of the selected NST."
     type: "array"
@@ -175,5 +171,4 @@ required:
   - id
   - vendor
   - nstId     #nst-ref
-  - netServInstance_Uuid      #nsr-ref-list
 additionalProperties: true
