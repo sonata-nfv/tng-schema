@@ -132,7 +132,6 @@ properties:
         - workingStatus
         - servName
         - servId
-    minItems: 1
   vlr-list:
     description: "The list of VLD uuids generated due to the instantiation of the selected NST."
     type: "array"
