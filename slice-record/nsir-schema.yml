@@ -56,7 +56,7 @@ properties:
   vendor:
     description: "Description of the NST vendor"
     type: "string"
-  nstId:     #TODO: do refractor with this name: nst-ref:
+  nst-ref:
     description: "The uuid of the NST used to instantiate the NSI."
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
@@ -67,13 +67,7 @@ properties:
     description: "The version of the NetSlice Template the instance is based on."
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
-  flavorId:
-    description: "The flavor identifier of the NSI."
-    type: "string" 
-  sapInfo:
-    description: "SAP of the NSI."
-    type: "string"
-  nsiState:
+  nsiStatus:
     description: "State of the NSI (possible values INSTANTIATED, TERMINATED, ERROR)."
     type: string
     enum:
@@ -83,32 +77,53 @@ properties:
     - TERMINATED
     - READY
     - ERROR
+  nsiLog:
+    description: "Internal log msg with the steps that the NSI goes through."
+    type: string
+  datacenter:
+    description: "VIM uuid where the nsi is instantiated."
+    type: "string"
+    pattern: "^[a-zA-Z0-9\\-_.]+$"
   instantiateTime:
-    description: "Timestamp indicating when the instantiation will be trigerred (0 means immediatly)."
+    description: "Timestamp indicating when the instantiation was trigerred."
     type: "string"
   terminateTime:
     description: "Timestamp indicating when the termination will be tigerred (0 means immediatly)."
     type: "string"
   scaleTime:
-    description: "Timestamp indicating when the scale will be tigerred (0 means immediatly)."
+    description: "Timestamp indicating when the scale is tigerred."
     type: "string"
   updateTime:
-    description: "Timestamp indicating when the update will be tigerred (0 means immediatly)."
+    description: "Timestamp indicating when the update is tigerred."
     type: "string"
   sliceCallback:
-    description: "Contains the URL to callback the GK when the slice is READY"
+    description: "Contains the URL to callback the GK when slice instantiation/termination processes are done."
     type: "string"
-  netServInstance_Uuid:       #TODO: do refractor with this name: nsr-ref-list:
-    description: "The list uuids of the Network Services instances generated when the NSI is requested."
+  5qiValue:
+    description: "5qi value identifies a set of 5G QoS characterisitics defined by 3GPP"
+    type: "integer"
+  nsr-list:
+    description: "Network Services records list generated when the NSI is requested."
     type: "array"
     items:
-      description: "A service uuid with related parameters (i.e slaId)"
+      description: "All the information parameters definning a netservice record."
       type: "object"
       properties:
-        servInstanceId:   #TODO: do refractor with this name: nsr-ref:
-          description: "UUID of a service instanance"
+        nsrID:
+          description: "UUID of a network service record (instance)."
           type: "string"
-        workingStatus:
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        nsrName:
+          description: "Name of the instantiation"
+          type: "string"
+        nsdId:
+          description: "UUID of the service descriptor."
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        nsdName:
+          description: "Name of the network service descriptor"
+          type: "string"
+        working-status:
           description: "Status of the service instantiation."
           type: "string"
           enum:
@@ -118,17 +133,30 @@ properties:
           - TERMINATED
           - READY
           - ERROR
-        servName:
-          description: "Name of the service used for this instance."
+        requestId:
+          description: "ID of the last request (create/terminate) action done."
           type: "string"
-        servId:
-          description: "UUID of the service used for this instance."
+        vimAccountId:
+          description: "VIM Id where the service isntance is deployed (specified in InstantiationParams)"
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
-        requestId:
-          description: "ID of the current request (create/terminate) being carried on. If empty, no action assigned."
-          type: "string"
-  vlr-list:
+        shared:
+          description: "Boolean definning if a service instance is shared."
+          type: "boolean"
+        instantiated: # TODO: lo necesitamos???
+          description: "Boolean definning if a service instance is instantiated."
+          type: "boolean"
+        vld:
+          description: "The list of vld names where the nsr is conencted."
+          type: "array"
+          items:
+            description: "All the information parameters definning a netservice record."
+            type: "object"
+            properties:
+              name:
+                description: "Name of the vld connected to the nsr."
+                type: "string"
+  vld-ref-list:
     description: "The list of VLD uuids generated due to the instantiation of the selected NST."
     type: "array"
     items:
@@ -136,39 +164,60 @@ properties:
       type: "object"
       properties:
         id:
-          description: "UUID of a vlr"
+          description: "Id of the vld (should have the same value as the vld id in the nst)."
+          type: "string"
+        name:
+          description: "VLD name"
+          type: "string"
+        vimAccountId:
+          description: "VIM uuid where the vld is placed"
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
+        vim-net-id:
+          description: "VIM network uuid"
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        mgmt-network:
+          description: "Defines if the vld is of management or not"
+          type: "boolean"
+        type:
+          description: "Type of vld"
+          type: "string"
+        vld-status:
+          description: "Status of the vld (vim-net) instantiation."
+          type: "string"
+          enum:
+          - ACTIVE
+          - INACTIVE
+        shared-nsrs-list:
+          description: "Uuid list of the shared nsr conected to this vld."
+          type: "array"
+          items:
+            type: "string"
+            pattern: "^[a-zA-Z0-9\\-_.]+$"
+        ns-conn-point-ref:
+          description: "List with the relationship between service, connection point and vld "
+          type: "array"
+          items:
+            description: "Three elements nsrName-ref, nsd-cp-ref, nsr-vld-nsd-ref"
+            type: "object"
+            properties:
+              nsrName-ref:
+                description: "Reference to a nsdName"
+                type: "string"
+              nsd-cp-ref:
+                description: "Reference to the connection-point within the nsd referencing to the slice-vld."
+                type: "string"
+              nsr-vld-nsd-ref:
+                description: "Reference to the internal network service vld."
+                type: "string"
+
       required:
-        - id 
-  qos:
-    description: "slice qos"
-    type: "object"
-    properties:
-      5qi_value:
-        description: "5qi value identifies slice quality of service from B to G and 1 to 79"
-        type: "string"
-      resource_type:
-        description: "delay critical guaranted bit rate, GBR, non-GBR"
-        enum:
-            - "delay_critical_GBR" #delay critical guaranted bit rate
-            - "GBR" # GBR
-            - "non_GBR"  # non GBR
-      priority_level:
-        description: "priority level"
-        type: "integer"
-      packet_delay_budget:
-        description: "packet delay budget in (ms)"
-        type: "integer"
-      packet_error_rate:
-        description: "10^-index"
-        type: "integer"
-      default_max_data_burst:
-        description: "in bytes B"
-        type: "integer"
+        - id
+        - name
 required: 
   - name 
   - id
   - vendor
-  - nstId     #nst-ref
+  - nst-ref
 additionalProperties: true
