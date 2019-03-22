@@ -77,8 +77,8 @@ properties:
     - TERMINATED
     - READY
     - ERROR
-  nsiLog:
-    description: "Internal log msg with the steps that the NSI goes through."
+  errorLog:
+    description: "Internal log msg with the error desription if status is ERROR."
     type: string
   datacenter:
     description: "VIM uuid where the nsi is instantiated."
@@ -97,7 +97,7 @@ properties:
     description: "Timestamp indicating when the update is tigerred."
     type: "string"
   sliceCallback:
-    description: "Contains the URL to callback the GK when slice instantiation/termination processes are done."
+    description: "Contains the URL to call back the GK when slice instantiation/termination processes are done."
     type: "string"
   5qiValue:
     description: "5qi value identifies a set of 5G QoS characterisitics defined by 3GPP"
@@ -109,19 +109,15 @@ properties:
       description: "All the information parameters definning a netservice record."
       type: "object"
       properties:
-        nsrID:
+        nsrName:
+          description: "Name of the instantiation composed by the <slice_name-subnet_name-index>"
+          type: "string"
+        nsrId:
           description: "UUID of a network service record (instance)."
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
-        nsrName:
-          description: "Name of the instantiation"
-          type: "string"
-        nsdId:
-          description: "UUID of the service descriptor."
-          type: "string"
-          pattern: "^[a-zA-Z0-9\\-_.]+$"
-        nsdName:
-          description: "Name of the network service descriptor"
+        subnet-ref:
+          description: "References to the ID of the slice-subnet in NST.slice_ns_subnets list."
           type: "string"
         working-status:
           description: "Status of the service instantiation."
@@ -134,16 +130,16 @@ properties:
           - READY
           - ERROR
         requestId:
-          description: "ID of the last request (create/terminate) action done."
+          description: "Last request (create/terminate) action uuid done by GTK related to this service."
           type: "string"
         vimAccountId:
           description: "VIM Id where the service isntance is deployed (specified in InstantiationParams)"
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
-        shared:
+        isshared:
           description: "Boolean definning if a service instance is shared."
           type: "boolean"
-        instantiated: # TODO: lo necesitamos???
+        isinstantiated:
           description: "Boolean definning if a service instance is instantiated."
           type: "boolean"
         vld:
@@ -183,6 +179,10 @@ properties:
         type:
           description: "Type of vld"
           type: "string"
+          enum:
+            - E-LINE
+            - E-TREE
+            - E-LAN
         vld-status:
           description: "Status of the vld (vim-net) instantiation."
           type: "string"
@@ -196,22 +196,21 @@ properties:
             type: "string"
             pattern: "^[a-zA-Z0-9\\-_.]+$"
         ns-conn-point-ref:
-          description: "List with the relationship between service, connection point and vld "
+          description: "List of the instances and their cps connected to each VLD."
           type: "array"
           items:
             description: "Three elements nsrName-ref, nsd-cp-ref, nsr-vld-nsd-ref"
             type: "object"
             properties:
               nsrName-ref:
-                description: "Reference to a nsdName"
+                description: "Reference to one of the nsi.nsr-list.nsrName items."
                 type: "string"
               nsd-cp-ref:
-                description: "Reference to the connection-point within the nsd referencing to the slice-vld."
+                description: "Reference to the nsd.connection-point within the NSD where to connect the VLD."
                 type: "string"
               nsr-vld-nsd-ref:
-                description: "Reference to the internal network service vld."
+                description: "Reference to the internal network service vld in the NSD."
                 type: "string"
-
       required:
         - id
         - name

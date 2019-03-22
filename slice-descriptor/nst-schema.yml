@@ -66,18 +66,18 @@ properties:
     type: string
   SNSSAI_identifier:
     description: "Identifies the type of the slice"
-      type: "object"
-      properties:
-        slice-service-type:
-          description: "Identifier of the selected NSD"
-          type: "string"
-          enum:
-          - eMBB    # enhanced Mobile Broadband slice
-          - URLLC   # Ultra Reliable Low Latency Communications slice
-          - mMTC    # massive Machine Type Communications slice
-        slice-differentiator:
-          description: "Network slice differentiator"
-          type: "string"
+    type: "object"
+    properties:
+      slice-service-type:
+        description: "Identifier of the selected NSD"
+        type: "string"
+        enum:
+        - eMBB    # enhanced Mobile Broadband slice
+        - URLLC   # Ultra Reliable Low Latency Communications slice
+        - mMTC    # massive Machine Type Communications slice
+      slice-differentiator:
+        description: "Network slice differentiator"
+        type: "string"
   onboardingState:
     description: "Defines the onboarding state (ENABLE, DISABLED)."
     type: string
@@ -99,7 +99,7 @@ properties:
   5qi_value:
     description: "5qi value identifies slice quality of service from B to G and 1 to 79"
     type: "integer"
-  sliceSubnets:
+  slice_ns_subnets:
     description: "The list of Network Services uuids composing the NST"
     type: "array"
     items:
@@ -116,13 +116,10 @@ properties:
         nsd-name:
           description: "The name of the selected service to instantiate."
           type: "string"
-        description:
-          description: "Description of the NetSlice Template (services, functions, etc.)"
-          type: "string"
         sla-name:
           description: "The name of the associated SLA."
           type: "string"
-        sla-id:
+        sla-ref:
           description: "Uuid of the associated SLA."
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
@@ -130,11 +127,14 @@ properties:
           description: "Specifies if that services is shared among multiple slices"
           type: "boolean"
       required:
-        - nsdRef
-        - nsdName
+        - id
+        - nsd-ref
+        - nsd-name
+        - sla-name
+        - sla-ref
         - is-shared
     minItems: 1
-  sliceVLD:
+  slice_vld:
     description: "The list of VLD linking the multiple NS of the slice"
     type: "array"
     items:
@@ -142,9 +142,8 @@ properties:
       type: "object"
       properties:
         id:
-          description: "Identifier of the VLD"
+          description: "Identifier of the VLD (might be equal to the name)."
           type: "string"
-          pattern: "^[a-zA-Z0-9\\-_.]+$"
         name:
           description: "The name of the selected VLD"
           type: "string"
@@ -154,6 +153,10 @@ properties:
         type:
           description: "Type of vld"
           type: "string"
+          enum:
+            - E-LINE
+            - E-TREE
+            - E-LAN
         root-bandwidth:
           description: "A unique identifier of this FSM within the scope of this VNF descriptor."
           type: "integer"
@@ -173,7 +176,7 @@ properties:
             description: "Each item is a CP reference."
             type: "object"
             properties:
-              nsd-ref:
+              subnet-ref:
                 description: "References to the sliceSubnets.nsd-name"
                 type: "string"
                 pattern: "^[a-zA-Z0-9\\-_.]+$"
@@ -186,7 +189,10 @@ properties:
                 pattern: "^[a-zA-Z0-9\\-_.]+$"
       required:
         - id
-  sliceConnPoints: #TODO: should I remove it (it will be added in the future if there's one)???
+        - name
+        - type
+        - nsd-connection-point-ref
+  sliceConnPoints: # TODO: Future Work
     description: "The list of Connection Points belonging to the Slice"
     type: "array"
     items:
@@ -217,7 +223,7 @@ properties:
           pattern: "^[a-zA-Z0-9\\-_.]+$"
       required:
         - cpname
-  sliceFGD:        #TODO: should I remove it (it will be added in the future if there's one)??
+  sliceFGD:        # TODO: Future Work
     description: "The list of VLD linking the multiple NS of the slice"
     type: "array"
     items:
@@ -234,29 +240,17 @@ properties:
         #TODO(future feature): Ddd rsp and classifier list to manage FG.
     required:
       - id
-  NSI_list_ref: # TODO: think a way to remove this parameter to not update NST in running time
+  NSI_list_ref:    # TODO: to be removed when a filtering function (to check if any NSI uses the NST) exists
     description: "The reference list of uuid instances based on the NST"
     type: "array"
     items:
       type: "string"
       pattern: "^[a-zA-Z0-9\\-_.]+$"
-  
-  # notificationTypes:
-  #   description: "Defines multiple notification types."
-  #   type: string
-  #   enum:
-  #   - NstOnboardingNotification
-  #   - NstChangeNotification
-  #   - NstDeletionNotification
-  # nstInvariantId:
-  #   description: "Common/Static ID for all versions belonging to the same NST."
-  #   type: string
-
 required: 
   - descriptor_schema
   - name 
   - description
-  - sliceSubnets
   - version
   - vendor
+  - slice_ns_subnets
 additionalProperties: true
