@@ -1,0 +1,151 @@
+## Copyright (c) 2015 SONATA-NFV, 2017 5GTANGO
+## ALL RIGHTS RESERVED.
+##
+## Licensed under the Apache License, Version 2.0 (the "License");
+## you may not use this file except in compliance with the License.
+## You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing, software
+## distributed under the License is distributed on an "AS IS" BASIS,
+## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+## See the License for the specific language governing permissions and
+## limitations under the License.
+##
+## Neither the name of the SONATA-NFV, 5GTANGO
+## nor the names of its contributors may be used to endorse or promote
+## products derived from this software without specific prior written
+## permission.
+##
+## This work has been performed in the framework of the SONATA project,
+## funded by the European Commission under Grant number 671517 through
+## the Horizon 2020 and 5G-PPP programmes. The authors would like to
+## acknowledge the contributions of their colleagues of the SONATA
+## partner consortium (www.sonata-nfv.eu).
+##
+## This work has been performed in the framework of the 5GTANGO project,
+## funded by the European Commission under Grant number 761493 through
+## the Horizon 2020 and 5G-PPP programmes. The authors would like to
+## acknowledge the contributions of their colleagues of the 5GTANGO
+## partner consortium (www.5gtango.eu).
+
+
+##
+## Slice Network Instance (NSI) example
+## @author Pol Alemany
+##
+---
+
+#The Network Slice Template with composed by two NetServices.
+descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/slice-descriptor/nst-schema.yml"
+author: "Pol"
+id: "69e4a590-7417-4786-a629-1604636b06a6"
+name: "NSI_example"
+description: "This is the description of a NSI."
+vendor: "5GTango"
+nst-ref: "8859d979-e264-45b4-b6bf-a3a5f4df3732"
+nst-name: "NST_example_name"
+nstVersion: "3.0"
+nsiStatus: "INSTANTIATED"
+errorLog: "null"
+datacenter: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+instantiateTime: "2019-03-19T08:59:46.250+00:00"
+terminateTime: "null"
+scaleTime: "null"
+updateTime: "2019-03-19T09:01:32.250+00:00"
+sliceCallback: "http://tng-gtk-sp:5000/requests/e88097fb-cd31-403c-b028-9aa955bcc5e2/on-change"
+5qi_value: 3
+nsr-list:
+  - nsrName: "NSI_example-Service_subnet_1-1"
+    nsrId: "5e28f931-7558-4a8c-9894-7a8787c4492b"
+    subnet-ref: "Service_subnet_1"
+    working-status: INSTANTIATED
+    requestId: "1e150bc1-78fd-47b1-a0f6-30cf55dc08a9"
+    vimAccountId: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+    isshared: False
+    isinstantiated: True
+    vld:
+      - vld-ref: "15ee31cd-ea36-4cba-8551-81fe95a72f23"     
+      - vld-ref: "3dee74bd-e83d-47fe-a433-a0772c330478"
+  - nsrName: "NSI_example-Service_subnet_2-1"
+    nsrId: "8efced90-1971-40d1-8a9a-d421b79ab335"
+    subnet-ref: "Service_subnet_2"
+    nsd-ref: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
+    working-status: INSTANTIATED
+    requestId: "7ccf9584-8b1f-45f9-9193-fb3bcf4cf33e"
+    vimAccountId: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+    isshared: True
+    isinstantiated: True
+    vld:
+      - vld-ref: "15ee31cd-ea36-4cba-8551-81fe95a72f23"
+      - vld-ref: "3dee74bd-e83d-47fe-a433-a0772c330478"
+      - vld-ref: "4bf00376-b9aa-41ba-affe-a01991e4b6c7"
+  - nsrName: "NSI_example-Service_subnet_3-1"
+    nsrId: "51957551-e562-47b3-9cc8-874053aea538"
+    subnet-ref: "Service_subnet_3"
+    nsd-ref: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
+    working-status: INSTANTIATED
+    requestId: "1e150bc1-78fd-47b1-a0f6-30cf55dc08a9"
+    vimAccountId: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+    isshared: False
+    isinstantiated: True
+    vld:
+      - vld-ref: "15ee31cd-ea36-4cba-8551-81fe95a72f23"
+      - vld-ref: "4bf00376-b9aa-41ba-affe-a01991e4b6c7"
+vldr-list:
+  - id: "mgmt"
+    name: "mgmt"
+    vimAccountId: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+    vim-net-id: "15ee31cd-ea36-4cba-8551-81fe95a72f23"
+    mgmt-network: True
+    type: "E-LAN"
+    vld-status: "ACTIVE"
+    shared-nsrs-list:
+      - "5e28f931-7558-4a8c-9894-7a8787c4492b"
+      - "8efced90-1971-40d1-8a9a-d421b79ab335"
+      - "51957551-e562-47b3-9cc8-874053aea538"
+    ns-conn-point-ref:
+      - nsrName-ref: "Service_subnet_1"
+        nsd-cp-ref: "cp_mgmt"
+        nsr-vld-nsd-ref: "mgmt"
+      - nsrName-ref: "Service_subnet_2"
+        nsd-cp-ref: "cp_mgmt"
+        nsr-vld-nsd-ref: "mgmt"
+      - nsrName-ref: "Service_subnet_3"
+        nsd-cp-ref: "cp_mgmt"
+        nsr-vld-nsd-ref: "mgmt"
+  - id: "data_1"
+    name: "data_1"
+    vimAccountId: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+    vim-net-id: "3dee74bd-e83d-47fe-a433-a0772c330478"
+    mgmt-network: True
+    type: "E-LAN"
+    vld-status: "ACTIVE"
+    shared-nsrs-list:
+      - "5e28f931-7558-4a8c-9894-7a8787c4492b"
+      - "8efced90-1971-40d1-8a9a-d421b79ab335"
+    ns-conn-point-ref:
+      - nsrName-ref: "Service_subnet_1"
+        nsd-cp-ref: "cp_1"
+        nsr-vld-nsd-ref: "data_1"
+      - nsrName-ref: "Service_subnet_2"
+        nsd-cp-ref: "cp_1"
+        nsr-vld-nsd-ref: "data_1"
+  - id: "data_2"
+    name: "data_2"
+    vimAccountId: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+    vim-net-id: "4bf00376-b9aa-41ba-affe-a01991e4b6c7"
+    mgmt-network: True
+    type: "E-LAN"
+    vld-status: "ACTIVE"
+    shared-nsrs-list:
+      - "8efced90-1971-40d1-8a9a-d421b79ab335"
+      - "51957551-e562-47b3-9cc8-874053aea538"
+    ns-conn-point-ref:
+      - nsrName-ref: "Service_subnet_2"
+        nsd-cp-ref: "cp_2"
+        nsr-vld-nsd-ref: "data_2"
+      - nsrName-ref: "Service_subnet_3"
+        nsd-cp-ref: "cp_1"
+        nsr-vld-nsd-ref: "data_2"

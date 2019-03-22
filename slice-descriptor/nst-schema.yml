@@ -1,4 +1,4 @@
-## Copyright (c) 2015 SONATA-NFV, 2017 5GTANGO
+## Copyright (c) 2015 SONATA-NFV, 2018 5GTANGO
 ## ALL RIGHTS RESERVED.
 ##
 ## Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,13 +35,14 @@
 $schema: "http://json-schema.org/draft-04/schema#"
 #id: "http://www.sonata-nfv.eu/schema/nst-schema"
 title: "Network Slice Template Schema"
-version: 0.9
+version: 1.0
 #description: "The core scheme for network slice template (NST)"
 
 ##
 ## Network Slice Template JSON SCHEMA
 ##
 
+#There's is no ID field as it is given by the catalogues (tng-cat).
 type: "object"
 properties:
   descriptor_schema:
@@ -53,28 +54,30 @@ properties:
   description:
     description: "Description of the NetSlice Template (services, functions, etc.)"
     type: "string"
-  sliceServices:
-    description: "The list of Network Services uuids composing the NST"
-    type: "array"
-    items:
-      description: "A service uuid with related parameters (i.e slaId)"
-      type: "object"
-      properties:
-        servID:
-          description: "An arbitrary description of the FSM."
-          type: "string"
-          pattern: "^[a-zA-Z0-9\\-_.]+$"
-        servname:
-          description: "The name of the selected service to instantiate."
-          type: "string"
-        slaID:
-          description: "A unique identifier of this FSM within the scope of this VNF descriptor."
-          type: "string"
-          pattern: "^[a-zA-Z0-9\\-_.]+$"
-      required:
-        - servID
-        - servname
-    minItems: 1
+  version:
+    description: "The version of the service descriptor."
+    type: "string"
+    pattern: "^[a-zA-Z0-9\\-_.]+$"
+  author:
+    description: "Name of the NST author/developer."
+    type: string
+  vendor:
+    description: "Name of the NST vendor."
+    type: string
+  SNSSAI_identifier:
+    description: "Identifies the type of the slice"
+    type: "object"
+    properties:
+      slice-service-type:
+        description: "Identifier of the selected NSD"
+        type: "string"
+        enum:
+        - eMBB    # enhanced Mobile Broadband slice
+        - URLLC   # Ultra Reliable Low Latency Communications slice
+        - mMTC    # massive Machine Type Communications slice
+      slice-differentiator:
+        description: "Network slice differentiator"
+        type: "string"
   onboardingState:
     description: "Defines the onboarding state (ENABLE, DISABLED)."
     type: string
@@ -93,64 +96,161 @@ properties:
     enum:
     - IN_USE
     - NOT_IN_USE
-  version:
-    description: "The version of the service descriptor."
-    type: "string"
-    pattern: "^[a-zA-Z0-9\\-_.]+$"
-  author:
-    description: "Name of the NST author/developer."
-    type: string
-  nstInvariantId:
-    description: "Common/Static ID for all versions belonging to the same NST."
-    type: string
-  notificationTypes:
-    description: "Defines multiple notification types."
-    type: string
-    enum:
-    - NstOnboardingNotification
-    - NstChangeNotification
-    - NstDeletionNotification
-  userDefinedData:
-    #this parameter needs to be better define (maybe as a hash?)
-    description: "NST user defined data."
-    type: string
-  NSI_list_ref:
+  5qi_value:
+    description: "5qi value identifies slice quality of service from B to G and 1 to 79"
+    type: "integer"
+  slice_ns_subnets:
+    description: "The list of Network Services uuids composing the NST"
+    type: "array"
+    items:
+      description: "A service uuid with related parameters (i.e slaId)"
+      type: "object"
+      properties:
+        id:
+          description: "Identifier of the slice-subnet (could be equal to the nsd-name)."
+          type: "string"
+        nsd-ref:
+          description: "Identifier of the selected NSD"
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        nsd-name:
+          description: "The name of the selected service to instantiate."
+          type: "string"
+        sla-name:
+          description: "The name of the associated SLA."
+          type: "string"
+        sla-ref:
+          description: "Uuid of the associated SLA."
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        is-shared:
+          description: "Specifies if that services is shared among multiple slices"
+          type: "boolean"
+      required:
+        - id
+        - nsd-ref
+        - nsd-name
+        - sla-name
+        - sla-ref
+        - is-shared
+    minItems: 1
+  slice_vld:
+    description: "The list of VLD linking the multiple NS of the slice"
+    type: "array"
+    items:
+      description: "A Virtual Link Descriptor (VLD)"
+      type: "object"
+      properties:
+        id:
+          description: "Identifier of the VLD (might be equal to the name)."
+          type: "string"
+        name:
+          description: "The name of the selected VLD"
+          type: "string"
+        mgmt-network:
+          description: "Specifies if that VLD belongs to a mgmt network."
+          type: "boolean"
+        type:
+          description: "Type of vld"
+          type: "string"
+          enum:
+            - E-LINE
+            - E-TREE
+            - E-LAN
+        root-bandwidth:
+          description: "A unique identifier of this FSM within the scope of this VNF descriptor."
+          type: "integer"
+        leaf-bandwidth:
+          description: "A unique identifier of this FSM within the scope of this VNF descriptor."
+          type: "integer"
+        physical-network:
+          description: "The name of the physical network to which this VLD is connected."
+          type: "string"
+        segmentation_id:
+          description: "Identifies to which segment of the pysical network is connected."
+          type: "integer"
+        nsd-connection-point-ref:
+          description: "List of CP references composing each VLD"
+          type: "array"
+          items:
+            description: "Each item is a CP reference."
+            type: "object"
+            properties:
+              subnet-ref:
+                description: "References to the sliceSubnets.nsd-name"
+                type: "string"
+                pattern: "^[a-zA-Z0-9\\-_.]+$"
+              nsd-cp-ref:
+                description: "References to a conn. point among those within the NSD"
+                type: "string"
+              ip-address:
+                description: "Defines the IP address associated to the CP (if necessary)"
+                type: "string"
+                pattern: "^[a-zA-Z0-9\\-_.]+$"
+      required:
+        - id
+        - name
+        - type
+        - nsd-connection-point-ref
+  sliceConnPoints: # TODO: Future Work
+    description: "The list of Connection Points belonging to the Slice"
+    type: "array"
+    items:
+      description: "A connection point description."
+      type: "object"
+      properties:
+        cpName:
+          description: "Connection Point name."
+          type: "string"
+        floatingIPrequired:
+          description: "Specifies if a floating ip is required."
+          type: "boolean"
+        connection-type:
+          description: "Defines the type of the connection points of the slice (through VLD or CP)."
+          type: string
+          enum:
+          - slice-vld       #Type 1
+          - service-cp      #Type 2
+        slice-vld-ref:      #If connection-type is 1, will have this parameter
+          description: "Internal sliceVLD id used as a CP."
+          type: "string"
+        service-cp-ref:     #If connection-type is 2, will have the following tqo parameters
+          description: "Connection Point name of the within the service."
+          type: "string"
+        nsd-ref:
+          description: "Identifier of the service having the CP to be attached"
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+      required:
+        - cpname
+  sliceFGD:        # TODO: Future Work
+    description: "The list of VLD linking the multiple NS of the slice"
+    type: "array"
+    items:
+      description: "A Virtual Link Descriptor (VLD)"
+      type: "object"
+      properties:
+        id:
+          description: "Identifier of the Forwarding Graph Descriptor"
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        name:
+          description: "The name of the selected FGD"
+          type: "string"
+        #TODO(future feature): Ddd rsp and classifier list to manage FG.
+    required:
+      - id
+  NSI_list_ref:    # TODO: to be removed when a filtering function (to check if any NSI uses the NST) exists
     description: "The reference list of uuid instances based on the NST"
     type: "array"
     items:
       type: "string"
       pattern: "^[a-zA-Z0-9\\-_.]+$"
-  qos:
-    description: "slice qos"
-    type: "object"
-    properties:
-      5qi_value:
-        description: "5qi value identifies slice quality of service from B to G and 1 to 79"
-        type: "string"
-      resource_type:
-        description: "delay critical guaranted bit rate, GBR, non-GBR"
-        enum:
-            - "delay_critical_GBR" # delay critical guaranted bit rate
-            - "GBR" # GBR
-            - "non_GBR"  # non GBR
-      priority_level:
-        description: "priority level"
-        type: "integer"
-      packet_delay_budget:
-        description: "packet delay budget in (ms)"
-        type: "integer"
-      packet_error_rate:
-        description: "10^-index"
-        type: "integer"
-      default_max_data_burst:
-        description: "in bytes B"
-        type: "integer"       
-
 required: 
   - descriptor_schema
   - name 
   - description
-  - sliceServices
   - version
   - vendor
+  - slice_ns_subnets
 additionalProperties: true
