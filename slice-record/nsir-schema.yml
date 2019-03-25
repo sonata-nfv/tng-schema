@@ -164,6 +164,8 @@ properties:
                 description: "Name of the vld connected to the nsr."
                 type: "string"
     minItems: 1
+    required:
+      - nsrName
   vldr-list:
     description: "The list of VLD uuids generated due to the instantiation of the selected NST."
     type: "array"
