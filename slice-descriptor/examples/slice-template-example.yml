@@ -52,7 +52,6 @@ onboardingState: "ENABLED"
 operationalState: "ENABLED"
 usageState: "NOT_IN_USE"
 5qi_value: 3
-notificationTypes: "NstOnboardingNotification"
 slice_ns_subnets:
   - id: "Service_subnet_1"
     nsd-ref: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"

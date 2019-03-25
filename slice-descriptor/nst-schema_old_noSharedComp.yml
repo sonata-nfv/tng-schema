@@ -61,7 +61,7 @@ properties:
       type: "object"
       properties:
         servID:
-          description: "An arbitrary description of the FSM."
+          description: "Uuid of the NSD"
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
         servname:

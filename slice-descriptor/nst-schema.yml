@@ -64,7 +64,7 @@ properties:
   vendor:
     description: "Name of the NST vendor."
     type: string
-  SNSSAI_identifier:
+  SNSSAI_identifier:      # add in the nst parsing
     description: "Identifies the type of the slice"
     type: "object"
     properties:
@@ -96,30 +96,30 @@ properties:
     enum:
     - IN_USE
     - NOT_IN_USE
-  5qi_value:
+  5qi_value:              # add in the nst parsing
     description: "5qi value identifies slice quality of service from B to G and 1 to 79"
     type: "integer"
-  slice_ns_subnets:
+  slice_ns_subnets: # sliceServices
     description: "The list of Network Services uuids composing the NST"
     type: "array"
     items:
       description: "A service uuid with related parameters (i.e slaId)"
       type: "object"
       properties:
-        id:
-          description: "Identifier of the slice-subnet (could be equal to the nsd-name)."
+        id: #servID
+          description: "Identifier of the subnet element (not a uuid)"
           type: "string"
-        nsd-ref:
+        nsd-ref: #servID
           description: "Identifier of the selected NSD"
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
-        nsd-name:
+        nsd-name: #servname
           description: "The name of the selected service to instantiate."
           type: "string"
         sla-name:
           description: "The name of the associated SLA."
           type: "string"
-        sla-ref:
+        sla-ref: #slaID
           description: "Uuid of the associated SLA."
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"

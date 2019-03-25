@@ -56,18 +56,18 @@ properties:
   vendor:
     description: "Description of the NST vendor"
     type: "string"
-  nst-ref:
+  nst-ref: #nstId
     description: "The uuid of the NST used to instantiate the NSI."
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
-  nstName:
+  nst-name:
     description: "The name of the NST used to instantiate the NSI."
     type: "string"
-  nstVersion:
+  nst-version:
     description: "The version of the NetSlice Template the instance is based on."
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
-  nsiStatus:
+  nsi-status: #nsiState
     description: "State of the NSI (possible values INSTANTIATED, TERMINATED, ERROR)."
     type: string
     enum:
@@ -99,27 +99,27 @@ properties:
   sliceCallback:
     description: "Contains the URL to call back the GK when slice instantiation/termination processes are done."
     type: "string"
-  5qiValue:
+  5qiValue: #qos.5qi_value
     description: "5qi value identifies a set of 5G QoS characterisitics defined by 3GPP"
     type: "integer"
-  nsr-list:
+  nsr-list: #netServInstance_Uuid
     description: "Network Services records list generated when the NSI is requested."
     type: "array"
     items:
       description: "All the information parameters definning a netservice record."
       type: "object"
       properties:
-        nsrName:
+        nsrName: #servName
           description: "Name of the instantiation composed by the <slice_name-subnet_name-index>"
           type: "string"
-        nsrId:
+        nsrId: #servInstanceId
           description: "UUID of a network service record (instance)."
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
         subnet-ref:
           description: "References to the ID of the slice-subnet in NST.slice_ns_subnets list."
           type: "string"
-        working-status:
+        working-status: #workingStatus
           description: "Status of the service instantiation."
           type: "string"
           enum:
@@ -152,7 +152,8 @@ properties:
               name:
                 description: "Name of the vld connected to the nsr."
                 type: "string"
-  vld-ref-list:
+    minItems: 1
+  vldr-list:
     description: "The list of VLD uuids generated due to the instantiation of the selected NST."
     type: "array"
     items:
@@ -215,8 +216,9 @@ properties:
         - id
         - name
 required: 
-  - name 
   - id
+  - name 
   - vendor
   - nst-ref
+  - nsr-list
 additionalProperties: true
