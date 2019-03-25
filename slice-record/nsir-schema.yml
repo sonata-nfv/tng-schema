@@ -56,7 +56,7 @@ properties:
   vendor:
     description: "Description of the NST vendor"
     type: "string"
-  nst-ref: #nstId
+  nst-ref:
     description: "The uuid of the NST used to instantiate the NSI."
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
@@ -67,7 +67,7 @@ properties:
     description: "The version of the NetSlice Template the instance is based on."
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
-  nsi-status: #nsiState
+  nsi-status:
     description: "State of the NSI (possible values INSTANTIATED, TERMINATED, ERROR)."
     type: string
     enum:
@@ -99,27 +99,34 @@ properties:
   sliceCallback:
     description: "Contains the URL to call back the GK when slice instantiation/termination processes are done."
     type: "string"
-  5qiValue: #qos.5qi_value
+  5qiValue:
     description: "5qi value identifies a set of 5G QoS characterisitics defined by 3GPP"
     type: "integer"
-  nsr-list: #netServInstance_Uuid
+  nsr-list:
     description: "Network Services records list generated when the NSI is requested."
     type: "array"
     items:
       description: "All the information parameters definning a netservice record."
       type: "object"
       properties:
-        nsrName: #servName
+        nsrName:
           description: "Name of the instantiation composed by the <slice_name-subnet_name-index>"
           type: "string"
-        nsrId: #servInstanceId
+        nsrId:
           description: "UUID of a network service record (instance)."
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
         subnet-ref:
           description: "References to the ID of the slice-subnet in NST.slice_ns_subnets list."
           type: "string"
-        working-status: #workingStatus
+        sla-name:
+          description: "Associated SLA name (from NST unless user changes it with the instantiation parameters)"
+          type: "string"
+        sla-ref:
+          description: "Associated SLA Uuid (from NST unless user changes it with the instantiation parameters)"
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        working-status:
           description: "Status of the service instantiation."
           type: "string"
           enum:
