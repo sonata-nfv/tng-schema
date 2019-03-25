@@ -39,15 +39,14 @@
 
 #The Network Slice Template with composed by two NetServices.
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/slice-descriptor/nst-schema.yml"
-author: "Pol"
 id: "69e4a590-7417-4786-a629-1604636b06a6"
 name: "NSI_example"
 description: "This is the description of a NSI."
 vendor: "5GTango"
 nst-ref: "8859d979-e264-45b4-b6bf-a3a5f4df3732"
 nst-name: "NST_example_name"
-nstVersion: "3.0"
-nsiStatus: "INSTANTIATED"
+nst-version: "3.0"
+nsi-status: "INSTANTIATED"
 errorLog: "null"
 datacenter: "0af860f6-8124-42c0-a355-2ffdd669fa51"
 instantiateTime: "2019-03-19T08:59:46.250+00:00"
@@ -55,7 +54,7 @@ terminateTime: "null"
 scaleTime: "null"
 updateTime: "2019-03-19T09:01:32.250+00:00"
 sliceCallback: "http://tng-gtk-sp:5000/requests/e88097fb-cd31-403c-b028-9aa955bcc5e2/on-change"
-5qi_value: 3
+5qiValue: 3
 nsr-list:
   - nsrName: "NSI_example-Service_subnet_1-1"
     nsrId: "5e28f931-7558-4a8c-9894-7a8787c4492b"

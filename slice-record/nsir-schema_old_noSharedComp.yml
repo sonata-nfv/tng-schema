@@ -98,14 +98,14 @@ properties:
   sliceCallback:
     description: "Contains the URL to callback the GK when the slice is READY"
     type: "string"
-  netServInstance_Uuid:       #refractored with this name: nsr-ref-list:
+  netServInstance_Uuid:
     description: "The list uuids of the Network Services instances generated when the NSI is requested."
     type: "array"
     items:
       description: "A service uuid with related parameters (i.e slaId)"
       type: "object"
       properties:
-        servInstanceId:   #refractored with this name: nsr-ref:
+        servInstanceId:
           description: "UUID of a service instance"
           type: "string"
         workingStatus:
@@ -118,7 +118,7 @@ properties:
           - TERMINATED
           - READY
           - ERROR
-        servName:         #refractored with this name: serv-instance-name
+        servName:
           description: "Name of the service used for this instance."
           type: "string"
         servId:
