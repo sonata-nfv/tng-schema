@@ -119,6 +119,10 @@ properties:
         subnet-ref:
           description: "References to the ID of the slice-subnet in NST.slice_ns_subnets list."
           type: "string"
+        subnet-nsdId-ref:
+          description: "NSD uuid which this instance is based on."
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
         sla-name:
           description: "Associated SLA name (from NST unless user changes it with the instantiation parameters)"
           type: "string"
