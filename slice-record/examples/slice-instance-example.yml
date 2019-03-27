@@ -39,7 +39,7 @@
 
 #The Network Slice Template with composed by two NetServices.
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/slice-descriptor/nst-schema.yml"
-id: "69e4a590-7417-4786-a629-1604636b06a6"
+uuid: "69e4a590-7417-4786-a629-1604636b06a6"
 name: "NSI_example"
 description: "This is the description of a NSI."
 vendor: "5GTango"
@@ -59,6 +59,9 @@ nsr-list:
   - nsrName: "NSI_example-Service_subnet_1-1"
     nsrId: "5e28f931-7558-4a8c-9894-7a8787c4492b"
     subnet-ref: "Service_subnet_1"
+    subnet-ref-nsdId: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
+    sla-name: "GOLD_SLA_2"
+    sla-ref: "aabbccdd-9d42-4bc9-866c-a8a3868fdf5e"
     working-status: INSTANTIATED
     requestId: "1e150bc1-78fd-47b1-a0f6-30cf55dc08a9"
     vimAccountId: "0af860f6-8124-42c0-a355-2ffdd669fa51"
@@ -70,7 +73,9 @@ nsr-list:
   - nsrName: "NSI_example-Service_subnet_2-1"
     nsrId: "8efced90-1971-40d1-8a9a-d421b79ab335"
     subnet-ref: "Service_subnet_2"
-    nsd-ref: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
+    subnet-ref-nsdId: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
+    sla-name: "GOLD_SLA_2"
+    sla-ref: "aabbccdd-9d42-4bc9-866c-a8a3868fdf5e"
     working-status: INSTANTIATED
     requestId: "7ccf9584-8b1f-45f9-9193-fb3bcf4cf33e"
     vimAccountId: "0af860f6-8124-42c0-a355-2ffdd669fa51"
@@ -83,7 +88,9 @@ nsr-list:
   - nsrName: "NSI_example-Service_subnet_3-1"
     nsrId: "51957551-e562-47b3-9cc8-874053aea538"
     subnet-ref: "Service_subnet_3"
-    nsd-ref: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
+    subnet-ref-nsdId: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
+    sla-name: "GOLD_SLA_2"
+    sla-ref: "aabbccdd-9d42-4bc9-866c-a8a3868fdf5e"
     working-status: INSTANTIATED
     requestId: "1e150bc1-78fd-47b1-a0f6-30cf55dc08a9"
     vimAccountId: "0af860f6-8124-42c0-a355-2ffdd669fa51"
