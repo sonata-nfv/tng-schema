@@ -39,7 +39,7 @@
 
 #The Network Slice Template with composed by two NetServices.
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/slice-descriptor/nst-schema.yml"
-id: "69e4a590-7417-4786-a629-1604636b06a6"
+uuid: "69e4a590-7417-4786-a629-1604636b06a6"
 name: "NSI_example"
 description: "This is the description of a NSI."
 vendor: "5GTango"
