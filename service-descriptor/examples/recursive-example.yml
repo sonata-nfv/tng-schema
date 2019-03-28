@@ -136,6 +136,10 @@ forwarding_graphs:
           - connection_point_ref: "output"
             position: 6
 
+# Platforms appropriate for specific network service in the V&V
+service_platforms:
+  - SONATA
+
 # Testing tags to select appropriate tests in the V&V
 testing_tags:
   - "latency"
