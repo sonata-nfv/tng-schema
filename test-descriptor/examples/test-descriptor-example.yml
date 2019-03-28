@@ -37,8 +37,6 @@ version: "0.1"
 author: "Ignacio Dominguez, Felipe Vicens (ATOS)"
 description: >
   "Performance test for video analysis"
-service_platforms:
-  - SONATA
 test_tags:
   - rtmp-media-service
 test_category:
