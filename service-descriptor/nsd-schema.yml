@@ -344,6 +344,13 @@ definitions:
                           type: "integer"
           required:
             - fg_id
+  platform:
+     enum:
+       - "SONATA"
+       - "OSM"
+       - "ONAP"
+
+
     
   
 
@@ -531,7 +538,11 @@ properties:
                 type: "string"
       action: 
         type: "string"
-        
+  # platforms in which the network service can be instantiated and tested
+  service_platforms:
+    type: array
+    items:
+      $ref: "#/definitions/platform"
   # tags to select network service for correct tests later (eg, latency tests)
   testing_tags:
     type: "array"
