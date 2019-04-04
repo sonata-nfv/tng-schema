@@ -171,6 +171,10 @@ properties:
     description: "The version of the description definition used to describe the function record."
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.]+$"
+  name:
+    description: "The name of the network function."
+    type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
   id:
     description: "The UUID of the function record."
     type: "string"
