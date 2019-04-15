@@ -195,6 +195,16 @@ properties:
           type: "object"
           properties:
             id:
+              description: "Unique identifier for the virtual link."
+              type: "string"
+            descriptor_reference:
+              description: "Link to the vl descriptor."
+              type: "string"
+            vim_id:
+              description: "indicates which VIM this virtual link is established by, if any."
+              type: "string"
+            wim_id:
+              description: "indicates which WIM this virtual link is established by, if any."
               type: "string"
             connectivity_type: 
               enum:
@@ -220,7 +230,7 @@ properties:
             qos:
               type: "string"
           required:
-            - id
+            - descriptor_reference
             - connectivity_type
             - connection_points_reference
           additionalProperties: false
