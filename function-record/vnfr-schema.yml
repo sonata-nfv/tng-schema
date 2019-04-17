@@ -570,7 +570,7 @@ properties:
         qos:
           type: "string"
       required:
-        - descriptor_reference
+#        - descriptor_reference
         - connectivity_type
         - connection_points_reference
       additionalProperties: false
