@@ -57,7 +57,7 @@ slice_ns_subnets:
     nsd-ref: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
     nsd-name: "mediapilot-service"
     nsd-version: "0.2"
-    nsd-vendor: "eu.sonata-nfv""
+    nsd-vendor: "eu.sonata-nfv"
     sla-name: "GOLD_SLA_2"
     sla-ref: "aabbccdd-9d42-4bc9-866c-a8a3868fdf5e"
     is-shared: False
@@ -65,7 +65,7 @@ slice_ns_subnets:
     nsd-ref: "eeff1122-9d42-4bc9-866c-a8a3868fdf5e"
     nsd-name: "mediapilot-service"
     nsd-version: "0.2"
-    nsd-vendor: "eu.sonata-nfv""
+    nsd-vendor: "eu.sonata-nfv"
     sla-name: "GOLD_SLA_2"
     sla-ref: "44556677-9d42-4bc9-866c-a8a3868fdf5e"
     is-shared: True
@@ -73,7 +73,7 @@ slice_ns_subnets:
     nsd-ref: "99887766-9d42-4bc9-866c-a8a3868fdf5e"
     nsd-name: "mediapilot-service"
     nsd-version: "0.2"
-    nsd-vendor: "eu.sonata-nfv""
+    nsd-vendor: "eu.sonata-nfv"
     sla-name: "None"
     sla-ref: "None"
     is-shared: False
