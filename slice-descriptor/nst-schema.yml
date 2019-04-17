@@ -64,7 +64,7 @@ properties:
   vendor:
     description: "Name of the NST vendor."
     type: string
-  SNSSAI_identifier:      # add in the nst parsing
+  SNSSAI_identifier:
     description: "Identifies the type of the slice"
     type: "object"
     properties:
@@ -96,30 +96,36 @@ properties:
     enum:
     - IN_USE
     - NOT_IN_USE
-  5qi_value:              # add in the nst parsing
+  5qi_value:
     description: "5qi value identifies slice quality of service from B to G and 1 to 79"
     type: "integer"
-  slice_ns_subnets: # sliceServices
+  slice_ns_subnets:
     description: "The list of Network Services uuids composing the NST"
     type: "array"
     items:
       description: "A service uuid with related parameters (i.e slaId)"
       type: "object"
       properties:
-        id: #servID
+        id:
           description: "Identifier of the subnet element (not a uuid)"
           type: "string"
-        nsd-ref: #servID
+        nsd-ref:
           description: "Identifier of the selected NSD"
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
-        nsd-name: #servname
-          description: "The name of the selected service to instantiate."
+        nsd-name:
+          description: "Name of the selected NSD"
+          type: "string"
+        nsd-version:
+          description: "Version of the selected NSD"
+          type: "string"
+        nsd-vendor:
+          description: "Vendor of the selected NSD"
           type: "string"
         sla-name:
           description: "The name of the associated SLA."
           type: "string"
-        sla-ref: #slaID
+        sla-ref:
           description: "Uuid of the associated SLA."
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
@@ -130,6 +136,8 @@ properties:
         - id
         - nsd-ref
         - nsd-name
+        - nsd-version
+        - nsd-vendor
         - sla-name
         - sla-ref
         - is-shared
@@ -158,11 +166,17 @@ properties:
             - E-TREE
             - E-LAN
         root-bandwidth:
-          description: "A unique identifier of this FSM within the scope of this VNF descriptor."
+          description: "Root Bw"
           type: "integer"
+        root-bandwidth-unit:
+          description: "Root Bw units"
+          type: "string"
         leaf-bandwidth:
-          description: "A unique identifier of this FSM within the scope of this VNF descriptor."
+          description: "Leaf Bw"
           type: "integer"
+        leaf-bandwidth-unit:
+          description: "leaf Bw units"
+          type: "string"
         physical-network:
           description: "The name of the physical network to which this VLD is connected."
           type: "string"
