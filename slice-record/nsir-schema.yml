@@ -160,7 +160,7 @@ properties:
             description: "All the information parameters definning a netservice record."
             type: "object"
             properties:
-              name:
+              vld-ref:
                 description: "Name of the vld connected to the nsr."
                 type: "string"
     minItems: 1
