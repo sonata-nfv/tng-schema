@@ -10,6 +10,8 @@ package:
 files:
   - path: "Definitions/myvnfd.yaml"
     type: "application/vnd.5gtango.vnfd"
+    testing_tags:
+      - "some_testing_tag"
     tags:  # (optional)
       - "eu.5gtango"
   - path: "Icons/upb_logo.png"
