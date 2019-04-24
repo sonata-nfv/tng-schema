@@ -122,6 +122,12 @@ properties:
           items:
             type: "string"
             pattern: "^[A-Za-z0-9\\-_.]+$"
+        testing_tags:
+          description: "List of tags assigned to this artifact."
+          type: "array"
+          items:
+            type: "string"
+            pattern: "^[A-Za-z0-9\\-_.]+$"
       required:
         - "source"
         - "algorithm"
