@@ -225,6 +225,9 @@ properties:
                         ref:
                           description: "A reference towards the connection point"
                           type: "string"
+                        location:
+                          description: "The location of the node, either a VIM or an endpoint"
+                          type: "string"
                         nap:
                           description: "The associated network access point"
                           type: "string"
