@@ -201,11 +201,36 @@ properties:
               description: "Link to the vl descriptor."
               type: "string"
             vim_id:
-              description: "indicates which VIM this virtual link is established by, if any."
-              type: "string"
+              description: "indicates which VIMs this virtual link is established by."
+              type: "array"
+              items:
+                type: "string"
+                minItems: 2
+                uniqueItems: true
             wim_id:
               description: "indicates which WIM this virtual link is established by, if any."
               type: "string"
+            paths:
+              description: "Only with wim_id, indicates which paths are created by the WIM."
+              type: "array"
+              items:
+                type: "object"
+                properties:
+                  nodes:
+                    description: "list of nodes (2) on both sides of the path"
+                    type: "array"
+                    items:
+                      type: "object"
+                      properties:
+                        ref:
+                          description: "A reference towards the connection point"
+                          type: "string"
+                        nap:
+                          description: "The associated network access point"
+                          type: "string"
+                    minItems: 2
+                    maxItems: 2
+                    uniqueItems: true
             connectivity_type: 
               enum:
                 - "E-Line" # Point-to-point
