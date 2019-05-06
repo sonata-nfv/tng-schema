@@ -103,6 +103,9 @@ properties:
     description: "The version of the service record. Can be used to track changes."
     type: "string"
     pattern: "^[0-9]+$"
+  flavour:
+    description: "Indicates which nsd flavour has been deployed."
+    type: "string"
   logo:
     description: "Path to service logo."
     type: "string"
