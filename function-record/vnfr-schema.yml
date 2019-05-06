@@ -183,6 +183,9 @@ properties:
     description: "The version of the function record. Can be used to track changes."
     type: "string"
     pattern: "^[0-9]+$"
+  flavour:
+    description: "Indicates which vnfd flavour has been deployed."
+    type: "string"
   logo:
     description: "Path to VNF logo."
     type: "string"
