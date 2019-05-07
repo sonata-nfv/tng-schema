@@ -50,6 +50,13 @@ definitions:
       - "ethernet"
       - "ipv4"
       - "ipv6"
+  bandwidth_units:
+    enum:
+      - "bps"  # Bit per second
+      - "kbps" # Kilobit per second
+      - "Mbps" # Megabit per second
+      - "Gbps" # Gigabit per second
+      - "Tbps" # Terabit per second     
   connection_points:
     description: "The connection points of a VDU, CDU, PDU or complete VNF. Connects it to other units or the external world."
     type: "array"
