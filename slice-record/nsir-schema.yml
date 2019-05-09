@@ -140,6 +140,7 @@ properties:
           - TERMINATED
           - READY
           - ERROR
+          - NOT_INSTANTIATED
         requestId:
           description: "Last request (create/terminate) action uuid done by GTK related to this service."
           type: "string"
@@ -202,6 +203,7 @@ properties:
           enum:
           - ACTIVE
           - INACTIVE
+          - ERROR
         shared-nsrs-list:
           description: "Uuid list of the shared nsr conected to this vld."
           type: "array"
