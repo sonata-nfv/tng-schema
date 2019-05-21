@@ -48,8 +48,6 @@ author: "CTTC"
 vendor: "5GTango"
 SNSSAI_identifier:
   slice-service-type: "eMBB"
-onboardingState: "ENABLED"
-operationalState: "ENABLED"
 usageState: "NOT_IN_USE"
 5qi_value: 3
 slice_ns_subnets:
