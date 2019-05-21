@@ -204,6 +204,9 @@ properties:
           - ACTIVE
           - INACTIVE
           - ERROR
+        access_net:
+          description: "Defines if the vld allows external access (so it get's a floating IP)."
+          type: "boolean"
         shared-nsrs-list:
           description: "Uuid list of the shared nsr conected to this vld."
           type: "array"

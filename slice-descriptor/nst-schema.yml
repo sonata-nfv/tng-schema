@@ -78,18 +78,6 @@ properties:
       slice-differentiator:
         description: "Network slice differentiator"
         type: "string"
-  onboardingState:
-    description: "Defines the onboarding state (ENABLE, DISABLED)."
-    type: string
-    enum:
-    - ENABLED
-    - DISABLED
-  operationalState:
-    description: "Defines the operational state (ENABLE, DISABLED)."
-    type: string
-    enum:
-    - ENABLED
-    - DISABLED
   usageState:
     description: "Defines wether this NST is used or not (IN_USE, NOT_IN_USE)."
     type: string

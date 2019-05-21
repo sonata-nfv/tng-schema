@@ -59,7 +59,7 @@ nsr-list:
   - nsrName: "NSI_example-Service_subnet_1-1"
     nsrId: "5e28f931-7558-4a8c-9894-7a8787c4492b"
     subnet-ref: "Service_subnet_1"
-    subnet-ref-nsdId: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
+    subnet-nsdId-ref: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
     sla-name: "GOLD_SLA_2"
     sla-ref: "aabbccdd-9d42-4bc9-866c-a8a3868fdf5e"
     working-status: INSTANTIATED
@@ -73,7 +73,7 @@ nsr-list:
   - nsrName: "NSI_example-Service_subnet_2-1"
     nsrId: "8efced90-1971-40d1-8a9a-d421b79ab335"
     subnet-ref: "Service_subnet_2"
-    subnet-ref-nsdId: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
+    subnet-nsdId-ref: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
     sla-name: "GOLD_SLA_2"
     sla-ref: "aabbccdd-9d42-4bc9-866c-a8a3868fdf5e"
     working-status: INSTANTIATED
@@ -88,7 +88,7 @@ nsr-list:
   - nsrName: "NSI_example-Service_subnet_3-1"
     nsrId: "51957551-e562-47b3-9cc8-874053aea538"
     subnet-ref: "Service_subnet_3"
-    subnet-ref-nsdId: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
+    subnet-nsdId-ref: "6a01afdc-9d42-4bc9-866c-a8a3868fdf5e"
     sla-name: "GOLD_SLA_2"
     sla-ref: "aabbccdd-9d42-4bc9-866c-a8a3868fdf5e"
     working-status: INSTANTIATED
@@ -107,20 +107,15 @@ vldr-list:
     mgmt-network: True
     type: "E-LAN"
     vld-status: "ACTIVE"
+    access_net: True
     shared-nsrs-list:
       - "5e28f931-7558-4a8c-9894-7a8787c4492b"
       - "8efced90-1971-40d1-8a9a-d421b79ab335"
       - "51957551-e562-47b3-9cc8-874053aea538"
     ns-conn-point-ref:
-      - nsrName-ref: "Service_subnet_1"
-        nsd-cp-ref: "cp_mgmt"
-        nsr-vld-nsd-ref: "mgmt"
-      - nsrName-ref: "Service_subnet_2"
-        nsd-cp-ref: "cp_mgmt"
-        nsr-vld-nsd-ref: "mgmt"
-      - nsrName-ref: "Service_subnet_3"
-        nsd-cp-ref: "cp_mgmt"
-        nsr-vld-nsd-ref: "mgmt"
+      - Service_subnet_1: "mgmt"
+      - Service_subnet_2: "mgmt"
+      - Service_subnet_3: "mgmt"
   - id: "data_1"
     name: "data_1"
     vimAccountId: "0af860f6-8124-42c0-a355-2ffdd669fa51"
@@ -131,12 +126,8 @@ vldr-list:
       - "5e28f931-7558-4a8c-9894-7a8787c4492b"
       - "8efced90-1971-40d1-8a9a-d421b79ab335"
     ns-conn-point-ref:
-      - nsrName-ref: "Service_subnet_1"
-        nsd-cp-ref: "cp_1"
-        nsr-vld-nsd-ref: "data_1"
-      - nsrName-ref: "Service_subnet_2"
-        nsd-cp-ref: "cp_1"
-        nsr-vld-nsd-ref: "data_1"
+      - Service_subnet_1: "data_1"
+      - Service_subnet_2: "data_1"
   - id: "data_2"
     name: "data_2"
     vimAccountId: "0af860f6-8124-42c0-a355-2ffdd669fa51"
@@ -147,9 +138,5 @@ vldr-list:
       - "8efced90-1971-40d1-8a9a-d421b79ab335"
       - "51957551-e562-47b3-9cc8-874053aea538"
     ns-conn-point-ref:
-      - nsrName-ref: "Service_subnet_2"
-        nsd-cp-ref: "cp_2"
-        nsr-vld-nsd-ref: "data_2"
-      - nsrName-ref: "Service_subnet_3"
-        nsd-cp-ref: "cp_1"
-        nsr-vld-nsd-ref: "data_2"
+      - Service_subnet_2: "data_2"
+      - Service_subnet_3: "data_2"
