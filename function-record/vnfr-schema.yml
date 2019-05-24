@@ -171,6 +171,10 @@ properties:
     description: "The version of the description definition used to describe the function record."
     type: "string"
     pattern: "^[A-Za-z0-9\\-_.]+$"
+  name:
+    description: "The name of the network function."
+    type: "string"
+    pattern: "^[a-z0-9\\-_.]+$"
   id:
     description: "The UUID of the function record."
     type: "string"
@@ -179,6 +183,9 @@ properties:
     description: "The version of the function record. Can be used to track changes."
     type: "string"
     pattern: "^[0-9]+$"
+  flavour:
+    description: "Indicates which vnfd flavour has been deployed."
+    type: "string"
   logo:
     description: "Path to VNF logo."
     type: "string"
@@ -529,7 +536,16 @@ properties:
       type: "object"
       properties:
         id:
-          description: "A VNF-unique id of the virtual link. Can be used for references."
+          description: "Unique identifier for the virtual link."
+          type: "string"
+        descriptor_reference:
+          description: "Link to the vl descriptor."
+          type: "string"
+        vim_id:
+          description: "indicates which VIM this virtual link is established by, if any."
+          type: "string"
+        wim_id:
+          description: "indicates which WIM this virtual link is established by, if any."
           type: "string"
         connectivity_type: 
           description: "The connectivity type, such as point-to-point, point-to-multipoint, and multipoint-to-multipoint."
@@ -557,7 +573,7 @@ properties:
         qos:
           type: "string"
       required:
-        - id
+#        - descriptor_reference
         - connectivity_type
         - connection_points_reference
       additionalProperties: false

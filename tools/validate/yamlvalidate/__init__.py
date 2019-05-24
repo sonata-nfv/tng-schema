@@ -30,6 +30,7 @@ import yaml
 import sys
 import json
 import pkg_resources
+import traceback
 from jsonschema import validate
 
 
@@ -61,8 +62,10 @@ def read_file(path, use_json=False):
                 data = json.load(f)
             else:
                 data = yaml.load(f)
-    except:
+    except BaseException as ex:
         print("Couldn't open '{}'. Abort.".format(path))
+        traceback.print_exc()
+        print("{} is not be a valid YAML file: {}".format(path, ex))
         sys.exit(1)
     print("Loaded: {}".format(path))
     return data

@@ -51,10 +51,14 @@ cloudnative_deployment_units:
     image: some-docker-hub/nginx:latest
     connection_points:
       - id: "int-http"
-        port: 80
+        port: 8080
+        publish: {80: 8080}      # directly publish port of CDU (mostly for debugging, not needed for K8s)
       - id: "int-https"
         port: 443
     parameters:                 # (optional)
+        env:                    # In case of set environment variables to the containers
+          key1: valueA
+          key2: valueB
         k8s_deployment:
           key1: value2
         k8s_service:
