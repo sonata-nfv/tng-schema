@@ -233,7 +233,7 @@ properties:
         - id
         - name
 required: 
-  - uuid
+  #- uuid
   - name 
   - vendor
   - nst-ref
