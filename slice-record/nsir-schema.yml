@@ -43,7 +43,7 @@ description: "The core scheme for network slice instance (NSI)"
 
 type: "object"
 properties:
-  id:
+  uuid:
     description: "Identifies the Network Slice Instance (NSI)"
     type: "string"
     pattern: "^[a-zA-Z0-9\\-_.]+$"
@@ -233,7 +233,7 @@ properties:
         - id
         - name
 required: 
-  - id
+  - uuid
   - name 
   - vendor
   - nst-ref
