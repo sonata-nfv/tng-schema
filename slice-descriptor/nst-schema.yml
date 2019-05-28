@@ -84,9 +84,6 @@ properties:
     enum:
     - IN_USE
     - NOT_IN_USE
-  5qi_value:
-    description: "5qi value identifies slice quality of service from B to G and 1 to 79"
-    type: "integer"
   slice_ns_subnets:
     description: "The list of Network Services uuids composing the NST"
     type: "array"
@@ -110,6 +107,9 @@ properties:
         nsd-vendor:
           description: "Vendor of the selected NSD"
           type: "string"
+        is-shared:
+          description: "Specifies if that services is shared among multiple slices"
+          type: "boolean"
         sla-name:
           description: "The name of the associated SLA."
           type: "string"
@@ -117,17 +117,40 @@ properties:
           description: "Uuid of the associated SLA."
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
-        is-shared:
-          description: "Specifies if that services is shared among multiple slices"
-          type: "boolean"
+        ingresses:
+          description: "List of ingress values"
+          type: "array"
+          items:
+            description: "Each element is composed by a pair parameters: location, nap."
+            type: "object"
+            properties:
+              location:
+                description: "Identifier of ingress location"
+                type: "string"
+                pattern: "^[a-zA-Z0-9\\-_.]+$"
+              nap:
+                description: "IP range for the ingress location"
+                type: "string"
+        egresses:
+          description: "List of egress values"
+          type: "array"
+          items:
+            description: "Each element is composed by a pair parameters: location, nap."
+            type: "object"
+            properties:
+              location:
+                description: "Identifier of egress location"
+                type: "string"
+                pattern: "^[a-zA-Z0-9\\-_.]+$"
+              nap:
+                description: "IP range for the egress location"
+                type: "string"
       required:
         - id
         - nsd-ref
         - nsd-name
         - nsd-version
         - nsd-vendor
-        - sla-name
-        - sla-ref
         - is-shared
     minItems: 1
   slice_vld:
@@ -242,12 +265,6 @@ properties:
         #TODO(future feature): Ddd rsp and classifier list to manage FG.
     required:
       - id
-  NSI_list_ref:    # TODO: to be removed when a filtering function (to check if any NSI uses the NST) exists
-    description: "The reference list of uuid instances based on the NST"
-    type: "array"
-    items:
-      type: "string"
-      pattern: "^[a-zA-Z0-9\\-_.]+$"
 required: 
   - descriptor_schema
   - name 
