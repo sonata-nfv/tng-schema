@@ -123,13 +123,6 @@ properties:
           description: "NSD uuid which this instance is based on."
           type: "string"
           pattern: "^[a-zA-Z0-9\\-_.]+$"
-        sla-name:
-          description: "Associated SLA name (from NST unless user changes it with the instantiation parameters)"
-          type: "string"
-        sla-ref:
-          description: "Associated SLA Uuid (from NST unless user changes it with the instantiation parameters)"
-          type: "string"
-          pattern: "^[a-zA-Z0-9\\-_.]+$"
         working-status:
           description: "Status of the service instantiation."
           type: "string"
@@ -151,9 +144,41 @@ properties:
         isshared:
           description: "Boolean definning if a service instance is shared."
           type: "boolean"
-        isinstantiated:
-          description: "Boolean definning if a service instance is instantiated."
-          type: "boolean"
+        sla-name:
+          description: "Associated SLA name (from NST unless user changes it with the instantiation parameters)"
+          type: "string"
+        sla-ref:
+          description: "Associated SLA Uuid (from NST unless user changes it with the instantiation parameters)"
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        ingresses:
+          description: "List of ingress values"
+          type: "array"
+          items:
+            description: "Each element is composed by a pair parameters: location, nap."
+            type: "object"
+            properties:
+              location:
+                description: "Identifier of ingress location"
+                type: "string"
+                pattern: "^[a-zA-Z0-9\\-_.]+$"
+              nap:
+                description: "IP range for the ingress location"
+                type: "string"
+        egresses:
+          description: "List of egress values"
+          type: "array"
+          items:
+            description: "Each element is composed by a pair parameters: location, nap."
+            type: "object"
+            properties:
+              location:
+                description: "Identifier of egress location"
+                type: "string"
+                pattern: "^[a-zA-Z0-9\\-_.]+$"
+              nap:
+                description: "IP range for the egress location"
+                type: "string"
         vld:
           description: "The list of vld names where the nsr is conencted."
           type: "array"
@@ -167,6 +192,9 @@ properties:
     minItems: 1
     required:
       - nsrName
+      - subnet-ref
+      - subnet-nsdId-ref
+      - working-status
   vldr-list:
     description: "The list of VLD uuids generated due to the instantiation of the selected NST."
     type: "array"
