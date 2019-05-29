@@ -99,9 +99,6 @@ properties:
   sliceCallback:
     description: "Contains the URL to call back the GK when slice instantiation/termination processes are done."
     type: "string"
-  5qiValue:
-    description: "5qi value identifies a set of 5G QoS characterisitics defined by 3GPP"
-    type: "integer"
   nsr-list:
     description: "Network Services records list generated when the NSI is requested."
     type: "array"
