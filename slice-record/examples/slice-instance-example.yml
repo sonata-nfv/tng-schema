@@ -54,7 +54,6 @@ terminateTime: "null"
 scaleTime: "null"
 updateTime: "2019-03-19T09:01:32.250+00:00"
 sliceCallback: "http://tng-gtk-sp:5000/requests/e88097fb-cd31-403c-b028-9aa955bcc5e2/on-change"
-5qiValue: 3
 nsr-list:
   - nsrName: "NSI_example-Service_subnet_1-1"
     nsrId: "5e28f931-7558-4a8c-9894-7a8787c4492b"
