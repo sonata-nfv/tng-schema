@@ -535,6 +535,96 @@ definitions:
             - version
             - interval
             - oids
+        resource_requirements:
+          description: "The requirments of a (virtual) machine that hosts this VDU. The service platform has to provide machines that meet these requirements."
+          type: "object"
+          properties:
+            cpu:
+              description: "All the requirements and parameters related to the (virtual) CPU."
+              type: "object"
+              properties:
+                vcpus:
+                  description: "The number of (virtualized) CPU cores."
+                  type: "integer"
+                  minimum: 0
+                  exclusiveMinimum: true
+                cpu_support_accelerator:
+                  type: "string"
+              required:
+                - vcpus
+            gpu:
+              description: "All the requirements and parameters related to the (virtual) CPU."
+              type: "object"
+              properties:
+                amd:
+                  description: "The number of amd GPU cores."
+                  type: "integer"
+                  minimum: 0
+                  exclusiveMinimum: true
+                nvidia:
+                  description: "The number of nvidia GPU cores."
+                  type: "integer"
+                  minimum: 0
+                  exclusiveMinimum: true
+            memory:
+              type: "object"
+              properties:
+                size:
+                  description: "The size of the memory for this CDU."
+                  type: "number"
+                  minimum: 0
+                  exclusiveMinimum: true
+                size_unit:
+                  description: "The unit the host memory is measured in. Default is MB (Megabyte)."
+                  $ref: "#/definitions/memory_units"
+                  default: "MB"
+                large_pages_required:
+                  description: "States whether large memory pages are required or not."
+                  type: "boolean"
+              required:
+                - size
+              additionalProperties: false
+            storage:
+              # TODO: This has to be an array! There can be more than one storage entity.
+              type: "object"
+              properties:
+                size:
+                  description: "The size of the storage for this CDU."
+                  type: "number"
+                  minimum: 0
+                  exclusiveMinimum: true
+                size_unit:
+                  description: "The unit the host storage is measured in. Default is MB (Megabyte)."
+                  $ref: "#/definitions/memory_units"
+                  default: "MB"
+                persistence:
+                  description: "States whether this is persistent storage or not."
+                  type: "boolean"
+              required:
+                - size
+              additionalProperties: false
+            network:
+              # TODO: This has to be an array! There can be more than one network interface.
+              type: "object"
+              properties:
+                network_interface_bandwidth:
+                  description: "The size of the bandwidth for this CDU."
+                  type: "number"
+                  minimum: 0
+                  exclusiveMinimum: true
+                network_interface_bandwidth_unit:
+                  description: "The unit of the network interface bandwidth. Default is bps (bit per second)."
+                  $ref: "#/definitions/bandwidth_units"     
+            pcie:
+              # TODO: This has to be an array! There can be more than one PCI entity.
+              description: "The PCIe parameters of the platform."
+              type: "object"
+              properties:
+                SR-IOV:
+                  description: "States whether this CDU requires Single Root I/O Virtualization on this PCI entity."
+                  type: "boolean"
+          additionalProperties: false
+
         connection_points:
           $ref: "#/definitions/connection_points"
         parameters:
