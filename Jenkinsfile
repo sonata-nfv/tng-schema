@@ -1,14 +1,16 @@
-pipeline {				//indicate the job is written in Declarative Pipeline
-    agent any				//agent specifies where the pipeline will execute. 
+pipeline {
+    agent any 
     stages {
-        stage ("Trigger tng-rep build") {		//an arbitrary stage name
+        stage ("Trigger tng-rep build") {
             steps {
-                build '../tng-rep/master'	//this is where we specify which job to invoke.
+                build '../tng-rep/master'
+                wait false
             }
         }
-        stage ("Trigger tng-sdk-package build") {		//an arbitrary stage name
+        stage ("Trigger tng-sdk-package build") {
             steps {
-                build '../tng-sdk-package/master'	//this is where we specify which job to invoke.
+                build '../tng-sdk-package/master'
+                wait false
             }
         }
     }
