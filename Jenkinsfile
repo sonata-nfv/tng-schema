@@ -9,7 +9,7 @@ pipeline {
         }
         stage ("Trigger tng-sdk-package build") {
             steps {
-                build '../tng-sdk-package/master'
+                build '../tng-sdk-package-pipeline/master'
                 wait false
             }
         }
