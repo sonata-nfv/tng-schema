@@ -124,6 +124,7 @@ properties:
           description: "Status of the service instantiation."
           type: "string"
           enum:
+          - NEW
           - INSTANTIATING
           - INSTANTIATED
           - TERMINATING
