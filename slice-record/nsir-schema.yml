@@ -213,6 +213,10 @@ properties:
         vim-net-id:
           description: "VIM network uuid"
           type: "string"
+        _stack-net-ref:
+          description: "Identifies the stack created through the IA component to create the VIM networks"
+          type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
         mgmt-network:
           description: "Defines if the vld is of management or not"
           type: "boolean"
