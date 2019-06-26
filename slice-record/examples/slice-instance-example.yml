@@ -48,7 +48,9 @@ nst-name: "NST_example_name"
 nst-version: "3.0"
 nsi-status: "INSTANTIATED"
 errorLog: "null"
-datacenter: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+datacenter:
+  - "cc75dd7e-9c61-4e0a-8cb2-8825a98fe418"
+  - "0af860f6-8124-42c0-a355-2ffdd669fa51"
 instantiateTime: "2019-03-19T08:59:46.250+00:00"
 terminateTime: "null"
 scaleTime: "null"
@@ -65,7 +67,7 @@ nsr-list:
     requestId: "1e150bc1-78fd-47b1-a0f6-30cf55dc08a9"
     nsr-placement:
       - nsd-comp-ref: "cnf_0"
-        vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+        vim-id: "cc75dd7e-9c61-4e0a-8cb2-8825a98fe418"
       - nsd-comp-ref: "vnf_1"
         vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
     isshared: False
@@ -88,7 +90,7 @@ nsr-list:
     requestId: "7ccf9584-8b1f-45f9-9193-fb3bcf4cf33e"
     nsr-placement:
       - nsd-comp-ref: "cnf_0"
-        vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+        vim-id: "cc75dd7e-9c61-4e0a-8cb2-8825a98fe418"
       - nsd-comp-ref: "vnf_1"
         vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
     isshared: True
@@ -112,7 +114,7 @@ nsr-list:
     requestId: "1e150bc1-78fd-47b1-a0f6-30cf55dc08a9"
     nsr-placement:
       - nsd-comp-ref: "cnf_0"
-        vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+        vim-id: "cc75dd7e-9c61-4e0a-8cb2-8825a98fe418"
       - nsd-comp-ref: "vnf_1"
         vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
     isshared: False

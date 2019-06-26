@@ -81,9 +81,11 @@ properties:
     description: "Internal log msg with the error desription if status is ERROR."
     type: string
   datacenter:
-    description: "VIM uuid where the nsi is instantiated."
-    type: "string"
-    pattern: "^[a-zA-Z0-9\\-_.]+$"
+    description: "List of VIms where the diferent NSs composing the slice are deployed."
+    type: "array"
+    items:
+      type: "string"
+      pattern: "^[a-zA-Z0-9\\-_.]+$"
   instantiateTime:
     description: "Timestamp indicating when the instantiation was trigerred."
     type: "string"
@@ -135,6 +137,7 @@ properties:
         requestId:
           description: "Last request (create/terminate) action uuid done by GTK related to this service."
           type: "string"
+          pattern: "^[a-zA-Z0-9\\-_.]+$"
         nsr-placement:
           description: "List of NSD components and VIMs where they are deployed"
           type: "array"
@@ -148,6 +151,7 @@ properties:
               vim-id:
                 description: "VIM id where the NSD component is placed."
                 type: "string"
+                pattern: "^[a-zA-Z0-9\\-_.]+$"
         isshared:
           description: "Boolean definning if a service instance is shared."
           type: "boolean"
