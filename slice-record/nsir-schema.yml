@@ -135,10 +135,19 @@ properties:
         requestId:
           description: "Last request (create/terminate) action uuid done by GTK related to this service."
           type: "string"
-        vimAccountId:
-          description: "VIM Id where the service isntance is deployed (specified in InstantiationParams)"
-          type: "string"
-          pattern: "^[a-zA-Z0-9\\-_.]+$"
+        nsr-placement:
+          description: "List of NSD components and VIMs where they are deployed"
+          type: "array"
+          items:
+            description: "A dit composed by nsd-comp-ref and vim-id."
+            type: "object"
+            properties:
+              nsd-comp-ref:
+                description: "Id ref of the NSD component (either VNF or CNF)."
+                type: "string"
+              vim-id:
+                description: "VIM id where the NSD component is placed."
+                type: "string"
         isshared:
           description: "Boolean definning if a service instance is shared."
           type: "boolean"
@@ -207,9 +216,11 @@ properties:
           description: "VLD name"
           type: "string"
         vimAccountId:
-          description: "VIM uuid where the vld is placed"
-          type: "string"
-          pattern: "^[a-zA-Z0-9\\-_.]+$"
+          description: "List of VIM where this network is created due to multi-vim placement."
+          type: "array"
+          items:
+            type: "string"
+            pattern: "^[a-zA-Z0-9\\-_.]+$"
         vim-net-id:
           description: "VIM network uuid"
           type: "string"
