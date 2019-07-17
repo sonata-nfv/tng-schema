@@ -142,7 +142,7 @@ properties:
           description: "List of NSD components and VIMs where they are deployed"
           type: "array"
           items:
-            description: "A dit composed by nsd-comp-ref and vim-id."
+            description: "A dict composed by nsd-comp-ref and vim-id."
             type: "object"
             properties:
               nsd-comp-ref:
@@ -250,7 +250,7 @@ properties:
           - INACTIVE
           - ERROR
         access_net:
-          description: "Defines if the vld allows external access (so it get's a floating IP)."
+          description: "Defines if the vld is external (true) and so, gets a floating IP or internal (false)."
           type: "boolean"
         shared-nsrs-list:
           description: "Uuid list of the shared nsr conected to this vld."
