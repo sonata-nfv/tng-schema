@@ -176,6 +176,9 @@ properties:
             - E-LINE
             - E-TREE
             - E-LAN
+        access_net:
+          description: "Defines either the slice-vld is externally (true) or internally (false) accessible."
+          type: "boolean"
         root-bandwidth:
           description: "Root Bw"
           type: "integer"

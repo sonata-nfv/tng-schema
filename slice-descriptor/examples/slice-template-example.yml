@@ -97,6 +97,7 @@ slice_vld:
     name: "mgmt"
     mgmt-network: True
     type: "E-LAN"
+    access_net: false
     nsd-connection-point-ref:
       - subnet-ref: "Service_subnet_1"
         nsd-cp-ref: cp_mgmt
@@ -107,6 +108,7 @@ slice_vld:
   - id: "data-east"
     name: "data-east"
     type: "E-LAN"
+    access_net: false
     nsd-connection-point-ref:
       - subnet-ref: "Service_subnet_1"
         nsd-cp-ref: cp_1
@@ -115,6 +117,7 @@ slice_vld:
   - id: "data_west"
     name: "data_west"
     type: "E-LAN"
+    access_net: false
     nsd-connection-point-ref:
       - subnet-ref: "Service_subnet_2"
         nsd-cp-ref: cp_2

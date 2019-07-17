@@ -138,6 +138,7 @@ vldr-list:
     mgmt-network: True
     type: "E-LAN"
     vld-status: "ACTIVE"
+    access_net: false
     access_net: True
     shared-nsrs-list:
       - "5e28f931-7558-4a8c-9894-7a8787c4492b"
@@ -155,6 +156,7 @@ vldr-list:
     _stack-net-ref: "76c81cf1-0d39-46de-a032-26becf232f45"
     type: "E-LAN"
     vld-status: "ACTIVE"
+    access_net: false
     shared-nsrs-list:
       - "5e28f931-7558-4a8c-9894-7a8787c4492b"
       - "8efced90-1971-40d1-8a9a-d421b79ab335"
@@ -170,6 +172,7 @@ vldr-list:
     _stack-net-ref: "01dbff12-3011-4d2f-b66a-28523225dec8"
     type: "E-LAN"
     vld-status: "ACTIVE"
+    access_net: false
     shared-nsrs-list:
       - "8efced90-1971-40d1-8a9a-d421b79ab335"
       - "51957551-e562-47b3-9cc8-874053aea538"
