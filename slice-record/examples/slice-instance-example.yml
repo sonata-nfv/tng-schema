@@ -131,8 +131,10 @@ vldr-list:
   - id: "mgmt"
     name: "mgmt"
     vimAccountId:
-      - "0af860f6-8124-42c0-a355-2ffdd669fa51"
-      - "51957551-e562-47b3-9cc8-874053aea538"
+      - vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+        net-created: True
+      - vim-id: "51957551-e562-47b3-9cc8-874053aea538"
+        net-created: True
     vim-net-id: "NSI_Example.mgmt.net.15ee31cd-ea36-4cba-8551-81fe95a72f23"
     _stack-net-ref: "584ee26e-8cb9-4b9c-841f-234246b61157"
     mgmt-network: True
@@ -151,7 +153,8 @@ vldr-list:
   - id: "data_1"
     name: "data_1"
     vimAccountId:
-      - "51957551-e562-47b3-9cc8-874053aea538"
+      - vim-id: "51957551-e562-47b3-9cc8-874053aea538"
+        net-created: True
     vim-net-id: "NSI_Example.data_1.net.3dee74bd-e83d-47fe-a433-a0772c330478"
     _stack-net-ref: "76c81cf1-0d39-46de-a032-26becf232f45"
     type: "E-LAN"
@@ -166,8 +169,10 @@ vldr-list:
   - id: "data_2"
     name: "data_2"
     vimAccountId:
-      - "0af860f6-8124-42c0-a355-2ffdd669fa51"
-      - "51957551-e562-47b3-9cc8-874053aea538"
+      - vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+        net-created: True
+      - vim-id: "51957551-e562-47b3-9cc8-874053aea538"
+        net-created: True
     vim-net-id: "NSI_Example.data_2.net.4bf00376-b9aa-41ba-affe-a01991e4b6c7"
     _stack-net-ref: "01dbff12-3011-4d2f-b66a-28523225dec8"
     type: "E-LAN"
