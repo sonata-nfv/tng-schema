@@ -220,18 +220,23 @@ properties:
           description: "VLD name"
           type: "string"
         vimAccountId:
-          description: "List of VIM where this network is created due to multi-vim placement."
+          description: "List of VIMs and their IA stacks uuids for a better multi-deployment management"
           type: "array"
           items:
-            type: "string"
-            pattern: "^[a-zA-Z0-9\\-_.]+$"
+            description: "A dict composed by _stack-net-ref and vim-id."
+            type: "object"
+            properties:
+              vim-id:
+                description: "VIM id where the NSD component is placed."
+                type: "string"
+                pattern: "^[a-zA-Z0-9\\-_.]+$"
+              _stack-net-ref:
+                description: "Identifies the stack created through the IA component to create the VIM networks"
+                type: "string"
+                pattern: "^[a-zA-Z0-9\\-_.]+$"
         vim-net-id:
           description: "VIM network uuid"
           type: "string"
-        _stack-net-ref:
-          description: "Identifies the stack created through the IA component to create the VIM networks"
-          type: "string"
-          pattern: "^[a-zA-Z0-9\\-_.]+$"
         mgmt-network:
           description: "Defines if the vld is of management or not"
           type: "boolean"
