@@ -223,17 +223,16 @@ properties:
           description: "List of VIMs and their IA stacks uuids for a better multi-deployment management"
           type: "array"
           items:
-            description: "A dict composed by _stack-net-ref and vim-id."
+            description: "A dict composed by nsd-comp-ref and vim-id."
             type: "object"
             properties:
               vim-id:
                 description: "VIM id where the NSD component is placed."
                 type: "string"
                 pattern: "^[a-zA-Z0-9\\-_.]+$"
-              _stack-net-ref:
-                description: "Identifies the stack created through the IA component to create the VIM networks"
-                type: "string"
-                pattern: "^[a-zA-Z0-9\\-_.]+$"
+              net-created:
+                description: "Defines wether the network is created or not in the vim (for multiple-vim deployment)."
+                type: "boolean"
         vim-net-id:
           description: "VIM network uuid"
           type: "string"
