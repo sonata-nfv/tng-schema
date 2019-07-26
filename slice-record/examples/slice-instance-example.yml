@@ -136,12 +136,10 @@ vldr-list:
       - vim-id: "51957551-e562-47b3-9cc8-874053aea538"
         net-created: True
     vim-net-id: "NSI_Example.mgmt.net.15ee31cd-ea36-4cba-8551-81fe95a72f23"
-    _stack-net-ref: "584ee26e-8cb9-4b9c-841f-234246b61157"
     mgmt-network: True
     type: "E-LAN"
     vld-status: "ACTIVE"
     access_net: false
-    access_net: True
     shared-nsrs-list:
       - "5e28f931-7558-4a8c-9894-7a8787c4492b"
       - "8efced90-1971-40d1-8a9a-d421b79ab335"
@@ -156,7 +154,6 @@ vldr-list:
       - vim-id: "51957551-e562-47b3-9cc8-874053aea538"
         net-created: True
     vim-net-id: "NSI_Example.data_1.net.3dee74bd-e83d-47fe-a433-a0772c330478"
-    _stack-net-ref: "76c81cf1-0d39-46de-a032-26becf232f45"
     type: "E-LAN"
     vld-status: "ACTIVE"
     access_net: false
@@ -174,7 +171,6 @@ vldr-list:
       - vim-id: "51957551-e562-47b3-9cc8-874053aea538"
         net-created: True
     vim-net-id: "NSI_Example.data_2.net.4bf00376-b9aa-41ba-affe-a01991e4b6c7"
-    _stack-net-ref: "01dbff12-3011-4d2f-b66a-28523225dec8"
     type: "E-LAN"
     vld-status: "ACTIVE"
     access_net: false
