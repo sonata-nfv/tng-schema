@@ -28,7 +28,7 @@ partner consortium (www.5gtango.eu).
 from setuptools import setup, find_packages
 
 setup(name='yamlvalidate',
-      version='0.1',
+      version='5.0',
       license='Apache 2.0',
       description='Simple JSON-schema validator for YAML files.',
       url='https://github.com/5gtango/tango-schema',
