@@ -285,6 +285,12 @@ properties:
       required:
         - id
         - name
+  _wim-connections:
+    description: "List of connections done to interconnect VIM belonging to the same WIM."
+    type: "array"
+    items:
+      description: "A list of dicts composed by multiple elements."
+      type: "object"
 required: 
   - id
   - name 

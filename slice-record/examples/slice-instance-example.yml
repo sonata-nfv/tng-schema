@@ -184,3 +184,14 @@ vldr-list:
     ns-conn-point-ref:
       - Service_subnet_2: "data_2"
       - Service_subnet_3: "data_2"
+_wim-connections:
+  - vl_id: data_1
+    wim_uuid: ec5320e8-efe6-44a4-9b11-c85ec27d295e
+    service_instance_id: NSI_example
+    bidirectional: 'True'
+    ingress:
+      location: 24ead082-f623-4d08-b105-38b1003a656c
+      nap: 10.100.33.113
+    egress:
+      location: 21772c2b-f557-460b-a085-6ddedf63253e
+      nap: 10.120.0.202
