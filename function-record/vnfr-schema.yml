@@ -258,6 +258,9 @@ properties:
               port:
                 description: "The used port for this connection point."
                 type: "integer"
+              ip:
+                description: "The used ip for this connection point (Emulator case)."
+                type: "string"
 
   virtual_deployment_units: 
     description: "The virtual deployment units (VDUs) of the virtual network record."

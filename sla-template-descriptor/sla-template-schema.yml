@@ -1,6 +1,44 @@
+## Copyright (c) 2015 SONATA-NFV, 2017 5GTANGO
+## ALL RIGHTS RESERVED.
+##
+## Licensed under the Apache License, Version 2.0 (the "License");
+## you may not use this file except in compliance with the License.
+## You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing, software
+## distributed under the License is distributed on an "AS IS" BASIS,
+## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+## See the License for the specific language governing permissions and
+## limitations under the License.
+##
+## Neither the name of the SONATA-NFV, 5GTANGO
+## nor the names of its contributors may be used to endorse or promote
+## products derived from this software without specific prior written
+## permission.
+##
+## This work has been performed in the framework of the SONATA project,
+## funded by the European Commission under Grant number 671517 through
+## the Horizon 2020 and 5G-PPP programmes. The authors would like to
+## acknowledge the contributions of their colleagues of the SONATA
+## partner consortium (www.sonata-nfv.eu).
+##
+## This work has been performed in the framework of the 5GTANGO project,
+## funded by the European Commission under Grant number 761493 through
+## the Horizon 2020 and 5G-PPP programmes. The authors would like to
+## acknowledge the contributions of their colleagues of the 5GTANGO
+## partner consortium (www.5gtango.eu).
+
 ---
 "$schema": http://json-schema.org/draft-04/schema#
-definitions: {}
+title: "SLA Descriptor Schema"
+version: 0.2
+description: "The core schema for SONATA SLA descriptors."
+
+##
+## The document description.
+##
 properties:
   descriptor_schema:
     "$id": "/properties/descriptor_schema"
@@ -49,6 +87,8 @@ properties:
           ns_version:
             "$id": "/properties/sla_template/properties/service/properties/ns_version"
             type: string
+        required:
+          - ns_uuid       
       guaranteeTerms:
         "$id": "/properties/sla_template/properties/guaranteeTerms"
         type: array
@@ -97,7 +137,12 @@ properties:
                   target_period:
                     "$id": "/properties/sla_template/properties/guaranteeTerms/items/target_slo/items/target_period"
                     type: string
-      licenses:
+    required:
+      - offer_date
+      - expiration_date
+      - template_name
+      - service      
+  licenses:
         "$id": "/properties/sla_template/properties/licensing"
         type: object
         properties:
@@ -113,9 +158,18 @@ properties:
                 "$id": "/properties/sla_template/properties/licensing/service_based/service_licence_instances"
                 description: Number of allowed instances
                 type: string
-              service_licence_period:
-                "$id": "/properties/sla_template/properties/licensing/service_based/service_licence_period"
-                type: string
               service_licence_expiration_date:
                 "$id": "/properties/sla_template/properties/licensing/service_based/service_licence_expiration_date"
                 type: string
+            required:
+              - service_licence_type
+              - allowed_service_instances
+              - service_licence_expiration_date
+        required:
+          - service_based
+required:
+  - descriptor_schema
+  - name
+  - vendor
+  - version
+  - sla_template
