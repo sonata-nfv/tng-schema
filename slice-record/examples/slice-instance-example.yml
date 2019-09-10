@@ -130,11 +130,13 @@ nsr-list:
 vldr-list:
   - id: "mgmt"
     name: "mgmt"
-    vimAccountId:
-      - vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
-        net-created: True
-      - vim-id: "51957551-e562-47b3-9cc8-874053aea538"
-        net-created: True
+    vim-net-stack:
+      - id: 1ad7f5fd-327d-42af-b7a4-389fda20bff4          # substitutes the _stack-net-ref key in the code
+        vimAccountId:
+        - vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+          net-created: True
+        - vim-id: "51957551-e562-47b3-9cc8-874053aea538"
+          net-created: True
     vim-net-id: "NSI_Example.mgmt.net.15ee31cd-ea36-4cba-8551-81fe95a72f23"
     mgmt-network: True
     type: "E-LAN"
@@ -150,9 +152,13 @@ vldr-list:
       - Service_subnet_3: "mgmt"
   - id: "data_1"
     name: "data_1"
-    vimAccountId:
-      - vim-id: "51957551-e562-47b3-9cc8-874053aea538"
-        net-created: True
+    vim-net-stack:
+      - id: 1ad7f5fd-327d-42af-b7a4-389fda20bff4          # substitutes the _stack-net-ref key in the code
+        vimAccountId:
+          - vim-id: "cc75dd7e-9c61-4e0a-8cb2-8825a98fe418"
+            net-created: True
+          - vim-id: "cc75dd7e-9c61-4e0a-8cb2-8825a98fe418"
+            net-created: True
     vim-net-id: "NSI_Example.data_1.net.3dee74bd-e83d-47fe-a433-a0772c330478"
     type: "E-LAN"
     vld-status: "ACTIVE"
@@ -165,11 +171,13 @@ vldr-list:
       - Service_subnet_2: "data_1"
   - id: "data_2"
     name: "data_2"
-    vimAccountId:
-      - vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
-        net-created: True
-      - vim-id: "51957551-e562-47b3-9cc8-874053aea538"
-        net-created: True
+    vim-net-stack:
+      - id: 1ad7f5fd-327d-42af-b7a4-389fda20bff4          # substitutes the _stack-net-ref key in the code
+        vimAccountId:
+          - vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+            net-created: True
+          - vim-id: "51957551-e562-47b3-9cc8-874053aea538"
+            net-created: True
     vim-net-id: "NSI_Example.data_2.net.4bf00376-b9aa-41ba-affe-a01991e4b6c7"
     type: "E-LAN"
     vld-status: "ACTIVE"
@@ -182,6 +190,16 @@ vldr-list:
       - Service_subnet_3: "data_2"
 _wim-connections:
   - vl_id: data_1
+    wim_uuid: ec5320e8-efe6-44a4-9b11-c85ec27d295e
+    service_instance_id: NSI_example
+    bidirectional: 'True'
+    ingress:
+      location: 24ead082-f623-4d08-b105-38b1003a656c
+      nap: 10.100.33.113
+    egress:
+      location: 21772c2b-f557-460b-a085-6ddedf63253e
+      nap: 10.120.0.202
+  - vl_id: data_2
     wim_uuid: ec5320e8-efe6-44a4-9b11-c85ec27d295e
     service_instance_id: NSI_example
     bidirectional: 'True'
