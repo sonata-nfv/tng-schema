@@ -106,6 +106,10 @@ properties:
   flavour:
     description: "Indicates which nsd flavour has been deployed."
     type: "string"
+  params:
+    description: "Indicates the instantiation env parameters."
+    type: "object"
+    additionalProperties: true  
   logo:
     description: "Path to service logo."
     type: "string"
