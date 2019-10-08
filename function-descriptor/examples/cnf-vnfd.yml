@@ -65,7 +65,7 @@ cloudnative_deployment_units:
           keyA: valueB
     monitoring_parameters:
       - name: "foo"
-        unit: "bar/s"
+        unit: "Mbps"
       
 # VNF connection points to the outside world
 connection_points:

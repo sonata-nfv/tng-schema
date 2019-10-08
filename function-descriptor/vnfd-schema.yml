@@ -44,6 +44,8 @@ definitions:
   general_units:
     enum:
       - "Percentage"
+      - "Binary"
+      - "Other"
   time_units:
     enum:
       - "ns"  # nano seconds
