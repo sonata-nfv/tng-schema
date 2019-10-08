@@ -44,6 +44,8 @@ definitions:
   general_units:
     enum:
       - "Percentage"
+      - "Binary"
+      - "Other"
   time_units:
     enum:
       - "ns"  # nano seconds
@@ -630,6 +632,12 @@ definitions:
 
         connection_points:
           $ref: "#/definitions/connection_points"
+        monitoring_parameters:
+          description: "The various metrics and parameters to monitor."
+          type: "array"
+          items:
+            description: "A specific monitoring metric or parameter."
+            $ref: "#/definitions/monitoring"
         parameters:
           description: "Additional CNDU parameter dictionaries."
           type: "object"
