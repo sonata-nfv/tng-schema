@@ -63,6 +63,9 @@ cloudnative_deployment_units:
           key1: value2
         k8s_service:
           keyA: valueB
+    monitoring_parameters:
+      - name: "foo"
+        unit: "bar/s"
       
 # VNF connection points to the outside world
 connection_points:
