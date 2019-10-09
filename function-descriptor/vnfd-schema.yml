@@ -189,7 +189,7 @@ definitions:
       name:
        description: "The name of the parameter to monitor. The name has to be supported by the service platform or the FSM."
        type: "string"
-       pattern: "^[A-Za-z-_]+$"
+       #pattern: "^[A-Za-z-_]+$"
       unit:
        description: "The unit used to monitor (or represent) the parameter."
        oneOf:
