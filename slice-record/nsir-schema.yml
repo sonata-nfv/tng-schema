@@ -298,6 +298,12 @@ properties:
     items:
       description: "A list of dicts composed by multiple elements."
       type: "object"
+  _instantiation_params:
+    description: "List of instantiation parameters for each of the subnets (NS) composing the slice."
+    type: "array"
+    items:
+      description: "A list of dicts composed by multiple elements."
+      type: "object"
 required: 
   - id
   - name 
