@@ -39,12 +39,11 @@
 
 #The Network Slice Template with composed by two NetServices.
 descriptor_schema: "https://raw.githubusercontent.com/sonata-nfv/tng-schema/master/slice-descriptor/nst-schema.yml"
-author: "Pol"
 ##id: --> a UUID given by the catalogues
 name: "NST_Example"
 description: "This is the description of a NST."
 version: "3.0"
-author: "CTTC"
+author: "Pol Alemany @:CTTC"
 vendor: "5GTango"
 SNSSAI_identifier:
   slice-service-type: "eMBB"

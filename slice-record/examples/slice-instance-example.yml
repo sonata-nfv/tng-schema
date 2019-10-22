@@ -69,7 +69,7 @@ nsr-list:
       - nsd-comp-ref: "cnf_0"
         vim-id: "cc75dd7e-9c61-4e0a-8cb2-8825a98fe418"
       - nsd-comp-ref: "vnf_1"
-        vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+        vim-id: "cc75dd7e-9c61-4e0a-8cb2-8825a98fe418"
     isshared: False
     ingresses:
       - location: "daf77638-7d9a-44ec-b54b-97a03876a479"
@@ -92,7 +92,7 @@ nsr-list:
       - nsd-comp-ref: "cnf_0"
         vim-id: "cc75dd7e-9c61-4e0a-8cb2-8825a98fe418"
       - nsd-comp-ref: "vnf_1"
-        vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
+        vim-id: "cc75dd7e-9c61-4e0a-8cb2-8825a98fe418"
     isshared: True
     ingresses:
       - location: "daf77638-7d9a-44ec-b54b-97a03876a479"
@@ -114,7 +114,7 @@ nsr-list:
     requestId: "1e150bc1-78fd-47b1-a0f6-30cf55dc08a9"
     nsr-placement:
       - nsd-comp-ref: "cnf_0"
-        vim-id: "cc75dd7e-9c61-4e0a-8cb2-8825a98fe418"
+        vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
       - nsd-comp-ref: "vnf_1"
         vim-id: "0af860f6-8124-42c0-a355-2ffdd669fa51"
     isshared: False
@@ -209,3 +209,17 @@ _wim-connections:
     egress:
       location: 21772c2b-f557-460b-a085-6ddedf63253e
       nap: 10.120.0.202
+_instantiation_params:
+  - subnet_id: "Service_subnet_1"
+    sla_id: "aabbccdd-9d42-4bc9-866c-a8a3868fdf5e"
+    sla_name: "GOLD_SLA_2"
+    ingresses:
+      - location: "daf77638-7d9a-44ec-b54b-97a03876a479"
+        nap: "10.10.10.1/32"
+    egresses:
+      - location: "b9311207-c87f-4d68-8698-5870aa441e2f"
+        nap: "10.10.10.2/32"
+    vim_id: "cc75dd7e-9c61-4e0a-8cb2-8825a98fe418"
+    ns_conf_params:
+      - key_1: "value1"
+        key_2: "value2"
