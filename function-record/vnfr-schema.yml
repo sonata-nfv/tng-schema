@@ -573,6 +573,8 @@ properties:
           type: "string"
         dhcp:
           type: "boolean"
+        cidr:
+          type: "string"
         qos:
           type: "string"
       required:
